@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+var CodeMirror = require('react-codemirror');
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+var App = React.createClass({
+  getInitialState: function() {
+    return {
+      code: "// Code",
+    };
+  },
+  updateCode: function(newCode) {
+    this.setState({
+      code: newCode,
+    });
+  },
+  render: function() {
+    var options = {
+      lineNumbers: true,
+    };
+    return <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
+  }
+});
 export default App;
