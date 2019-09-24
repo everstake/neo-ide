@@ -1,24 +1,37 @@
 import React from 'react';
 import './App.css';
-var CodeMirror = require('react-codemirror');
+import './codemirror.css'
+import CodeMirror from 'react-codemirror';
+import PanelsBlock from "./components/PanelsBlock";
 
+class App extends React.Component {
 
-var App = React.createClass({
-  getInitialState: function() {
-    return {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
       code: "// Code",
     };
-  },
-  updateCode: function(newCode) {
+  }
+
+  updateCode(newCode) {
     this.setState({
       code: newCode,
     });
-  },
-  render: function() {
+  }
+
+  render() {
+
     var options = {
       lineNumbers: true,
     };
-    return <CodeMirror value={this.state.code} onChange={this.updateCode} options={options} />
+    return (
+
+        <PanelsBlock/>
+        // <CodeMirror value={this.state.code} onChange={this.updateCode.bind(this)} options={options}/>
+
+    );
   }
-});
+}
+
 export default App;
