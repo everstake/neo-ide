@@ -17,7 +17,7 @@ render (){
        <div>
            
         <SplitPane split="vertical" size={300} >
-        <div><FileExplorer></FileExplorer></div>
+        <div></div>
         {/* <FileExplorer></FileExplorer> */}
 
       
