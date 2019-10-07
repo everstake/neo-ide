@@ -3,6 +3,7 @@ import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
 import FileExplorer from '../components/FileExplorer'
+import LogPanel from '../components/LogPanel'
 
 class HorizontalPanel extends React.Component
 {
@@ -22,11 +23,8 @@ render (){
 
       
         <SplitPane split="horizontal"  size={800}>
-        
              <Afpp/>
-          
-            <div></div>
-      
+             <LogPanel  />
         </SplitPane>
     </SplitPane>
     </div>
