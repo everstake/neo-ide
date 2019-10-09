@@ -2,17 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa330877-3eba-4d24-bd5a-1597cd61e5b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/HorizontalPanel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainPanel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/VerticalPane.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/stylesheets/panel.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PanelsBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PanelsBlock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/h-multipane-resizer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/v-multipane-resizer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+    </list>
+    <list id="f74e1b36-5adb-4715-9ad8-768e52ae3c62" name="Revert &quot;added src of file_explorer without storybook&quot;" comment="Revert &quot;added src of file_explorer without storybook&quot;&#10;&#10;This reverts commit afbe1701">
+      <change beforePath="$PROJECT_DIR$/file_explorer/base-file.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/base-folder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/browser.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/browser.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/constants.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/contextmenu.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/contextmenu.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/details/default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/details/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/files/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/files/list-thumbnail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/files/simple-list-thumbnail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/files/table.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/files/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/filters/default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/filters/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/folders/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/folders/list-thumbnail.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/folders/table.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/groupers/by-folder.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/groupers/by-modified.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/groupers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/groupers/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/headers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/headers/table.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/icons/FontAwesome.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/icons/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/list-style.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/sorters/by-modified.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/sorters/by-name.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/sorters/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/sorters/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/table-style.sass" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_explorer/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +77,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -85,7 +114,7 @@
     </configuration>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -98,6 +127,7 @@
       <workItem from="1569320376450" duration="17448000" />
       <workItem from="1569407762077" duration="11168000" />
       <workItem from="1569585373181" duration="636000" />
+      <workItem from="1570617304929" duration="867000" />
     </task>
     <task id="LOCAL-00001" summary="add(land): moved main panel&#10;add(scroller): moved scroller">
       <created>1569336315121</created>
