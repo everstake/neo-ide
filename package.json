@@ -1,21 +1,53 @@
 {
   "name": "ide",
   "version": "0.1.0",
-  "private": true,
+  "main": "./src/file_explorer/index.js",
   "dependencies": {
-    "@opuscapita/filemanager-server": "^1.1.0-beta.6",
-    "@opuscapita/react-filemanager": "^1.1.0-beta.6",
-    "@opuscapita/react-filemanager-connector-node-v1": "^1.1.0-beta.6",
-    "browserfs": "^1.4.3",
-    "events": "^3.0.0",
-    "react": "^16.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.6",
+    "classnames": "^2.2.3",
+    "moment": "^2.17.0",
+    "prop-types": "^15.5.8",
     "react-ace": "^7.0.4",
-    "react-codemirror": "^1.0.0",
-    "react-dom": "^16.9.0",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-emit": "^2.1.0",
-    "react-keyed-file-browser": "^1.5.2",
     "react-scripts": "3.1.2",
     "react-split-pane": "^0.1.87"
+  },
+  "peerDependencies": {
+    "react": "0.14.x || 15.x || 16.x",
+    "react-dom": "0.14.x || 15.x || 16.x"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/react": "^4.1.11",
+    "babel-cli": "^6.6.4",
+    "babel-eslint": "10.0.3",
+    "babel-loader": "^8.0.5",
+    "eslint": "^6.1.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "font-awesome": "^4.7.0",
+    "node-sass": "^4.11.0",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "4.40.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-node-externals": "^1.5.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,9 +56,6 @@
     "eject": "react-scripts eject",
     "server": "node-env-run server --exec nodemon",
     "dev": "run-p server start"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -39,5 +68,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "babel":
+  {
+    "plugins": [ "@babel/plugin-proposal-export-default-from"]
   }
 }

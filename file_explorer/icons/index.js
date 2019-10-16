@@ -1,1 +1,0 @@
-export FontAwesome from './FontAwesome'

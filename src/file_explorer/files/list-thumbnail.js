@@ -10,8 +10,8 @@ import { fileSize } from './utils.js'
 class RawListThumbnailFile extends BaseFile {
   static defaultProps = {
     showName: true,
-    showSize: true,
-    showModified: true,
+    showSize: false,
+    showModified: false,
     isSelectable: true,
   }
 
@@ -128,12 +128,12 @@ class RawListThumbnailFile extends BaseFile {
   }
 }
 
-@DragSource('file', BaseFileConnectors.dragSource, BaseFileConnectors.dragCollect)
-@DropTarget(
-  ['file', 'folder', NativeTypes.FILE],
-  BaseFileConnectors.targetSource,
-  BaseFileConnectors.targetCollect,
-)
+// @DragSource('file', BaseFileConnectors.dragSource, BaseFileConnectors.dragCollect)
+// @DropTarget(
+//   ['file', 'folder', NativeTypes.FILE],
+//   BaseFileConnectors.targetSource,
+//   BaseFileConnectors.targetCollect,
+// )
 class ListThumbnailFile extends RawListThumbnailFile {}
 
 export default ListThumbnailFile

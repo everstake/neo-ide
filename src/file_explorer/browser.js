@@ -673,7 +673,7 @@ class RawFileBrowser extends React.Component {
 
     return (
       <div className="action-bar">
-        {filter}
+        {/* {filter} */}
         {actions}
       </div>
     )
@@ -891,19 +891,19 @@ class RawFileBrowser extends React.Component {
         {this.props.actions}
         <input type="file" id="pictureTest" hidden text="AAAAAA"capture></input>
         <div className="rendered-file-browser" ref={el => { this.browserRef = el } }
-        onClick={this.onChange}>fgs
+        onClick={this.onChange}>
           {this.props.showActionBar && this.renderActionBar(selectedItem)}
           <div className="files">
             {renderedFiles}
           </div>
         </div>
-        {this.state.previewFile !== null && (
+        {/* {this.state.previewFile !== null && (
           <this.props.detailRenderer
             file={this.state.previewFile}
             close={this.closeDetail}
             {...this.props.detailRendererProps}
           />
-        )}
+        )} */}
          <ContextMenu  contextmenu={ this.state.contextmenu}  /> 
       </div>
      
@@ -912,7 +912,7 @@ class RawFileBrowser extends React.Component {
   }
 }
 
-@DragDropContext(HTML5Backend)
+// @DragDropContext(HTML5Backend)
 class FileBrowser extends RawFileBrowser {
 
   onChange = e =>{

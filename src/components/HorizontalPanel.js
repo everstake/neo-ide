@@ -2,13 +2,16 @@ import React from "react";
 import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
-import FileExplorer from '../components/FileExplorer'
-
+import Moment from 'moment'
+import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
+// import FontAwesome from 'font-awesome'
+import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
+import '../stylesheets/demos.css';
 class HorizontalPanel extends React.Component
 {
 
 constructor(props){
-
+    console.log(FontAwesomeIcons(4))
     super(props)
 }
 
@@ -17,8 +20,23 @@ render (){
        <div>
            
         <SplitPane split="vertical" size={300} >
-        <div></div>
-        {/* <FileExplorer></FileExplorer> */}
+        
+        <FileBrowser
+      icons={FontAwesomeIcons(4)}
+      files={[
+        {
+          key: 'new-folder/',
+          modified: +Moment().subtract(1, 'hours'),
+          size: 0,
+        },
+        {
+          key: 'new-folder/cat.js',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 1024 * 1024,
+        },
+      ]}
+      
+    />
 
       
         <SplitPane split="horizontal"  size={800}>

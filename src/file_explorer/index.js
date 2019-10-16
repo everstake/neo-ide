@@ -10,7 +10,7 @@ import * as Details from './details'
 import * as Filters from './filters'
 import * as Groupers from './groupers'
 import * as Sorters from './sorters'
-import * as Icons from './icons'
+import * as Icons from './icons/FontAwesome'
 import * as Utils from './utils'
 
 export default FileBrowser

@@ -91,12 +91,12 @@ class RawTableFolder extends BaseFolder {
   }
 }
 
-@DragSource('folder', BaseFolderConnectors.dragSource, BaseFolderConnectors.dragCollect)
-@DropTarget(
-  ['file', 'folder', NativeTypes.FILE],
-  BaseFileConnectors.targetSource,
-  BaseFileConnectors.targetCollect,
-)
+// @DragSource('folder', BaseFolderConnectors.dragSource, BaseFolderConnectors.dragCollect)
+// @DropTarget(
+//   ['file', 'folder', NativeTypes.FILE],
+//   BaseFileConnectors.targetSource,
+//   BaseFileConnectors.targetCollect,
+// )
 class TableFolder extends RawTableFolder {}
 
 export default TableFolder

@@ -127,12 +127,12 @@ class RawListThumbnailFolder extends BaseFolder {
   }
 }
 
-@DragSource('folder', BaseFolderConnectors.dragSource, BaseFolderConnectors.dragCollect)
-@DropTarget(
-  ['file', 'folder', NativeTypes.FILE],
-  BaseFileConnectors.targetSource,
-  BaseFileConnectors.targetCollect,
-)
+// @DragSource('folder', BaseFolderConnectors.dragSource, BaseFolderConnectors.dragCollect)
+// @DropTarget(
+//   ['file', 'folder', NativeTypes.FILE],
+//   BaseFileConnectors.targetSource,
+//   BaseFileConnectors.targetCollect,
+// )
 class ListThumbnailFolder extends RawListThumbnailFolder {}
 
 export default ListThumbnailFolder
