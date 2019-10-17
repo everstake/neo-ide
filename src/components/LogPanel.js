@@ -42,7 +42,7 @@ let newOutputs = Outputs.addRecord(
 
 newOutputs = Outputs.addRecord(
     newOutputs, OutputFactory.makeTextOutput(
-        getTime() + 'Ha, ha lo lo'
+        getTime() + 'Available commands: ls, cd, head, cat, echo, rm'
     )
 );
 
@@ -64,7 +64,7 @@ constructor(props){
 render (){
     return (           
         <ReactTerminal theme={{
-            background: '#272822',
+            background: '#323232',
             promptSymbolColor: '#6effe6',
             commandColor: '#fcfcfc',
             outputColor: '#fcfcfc',

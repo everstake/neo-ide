@@ -126,7 +126,7 @@ div.rendered-react-keyed-file-browser div.files table {
   div.rendered-react-keyed-file-browser div.files table thead th {
     border-bottom: 0.1rem solid #ddd; }
   div.rendered-react-keyed-file-browser div.files table tr:not(:last-child) td {
-    border-bottom: 0.1rem solid #eee; }
+   }
   div.rendered-react-keyed-file-browser div.files table td.name {
     padding-left: 0.8rem; }
     div.rendered-react-keyed-file-browser div.files table td.name form.renaming {

@@ -2,56 +2,215 @@ import React from "react";
 import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
-
+import Breadcrumbs from '@trendmicro/react-breadcrumbs';
+import { Button, ButtonGroup } from '@trendmicro/react-buttons';
+import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
 import Moment from 'moment'
 import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
 // import FontAwesome from 'font-awesome'
 import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
-
+import ensureArray from 'ensure-array';
 import FileExplorer from '../components/FileExplorer'
 import LogPanel from '../components/LogPanel'
+import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import '../stylesheets/react-breadcrumbs.css'
+import styled from 'styled-components';
 
-class HorizontalPanel extends React.Component
-{
+const Main = styled.main`
+    position: static;
+    overflow: hidden;
+    transition: all .11s;
+    padding: 0 10px;
+    margin-left: ${props => (props.expanded ? 240 : 64)}px;
+`;
+class HorizontalPanel extends React.Component {
 
-constructor(props){
+  constructor(props) {
     console.log(FontAwesomeIcons(4))
     super(props)
-}
+  }
+  state = {
+    selected: 'home',
+    expanded: false
+};
 
-render (){
-    return (
-       <div>
-           
-        <SplitPane split="vertical" size={300} >
-        
-        <FileBrowser
+onSelect = (selected) => {
+    this.setState({ selected: selected });
+};
+onToggle = (expanded) => {
+    this.setState({ expanded: expanded });
+};
+
+pageTitle = {
+    'home': [<FileBrowser
       icons={FontAwesomeIcons(4)}
       files={[
         {
-          key: 'new-folder/',
+          key: 'test_folder/',
           modified: +Moment().subtract(1, 'hours'),
           size: 0,
         },
         {
-          key: 'new-folder/cat.js',
+          key: 'C#_contracts/contract.cs',
          modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 1024 * 1024,
+          size: 1.5 * 245 * 1024,
+        },
+        {
+          key: 'Python_contracts/contract.py',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 102 * 1024,
+        },
+      ]}
+      
+    />],
+    'devices': [<FileBrowser
+      icons={FontAwesomeIcons(4)}
+      files={[
+        {
+          key: 'test_folder/',
+          modified: +Moment().subtract(1, 'hours'),
+          size: 0,
+        },
+        {
+          key: 'C#_contracts/contract.cs',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 245 * 1024,
+        },
+        {
+          key: 'Python_contracts/contract.py',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 102 * 1024,
+        },
+      ]}
+      
+    />],
+    'reports': ['Reports'],
+    'settings/policies': ['Settings', 'Policies'],
+    'settings/network': ['Settings', 'Network']
+};
+
+renderBreadcrumbs() {
+    const { selected } = this.state;
+    const list = ensureArray(this.pageTitle[selected]);
+
+    return (
+        <Breadcrumbs>
+            {list.map((item, index) => (
+                <Breadcrumbs.Item
+                    active={index === list.length - 1}
+                    key={`${selected}_${index}`}
+                >
+                    {item}
+                </Breadcrumbs.Item>
+            ))}
+        </Breadcrumbs>
+    );
+}
+
+navigate = (pathname) => () => {
+    this.setState({ selected: pathname });
+};
+  render() {
+
+    const { expanded, selected } = this.state;
+    return (
+      <div>
+
+        <SplitPane split="vertical" size={350} >
+
+          {/* <FileBrowser
+      icons={FontAwesomeIcons(4)}
+      files={[
+        {
+          key: 'test_folder/',
+          modified: +Moment().subtract(1, 'hours'),
+          size: 0,
+        },
+        {
+          key: 'C#_contracts/contract.cs',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 245 * 1024,
+        },
+        {
+          key: 'Python_contracts/contract.py',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 102 * 1024,
         },
       ]}
       
     />
+     */}
+          <div>
+                <div
+                    style={{
+                        marginLeft: expanded ? 240 : 64,
+                        padding: '15px 20px 0 20px'
+                    }}
+                >
+                    
+                </div>
+                <SideNav onSelect={this.onSelect} onToggle={this.onToggle}>
+                    
+                    <SideNav.Nav selected={selected}>
+                        <NavItem eventKey="home">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-folder-open" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
+                            </NavIcon>
+                            <NavText style={{ paddingRight: 32 }} title="Home">
+                                Home
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="devices">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-play-circle" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
+                            </NavIcon>
+                            <NavText style={{ paddingRight: 32 }} title="Devices">
+                                Devices
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="reports">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-bug" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
+                            </NavIcon>
+                            <NavText style={{ paddingRight: 32 }} title="Reports">
+                                Reports
+                            </NavText>
+                        </NavItem>
+                        <NavItem eventKey="settings">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-cogs" style={{ fontSize: '1.5em', verticalAlign: 'middle' }} />
+                            </NavIcon>
+                            <NavText style={{ paddingRight: 32 }} title="Settings">
+                                Settings
+                            </NavText>
+                            <NavItem eventKey="settings/policies">
+                                <NavText title="Policies">
+                                    Policies
+                                </NavText>
+                            </NavItem>
+                            <NavItem eventKey="settings/network">
+                                <NavText title="Network">
+                                    Network
+                                </NavText>
+                            </NavItem>
+                        </NavItem>
+                    </SideNav.Nav>
+                </SideNav>
+                <Main expanded={expanded}>
+                    {this.renderBreadcrumbs()}
+                </Main>
+            </div>
 
-      
-        <SplitPane split="horizontal"  size={800}>
-             <Afpp/>
-             <LogPanel  />
+          <SplitPane split="horizontal" size={500}>
+            <Afpp />
+            <LogPanel />
+          </SplitPane>
         </SplitPane>
-    </SplitPane>
-    </div>
+      </div>
     )
-    }
+  }
 
 }
 
