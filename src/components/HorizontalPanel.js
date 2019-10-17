@@ -21,7 +21,7 @@ import Select from 'react-select'
 const Main = styled.main`
    
    
-    margin-left: 70px;
+    margin-left: 20px;
     
 `;
 
