@@ -4,7 +4,7 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import './test.css'
-import 'brace/mode/java';
+import 'brace/mode/javascript';
 import 'brace/theme/github';
 import { throwStatement } from '@babel/types';
 

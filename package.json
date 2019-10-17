@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "main": "./src/file_explorer/index.js",
   "dependencies": {
+
     "@fortawesome/react-fontawesome": "^0.1.6",
     "classnames": "^2.2.3",
     "moment": "^2.17.0",
@@ -10,9 +11,23 @@
     "react-ace": "^7.0.4",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
+
+    "@opuscapita/filemanager-server": "^1.1.0-beta.6",
+    "@opuscapita/react-filemanager": "^1.1.0-beta.6",
+    "@opuscapita/react-filemanager-connector-node-v1": "^1.1.0-beta.6",
+    "browserfs": "^1.4.3",
+    "events": "^3.0.0",
+    "javascript-terminal": "^1.0.3",
+    "react": "^16.9.0",
+    
+    "react-broadcast": "^0.7.1",
+    "react-codemirror": "^1.0.0",
+    "react-dom": "^16.9.0",
+
     "react-emit": "^2.1.0",
     "react-scripts": "3.1.2",
-    "react-split-pane": "^0.1.87"
+    "react-split-pane": "^0.1.87",
+    "react-terminal-component": "^1.4.1"
   },
   "peerDependencies": {
     "react": "0.14.x || 15.x || 16.x",
