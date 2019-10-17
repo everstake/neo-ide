@@ -17,14 +17,28 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
 import styled from 'styled-components';
-
+import Select from 'react-select'
 const Main = styled.main`
-    position: static;
-    overflow: hidden;
-    transition: all .11s;
-    padding: 0 10px;
-    margin-left: ${props => (props.expanded ? 240 : 64)}px;
+   
+   
+    margin-left: 70px;
+    
 `;
+
+
+const CCoptions = [
+  { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
+  { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
+  { value: 'purple', label: 'Purple', color: '#5243AA' },
+  { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
+  { value: 'orange', label: 'Orange', color: '#FF8B00' },
+  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+  { value: 'green', label: 'Green', color: '#36B37E' },
+  { value: 'forest', label: 'Forest', color: '#00875A' },
+  { value: 'slate', label: 'Slate', color: '#253858' },
+  { value: 'silver', label: 'Silver', color: '#666666' },
+];
+
 class HorizontalPanel extends React.Component {
 
   constructor(props) {
@@ -65,27 +79,7 @@ pageTitle = {
       ]}
       
     />],
-    'devices': [<FileBrowser
-      icons={FontAwesomeIcons(4)}
-      files={[
-        {
-          key: 'test_folder/',
-          modified: +Moment().subtract(1, 'hours'),
-          size: 0,
-        },
-        {
-          key: 'C#_contracts/contract.cs',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 245 * 1024,
-        },
-        {
-          key: 'Python_contracts/contract.py',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 102 * 1024,
-        },
-      ]}
-      
-    />],
+    'devices': [<div><Select  options={CCoptions}></Select></div>],
     'reports': ['Reports'],
     'settings/policies': ['Settings', 'Policies'],
     'settings/network': ['Settings', 'Network']
@@ -144,10 +138,7 @@ navigate = (pathname) => () => {
      */}
           <div>
                 <div
-                    style={{
-                        marginLeft: expanded ? 240 : 64,
-                        padding: '15px 20px 0 20px'
-                    }}
+                   
                 >
                     
                 </div>
@@ -158,15 +149,19 @@ navigate = (pathname) => () => {
                             <NavIcon>
                                 <i className="fa fa-fw fa-folder-open" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
-                            <NavText style={{ paddingRight: 32 }} title="Home">
-                                Home
-                            </NavText>
+                           
                         </NavItem>
                         <NavItem eventKey="devices">
                             <NavIcon>
                                 <i className="fa fa-fw fa-play-circle" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
-                            <NavText style={{ paddingRight: 32 }} title="Devices">
+                            
+                        </NavItem>
+                        <NavItem eventKey="wallet">
+                            <NavIcon>
+                                <i className="fa fa-fw fa-bank" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
+                            </NavIcon>
+                            <NavText style={{ paddingRight: 32 }} title="Wallet">
                                 Devices
                             </NavText>
                         </NavItem>
