@@ -4,7 +4,7 @@ import React from 'react';
 import AceEditor from 'react-ace';
 import brace from 'brace';
 import './test.css'
-import 'brace/mode/javascript';
+import 'brace/mode/python';
 import 'brace/theme/monokai';
 import { throwStatement } from '@babel/types';
 
@@ -52,7 +52,7 @@ componentDidMount() {
     return (
 
    
-   <AceEditor value={this.state.value} fontSize={'15px'} mode="javascript" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
+   <AceEditor value={this.state.value} fontSize={'15px'} mode="python" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
   
     );
   }

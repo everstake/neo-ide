@@ -16,8 +16,14 @@ a {
   text-decoration: none; }
 
 a:hover {
-  color: #192026;
-  text-decoration: none; }
+  color: #cfcfcf;
+
+  text-decoration: none; 
+}
+.folder:hover, .file:hover {
+  background: #54554e;
+  
+}
 
 ul li, ol li {
   margin: 0.5rem 0; }
@@ -132,13 +138,13 @@ div.rendered-react-keyed-file-browser div.files table {
       div.rendered-react-keyed-file-browser div.files table td.name form.renaming input[type="text"] {
         flex: 1; }
   div.rendered-react-keyed-file-browser div.files table tr td {
-    cursor: pointer; }
+    cursor: pointer;  color:#eee;  }
   div.rendered-react-keyed-file-browser div.files table tr.selected td {
     font-weight: bold;
-  color:red; }
+  color:#eee; }
     div.rendered-react-keyed-file-browser div.files table tr.selected td input, div.rendered-react-keyed-file-browser div.files table tr.selected td button {
       font-weight: normal; 
-      color:red;}
+      color:#eee;}
     div.rendered-react-keyed-file-browser div.files table tr.selected td.name {
       position: relative; }
       div.rendered-react-keyed-file-browser div.files table tr.selected td.name:after {
