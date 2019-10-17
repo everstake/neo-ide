@@ -12,7 +12,7 @@ h4, h5, h6 {
   margin-top: 3rem; }
 
 a {
-  color: #161616;
+  color: #cfcfcf;
   text-decoration: none; }
 
 a:hover {
@@ -134,9 +134,11 @@ div.rendered-react-keyed-file-browser div.files table {
   div.rendered-react-keyed-file-browser div.files table tr td {
     cursor: pointer; }
   div.rendered-react-keyed-file-browser div.files table tr.selected td {
-    font-weight: bold; }
+    font-weight: bold;
+  color:red; }
     div.rendered-react-keyed-file-browser div.files table tr.selected td input, div.rendered-react-keyed-file-browser div.files table tr.selected td button {
-      font-weight: normal; }
+      font-weight: normal; 
+      color:red;}
     div.rendered-react-keyed-file-browser div.files table tr.selected td.name {
       position: relative; }
       div.rendered-react-keyed-file-browser div.files table tr.selected td.name:after {

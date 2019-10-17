@@ -5,7 +5,7 @@ import AceEditor from 'react-ace';
 import brace from 'brace';
 import './test.css'
 import 'brace/mode/javascript';
-import 'brace/theme/github';
+import 'brace/theme/monokai';
 import { throwStatement } from '@babel/types';
 
 class Afpp extends React.Component {
@@ -51,9 +51,9 @@ componentDidMount() {
     };
     return (
 
-   <div className="dddd">
-   <AceEditor value={this.state.value} mode="java" theme="github" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} editorProps={{$blockScrolling: true}}/>
-   </div>
+   
+   <AceEditor value={this.state.value} fontSize={'15px'} mode="javascript" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
+  
     );
   }
 }

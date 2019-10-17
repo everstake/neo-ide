@@ -2,7 +2,7 @@ body {
   width: 105%;
   height: 100%;
   position: fixed;
-  background: #585858;
+  background: #272822;
 }
 *:active, *:focus {
   outline: none !important;

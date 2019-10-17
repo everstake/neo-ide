@@ -12,7 +12,7 @@ import {
 
 const theme={
   textAlign: 'left',
-  background: '#141313',
+  background: '#272822',
   promptSymbolColor: '#6effe6',
   commandColor: '#fcfcfc',
   outputColor: '#fcfcfc',
@@ -21,7 +21,7 @@ const theme={
   spacing: '1%',
   fontFamily: 'monospace',
   width: '100%',
-  height: '30vh',
+  height: '100%',
 //   height: '100%'
 }
 
@@ -63,8 +63,19 @@ constructor(props){
 
 render (){
     return (           
-        <ReactTerminal inputStr=''
-        emulatorState={emulatorState}/>
+        <ReactTerminal theme={{
+            background: '#272822',
+            promptSymbolColor: '#6effe6',
+            commandColor: '#fcfcfc',
+            outputColor: '#fcfcfc',
+            errorOutputColor: '#ff89bd',
+            fontSize: '1.1rem',
+            spacing: '1%',
+            fontFamily: 'monospace',
+            width: '100%',
+            height: '50vh'
+          }} inputStr=''
+        emulatorState={emulatorState} style={{background: '#272822'}}/>
     );
     }
 
