@@ -4,6 +4,10 @@ import React, { Component } from 'react';
 import ReactTerminal from 'react-terminal-component';
 import {ReactTerminalStateless} from 'react-terminal-component';
 
+
+import { createStore, combineReducers } from 'redux';
+import { connect } from 'react-redux';
+
 import {
     EmulatorState, OutputFactory, CommandMapping,
     EnvironmentVariables, FileSystem, History,
@@ -48,6 +52,25 @@ newOutputs = Outputs.addRecord(
 
 const emulatorState = defaultState.setOutputs(newOutputs);
 
+
+// The User Reducer
+const userReducer = function(state = {}, action) {
+  return state;
+}
+
+// The Widget Reducer
+const widgetReducer = function(state = {}, action) {
+  return state;
+}
+
+// Combine Reducers
+const reducers = combineReducers({
+  userState: userReducer,
+  widgetState: widgetReducer
+});
+
+const store = createStore(reducers);
+
 class LogPanel extends React.Component
 {
 
@@ -59,6 +82,13 @@ constructor(props){
     //     emulatorState: EmulatorState.createEmpty(),
     //     inputStr: 'initial value'
     // };
+}
+
+componentDidMount() {
+    store.dispatch({
+      type: 'USER_LIST_SUCCESS',
+      users: [{user: "1"}, {user: "2"}]
+    });
 }
 
 render (){
@@ -74,11 +104,17 @@ render (){
             fontFamily: 'monospace',
             width: '100%',
             height: '50vh'
-          }} inputStr=''
+          }} inputStr={this.userState.users}
         emulatorState={emulatorState} style={{background: '#272822'}}/>
     );
     }
 
 }
 
-export default LogPanel;
+const mapStateToPtops = function(store) {
+    return {
+        users: store.userState.users
+    }
+}
+
+export default connect(mapStateToPtops)(LogPanel);
