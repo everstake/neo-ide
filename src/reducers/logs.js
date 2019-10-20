@@ -14,7 +14,9 @@ const logs = (state = [], action) => {
           todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
         )
       default:
-        return state
+        return [
+          "ALLAH"
+        ]
     }
   }
   

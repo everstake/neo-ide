@@ -10,7 +10,7 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 
 import FileExplorer from '../components/FileExplorer'
-import LogPanel from '../components/LogPanel'
+import LogPanel from '../containers/LogPanel'
 
 class HorizontalPanel extends React.Component
 {
