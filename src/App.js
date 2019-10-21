@@ -21,7 +21,6 @@ class Afpp extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-
    onChange(newValue) {
    // console.log('change',newValue);
    localStorage.setItem ('code', newValue);

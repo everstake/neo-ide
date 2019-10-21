@@ -10,7 +10,13 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 
 import FileExplorer from '../components/FileExplorer'
-import LogPanel from '../components/LogPanel'
+import LogPanel from '../containers/LogPanel'
+
+import { connect } from 'react-redux';
+const mapStateToProps = store => ({
+  logs: store
+});
+
 
 class HorizontalPanel extends React.Component
 {
@@ -18,6 +24,10 @@ class HorizontalPanel extends React.Component
 constructor(props){
     console.log(FontAwesomeIcons(4))
     super(props)
+}
+
+componentDidMount(){
+  console.log(this.props.logs);
 }
 
 render (){
@@ -55,7 +65,7 @@ render (){
 
 }
 
-export default HorizontalPanel;
+export default connect(mapStateToProps)(HorizontalPanel);
 // const splitPaneContext = React.createContext();
 
 // export default function SplitPane({ children, ...props }) {
