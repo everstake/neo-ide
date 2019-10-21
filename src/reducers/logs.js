@@ -1,23 +1,28 @@
-const logs = (state = [], action) => {
+let logId = 0;
+
+function getTime() {
+  const timestamp = Date.now();
+
+  return new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', dayPeriod: ''}).format(timestamp).slice(0,-3)
+}
+
+const usersReducer = (state = [], action) => {
     switch (action.type) {
-      case 'ADD_TODO':
+      case 'ADD_LOG': {
+        logId++;
         return [
           ...state,
           {
-            id: action.id,
+            id: logId,
+            group: action.group,
+            date: getTime(),
             text: action.text,
-            completed: false
           }
         ]
-      case 'TOGGLE_TODO':
-        return state.map(todo =>
-          todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
-        )
+      }
       default:
-        return [
-          "ALLAH"
-        ]
+        return state;
     }
   }
   
-  export default logs
+  export default usersReducer

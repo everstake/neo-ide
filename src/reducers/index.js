@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import logs from './logs'
-import visibilityFilter from './visibilityFilter'
+import usersReducer from './logs'
 
-export default combineReducers({
-  logs,
-  visibilityFilter
+const reducers = combineReducers({
+  logs: usersReducer
 })
+
+export default reducers
