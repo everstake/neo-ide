@@ -8,8 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import '../stylesheets/table.css'
-import { thisExpression } from '@babel/types';
-import { resolve } from 'q';
+
 const useStyles = makeStyles({
     root: {
       
@@ -54,8 +53,7 @@ constructor(props) {
 }
 
 componentDidMount() {
-    // this.hah("s")
-    
+      
     if (!this.state.Neo){ alert("dfdfsf")}else{
       
         this.state.Neo.getAccount()
@@ -66,51 +64,9 @@ componentDidMount() {
           })
         
         })
-
-
-
 }
 }
   
-// console.log("CONSTRUCTOR CALLS")
-        
-//         // window.addEventListener('neoline.ready', () => {
-            
-
-            // neoline.getBalance({
-            //     params: [
-            //       {
-            //         address: this.state.account_D.address,
-            //         assets: ['GAS','MCT', '0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b', 'NEO']
-            //       },{
-            //         address: 'AWSEU4BXpjGVdw9ajnFBXh8Rg8cgw9f3Zo'
-            //       }
-            //     ],
-            //     network: 'TestNet'
-            //   })
-            //   .then((results) => {
-            //     Object.keys(results).forEach(address => {
-            //       const balances = results[address];
-            //       balances.forEach(balance => {
-            //         const { assetID, symbol, amount } = balance
-              
-            //         console.log('Address: ' + address);
-            //         console.log('Asset ID: ' + assetID);
-            //         console.log('Asset symbol: ' + symbol);
-            //         console.log('Amount: ' + amount);
-            //       });
-            //     });
-            //   })
-
-//             console.log("SDASADSAD");
-        //   });
-    
-
-// componentDidUpdate () {
-//     const neoline =  new global.NEOLine.Init();
-//     neoline.getAccount()
-//     .then(account => console.log(account))
-// }
     render() {
         const classes = useStyles;
         const rows = [

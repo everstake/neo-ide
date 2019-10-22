@@ -1,12 +1,8 @@
 import React from 'react';
-// import CodeMirror from 'react-codemirror';
-// import './codemirror1.css';
 import AceEditor from 'react-ace';
-import brace from 'brace';
 import './test.css'
 import 'brace/mode/python';
 import 'brace/theme/monokai';
-import { throwStatement } from '@babel/types';
 
 class Afpp extends React.Component {
 
