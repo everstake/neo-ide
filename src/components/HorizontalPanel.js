@@ -12,7 +12,8 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
 import FileExplorer from '../components/FileExplorer'
-import LogPanel from '../components/LogPanel'
+
+
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
@@ -20,12 +21,23 @@ import styled from 'styled-components';
 import Select from 'react-select'
 
 import Wallet from './Wallet'
+
+
+import LogPanel from '../containers/LogPanel'
+
+import { connect } from 'react-redux';
 const Main = styled.main`
    
    
     margin-left: 20px;
     
 `;
+
+const mapStateToProps = store => ({
+  logs: store
+});
+
+
 
 
 const CCoptions = [
@@ -180,9 +192,10 @@ renderBreadcrumbs() {
 navigate = (pathname) => () => {
     this.setState({ selected: pathname });
 };
-  render() {
-console.log(this.state)
-    const { expanded, selected } = this.state;
+ 
+
+render (){
+  const { expanded, selected } = this.state;
     return (
       <div>
 
@@ -283,7 +296,7 @@ console.log(this.state)
 
 }
 
-export default HorizontalPanel;
+export default connect(mapStateToProps)(HorizontalPanel);
 // const splitPaneContext = React.createContext();
 
 // export default function SplitPane({ children, ...props }) {
