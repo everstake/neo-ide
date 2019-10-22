@@ -18,6 +18,8 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
 import styled from 'styled-components';
 import Select from 'react-select'
+
+import Wallet from './Wallet'
 const Main = styled.main`
    
    
@@ -44,10 +46,80 @@ class HorizontalPanel extends React.Component {
   constructor(props) {
     console.log(FontAwesomeIcons(4))
     super(props)
+
+    // this.state.Neo.getBalance({
+    //   params:  {
+    //       address: this.state.account.address,
+    //       assets: ['NEO']
+    //     },
+
+    //   network: 'TestNet'
+    // })
+    // .then((results) => {
+    //   Object.keys(results).forEach(address => {
+    //     const balances = results[address];
+    //     balances.forEach(balance => {
+    //       const { assetID, symbol, amount } = balance
+    
+    //       console.log('Address: ' + address);
+    //       console.log('Asset ID: ' + assetID);
+    //       console.log('Asset symbol: ' + symbol);
+    //       console.log('Amount: ' + amount);
+    //     });
+    //   });
+    // })
+
+  }
+
+
+  componentDidMount(){
+
+    window.addEventListener('neoline.ready', () => {
+      const neoline =  new global.NEOLine.Init()
+      this.setState({
+        Neo:  neoline,
+      })
+
+      neoline.getAccount()
+      .then(account => {
+        this.setState({
+        account:account
+      }) 
+      return account; }).then(a => 
+        
+        neoline.getBalance({
+          params: [
+            {
+              address: a.address,
+              assets: [ 'NEO']
+            },
+          ],
+          network: 'TestNet'
+        })
+        .then((results) => {
+          Object.keys(results).forEach(address => {
+            const balances = results[address];
+            balances.forEach(balance => {
+              const { assetID, symbol, amount } = balance
+        
+
+              this.setState({
+                balance:balance.amount,
+              })
+             ;
+            });
+          });
+        })
+        
+        );
+    });
   }
   state = {
     selected: 'home',
-    expanded: false
+    expanded: false,
+    account: '',
+    balance: null,
+    Neo: null,
 };
 
 onSelect = (selected) => {
@@ -57,7 +129,10 @@ onToggle = (expanded) => {
     this.setState({ expanded: expanded });
 };
 
-pageTitle = {
+
+
+renderBreadcrumbs() {
+  const pageTitle = {
     'home': [<FileBrowser
       icons={FontAwesomeIcons(4)}
       files={[
@@ -81,13 +156,12 @@ pageTitle = {
     />],
     'devices': [<div><Select  options={CCoptions}></Select></div>],
     'reports': ['Reports'],
+    'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],
     'settings/policies': ['Settings', 'Policies'],
     'settings/network': ['Settings', 'Network']
-};
-
-renderBreadcrumbs() {
+}; 
     const { selected } = this.state;
-    const list = ensureArray(this.pageTitle[selected]);
+    const list = ensureArray(pageTitle[selected]);
 
     return (
         <Breadcrumbs>
@@ -107,7 +181,7 @@ navigate = (pathname) => () => {
     this.setState({ selected: pathname });
 };
   render() {
-
+console.log(this.state)
     const { expanded, selected } = this.state;
     return (
       <div>
@@ -193,7 +267,7 @@ navigate = (pathname) => () => {
                         </NavItem>
                     </SideNav.Nav>
                 </SideNav>
-                <Main expanded={expanded}>
+                <Main className="main-breadcrumbs">
                     {this.renderBreadcrumbs()}
                 </Main>
             </div>
