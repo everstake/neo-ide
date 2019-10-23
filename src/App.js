@@ -3,6 +3,18 @@ import AceEditor from 'react-ace';
 import './test.css'
 import 'brace/mode/python';
 import 'brace/theme/monokai';
+import { connect } from 'react-redux';
+
+const mapStateToProps =  (store) => {
+  let fileContent = "";
+  store.files.forEach(elem => {
+    if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
+      fileContent = elem.content;
+    }  
+  });
+  console.log(typeof fileContent);
+  return {value: fileContent};
+};
 
 class Afpp extends React.Component {
 
@@ -11,7 +23,7 @@ class Afpp extends React.Component {
 
     this.state = {
       width:window.innerWidth, height: window.innerHeight, 
-     value: localStorage.getItem('code'),
+    //  value: localStorage.getItem('code'),
     };
 
     this.onChange = this.onChange.bind(this);
@@ -19,10 +31,10 @@ class Afpp extends React.Component {
 
    onChange(newValue) {
    // console.log('change',newValue);
-   localStorage.setItem ('code', newValue);
-   this.setState({
-     value: localStorage.getItem('code'),
-   })
+  //  localStorage.setItem ('code', newValue);
+  //  this.setState({
+  //    value: localStorage.getItem('code'),
+  //  })
   
   }
 updateDimensions  = () => {
@@ -40,17 +52,12 @@ componentDidMount() {
       lineNumbers: true,
       foldGutter: false,
       viewportMargin:200,
-        flattenSpans:true,
-        
-  
+      flattenSpans:true,
     };
     return (
-
-   
-   <AceEditor value={this.state.value} fontSize={'15px'} mode="python" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
-  
+      <AceEditor value={this.props.value} fontSize={'15px'} mode="python" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
     );
   }
 }
 
-export default Afpp;
+export default connect(mapStateToProps)(Afpp);

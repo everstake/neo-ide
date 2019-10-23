@@ -3,9 +3,8 @@ import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
 import Breadcrumbs from '@trendmicro/react-breadcrumbs';
-import { Button, ButtonGroup } from '@trendmicro/react-buttons';
+// import { Button, ButtonGroup } from '@trendmicro/react-buttons';
 import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
-import Moment from 'moment'
 import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
 // import FontAwesome from 'font-awesome'
 import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
@@ -22,10 +21,14 @@ import Select from 'react-select'
 
 import Wallet from './Wallet'
 
+import Button from '@material-ui/core/Button';
 
 import LogPanel from '../containers/LogPanel'
 
 import { connect } from 'react-redux';
+
+import defaultFiles from '../default_files/default_files';
+
 const Main = styled.main`
    
    
@@ -34,7 +37,7 @@ const Main = styled.main`
 `;
 
 const mapStateToProps = store => ({
-  logs: store
+  files: store.files
 });
 
 
@@ -147,23 +150,7 @@ renderBreadcrumbs() {
   const pageTitle = {
     'home': [<FileBrowser
       icons={FontAwesomeIcons(4)}
-      files={[
-        {
-          key: 'test_folder/',
-          modified: +Moment().subtract(1, 'hours'),
-          size: 0,
-        },
-        {
-          key: 'C#_contracts/contract.cs',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 245 * 1024,
-        },
-        {
-          key: 'Python_contracts/contract.py',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 102 * 1024,
-        },
-      ]}
+      files={ this.props.files }
       
     />],
     'devices': [<div><Select  options={CCoptions}></Select></div>],
@@ -177,6 +164,13 @@ renderBreadcrumbs() {
 
     return (
         <Breadcrumbs>
+          <Button 
+            variant="contained"
+            color="primary"
+            size="small"
+            // className={classes.button}
+            // startIcon={<SaveIcon />}
+            > Save </Button>
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
@@ -200,37 +194,9 @@ render (){
       <div>
 
         <SplitPane split="vertical" size={350} >
-
-          {/* <FileBrowser
-      icons={FontAwesomeIcons(4)}
-      files={[
-        {
-          key: 'test_folder/',
-          modified: +Moment().subtract(1, 'hours'),
-          size: 0,
-        },
-        {
-          key: 'C#_contracts/contract.cs',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 245 * 1024,
-        },
-        {
-          key: 'Python_contracts/contract.py',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 102 * 1024,
-        },
-      ]}
-      
-    />
-     */}
           <div>
-                <div
-                   
-                >
-                    
-                </div>
+            
                 <SideNav onSelect={this.onSelect} onToggle={this.onToggle}>
-                    
                     <SideNav.Nav selected={selected}>
                         <NavItem eventKey="home">
                             <NavIcon>
