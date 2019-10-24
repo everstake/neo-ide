@@ -4,17 +4,7 @@ import './test.css'
 import 'brace/mode/python';
 import 'brace/theme/monokai';
 import { connect } from 'react-redux';
-
-const mapStateToProps =  (store) => {
-  let fileContent = "";
-  store.files.forEach(elem => {
-    if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
-      fileContent = elem.content;
-    }  
-  });
-  console.log(typeof fileContent);
-  return {value: fileContent};
-};
+import * as actions from './actions/index'
 
 class Afpp extends React.Component {
 
@@ -35,6 +25,8 @@ class Afpp extends React.Component {
   //  this.setState({
   //    value: localStorage.getItem('code'),
   //  })
+    this.props.changeFileSaved(this.props.currentFile);
+
   
   }
 updateDimensions  = () => {
@@ -60,4 +52,19 @@ componentDidMount() {
   }
 }
 
-export default connect(mapStateToProps)(Afpp);
+const mapStateToProps =  (store) => {
+  let fileContent = "";
+  store.files.forEach(elem => {
+    if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
+      fileContent = elem.content;
+    }  
+  });
+  console.log(typeof fileContent);
+  return {value: fileContent, currentFile: store.currentFile};
+};
+
+const mapDispatchToProps = dispatch =>({
+  changeFileSaved: (fileName)=>dispatch(actions.changeFileSaved(fileName))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Afpp);

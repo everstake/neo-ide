@@ -74,7 +74,7 @@ componentDidMount() {
     // console.log(this.props)
 
     this.props.addLog('hallo', 'logger panel')
-  }
+}
 
 render (){
     let logs = fetchLogs(this.props.logs);

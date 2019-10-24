@@ -21,13 +21,13 @@ import Select from 'react-select'
 
 import Wallet from './Wallet'
 
-import Button from '@material-ui/core/Button';
 
 import LogPanel from '../containers/LogPanel'
 
 import { connect } from 'react-redux';
 
-import defaultFiles from '../default_files/default_files';
+import SaveButton from '../components/SaveButton'
+import Dddd from '../components/Dddd' //
 
 const Main = styled.main`
    
@@ -39,7 +39,6 @@ const Main = styled.main`
 const mapStateToProps = store => ({
   files: store.files
 });
-
 
 
 
@@ -55,7 +54,7 @@ const CCoptions = [
   { value: 'slate', label: 'Slate', color: '#253858' },
   { value: 'silver', label: 'Silver', color: '#666666' },
 ];
-
+ 
 class HorizontalPanel extends React.Component {
 
   constructor(props) {
@@ -88,6 +87,7 @@ class HorizontalPanel extends React.Component {
 
 
   componentDidMount(){
+
 
     window.addEventListener('neoline.ready', () => {
       const neoline =  new global.NEOLine.Init()
@@ -145,10 +145,11 @@ onToggle = (expanded) => {
 };
 
 
-
 renderBreadcrumbs() {
+
   const pageTitle = {
-    'home': [<FileBrowser
+    'home': [
+      <FileBrowser
       icons={FontAwesomeIcons(4)}
       files={ this.props.files }
       
@@ -164,13 +165,6 @@ renderBreadcrumbs() {
 
     return (
         <Breadcrumbs>
-          <Button 
-            variant="contained"
-            color="primary"
-            size="small"
-            // className={classes.button}
-            // startIcon={<SaveIcon />}
-            > Save </Button>
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
@@ -186,9 +180,9 @@ renderBreadcrumbs() {
 navigate = (pathname) => () => {
     this.setState({ selected: pathname });
 };
- 
 
 render (){
+
   const { expanded, selected } = this.state;
     return (
       <div>
@@ -256,6 +250,7 @@ render (){
             <LogPanel />
           </SplitPane>
         </SplitPane>
+        <Dddd />
       </div>
     )
   }

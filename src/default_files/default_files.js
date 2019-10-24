@@ -9,6 +9,7 @@ const defaultFiles = [
       modified: +Moment().subtract(1, 'hours'),
       size: 0,
       file: false,
+      saved: true,
       content: "",
       compiled: ""
     },
@@ -17,6 +18,7 @@ const defaultFiles = [
       modified: +Moment().subtract(1, 'hours'),
       size: 1.5 * 245 * 1024,
       file: true,
+      saved: true,
       content: domainContent,
       compiled: ""
     },
