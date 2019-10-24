@@ -12,8 +12,8 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
 import FileExplorer from '../components/FileExplorer'
-
-
+import ButtonM from './Button'
+import Paper from '@material-ui/core/Paper';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
@@ -23,9 +23,11 @@ import Select from 'react-select'
 import Wallet from './Wallet'
 
 
+import * as actions from '../actions/index'
 import LogPanel from '../containers/LogPanel'
 
 import { connect } from 'react-redux';
+import PanelsBlock from "./PanelsBlock";
 const Main = styled.main`
    
    
@@ -34,10 +36,13 @@ const Main = styled.main`
 `;
 
 const mapStateToProps = store => ({
-  logs: store
+  logs: store,
+  wallet: store
 });
 
-
+const mapDispatchToProps = dispatch =>({
+  addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d))
+});
 
 
 const CCoptions = [
@@ -54,6 +59,14 @@ const CCoptions = [
 ];
 
 class HorizontalPanel extends React.Component {
+  state = {
+    selected: 'home',
+    expanded: false,
+    account: '',
+    balance: null,
+    Neo: null,
+    Warning: null,
+};
 
   constructor(props) {
     console.log(FontAwesomeIcons(4))
@@ -118,22 +131,37 @@ class HorizontalPanel extends React.Component {
               this.setState({
                 balance:balance.amount,
               })
+
+              
              ;
             });
           });
+        }).then( () => {
+
+          neoline.getNetworks()
+.then(result => {
+  const {
+    networks,
+    defaultNetwork
+  } = result;
+
+  console.log(networks);
+  // eg. ["MainNet", "TestNet", "PrivateNet"]
+
+  console.log('Default network: ' + defaultNetwork);
+  // eg. "MainNet"
+  this.props.addUserWallet(this.state.account.address, networks, this.state.balance)
+})
+
+
         })
         
         );
     });
   }
-  state = {
-    selected: 'home',
-    expanded: false,
-    account: '',
-    balance: null,
-    Neo: null,
-};
 
+
+ 
 onSelect = (selected) => {
     this.setState({ selected: selected });
 };
@@ -142,7 +170,22 @@ onToggle = (expanded) => {
 };
 
 
+f = () => {
+  if(!this.state.Neo && !this.state.Warning){
+    alert("no wallet") 
+  this.setState({
+    Warning: true
+  })}
+}
+onLoad = e => {
+  console.log("LLLLLLOOOAD")
+}
 
+walletclick =() =>{
+
+  
+
+}
 renderBreadcrumbs() {
   const pageTitle = {
     'home': [<FileBrowser
@@ -166,7 +209,7 @@ renderBreadcrumbs() {
       ]}
       
     />],
-    'devices': [<div><Select  options={CCoptions}></Select></div>],
+    'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
     'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],
     'settings/policies': ['Settings', 'Policies'],
@@ -176,7 +219,7 @@ renderBreadcrumbs() {
     const list = ensureArray(pageTitle[selected]);
 
     return (
-        <Breadcrumbs>
+        <Breadcrumbs >
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
@@ -195,11 +238,12 @@ navigate = (pathname) => () => {
  
 
 render (){
+
   const { expanded, selected } = this.state;
     return (
-      <div>
+      <div >
 
-        <SplitPane split="vertical" size={350} >
+        <SplitPane split="vertical" size={550} >
 
           {/* <FileBrowser
       icons={FontAwesomeIcons(4)}
@@ -223,7 +267,7 @@ render (){
       
     />
      */}
-          <div>
+          <div >
                 <div
                    
                 >
@@ -238,13 +282,13 @@ render (){
                             </NavIcon>
                            
                         </NavItem>
-                        <NavItem eventKey="devices">
+                        <NavItem onClick={this.f}  eventKey="devices">
                             <NavIcon>
                                 <i className="fa fa-fw fa-play-circle" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
                             
                         </NavItem>
-                        <NavItem eventKey="wallet">
+                        <NavItem onClick={this.walletclick} eventKey="wallet">
                             <NavIcon>
                                 <i className="fa fa-fw fa-bank" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
@@ -296,4 +340,4 @@ render (){
 
 }
 
-export default connect(mapStateToProps)(HorizontalPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(HorizontalPanel);

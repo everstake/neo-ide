@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+.select {
+width: 300px;
+padding-left: 40px;
+}
 h1, h2, h3,
 h4, h5, h6 {
   margin-bottom: 1rem;

@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="aa330877-3eba-4d24-bd5a-1597cd61e5b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HorizontalPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HorizontalPanel.js" afterDir="false" />
     </list>
     <list id="f74e1b36-5adb-4715-9ad8-768e52ae3c62" name="Revert &quot;added src of file_explorer without storybook&quot;" comment="Revert &quot;added src of file_explorer without storybook&quot;&#10;&#10;This reverts commit afbe1701" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -92,7 +91,7 @@
       <workItem from="1569407762077" duration="11168000" />
       <workItem from="1569585373181" duration="636000" />
       <workItem from="1570617304929" duration="1402000" />
-      <workItem from="1571742002616" duration="1068000" />
+      <workItem from="1571742002616" duration="1752000" />
     </task>
     <task id="LOCAL-00001" summary="add(land): moved main panel&#10;add(scroller): moved scroller">
       <created>1569336315121</created>
