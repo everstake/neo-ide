@@ -10,10 +10,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import '../stylesheets/table.css'
-import { connect } from 'react-redux';
+import { connect} from 'react-redux';
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-
+import store from '../store'
 import SplitButton from './SplitButton'
 const useStyles = makeStyles(theme =>({
     root: {
@@ -62,6 +62,7 @@ class Wallet extends React.Component {
  
     state = {
         account: 'g',
+        balance:'1001001001',
         // Neo: new global.NEOLine.Init(),
     }
 hah (par ) {
@@ -75,9 +76,23 @@ constructor(props) {
 
   
 }
-componentWillMount() { console.log("wait for mount")}
+fff() {
+  console.log(store.getState())
+}
+componentWillMount() {  this.setState(prevState =>({
+  balance: prevState.balance  = this.props.wallet.amount,
+}))}
 componentDidMount() {
-      console.log(this.props.wallet.address)
+  store.subscribe(this.fff)
+  
+//   this.timerID = setInterval(() => {
+//      console.log(this.props.wallet.amount)
+//   this.setState({
+//       balance: this.props.wallet.amount,
+//   })
+// }, 100)
+//       console.log(this.props.wallet
+//         )
 //     if (!this.state.Neo){ alert("dfdfsf")}else{
       
 //         this.state.Neo.getAccount()
@@ -90,12 +105,15 @@ componentDidMount() {
 //         })
 // }
 }
-  
+componentWillUnmount() {
+  clearInterval(this.timerID);
+}
+
     render() {
         const classes = useStyles;
         const rows = [
           createData('Address', this.props.wallet.address+''),
-          createData('Gas',this.props.wallet.amount+''),
+          createData('Gas',this.state.balance+''),
       
         ];
         return(<Paper className="PaperClass">
@@ -131,10 +149,13 @@ componentDidMount() {
 
 }
 
+
 const mapStateToProps = state => ({
   wallet: state.wallet[0]
-});
+}
+
+);
 
 
 
-export default connect(mapStateToProps,)(Wallet);
+export default connect(mapStateToProps)(Wallet);

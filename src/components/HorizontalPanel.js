@@ -98,21 +98,33 @@ class HorizontalPanel extends React.Component {
 
 
   componentDidMount(){
+    this.timerID = setInterval(() => {
+       
+  
+    
+      // console.log("network changed");
 
     window.addEventListener('neoline.ready', () => {
       const neoline =  new global.NEOLine.Init()
       this.setState({
         Neo:  neoline,
       })
+    });
+      
 
-      neoline.getAccount()
+if(!this.state.Neo){console.log("not connectd")}
+else{
+     
+      this.state.Neo.getAccount()
       .then(account => {
         this.setState({
         account:account
       }) 
-      return account; }).then(a => 
+      return account; })
+    
+      .then(a => 
         
-        neoline.getBalance({
+        this.state.Neo.getBalance({
           params: [
             {
               address: a.address,
@@ -138,18 +150,19 @@ class HorizontalPanel extends React.Component {
           });
         }).then( () => {
 
-          neoline.getNetworks()
+          this.state.Neo.getNetworks()
 .then(result => {
   const {
     networks,
     defaultNetwork
   } = result;
 
-  console.log(networks);
+  // console.log(networks);
   // eg. ["MainNet", "TestNet", "PrivateNet"]
 
-  console.log('Default network: ' + defaultNetwork);
+  // console.log('Default network: ' + defaultNetwork);
   // eg. "MainNet"
+  // console.log(this.state.balance);
   this.props.addUserWallet(this.state.account.address, networks, this.state.balance)
 })
 
@@ -157,9 +170,16 @@ class HorizontalPanel extends React.Component {
         })
         
         );
-    });
+  
+    }
+  }, 1000);
   }
 
+
+  
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
 
  
 onSelect = (selected) => {
