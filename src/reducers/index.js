@@ -8,11 +8,9 @@ import neoReducer from './neo'
 const reducers = combineReducers({
   logs: usersReducer,
   files: filesReducer,
+  currentFile: currentFile,
   wallet: walletReducer,
   neo: neoReducer,
-  currentFile: currentFile
-
-
-});
+})
 
 export default reducers
