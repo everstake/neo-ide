@@ -11,8 +11,8 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
 import FileExplorer from '../components/FileExplorer'
-
-
+import ButtonM from './Button'
+import Paper from '@material-ui/core/Paper';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
@@ -22,6 +22,7 @@ import Select from 'react-select'
 import Wallet from './Wallet'
 
 
+import * as actions from '../actions/index'
 import LogPanel from '../containers/LogPanel'
 
 import { connect } from 'react-redux';
@@ -32,6 +33,8 @@ import DeployButton from '../components/DeployButton'
 
 
 
+import PanelsBlock from "./PanelsBlock";
+import neoReducer from "../reducers/neo";
 const Main = styled.main`
    
    
@@ -40,10 +43,16 @@ const Main = styled.main`
 `;
 
 const mapStateToProps = store => ({
-  files: store.files
+  files: store.files,
+  logs: store,
+  wallet: store.wallet,
+  neo: store.neo,
 });
 
-
+const mapDispatchToProps = dispatch =>({
+  addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
+  addNeo: (a) => dispatch(actions.addNeo(a)),
+});
 
 const CCoptions = [
   { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
@@ -59,6 +68,14 @@ const CCoptions = [
 ];
  
 class HorizontalPanel extends React.Component {
+  state = {
+    selected: 'home',
+    expanded: false,
+    account: '',
+    balance: null,
+   Neo: null,
+    Warning: null,
+};
 
   constructor(props) {
     console.log(FontAwesomeIcons(4))
@@ -90,56 +107,106 @@ class HorizontalPanel extends React.Component {
 
 
   componentDidMount(){
+    // this.timerID = setInterval(() => {
+
+if(!this.state.Neo){console.log("not connectdHH")
+window.addEventListener('neoline.ready', () => {
+  console.log("CONNECTED");
+  const neoline =  new global.NEOLine.Init()
+  console.log(neoline)
 
 
-    window.addEventListener('neoline.ready', () => {
-      const neoline =  new global.NEOLine.Init()
-      this.setState({
-        Neo:  neoline,
-      })
+  this.setState({
+      Neo: neoline,
+  })
+  this.props.addNeo(neoline)
+console.log(this.props)
+  this.props.neo.neo.getAccount()
+  .then(account => {
+    this.setState({
+    account:account
+  }) 
+  this.test( this.props.neo.neo)
 
-      neoline.getAccount()
-      .then(account => {
-        this.setState({
-        account:account
-      }) 
-      return account; }).then(a => 
-        
-        neoline.getBalance({
-          params: [
-            {
-              address: a.address,
-              assets: [ 'NEO']
-            },
-          ],
-          network: 'TestNet'
-        })
-        .then((results) => {
-          Object.keys(results).forEach(address => {
-            const balances = results[address];
-            balances.forEach(balance => {
-              const { assetID, symbol, amount } = balance
-        
+  })
+  // this.test()\
 
-              this.setState({
-                balance:balance.amount,
-              })
-             ;
-            });
-          });
-        })
-        
-        );
-    });
+});
+}
   }
-  state = {
-    selected: 'home',
-    expanded: false,
-    account: '',
-    balance: null,
-    Neo: null,
-};
 
+test (a) {
+
+  this.timerID = setInterval(() => {
+const neoline = a
+console.log(this.state.account.address)
+console.log("G1")
+this.props.neo.neo.getBalance({
+        params: [
+          {
+            address: this.state.account.address,
+            assets: ['NEO']
+          },
+        ],
+        network: 'TestNet'
+      })
+      .then((results) => {
+        console.log("G2")
+
+        console.log(results)
+        Object.keys(results).forEach(address => {
+          const balances = results[address];
+          balances.forEach(balance => {
+            const { assetID, symbol, amount } = balance
+      
+            
+            this.setState({
+              balance:balance.amount,
+            })
+
+            console.log('dsfsadfdf')
+           ;
+          });
+        });
+      }).then( () => {
+        console.log("G3")
+
+          console.log('dsfsadfdf')
+        this.props.neo.neo.getNetworks()
+.then(result => {
+  console.log("G4")
+
+const {
+  networks,
+  defaultNetwork
+} = result;
+
+// console.log(networks);
+// eg. ["MainNet", "TestNet", "PrivateNet"]
+
+// console.log('Default network: ' + defaultNetwork);
+// eg. "MainNet"
+console.log("IA DOSHEL'")
+if(this.state.balance !== this.props.wallet.amount) {
+  console.log("not equal")
+this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
+}
+})
+
+
+      }).catch(e=>{console.log("G5");      
+                  console.log(e)});
+      
+      
+    }, 3000);
+    console.log("G6")
+}
+  
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+ 
 onSelect = (selected) => {
     this.setState({ selected: selected });
 };
@@ -148,6 +215,22 @@ onToggle = (expanded) => {
 };
 
 
+f = () => {
+  if(!this.state.Neo && !this.state.Warning){
+    alert("no wallet") 
+  this.setState({
+    Warning: true
+  })}
+}
+onLoad = e => {
+  console.log("LLLLLLOOOAD")
+}
+
+walletclick =() =>{
+
+  
+
+}
 renderBreadcrumbs() {
 
   const pageTitle = {
@@ -159,7 +242,7 @@ renderBreadcrumbs() {
       files={ this.props.files }
       
     />],
-    'devices': [<div><Select  options={CCoptions}></Select></div>],
+    'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
     'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],
     'settings/policies': ['Settings', 'Policies'],
@@ -169,7 +252,7 @@ renderBreadcrumbs() {
     const list = ensureArray(pageTitle[selected]);
 
     return (
-        <Breadcrumbs>
+        <Breadcrumbs >
             {list.map((item, index) => (
                 <Breadcrumbs.Item
                     active={index === list.length - 1}
@@ -190,11 +273,38 @@ render (){
 
   const { expanded, selected } = this.state;
     return (
-      <div>
+      <div >
 
-        <SplitPane split="vertical" size={350} >
-          <div>
-            
+        <SplitPane split="vertical" size={550} >
+
+          {/* <FileBrowser
+      icons={FontAwesomeIcons(4)}
+      files={[
+        {
+          key: 'test_folder/',
+          modified: +Moment().subtract(1, 'hours'),
+          size: 0,
+        },
+        {
+          key: 'C#_contracts/contract.cs',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 245 * 1024,
+        },
+        {
+          key: 'Python_contracts/contract.py',
+         modified: +Moment().subtract(1, 'hours'),
+          size: 1.5 * 102 * 1024,
+        },
+      ]}
+      
+    />
+     */}
+          <div >
+                <div
+                   
+                >
+                    
+                </div>
                 <SideNav onSelect={this.onSelect} onToggle={this.onToggle}>
                     <SideNav.Nav selected={selected}>
                         <NavItem eventKey="home">
@@ -203,13 +313,13 @@ render (){
                             </NavIcon>
                            
                         </NavItem>
-                        <NavItem eventKey="devices">
+                        <NavItem onClick={this.f}  eventKey="devices">
                             <NavIcon>
                                 <i className="fa fa-fw fa-play-circle" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
                             
                         </NavItem>
-                        <NavItem eventKey="wallet">
+                        <NavItem onClick={this.walletclick} eventKey="wallet">
                             <NavIcon>
                                 <i className="fa fa-fw fa-bank" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
@@ -261,4 +371,4 @@ render (){
 
 }
 
-export default connect(mapStateToProps)(HorizontalPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(HorizontalPanel);
