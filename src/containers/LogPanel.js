@@ -69,14 +69,11 @@ constructor(props){
 }
 
 componentDidMount() {
-    // console.log("111");
-    // console.log(store.getState());
-    // console.log(this.props)
-
     this.props.addLog('hallo', 'logger panel')
 }
 
 render (){
+    console.log("Log panel sees the changes")
     let logs = fetchLogs(this.props.logs);
 
     return (           

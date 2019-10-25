@@ -27,7 +27,10 @@ import LogPanel from '../containers/LogPanel'
 import { connect } from 'react-redux';
 
 import SaveButton from '../components/SaveButton'
-import Dddd from '../components/Dddd' //
+import CompileButton from '../components/CompileButton'
+import DeployButton from '../components/DeployButton'
+
+
 
 const Main = styled.main`
    
@@ -148,7 +151,9 @@ onToggle = (expanded) => {
 renderBreadcrumbs() {
 
   const pageTitle = {
-    'home': [
+    'home': [<SaveButton />,
+      <CompileButton />,
+    
       <FileBrowser
       icons={FontAwesomeIcons(4)}
       files={ this.props.files }
@@ -250,7 +255,6 @@ render (){
             <LogPanel />
           </SplitPane>
         </SplitPane>
-        <Dddd />
       </div>
     )
   }

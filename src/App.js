@@ -25,7 +25,7 @@ class Afpp extends React.Component {
   //  this.setState({
   //    value: localStorage.getItem('code'),
   //  })
-    this.props.changeFileSaved(this.props.currentFile);
+    this.props.changeFileSaved(this.props.currentFile, newValue);
 
   
   }
@@ -56,15 +56,14 @@ const mapStateToProps =  (store) => {
   let fileContent = "";
   store.files.forEach(elem => {
     if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
-      fileContent = elem.content;
+      fileContent = elem.currentContent;
     }  
   });
-  console.log(typeof fileContent);
   return {value: fileContent, currentFile: store.currentFile};
 };
 
 const mapDispatchToProps = dispatch =>({
-  changeFileSaved: (fileName)=>dispatch(actions.changeFileSaved(fileName))
+  changeFileSaved: (fileName, newContent)=>dispatch(actions.changeFileSaved(fileName, newContent))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Afpp);

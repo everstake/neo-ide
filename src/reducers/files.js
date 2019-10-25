@@ -27,19 +27,55 @@ const filesReducer = (state = [], action) => {
         ]
       }
       case 'CHANGE_FILE_SAVED': {
-        state[findFileId(action.name, state)].saved = false;
-        return state;
+        return state.map((fileObj, i) => {
+          if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+            // Copy the object before mutating
+            return Object.assign({}, fileObj, {
+              saved: false,
+              compiled: false,
+              deployed: false,
+              currentContent: action.newContent
+            });
+          }
+          return fileObj
+        });
+      }
+      case 'CHANGE_FILE_COMPILED': {
+        return state.map((fileObj, i) => {
+          if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+            // Copy the object before mutating
+            return Object.assign({}, fileObj, {
+              compiled: true,
+            });
+          }
+          return fileObj
+        });
+      }
+      case 'CHANGE_FILE_DEPLOYED': {
+        return state.map((fileObj, i) => {
+          if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+            // Copy the object before mutating
+            return Object.assign({}, fileObj, {
+              deployed: true,
+            });
+          }
+          return fileObj
+        });
       }
       case 'SAVE_FILE': {
-        let id = findFileId(action.name, state);
-        if (action.fileObj.content) {
-          state[id].content = action.fileObj.content;
-        }
-        if (action.fileObj.compiled) {
-          state[id].compiled = action.fileObj.compiled;
-        }
-        state[id].saved = true;
-        return state;
+        return state.map((fileObj, i) => {
+          if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+            // Copy the object before mutating
+            return Object.assign({}, fileObj, {
+              saved: true,
+              compiled: false,
+              deployed: false,
+              savedContent: action.fileObj.currentContent,
+              currentContent: action.fileObj.currentContent,
+            });
+          }
+          return fileObj
+        });
       }
       default:
         return defaultFiles;

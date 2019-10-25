@@ -15,7 +15,6 @@ class RawListThumbnailFolder extends BaseFolder {
       isOpen, isDragging, isDeleting, isRenaming, isDraft, isOver, isSelected,
       url, action, browserProps, depth, keyDerived, connectDragPreview,
     } = this.props
-
     const icon = browserProps.icons[isOpen ? 'FolderOpen' : 'Folder']
     const inAction = (isDragging || action)
 

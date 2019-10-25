@@ -23,7 +23,7 @@ function CustomButtonView(props) {
       size="small"
       className={classes.button}
       startIcon={<SaveIcon />}
-      onClick={ props.saveFile }
+      onClick={ props.deploy }
       args={ props.args }
     > { props.content } </Button>);
 }
@@ -32,23 +32,23 @@ class CustomButton extends React.Component {
   constructor(props) {
     super(props);
     
-    this.saveFile = this.saveFile.bind(this);
+    this.deploy = this.deploy.bind(this);
   }
 
-  saveFile() {
-    this.props.saveFile(this.props.file.key, this.props.file)
+  deploy() {
+    this.props.changeFileDeployed(this.props.file.key)
   }
 
   render() {
     let content;
     if (this.props.saved) {
-      content = "saved"
+      content = "deployed"
     } else {
-      content = "save"
+      content = "deploy"
     }
-    console.log("Saved: ", this.props.file.saved)
+    console.log("deployed: ", this.props.file.saved)
     return (
-      <CustomButtonView disabled={ this.props.file.saved } content={ content } saveFile= {this.saveFile} args={{lala: 15}}/>
+      <CustomButtonView disabled={ (!this.props.file.compiled && !this.props.file.deployed) || (this.props.file.deployed) } content={ content } deploy= {this.deploy} args={{lala: 15}}/>
     );
   }
 }
@@ -64,7 +64,7 @@ const mapStateToProps =  (store) => {
 };
 
 const mapDispatchToProps = dispatch =>({
-  saveFile: (name, fileObj)=>dispatch(actions.saveFile(name, fileObj))
+  changeFileDeployed: (name)=>dispatch(actions.changeFileDeployed(name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)
