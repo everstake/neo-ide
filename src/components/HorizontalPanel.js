@@ -359,7 +359,6 @@ render (){
             <LogPanel />
           </SplitPane>
         </SplitPane>
-        <Dddd />
       </div>
     )
   }
