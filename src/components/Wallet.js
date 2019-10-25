@@ -79,11 +79,13 @@ constructor(props) {
 fff() {
   console.log(store.getState())
 }
-componentWillMount() {  this.setState(prevState =>({
-  balance: prevState.balance  = this.props.wallet.amount,
-}))}
+componentWillMount() {  
+//   this.setState(prevState =>({
+//   balance: prevState.balance  = this.props.wallet.amount,
+// }))
+}
 componentDidMount() {
-  store.subscribe(this.fff)
+  // store.subscribe(this.fff)
   
 //   this.timerID = setInterval(() => {
 //      console.log(this.props.wallet.amount)
@@ -113,9 +115,11 @@ componentWillUnmount() {
         const classes = useStyles;
         const rows = [
           createData('Address', this.props.wallet.address+''),
-          createData('Gas',this.state.balance+''),
+          createData('NEO',this.props.wallet.amount+''),
+          createData('CurrentNetwork', this.props.wallet.coin_type)
       
         ];
+        console.log(this.props.wallet)
         return(<Paper className="PaperClass">
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
@@ -136,9 +140,9 @@ componentWillUnmount() {
                 ))}
               </TableBody>
             </Table>
-           < Select options={[{value: '1', label:this.props.wallet.coin_type[1]}, 
-          {value:'2', label:this.props.wallet.coin_type[0]}]}></Select>
-          
+           {/* < Select options={[{value: '1', label:this.props.wallet.coin_type[1]}, 
+          {value:'2', label:this.props.wallet.ne[0]}]}></Select> */}
+         
          <SplitButton/>
           </Paper>
           
@@ -146,12 +150,12 @@ componentWillUnmount() {
           )
     }
     
+      }
 
-}
 
 
 const mapStateToProps = state => ({
-  wallet: state.wallet[0]
+  wallet: state.wallet
 }
 
 );

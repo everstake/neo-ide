@@ -28,6 +28,7 @@ import LogPanel from '../containers/LogPanel'
 
 import { connect } from 'react-redux';
 import PanelsBlock from "./PanelsBlock";
+import neoReducer from "../reducers/neo";
 const Main = styled.main`
    
    
@@ -37,11 +38,13 @@ const Main = styled.main`
 
 const mapStateToProps = store => ({
   logs: store,
-  wallet: store
+  wallet: store.wallet,
+  neo: store.neo,
 });
 
 const mapDispatchToProps = dispatch =>({
-  addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d))
+  addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
+  addNeo: (a) => dispatch(actions.addNeo(a)),
 });
 
 
@@ -64,7 +67,7 @@ class HorizontalPanel extends React.Component {
     expanded: false,
     account: '',
     balance: null,
-    Neo: null,
+   Neo: null,
     Warning: null,
 };
 
@@ -98,84 +101,100 @@ class HorizontalPanel extends React.Component {
 
 
   componentDidMount(){
-    this.timerID = setInterval(() => {
-       
-  
-    
-      // console.log("network changed");
+    // this.timerID = setInterval(() => {
 
-    window.addEventListener('neoline.ready', () => {
-      const neoline =  new global.NEOLine.Init()
-      this.setState({
-        Neo:  neoline,
+if(!this.state.Neo){console.log("not connectdHH")
+window.addEventListener('neoline.ready', () => {
+  console.log("CONNECTED");
+  const neoline =  new global.NEOLine.Init()
+  console.log(neoline)
+
+
+  this.setState({
+      Neo: neoline,
+  })
+  this.props.addNeo(neoline)
+console.log(this.props)
+  this.props.neo.neo.getAccount()
+  .then(account => {
+    this.setState({
+    account:account
+  }) 
+  this.test( this.props.neo.neo)
+
+  })
+  // this.test()\
+
+});
+}
+  }
+
+test (a) {
+
+  this.timerID = setInterval(() => {
+const neoline = a
+console.log(this.state.account.address)
+console.log("G1")
+this.props.neo.neo.getBalance({
+        params: [
+          {
+            address: this.state.account.address,
+            assets: ['NEO']
+          },
+        ],
+        network: 'TestNet'
       })
-    });
+      .then((results) => {
+        console.log("G2")
+
+        console.log(results)
+        Object.keys(results).forEach(address => {
+          const balances = results[address];
+          balances.forEach(balance => {
+            const { assetID, symbol, amount } = balance
       
+            
+            this.setState({
+              balance:balance.amount,
+            })
 
-if(!this.state.Neo){console.log("not connectd")}
-else{
-     
-      this.state.Neo.getAccount()
-      .then(account => {
-        this.setState({
-        account:account
-      }) 
-      return account; })
-    
-      .then(a => 
-        
-        this.state.Neo.getBalance({
-          params: [
-            {
-              address: a.address,
-              assets: [ 'NEO']
-            },
-          ],
-          network: 'TestNet'
-        })
-        .then((results) => {
-          Object.keys(results).forEach(address => {
-            const balances = results[address];
-            balances.forEach(balance => {
-              const { assetID, symbol, amount } = balance
-        
-
-              this.setState({
-                balance:balance.amount,
-              })
-
-              
-             ;
-            });
+            console.log('dsfsadfdf')
+           ;
           });
-        }).then( () => {
+        });
+      }).then( () => {
+        console.log("G3")
 
-          this.state.Neo.getNetworks()
+          console.log('dsfsadfdf')
+        this.props.neo.neo.getNetworks()
 .then(result => {
-  const {
-    networks,
-    defaultNetwork
-  } = result;
+  console.log("G4")
 
-  // console.log(networks);
-  // eg. ["MainNet", "TestNet", "PrivateNet"]
+const {
+  networks,
+  defaultNetwork
+} = result;
 
-  // console.log('Default network: ' + defaultNetwork);
-  // eg. "MainNet"
-  // console.log(this.state.balance);
-  this.props.addUserWallet(this.state.account.address, networks, this.state.balance)
+// console.log(networks);
+// eg. ["MainNet", "TestNet", "PrivateNet"]
+
+// console.log('Default network: ' + defaultNetwork);
+// eg. "MainNet"
+console.log("IA DOSHEL'")
+if(this.state.balance !== this.props.wallet.amount) {
+  console.log("not equal")
+this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
+}
 })
 
 
-        })
-        
-        );
-  
-    }
-  }, 1000);
-  }
-
-
+      }).catch(e=>{console.log("G5");      
+                  console.log(e)});
+      
+      
+    }, 3000);
+    console.log("G6")
+}
   
   componentWillUnmount() {
     clearInterval(this.timerID);

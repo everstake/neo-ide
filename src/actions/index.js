@@ -13,3 +13,10 @@ export const addUserWallet = (address, coin_type, amount, network) => ({
   amount: amount,
   network:network
 })
+
+
+
+export const addNeo = (neo) => ({
+  type: 'ADD_NEO',
+  neo: neo
+})

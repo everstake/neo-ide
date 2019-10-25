@@ -9,16 +9,46 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-
-const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
-
-export default function SplitButton() {
+import { connect } from 'react-redux';
+import * as actions from '../actions/index'
+const mapStateToProps = store => ({
+  logs: store,
+  wallet: store.wallet,
+  neo: store.neo,
+});
+const options = ['Deploy'];
+const mapDispatchToProps = dispatch =>({
+  addLog: (a, b)=>dispatch(actions.addLog(a, b))
+});
+function SplitButton(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleClick = () => {
-    alert(`You clicked ${options[selectedIndex]}`);
+    // alert(`You clicked ${options[selectedIndex]}`);
+    console.log(props.wallet)
+    props.neo.neo.deploy({
+      network: 'TestNet',
+      name: 'Hello world!',
+      version: 'v1.0.0',
+      author: 'NEOLine',
+      email: 'info@neoline.network',
+      description: 'My first contract.',
+      needsStorage: true,
+      dynamicInvoke: false,
+      isPayable: false,
+      parameterList: '0710',
+      returnType: '05',
+      code: '53c56b0d57616b652075702c204e454f21680f4e656f2e52756e74696d652e4c6f6761006c7566',
+      networkFee: '0.001'
+    })
+    .then(({txid, nodeUrl}: InvokeOutput) => {
+      props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `);
+     
+  
+    })
+    
   };
 
   const handleMenuItemClick = (event, index) => {
@@ -84,3 +114,5 @@ export default function SplitButton() {
     </Grid>
   );
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SplitButton);
