@@ -23,7 +23,7 @@ import ContextMenu from './contextmenu'
 const SEARCH_RESULTS_PER_PAGE = 20
 
 function getItemProps(file, browserProps) {
-  console.log(file)
+ 
   return {
     key: `file-${file.key}`,
     fileKey: file.key,

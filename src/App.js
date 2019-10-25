@@ -10,7 +10,7 @@ class Afpp extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-
+    localStorage.setItem ('code', "HI");
     this.state = {
       width:window.innerWidth, height: window.innerHeight, 
     //  value: localStorage.getItem('code'),
