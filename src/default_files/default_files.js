@@ -1,22 +1,11 @@
 import Moment from 'moment'
 
-import  domainContent  from './domain.cs.js'; // Relative path to your File
+import domainContentCs from './domain.cs.js';
+import domainContentPy from './domain.py.js';
 
-// isOpen: true,
-// isSelected: true,
-// keyDerived: true,
-
-console.log("TEXT: ", domainContent); 
 const defaultFiles = [
     {
-      isDeleting: false,
-      isDraft: false,
-      isOpen: true,
-      isRenaming: false,
-      isSelected: false,
-      keyDerived: true,
-  
-      key: 'examples_C#/',
+      key: 'examples_python/',
       modified: +Moment().subtract(1, 'hours'),
       size: 0,
       file: false,
@@ -26,24 +15,38 @@ const defaultFiles = [
       savedContent: "",
       currentContent: "",
       binary: ""
-    },
-    {
-      isDeleting: false,
-      isDraft: false,
-      isOpen: true,
-      isRenaming: false,
-      isSelected: false,
-      keyDerived: true,
-
-      key: 'examples_C#/domain.cs',
+    },{
+      key: 'examples_python/domain.py',
       modified: +Moment().subtract(1, 'hours'),
       size: 1.5 * 245 * 1024,
       file: true,
       saved: true,
       compiled: false,
       deployed: false,
-      savedContent: domainContent,
-      currentContent: domainContent,
+      savedContent: domainContentPy,
+      currentContent: domainContentPy,
+      binary: ""
+    },{
+      key: 'examples_csharp/',
+      modified: +Moment().subtract(1, 'hours'),
+      size: 0,
+      file: false,
+      saved: true,
+      compiled: true,
+      deployed: false,
+      savedContent: "",
+      currentContent: "",
+      binary: ""
+    },{
+      key: 'examples_csharp/domain.cs',
+      modified: +Moment().subtract(1, 'hours'),
+      size: 1.5 * 245 * 1024,
+      file: true,
+      saved: true,
+      compiled: false,
+      deployed: false,
+      savedContent: domainContentCs,
+      currentContent: domainContentCs,
       binary: ""
     },
   ]

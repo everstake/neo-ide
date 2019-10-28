@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import * as path from 'path'
 // drag and drop
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
@@ -13,6 +14,10 @@ import { TableHeader } from './headers'
 import { TableFile } from './files'
 import { TableFolder } from './folders'
 
+// redux
+import * as actions from '../actions/index'
+import { connect } from 'react-redux';
+
 // default processors
 import { GroupByFolder } from './groupers'
 import { SortByName } from './sorters'
@@ -20,6 +25,7 @@ import { SortByName } from './sorters'
 import { isFolder } from './utils'
 
 import ContextMenu from './contextmenu'
+import { isModuleDeclaration } from '@babel/types'
 const SEARCH_RESULTS_PER_PAGE = 20
 
 function getItemProps(file, browserProps) {
@@ -97,6 +103,8 @@ class RawFileBrowser extends React.Component {
 
     onFolderOpen: PropTypes.func,
     onFolderClose: PropTypes.func,
+
+    changeCurrentFile: PropTypes.func
   }
 
   static defaultProps = {
@@ -127,19 +135,19 @@ class RawFileBrowser extends React.Component {
     test:'',
 
     onSelect: (fileOrFolder) => {}, // Always called when a file or folder is selected
-    onSelectFile: (file) => {}, //    Called after onSelect, only on file selection
+    onSelectFile: (file, func) => {
+      // set selected file as current
+      func(path.basename(file.key));
+    }, //    Called after onSelect, only on file selection
     onSelectFolder: (folder) => {
 
-        
+        console.log(folder)
 
 
     }, //    Called after onSelect, only on folder selection
     onSelectFoldeContextMenu: (folder) => {
       
-      console.log(folder.files)
-      console.log(this.getBrowserProps)
-     // console.log(this.state.test);
-        return true;
+    
     },
     onPreviewOpen: (file) => {}, // File opened
     onPreviewClose: (file) => {}, // File closed
@@ -149,8 +157,8 @@ class RawFileBrowser extends React.Component {
   }
 
   state = {
-    openFolders: {},
-    selection: null,
+    openFolders: this.props.openFolders, //{'examples_C#/': true},
+    selection: this.props.selection, //'examples_C#/domain.cs',
     activeAction: null,
     actionTarget: null,
     contextmenu: {
@@ -334,10 +342,7 @@ class RawFileBrowser extends React.Component {
       activeAction: shouldClearState ? null : prevState.activeAction,
     }), () => {
       this.props.onSelect(selected)
-      
-      
-      console.log(selectedType);
-      if (selectedType === 'file') this.props.onSelectFile(selected)
+      if (selectedType === 'file') this.props.onSelectFile(selected, this.props.changeCurrentFile)
       if (selectedType === 'folder') this.props.onSelectFolder(selected)
       if (selectedType ===  'folder-contextmenu' ) {
         this.setState({
@@ -345,10 +350,6 @@ class RawFileBrowser extends React.Component {
             folder:this.props.onSelectFoldeContextMenu(selected),
           } 
         })
-
-        console.log(this.state.contextmenu.folder)
-       // this.props.onSelectFoldeContextMenu(selected)
-
       }
     })
   }
@@ -416,14 +417,14 @@ class RawFileBrowser extends React.Component {
     // TODO: updated old-to-new ref styles, but this ref was never set
     const inPreview = !!(this.previewRef && this.previewRef.contains(event.target))
 
-    if (!inBrowser && !inPreview) {
-      this.setState({
-        selection: null,
-        actionTarget: null,
-        activeAction: null,
+    // if (!inBrowser && !inPreview) {
+    //   this.setState({
+    //     selection: null,
+    //     actionTarget: null,
+    //     activeAction: null,
         
-      })
-    }
+    //   })
+    // }
   }
   handContexteMenuGlobalClick = (event) =>{
     if(event.path[2]=== window){
@@ -680,6 +681,9 @@ class RawFileBrowser extends React.Component {
   }
 
   renderFiles(files, depth) {
+    console.log(
+      "===================++> ", this.state.selection
+    )
     const {
       fileRenderer: FileRenderer, fileRendererProps,
       folderRenderer: FolderRenderer, folderRendererProps,
@@ -940,5 +944,13 @@ class FileBrowser extends RawFileBrowser {
 
 }
 
-export default FileBrowser
-export { RawFileBrowser }
+const mapStateToProps = store => ({
+  store: store,
+});
+
+const mapDispatchToProps = dispatch =>({
+  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileBrowser);
+export const RawFileBrowserRedux = connect(mapStateToProps, mapDispatchToProps)(RawFileBrowser);

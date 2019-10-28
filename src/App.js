@@ -10,7 +10,6 @@ class Afpp extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    localStorage.setItem ('code', "HI");
     this.state = {
       width:window.innerWidth, height: window.innerHeight, 
     //  value: localStorage.getItem('code'),
@@ -25,10 +24,10 @@ class Afpp extends React.Component {
   //  this.setState({
   //    value: localStorage.getItem('code'),
   //  })
+    // console.log("Before onChange:", newValue, this.props.currentFile)
     this.props.changeFileSaved(this.props.currentFile, newValue);
-
-  
   }
+
 updateDimensions  = () => {
   this.setState({ width: window.innerWidth,  });
 }
@@ -40,26 +39,36 @@ componentDidMount() {
 // }
 
   render() {
-    var options = {
-      lineNumbers: true,
-      foldGutter: false,
-      viewportMargin:200,
-      flattenSpans:true,
-    };
     return (
-      <AceEditor value={this.props.value} fontSize={'15px'} mode="python" theme="monokai" height = '100%' width = {this.state.width+'px'} onChange={this.onChange} />
+      <AceEditor  value={this.props.value} 
+                  fontSize={'15px'} 
+                  mode={ this.props.fileLang } 
+                  theme="monokai" 
+                  height = '100%' 
+                  width = {this.state.width+'px'} 
+                  onChange={this.onChange} 
+                  options={{
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true,
+                    enableSnippets: false,
+                    showLineNumbers: true,
+                    tabSize: 2,
+                  }}
+      />
     );
   }
 }
 
 const mapStateToProps =  (store) => {
   let fileContent = "";
+  let fileLang;
   store.files.forEach(elem => {
     if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
       fileContent = elem.currentContent;
+      fileLang = elem.lang;
     }  
   });
-  return {value: fileContent, currentFile: store.currentFile};
+  return {value: fileContent, currentFile: store.currentFile, fileLang: fileLang};
 };
 
 const mapDispatchToProps = dispatch =>({

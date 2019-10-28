@@ -21,20 +21,20 @@ import Select from 'react-select'
 
 import Wallet from './Wallet'
 
-
-import * as actions from '../actions/index'
 import LogPanel from '../containers/LogPanel'
 
+import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 
 import SaveButton from '../components/SaveButton'
 import CompileButton from '../components/CompileButton'
 import DeployButton from '../components/DeployButton'
 
-
-
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
+
+import defaultFiles from '../default_files/default_files'
+
 const Main = styled.main`
    
    
@@ -52,6 +52,8 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch =>({
   addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
   addNeo: (a) => dispatch(actions.addNeo(a)),
+  addFile: (file, lang) => dispatch(actions.addFile(file, lang)),
+  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
 });
 
 const CCoptions = [
@@ -105,8 +107,27 @@ class HorizontalPanel extends React.Component {
 
   }
 
+  setDefaultFiles(){
+    console.log("*********\n*********\n*********\n*********\n*********\n")
+
+    defaultFiles.map((file, index) => {
+      let lang = ''
+      if (file.file) {
+        lang = 'python'
+        console.log("****: ", file.key.slice(-3))
+        if (file.key.slice(-3) == '.cs')
+          lang = 'csharp'
+      }
+      this.props.addFile(file, lang)
+    })
+
+    this.props.changeCurrentFile('domain.py');
+  }
 
   componentDidMount(){
+
+    this.setDefaultFiles()
+
     // this.timerID = setInterval(() => {
 
 if(!this.state.Neo){console.log("not connectdHH")
@@ -240,6 +261,8 @@ renderBreadcrumbs() {
       <FileBrowser
       icons={FontAwesomeIcons(4)}
       files={ this.props.files }
+      openFolders = { {'examples_python/': true} }
+      selection = {'examples_python/domain.py'}
       
     />],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
@@ -274,37 +297,8 @@ render (){
   const { expanded, selected } = this.state;
     return (
       <div >
-
         <SplitPane split="vertical" size={550} >
-
-          {/* <FileBrowser
-      icons={FontAwesomeIcons(4)}
-      files={[
-        {
-          key: 'test_folder/',
-          modified: +Moment().subtract(1, 'hours'),
-          size: 0,
-        },
-        {
-          key: 'C#_contracts/contract.cs',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 245 * 1024,
-        },
-        {
-          key: 'Python_contracts/contract.py',
-         modified: +Moment().subtract(1, 'hours'),
-          size: 1.5 * 102 * 1024,
-        },
-      ]}
-      
-    />
-     */}
           <div >
-                <div
-                   
-                >
-                    
-                </div>
                 <SideNav onSelect={this.onSelect} onToggle={this.onToggle}>
                     <SideNav.Nav selected={selected}>
                         <NavItem eventKey="home">

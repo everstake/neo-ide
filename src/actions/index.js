@@ -5,6 +5,17 @@ export const addLog = (text, group) => ({
   group: group
 })
 
+export const addFile = (file, lang) => ({
+  type: 'ADD_FILE',
+  file: file,
+  lang: lang
+})
+
+export const changeCurrentFile = (name) => ({
+  type: 'CHANGE_CURRENT_FILE',
+  name: name,
+})
+
 export const changeFileSaved = (name, newContent) => ({
   type: 'CHANGE_FILE_SAVED',
   name: name,
@@ -34,8 +45,6 @@ export const addUserWallet = (address, coin_type, amount, network) => ({
   amount: amount,
   network:network
 })
-
-
 
 export const addNeo = (neo) => ({
   type: 'ADD_NEO',

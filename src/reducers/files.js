@@ -1,29 +1,10 @@
-import defaultFiles from '../default_files/default_files'
-import { identifier } from '@babel/types';
-
-function findFileId(name, state) {
-  let id = -1;
-  var i;
-  for (i = 0; i < state.length; i++) {
-    if (state[i].file === true  && state[i].key.slice(-name.length) === name) {
-      state[i].saved = false;
-      id = i;
-      break ;          
-    }
-  }
-  return id;
-}
-
 const filesReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_FILE': {
+        action.file.lang = action.lang
         return [
           ...state,
-          {
-            key: action.key,
-            modified: 0,
-            size: 0,
-          }
+          action.file
         ]
       }
       case 'CHANGE_FILE_SAVED': {
@@ -78,7 +59,7 @@ const filesReducer = (state = [], action) => {
         });
       }
       default:
-        return defaultFiles;
+        return state;
     }
   }
   

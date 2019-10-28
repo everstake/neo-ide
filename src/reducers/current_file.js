@@ -1,11 +1,12 @@
 
-const currentFileReducer = (state = [], action) => {
+const currentFileReducer = (state = "", action) => {
+    console.log("Action.name: ", action.name)
     switch (action.type) {
       case 'CHANGE_CURRENT_FILE': {
-        return action.file
+        return action.name;
       }
       default:
-        return 'domain.cs';
+        return state;
     }
   }
   
