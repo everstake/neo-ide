@@ -50,3 +50,15 @@ export const addNeo = (neo) => ({
   type: 'ADD_NEO',
   neo: neo
 })
+
+export const renameFolder = (currentKey, newKey) => ({
+  type: 'RENAME_FOLDER',
+  currentKey: currentKey,
+  newKey: newKey
+})
+
+export const renameFile = (currentKey, newKey) => ({
+  type: 'RENAME_FILE',
+  currentKey: currentKey,
+  newKey: newKey
+})

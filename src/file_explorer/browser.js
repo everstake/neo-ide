@@ -417,14 +417,14 @@ class RawFileBrowser extends React.Component {
     // TODO: updated old-to-new ref styles, but this ref was never set
     const inPreview = !!(this.previewRef && this.previewRef.contains(event.target))
 
-    // if (!inBrowser && !inPreview) {
-    //   this.setState({
-    //     selection: null,
-    //     actionTarget: null,
-    //     activeAction: null,
+    if (!inBrowser && !inPreview) {
+      this.setState({
+        selection: null,
+        actionTarget: null,
+        activeAction: null,
         
-    //   })
-    // }
+      })
+    }
   }
   handContexteMenuGlobalClick = (event) =>{
     if(event.path[2]=== window){

@@ -33,6 +33,8 @@ import DeployButton from '../components/DeployButton'
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
 
+
+import Moment from 'moment'
 import defaultFiles from '../default_files/default_files'
 
 const Main = styled.main`
@@ -53,7 +55,9 @@ const mapDispatchToProps = dispatch =>({
   addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
   addNeo: (a) => dispatch(actions.addNeo(a)),
   addFile: (file, lang) => dispatch(actions.addFile(file, lang)),
-  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
+  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name)),
+  renameFolder: (currentKey, newKey)=>dispatch(actions.renameFolder(currentKey, newKey)),
+  renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey))
 });
 
 const CCoptions = [
@@ -80,31 +84,83 @@ class HorizontalPanel extends React.Component {
 };
 
   constructor(props) {
-    console.log(FontAwesomeIcons(4))
     super(props)
+  }
 
-    // this.state.Neo.getBalance({
-    //   params:  {
-    //       address: this.state.account.address,
-    //       assets: ['NEO']
-    //     },
+  handleCreateFolder = (key) => {
+    this.setState(state => {
+      state.files = state.files.concat([{
+        key: key,
+      }])
+      return state
+    })
+  }
 
-    //   network: 'TestNet'
-    // })
-    // .then((results) => {
-    //   Object.keys(results).forEach(address => {
-    //     const balances = results[address];
-    //     balances.forEach(balance => {
-    //       const { assetID, symbol, amount } = balance
-    
-    //       console.log('Address: ' + address);
-    //       console.log('Asset ID: ' + assetID);
-    //       console.log('Asset symbol: ' + symbol);
-    //       console.log('Amount: ' + amount);
-    //     });
-    //   });
-    // })
+  handleCreateFiles = (files, prefix) => {
+    this.setState(state => {
+      const newFiles = files.map((file) => {
+        let newKey = prefix
+        if (prefix !== '' && prefix.substring(prefix.length - 1, prefix.length) !== '/') {
+          newKey += '/'
+        }
+        newKey += file.name
+        return {
+          key: newKey,
+          size: file.size,
+          modified: +Moment(),
+        }
+      })
 
+      const uniqueNewFiles = []
+      newFiles.map((newFile) => {
+        let exists = false
+        state.files.map((existingFile) => {
+          if (existingFile.key === newFile.key) {
+            exists = true
+          }
+        })
+        if (!exists) {
+          uniqueNewFiles.push(newFile)
+        }
+      })
+      state.files = state.files.concat(uniqueNewFiles)
+      return state
+    })
+  }
+
+  handleRenameFolder = (oldKey, newKey) => {
+    this.props.renameFolder(oldKey, newKey)
+  }
+
+  handleRenameFile = (oldKey, newKey) => {
+    this.props.renameFile(oldKey, newKey)
+    this.props.changeCurrentFile(newKey)
+  }
+
+  handleDeleteFolder = (folderKey) => {
+    this.setState(state => {
+      const newFiles = []
+      state.files.map((file) => {
+        if (file.key.substr(0, folderKey.length) !== folderKey) {
+          newFiles.push(file)
+        }
+      })
+      state.files = newFiles
+      return state
+    })
+  }
+
+  handleDeleteFile = (fileKey) => {
+    this.setState(state => {
+      const newFiles = []
+      state.files.map((file) => {
+        if (file.key !== fileKey) {
+          newFiles.push(file)
+        }
+      })
+      state.files = newFiles
+      return state
+    })
   }
 
   setDefaultFiles(){
@@ -202,15 +258,8 @@ const {
   defaultNetwork
 } = result;
 
-// console.log(networks);
-// eg. ["MainNet", "TestNet", "PrivateNet"]
-
-// console.log('Default network: ' + defaultNetwork);
-// eg. "MainNet"
-console.log("IA DOSHEL'")
 if(this.state.balance !== this.props.wallet.amount) {
-  console.log("not equal")
-this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
+  this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
 }
 })
 
@@ -263,6 +312,15 @@ renderBreadcrumbs() {
       files={ this.props.files }
       openFolders = { {'examples_python/': true} }
       selection = {'examples_python/domain.py'}
+
+      onCreateFolder={this.handleCreateFolder}
+      // onCreateFiles={this.handleCreateFiles}
+      // onMoveFolder={this.handleRenameFolder}
+      // onMoveFile={this.handleRenameFile}
+      onRenameFolder={this.handleRenameFolder}
+      onRenameFile={this.handleRenameFile}
+      // onDeleteFolder={this.handleDeleteFolder}
+      // onDeleteFile={this.handleDeleteFile}
       
     />],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],

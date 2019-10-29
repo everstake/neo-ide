@@ -58,6 +58,28 @@ const filesReducer = (state = [], action) => {
           return fileObj
         });
       }
+      case 'RENAME_FOLDER': {
+        return state.map((file, i) => {
+          if (file.key.substr(0, action.currentKey.length) === action.currentKey) {
+            // Copy the object before mutating
+            return Object.assign({}, file, {
+              key: file.key.replace(action.currentKey, action.newKey),
+            });
+          }
+          return file
+        });
+      }
+      case 'RENAME_FILE': {
+        return state.map((file, i) => {
+          if (file.key === action.currentKey) {
+            // Copy the object before mutating
+            return Object.assign({}, file, {
+              key: action.newKey,
+            });
+          }
+          return file
+        });
+      }
       default:
         return state;
     }
