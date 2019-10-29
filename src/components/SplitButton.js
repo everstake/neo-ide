@@ -44,7 +44,7 @@ function SplitButton(props) {
       networkFee: '0.001'
     })
     .then(({txid, nodeUrl}: InvokeOutput) => {
-      props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `);
+      props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `, 'Deploy');
      
   
     })

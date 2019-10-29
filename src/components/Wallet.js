@@ -119,7 +119,7 @@ componentWillUnmount() {
           createData('CurrentNetwork', this.props.wallet.coin_type)
       
         ];
-        console.log(this.props.wallet)
+        
         return(<Paper className="PaperClass">
             <Table className={classes.table} aria-label="simple table">
               <TableHead>

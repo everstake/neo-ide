@@ -47,7 +47,7 @@ class CustomButton extends React.Component {
     } else {
       content = "compile"
     }
-    console.log("compiled: ", this.props.file.saved)
+   
     return (
       <CustomButtonView disabled={ !(this.props.file.saved && !this.props.file.compiled) } content={ content } compile= {this.compile} args={{lala: 15}}/>
     );

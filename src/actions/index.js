@@ -50,3 +50,9 @@ export const addNeo = (neo) => ({
   type: 'ADD_NEO',
   neo: neo
 })
+
+
+export const tabSwitch = (tab) => ({
+  type: 'TAB_SELECTED',
+  tab: tab
+})

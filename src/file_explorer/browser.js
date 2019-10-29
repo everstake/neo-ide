@@ -194,7 +194,7 @@ class RawFileBrowser extends React.Component {
 
   // item manipulation
   createFiles = (files, prefix) => {
-    console.log("AAA");
+    
     this.setState(prevState => {
       const stateChanges = { selection: null }
       if (prefix) {
@@ -411,7 +411,7 @@ class RawFileBrowser extends React.Component {
   // event handlers
   handleGlobalClick = (event) => {
    
-    console.log(event.button)
+    
     const inBrowser = !!(this.browserRef && this.browserRef.contains(event.target))
 
     // TODO: updated old-to-new ref styles, but this ref was never set
@@ -681,9 +681,7 @@ class RawFileBrowser extends React.Component {
   }
 
   renderFiles(files, depth) {
-    console.log(
-      "===================++> ", this.state.selection
-    )
+    
     const {
       fileRenderer: FileRenderer, fileRendererProps,
       folderRenderer: FolderRenderer, folderRendererProps,

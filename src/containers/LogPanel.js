@@ -25,12 +25,11 @@ const theme={
   fontFamily: 'monospace',
   width: '100%',
   height: '100%',
-//   height: '100%'
 }
 
 
 
-function fetchLogs(logsArray) {
+function fetchLogs(logsArray, tab) {
     let newOutputs;
     const defaultState = EmulatorState.createEmpty();
     const defaultOutputs = defaultState.getOutputs();
@@ -42,12 +41,13 @@ function fetchLogs(logsArray) {
     )
 
     logsArray.forEach(function(element) {
-        console.log(element)
-        newOutputs = Outputs.addRecord(
-            defaultOutputs, OutputFactory.makeTextOutput(
-                element.date + ' ' + element.text
+        if (element.group === tab.tab) {
+            newOutputs = Outputs.addRecord(
+                defaultOutputs, OutputFactory.makeTextOutput(
+                    element.date + ' ' + element.text
+                )
             )
-        )
+        }
     });
 
     return defaultState.setOutputs(newOutputs);
@@ -69,12 +69,13 @@ constructor(props){
 }
 
 componentDidMount() {
-    this.props.addLog('hallo', 'logger panel')
+    this.props.addLog('logger compile', 'Compile')
+    this.props.addLog('logger deploy', 'Deploy')
+    this.props.addLog('logger debug', 'Debug')
 }
 
 render (){
-    console.log("Log panel sees the changes")
-    let logs = fetchLogs(this.props.logs);
+    let logs = fetchLogs(this.props.logs, this.props.tab);
 
     return (           
         <ReactTerminal theme={{
@@ -96,7 +97,8 @@ render (){
 }
 
 const mapStateToProps = state => ({
-    logs: state.logs
+    logs: state.logs,
+    tab: state.tab,
 });
 
 const mapDispatchToProps = dispatch =>({

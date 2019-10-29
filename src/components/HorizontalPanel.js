@@ -34,7 +34,7 @@ import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
 
 import defaultFiles from '../default_files/default_files'
-
+import Tab from './Tabs'
 const Main = styled.main`
    
    
@@ -80,7 +80,7 @@ class HorizontalPanel extends React.Component {
 };
 
   constructor(props) {
-    console.log(FontAwesomeIcons(4))
+   
     super(props)
 
     // this.state.Neo.getBalance({
@@ -108,13 +108,13 @@ class HorizontalPanel extends React.Component {
   }
 
   setDefaultFiles(){
-    console.log("*********\n*********\n*********\n*********\n*********\n")
+  
 
     defaultFiles.map((file, index) => {
       let lang = ''
       if (file.file) {
         lang = 'python'
-        console.log("****: ", file.key.slice(-3))
+        
         if (file.key.slice(-3) == '.cs')
           lang = 'csharp'
       }
@@ -130,18 +130,18 @@ class HorizontalPanel extends React.Component {
 
     // this.timerID = setInterval(() => {
 
-if(!this.state.Neo){console.log("not connectdHH")
+if(!this.state.Neo){
 window.addEventListener('neoline.ready', () => {
-  console.log("CONNECTED");
+
   const neoline =  new global.NEOLine.Init()
-  console.log(neoline)
+ 
 
 
   this.setState({
       Neo: neoline,
   })
   this.props.addNeo(neoline)
-console.log(this.props)
+
   this.props.neo.neo.getAccount()
   .then(account => {
     this.setState({
@@ -160,8 +160,7 @@ test (a) {
 
   this.timerID = setInterval(() => {
 const neoline = a
-console.log(this.state.account.address)
-console.log("G1")
+
 this.props.neo.neo.getBalance({
         params: [
           {
@@ -172,9 +171,7 @@ this.props.neo.neo.getBalance({
         network: 'TestNet'
       })
       .then((results) => {
-        console.log("G2")
-
-        console.log(results)
+       
         Object.keys(results).forEach(address => {
           const balances = results[address];
           balances.forEach(balance => {
@@ -185,17 +182,15 @@ this.props.neo.neo.getBalance({
               balance:balance.amount,
             })
 
-            console.log('dsfsadfdf')
+         
            ;
           });
         });
       }).then( () => {
-        console.log("G3")
-
-          console.log('dsfsadfdf')
+        
         this.props.neo.neo.getNetworks()
 .then(result => {
-  console.log("G4")
+  
 
 const {
   networks,
@@ -207,20 +202,20 @@ const {
 
 // console.log('Default network: ' + defaultNetwork);
 // eg. "MainNet"
-console.log("IA DOSHEL'")
+
 if(this.state.balance !== this.props.wallet.amount) {
-  console.log("not equal")
+  
 this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
 }
 })
 
 
-      }).catch(e=>{console.log("G5");      
+      }).catch(e=>{     
                   console.log(e)});
       
       
     }, 3000);
-    console.log("G6")
+  
 }
   
   componentWillUnmount() {
@@ -356,7 +351,8 @@ render (){
 
           <SplitPane split="horizontal" size={500}>
             <Afpp />
-            <LogPanel />
+            {/* <LogPanel /> */}
+            <Tab/>
           </SplitPane>
         </SplitPane>
       </div>

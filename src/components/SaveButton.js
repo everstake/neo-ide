@@ -46,7 +46,7 @@ class CustomButton extends React.Component {
     } else {
       content = "save"
     }
-    console.log("Saved: ", this.props.file.saved)
+    
     return (
       <CustomButtonView disabled={ this.props.file.saved } content={ content } saveFile= {this.saveFile} args={{lala: 15}}/>
     );
