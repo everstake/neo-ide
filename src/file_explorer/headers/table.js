@@ -35,21 +35,21 @@ class RawTableHeader extends React.Component {
           selected: this.props.isSelected,
         })}
       >
-        {/* <th>File</th>
+        <th>File</th>
         <th className="size">Size</th>
-        <th className="modified">Last Modified</th> */}
+        <th className="modified">Last Modified</th>
       </tr>
     )
 
-    if (
-      typeof this.props.browserProps.createFiles === 'function' ||
-      typeof this.props.browserProps.moveFile === 'function' ||
-      typeof this.props.browserProps.moveFolder === 'function'
-    ) {
-      return this.props.connectDropTarget(header)
-    } else {
+    // if (
+    //   typeof this.props.browserProps.createFiles === 'function' ||
+    //   typeof this.props.browserProps.moveFile === 'function' ||
+    //   typeof this.props.browserProps.moveFolder === 'function'
+    // ) {
+    //   return this.props.connectDropTarget(header)
+    // } else {
       return header
-    }
+    // }
   }
 }
 

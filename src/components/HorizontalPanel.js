@@ -131,7 +131,7 @@ class HorizontalPanel extends React.Component {
 
     defaultFiles.folders.map(elem => {
       this.props.addFolder(elem.key);
-    })
+    })    
 
     this.props.addFile(defaultFiles.files, '')
     this.props.changeCurrentFile('domain.py');
@@ -271,7 +271,7 @@ renderBreadcrumbs() {
       selection = {'examples_python/domain.py'}
 
       onCreateFolder={this.handleCreateFolder}
-      // onCreateFiles={this.handleCreateFiles}
+      onCreateFiles={this.handleCreateFiles}
       // onMoveFolder={this.handleRenameFolder}
       // onMoveFile={this.handleRenameFile}
       onRenameFolder={this.handleRenameFolder}

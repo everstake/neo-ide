@@ -32,7 +32,6 @@ const folders = [
 const files = [
   {
     key: 'examples_python/domain.py',
-    // name: 'domain.py',
     size: 1.5 * 245 * 1024,
     file: true,
     saved: true,
@@ -43,7 +42,6 @@ const files = [
     binary: ""
   },{
       key: 'examples_csharp/domain.cs',
-      // name: 'domain.cs',
       size: 1.5 * 245 * 1024,
       file: true,
       saved: true,

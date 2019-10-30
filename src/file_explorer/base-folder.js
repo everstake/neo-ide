@@ -180,13 +180,13 @@ class BaseFolder extends React.Component {
       ) {
         render = this.props.connectDragSource(render)
       }
-      if (
-        typeof this.props.browserProps.createFiles === 'function' ||
-        typeof this.props.browserProps.moveFolder === 'function' ||
-        typeof this.props.browserProps.moveFile === 'function'
-      ) {
-        render = this.props.connectDropTarget(render)
-      }
+      // if (
+      //   typeof this.props.browserProps.createFiles === 'function' ||
+      //   typeof this.props.browserProps.moveFolder === 'function' ||
+      //   typeof this.props.browserProps.moveFile === 'function'
+      // ) {
+      //   render = this.props.connectDropTarget(render)
+      // }
     }
     return render
   }
