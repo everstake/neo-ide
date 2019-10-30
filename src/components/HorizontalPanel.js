@@ -54,10 +54,13 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch =>({
   addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
   addNeo: (a) => dispatch(actions.addNeo(a)),
-  addFile: (file, lang) => dispatch(actions.addFile(file, lang)),
+  addFile: (files, prefix) => dispatch(actions.addFile(files, prefix)),
   changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name)),
   renameFolder: (currentKey, newKey)=>dispatch(actions.renameFolder(currentKey, newKey)),
-  renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey))
+  renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey)),
+  addFolder: (folderKey)=>dispatch(actions.addFolder(folderKey)),
+  deleteFolder: (folderKey)=>dispatch(actions.deleteFolder(folderKey)),
+  deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey))
 });
 
 const CCoptions = [
@@ -79,7 +82,7 @@ class HorizontalPanel extends React.Component {
     expanded: false,
     account: '',
     balance: null,
-   Neo: null,
+    Neo: null,
     Warning: null,
 };
 
@@ -88,44 +91,11 @@ class HorizontalPanel extends React.Component {
   }
 
   handleCreateFolder = (key) => {
-    this.setState(state => {
-      state.files = state.files.concat([{
-        key: key,
-      }])
-      return state
-    })
+    this.props.addFolder(key)
   }
 
   handleCreateFiles = (files, prefix) => {
-    this.setState(state => {
-      const newFiles = files.map((file) => {
-        let newKey = prefix
-        if (prefix !== '' && prefix.substring(prefix.length - 1, prefix.length) !== '/') {
-          newKey += '/'
-        }
-        newKey += file.name
-        return {
-          key: newKey,
-          size: file.size,
-          modified: +Moment(),
-        }
-      })
-
-      const uniqueNewFiles = []
-      newFiles.map((newFile) => {
-        let exists = false
-        state.files.map((existingFile) => {
-          if (existingFile.key === newFile.key) {
-            exists = true
-          }
-        })
-        if (!exists) {
-          uniqueNewFiles.push(newFile)
-        }
-      })
-      state.files = state.files.concat(uniqueNewFiles)
-      return state
-    })
+    this.props.addFile(files, prefix)
   }
 
   handleRenameFolder = (oldKey, newKey) => {
@@ -138,45 +108,32 @@ class HorizontalPanel extends React.Component {
   }
 
   handleDeleteFolder = (folderKey) => {
-    this.setState(state => {
-      const newFiles = []
-      state.files.map((file) => {
-        if (file.key.substr(0, folderKey.length) !== folderKey) {
-          newFiles.push(file)
-        }
-      })
-      state.files = newFiles
-      return state
-    })
+    this.props.deleteFolder(folderKey)
   }
 
   handleDeleteFile = (fileKey) => {
-    this.setState(state => {
-      const newFiles = []
-      state.files.map((file) => {
-        if (file.key !== fileKey) {
-          newFiles.push(file)
-        }
-      })
-      state.files = newFiles
-      return state
-    })
+    this.props.deleteFile(fileKey)
   }
 
   setDefaultFiles(){
     console.log("*********\n*********\n*********\n*********\n*********\n")
 
-    defaultFiles.map((file, index) => {
-      let lang = ''
-      if (file.file) {
-        lang = 'python'
-        console.log("****: ", file.key.slice(-3))
-        if (file.key.slice(-3) == '.cs')
-          lang = 'csharp'
-      }
-      this.props.addFile(file, lang)
+    // defaultFiles.map((file, index) => {
+    //   let lang = ''
+    //   if (file.file) {
+    //     lang = 'python'
+    //     console.log("****: ", file.key.slice(-3))
+    //     if (file.key.slice(-3) == '.cs')
+    //       lang = 'csharp'
+    //   }
+    //   this.props.addFile(file, lang)
+    // })
+
+    defaultFiles.folders.map(elem => {
+      this.props.addFolder(elem.key);
     })
 
+    this.props.addFile(defaultFiles.files, '')
     this.props.changeCurrentFile('domain.py');
   }
 
@@ -319,8 +276,8 @@ renderBreadcrumbs() {
       // onMoveFile={this.handleRenameFile}
       onRenameFolder={this.handleRenameFolder}
       onRenameFile={this.handleRenameFile}
-      // onDeleteFolder={this.handleDeleteFolder}
-      // onDeleteFile={this.handleDeleteFile}
+      onDeleteFolder={this.handleDeleteFolder}
+      onDeleteFile={this.handleDeleteFile}
       
     />],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],

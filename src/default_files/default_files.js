@@ -3,43 +3,47 @@ import Moment from 'moment'
 import domainContentCs from './domain.cs.js';
 import domainContentPy from './domain.py.js';
 
-const defaultFiles = [
-    {
-      key: 'examples_python/',
-      modified: +Moment().subtract(1, 'hours'),
-      size: 0,
-      file: false,
-      saved: true,
-      compiled: true,
-      deployed: false,
-      savedContent: "",
-      currentContent: "",
-      binary: ""
-    },{
-      key: 'examples_python/domain.py',
-      modified: +Moment().subtract(1, 'hours'),
-      size: 1.5 * 245 * 1024,
-      file: true,
-      saved: true,
-      compiled: false,
-      deployed: false,
-      savedContent: domainContentPy,
-      currentContent: domainContentPy,
-      binary: ""
-    },{
-      key: 'examples_csharp/',
-      modified: +Moment().subtract(1, 'hours'),
-      size: 0,
-      file: false,
-      saved: true,
-      compiled: true,
-      deployed: false,
-      savedContent: "",
-      currentContent: "",
-      binary: ""
-    },{
+const folders = [
+  {
+    key: 'examples_python/',
+    name: 'examples_python',
+    size: 0,
+    file: false,
+    saved: true,
+    compiled: true,
+    deployed: false,
+    savedContent: "",
+    currentContent: "",
+    binary: ""
+  },{
+    key: 'examples_csharp/',
+    name: 'examples_csharp',
+    size: 0,
+    file: false,
+    saved: true,
+    compiled: true,
+    deployed: false,
+    savedContent: "",
+    currentContent: "",
+    binary: ""
+  }
+]
+
+const files = [
+  {
+    key: 'examples_python/domain.py',
+    // name: 'domain.py',
+    size: 1.5 * 245 * 1024,
+    file: true,
+    saved: true,
+    compiled: false,
+    deployed: false,
+    savedContent: domainContentPy,
+    currentContent: domainContentPy,
+    binary: ""
+  },{
       key: 'examples_csharp/domain.cs',
-      modified: +Moment().subtract(1, 'hours'),
+      // name: 'domain.cs',
       size: 1.5 * 245 * 1024,
       file: true,
       saved: true,
@@ -51,4 +55,4 @@ const defaultFiles = [
     },
   ]
 
-export default defaultFiles 
+export default {folders, files} 
