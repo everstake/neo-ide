@@ -177,12 +177,9 @@ class RawFileBrowser extends React.Component {
   }
 
   componentDidMount() {
-//    console.log(this.props.files);
-   // this.props.files += this.props.files;
     if (this.props.renderStyle === 'table' && this.props.nestChildren) {
       console.warn('Invalid settings: Cannot nest table children in file browser')
     }
-
     window.addEventListener('click', this.handleGlobalClick)
     window.addEventListener('contextmenu', this.handContexteMenuGlobalClick)
   }
@@ -196,7 +193,6 @@ class RawFileBrowser extends React.Component {
 
   // item manipulation
   createFiles = (files, prefix) => {
-    console.log("AAA");
     this.setState(prevState => {
       const stateChanges = { selection: null }
       if (prefix) {
@@ -475,6 +471,45 @@ class RawFileBrowser extends React.Component {
       return stateChanges
     })
   }
+
+  handleActionBarAddFileClick = (event) => {
+    event.preventDefault()
+    
+    // this.setState(prevState => {
+    //   let addKey = ''
+    //   if (prevState.selection) {
+    //     addKey += prevState.selection
+    //     if (addKey.substr(addKey.length - 1, addKey.length) !== '/') {
+    //       addKey += '/'
+    //     }
+    //   }
+    //   addKey += '__new__/'
+    //   const stateChanges = {
+    //     actionTarget: addKey,
+    //     activeAction: 'createFolder',
+    //     selection: addKey,
+    //   }
+    //   if (prevState.selection) {
+    //     stateChanges.openFolders = {
+    //       ...prevState.openFolders,
+    //       [this.state.selection]: true,
+    //     }
+    //   }
+    //   return stateChanges
+    // })
+    
+    this.setState(prevState => {
+      let addKey = ''
+      if (prevState.selection) {
+        addKey += prevState.selection
+        if (addKey.substr(addKey.length - 1, addKey.length) !== '/') {
+          addKey += '/'
+        }
+      }
+      this.createFiles([{key: "untitled.py"}], addKey)
+    })
+  }
+
   handleActionBarDownloadClick = (event) => {
     event.preventDefault()
     this.downloadFile(this.state.selection)
@@ -512,6 +547,7 @@ class RawFileBrowser extends React.Component {
       preview: this.preview,
 
       // item manipulation
+      createFile: this.props.onCreateFile ? this.onCreateFile : undefined,
       createFiles: this.props.onCreateFiles ? this.createFiles : undefined,
       createFolder: this.props.onCreateFolder ? this.createFolder : undefined,
       renameFile: this.props.onRenameFile ? this.renameFile : undefined,
@@ -666,6 +702,18 @@ class RawFileBrowser extends React.Component {
             </a>
           </li>
         )
+        actions.push(
+          <li key="action-add-file">
+            <a
+              onClick={this.handleActionBarAddFileClick}
+              href="#"
+              role="button"
+            >
+              {icons.File}
+              &nbsp;Add File
+            </a>
+          </li>
+        )
       }
       if (actions.length) {
         actions = (<ul className="item-actions">{actions}</ul>)
@@ -683,9 +731,6 @@ class RawFileBrowser extends React.Component {
   }
 
   renderFiles(files, depth) {
-    console.log(
-      "===================++> ", this.state.selection
-    )
     const {
       fileRenderer: FileRenderer, fileRendererProps,
       folderRenderer: FolderRenderer, folderRendererProps,
@@ -903,13 +948,6 @@ class RawFileBrowser extends React.Component {
             {renderedFiles}
           </div>
         </div>
-        {/* {this.state.previewFile !== null && (
-          <this.props.detailRenderer
-            file={this.state.previewFile}
-            close={this.closeDetail}
-            {...this.props.detailRendererProps}
-          />
-        )} */}
          <ContextMenu  contextmenu={ this.state.contextmenu}  /> 
       </div>
      

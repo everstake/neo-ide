@@ -3,8 +3,6 @@ import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
 import Breadcrumbs from '@trendmicro/react-breadcrumbs';
-import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
-import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
 import ButtonM from './Button'
@@ -13,6 +11,8 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
 import styled from 'styled-components';
 import Select from 'react-select'
+import FileBrowserWrapper from '../containers/FileBrowserWrapper'
+
 
 import Wallet from './Wallet'
 
@@ -28,8 +28,6 @@ import DeployButton from '../components/DeployButton'
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
 
-import defaultFiles from '../default_files/default_files'
-
 const Main = styled.main`
    
    
@@ -38,7 +36,6 @@ const Main = styled.main`
 `;
 
 const mapStateToProps = store => ({
-  files: store.files,
   logs: store,
   wallet: store.wallet,
   neo: store.neo,
@@ -47,13 +44,6 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch =>({
   addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
   addNeo: (a) => dispatch(actions.addNeo(a)),
-  addFile: (files, prefix) => dispatch(actions.addFile(files, prefix)),
-  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name)),
-  renameFolder: (currentKey, newKey)=>dispatch(actions.renameFolder(currentKey, newKey)),
-  renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey)),
-  addFolder: (folderKey)=>dispatch(actions.addFolder(folderKey)),
-  deleteFolder: (folderKey)=>dispatch(actions.deleteFolder(folderKey)),
-  deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey))
 });
 
 const CCoptions = [
@@ -83,43 +73,7 @@ class HorizontalPanel extends React.Component {
     super(props)
   }
 
-  handleCreateFolder = (key) => {
-    this.props.addFolder(key)
-  }
-
-  handleCreateFiles = (files, prefix) => {
-    this.props.addFile(files, prefix)
-  }
-
-  handleRenameFolder = (oldKey, newKey) => {
-    this.props.renameFolder(oldKey, newKey)
-  }
-
-  handleRenameFile = (oldKey, newKey) => {
-    this.props.renameFile(oldKey, newKey)
-    this.props.changeCurrentFile(newKey)
-  }
-
-  handleDeleteFolder = (folderKey) => {
-    this.props.deleteFolder(folderKey)
-  }
-
-  handleDeleteFile = (fileKey) => {
-    this.props.deleteFile(fileKey)
-  }
-
-  setDefaultFiles(){
-    defaultFiles.folders.map(elem => {
-      this.props.addFolder(elem.key);
-    })    
-
-    this.props.addFile(defaultFiles.files, '')
-    this.props.changeCurrentFile('domain.py');
-  }
-
   componentDidMount(){
-
-    this.setDefaultFiles()
 
     // this.timerID = setInterval(() => {
 
@@ -243,23 +197,7 @@ renderBreadcrumbs() {
   const pageTitle = {
     'home': [<SaveButton />,
       <CompileButton />,
-    
-      <FileBrowser
-      icons={FontAwesomeIcons(4)}
-      files={ this.props.files }
-      openFolders = { {'examples_python/': true} }
-      selection = {'examples_python/domain.py'}
-
-      onCreateFolder={this.handleCreateFolder}
-      onCreateFiles={this.handleCreateFiles}
-      onMoveFolder={this.handleRenameFolder}
-      onMoveFile={this.handleRenameFile}
-      onRenameFolder={this.handleRenameFolder}
-      onRenameFile={this.handleRenameFile}
-      onDeleteFolder={this.handleDeleteFolder}
-      onDeleteFile={this.handleDeleteFile}
-      
-    />],
+      <FileBrowserWrapper/>],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
     'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],

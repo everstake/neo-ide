@@ -51,12 +51,12 @@ class BaseFolder extends React.Component {
   
   }
 
-
   componentDidUpdate(oldProps, oldState) {
     if (!oldProps.isRenaming && this.props.isRenaming) {
       this.selectAllNewName()
     }
   }
+
   selectAllNewName = () => {
     window.requestAnimationFrame(() => {
       const currentName = this.newNameRef.value
@@ -83,18 +83,8 @@ class BaseFolder extends React.Component {
   }
 
   handleFolderContextMenu = (event) => {
-  //onst { ContextmenuRender} = this.props
-   // event.stopPropagation();
-// console.log("RightClick");
-// console.log(this.props.browserProps)
     this.props.browserProps.select(this.props.fileKey, 'folder-contextmenu');
-     
- //let context 
-        
   }
-
-
-
 
   handleFolderDoubleClick = (event) => {
     // event.stopPropagation()
@@ -107,10 +97,12 @@ class BaseFolder extends React.Component {
     }
     this.props.browserProps.beginAction('rename', this.props.fileKey)
   }
+
   handleNewNameChange = (event) => {
     const newName = this.newNameRef.value
     this.setState({ newName: newName })
   }
+  
   handleRenameSubmit = (event) => {
     event.preventDefault()
     if (!this.props.browserProps.renameFolder) {
