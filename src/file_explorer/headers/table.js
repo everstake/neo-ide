@@ -41,24 +41,23 @@ class RawTableHeader extends React.Component {
       </tr>
     )
 
-    // if (
-    //   typeof this.props.browserProps.createFiles === 'function' ||
-    //   typeof this.props.browserProps.moveFile === 'function' ||
-    //   typeof this.props.browserProps.moveFolder === 'function'
-    // ) {
-    //   return this.props.connectDropTarget(header)
-    // } else {
+    if (
+      typeof this.props.browserProps.createFiles === 'function' ||
+      typeof this.props.browserProps.moveFile === 'function' ||
+      typeof this.props.browserProps.moveFolder === 'function'
+    ) {
+      return this.props.connectDropTarget(header)
+    } else {
       return header
-    // }
+    }
   }
 }
 
-// @DropTarget(
-//   ['file', 'folder', NativeTypes.FILE],
-//   BaseFileConnectors.targetSource,
-//   BaseFileConnectors.targetCollect,
-// )
 class TableHeader extends RawTableHeader {}
 
-export default TableHeader
+export default  DropTarget(
+                            ['file', 'folder', NativeTypes.FILE],
+                            BaseFileConnectors.targetSource,
+                            BaseFileConnectors.targetCollect
+                )(TableHeader)
 export { RawTableHeader }

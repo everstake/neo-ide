@@ -3,16 +3,11 @@ import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
 import Breadcrumbs from '@trendmicro/react-breadcrumbs';
-// import { Button, ButtonGroup } from '@trendmicro/react-buttons';
-import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
 import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
-// import FontAwesome from 'font-awesome'
 import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
-import FileExplorer from '../components/FileExplorer'
 import ButtonM from './Button'
-import Paper from '@material-ui/core/Paper';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
@@ -33,8 +28,6 @@ import DeployButton from '../components/DeployButton'
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
 
-
-import Moment from 'moment'
 import defaultFiles from '../default_files/default_files'
 
 const Main = styled.main`
@@ -116,19 +109,6 @@ class HorizontalPanel extends React.Component {
   }
 
   setDefaultFiles(){
-    console.log("*********\n*********\n*********\n*********\n*********\n")
-
-    // defaultFiles.map((file, index) => {
-    //   let lang = ''
-    //   if (file.file) {
-    //     lang = 'python'
-    //     console.log("****: ", file.key.slice(-3))
-    //     if (file.key.slice(-3) == '.cs')
-    //       lang = 'csharp'
-    //   }
-    //   this.props.addFile(file, lang)
-    // })
-
     defaultFiles.folders.map(elem => {
       this.props.addFolder(elem.key);
     })    
@@ -272,8 +252,8 @@ renderBreadcrumbs() {
 
       onCreateFolder={this.handleCreateFolder}
       onCreateFiles={this.handleCreateFiles}
-      // onMoveFolder={this.handleRenameFolder}
-      // onMoveFile={this.handleRenameFile}
+      onMoveFolder={this.handleRenameFolder}
+      onMoveFile={this.handleRenameFile}
       onRenameFolder={this.handleRenameFolder}
       onRenameFile={this.handleRenameFile}
       onDeleteFolder={this.handleDeleteFolder}

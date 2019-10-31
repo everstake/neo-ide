@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import * as path from 'path'
+
 // drag and drop
+import flow from 'lodash/flow'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
@@ -916,33 +918,7 @@ class RawFileBrowser extends React.Component {
   }
 }
 
-// @DragDropContext(HTML5Backend)
-class FileBrowser extends RawFileBrowser {
-
-  onChange = e =>{
-  //  console.log("sdfasdfs");
-    //console.log(this.props.fileKey)
-    // this.props.files.setState ({
-    //  file+= file" [ {
-    //     key: 'new-fohhlder/',
-    //     modified: 1,
-    //     size: 0,
-    //   }
-    //  ]
-    // });
-    //   let file = e.target.files[0];
-
-    //   var reader = new FileReader();
-    //   reader.readAsText(file);
-    //   reader.filenName = file.name
-
-    //   reader.onload = function(readerEvent) {
-    //     console.log(readerEvent.target.filenName);
-    //   }
-    // console.log(reader);
-  }
-
-}
+class FileBrowser extends RawFileBrowser {}
 
 const mapStateToProps = store => ({
   store: store,
@@ -952,5 +928,8 @@ const mapDispatchToProps = dispatch =>({
   changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileBrowser);
+export default  flow(
+                  connect(mapStateToProps, mapDispatchToProps),
+                  DragDropContext(HTML5Backend)
+                )(FileBrowser)
 export const RawFileBrowserRedux = connect(mapStateToProps, mapDispatchToProps)(RawFileBrowser);

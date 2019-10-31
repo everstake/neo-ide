@@ -77,6 +77,7 @@ class BaseFolder extends React.Component {
     event.stopPropagation()
   
    this.props.browserProps.select(this.props.fileKey, 'folder')
+   this.toggleFolder()
 
     //this._handleContextMenu(event);
   }
@@ -96,8 +97,8 @@ class BaseFolder extends React.Component {
 
 
   handleFolderDoubleClick = (event) => {
-    event.stopPropagation()
-    this.toggleFolder()
+    // event.stopPropagation()
+    // this.toggleFolder()
   }
 
   handleRenameClick = (event) => {
@@ -180,13 +181,13 @@ class BaseFolder extends React.Component {
       ) {
         render = this.props.connectDragSource(render)
       }
-      // if (
-      //   typeof this.props.browserProps.createFiles === 'function' ||
-      //   typeof this.props.browserProps.moveFolder === 'function' ||
-      //   typeof this.props.browserProps.moveFile === 'function'
-      // ) {
-      //   render = this.props.connectDropTarget(render)
-      // }
+      if (
+        typeof this.props.browserProps.createFiles === 'function' ||
+        typeof this.props.browserProps.moveFolder === 'function' ||
+        typeof this.props.browserProps.moveFile === 'function'
+      ) {
+        render = this.props.connectDropTarget(render)
+      }
     }
     return render
   }
