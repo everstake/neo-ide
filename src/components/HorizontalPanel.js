@@ -3,21 +3,16 @@ import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
 import Breadcrumbs from '@trendmicro/react-breadcrumbs';
-// import { Button, ButtonGroup } from '@trendmicro/react-buttons';
-import Dropdown, { MenuItem } from '@trendmicro/react-dropdown';
-import FileBrowser, { FileRenderers, FolderRenderers, Groupers, Icons } from '../file_explorer'
-// import FontAwesome from 'font-awesome'
-import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import '../stylesheets/demos.css';
 import ensureArray from 'ensure-array';
-import FileExplorer from '../components/FileExplorer'
 import ButtonM from './Button'
-import Paper from '@material-ui/core/Paper';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '../stylesheets/react-breadcrumbs.css'
 import styled from 'styled-components';
 import Select from 'react-select'
+import FileBrowserWrapper from '../containers/FileBrowserWrapper'
+
 
 import Wallet from './Wallet'
 
@@ -33,8 +28,6 @@ import DeployButton from '../components/DeployButton'
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
 
-import defaultFiles from '../default_files/default_files'
-
 const Main = styled.main`
    
    
@@ -43,7 +36,6 @@ const Main = styled.main`
 `;
 
 const mapStateToProps = store => ({
-  files: store.files,
   logs: store,
   wallet: store.wallet,
   neo: store.neo,
@@ -52,8 +44,6 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch =>({
   addUserWallet: (a, b, c ,d)=>dispatch(actions.addUserWallet(a, b, c ,d)),
   addNeo: (a) => dispatch(actions.addNeo(a)),
-  addFile: (file, lang) => dispatch(actions.addFile(file, lang)),
-  changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
 });
 
 const CCoptions = [
@@ -75,58 +65,15 @@ class HorizontalPanel extends React.Component {
     expanded: false,
     account: '',
     balance: null,
-   Neo: null,
+    Neo: null,
     Warning: null,
 };
 
   constructor(props) {
-    console.log(FontAwesomeIcons(4))
     super(props)
-
-    // this.state.Neo.getBalance({
-    //   params:  {
-    //       address: this.state.account.address,
-    //       assets: ['NEO']
-    //     },
-
-    //   network: 'TestNet'
-    // })
-    // .then((results) => {
-    //   Object.keys(results).forEach(address => {
-    //     const balances = results[address];
-    //     balances.forEach(balance => {
-    //       const { assetID, symbol, amount } = balance
-    
-    //       console.log('Address: ' + address);
-    //       console.log('Asset ID: ' + assetID);
-    //       console.log('Asset symbol: ' + symbol);
-    //       console.log('Amount: ' + amount);
-    //     });
-    //   });
-    // })
-
-  }
-
-  setDefaultFiles(){
-    console.log("*********\n*********\n*********\n*********\n*********\n")
-
-    defaultFiles.map((file, index) => {
-      let lang = ''
-      if (file.file) {
-        lang = 'python'
-        console.log("****: ", file.key.slice(-3))
-        if (file.key.slice(-3) == '.cs')
-          lang = 'csharp'
-      }
-      this.props.addFile(file, lang)
-    })
-
-    this.props.changeCurrentFile('domain.py');
   }
 
   componentDidMount(){
-
-    this.setDefaultFiles()
 
     // this.timerID = setInterval(() => {
 
@@ -202,15 +149,8 @@ const {
   defaultNetwork
 } = result;
 
-// console.log(networks);
-// eg. ["MainNet", "TestNet", "PrivateNet"]
-
-// console.log('Default network: ' + defaultNetwork);
-// eg. "MainNet"
-console.log("IA DOSHEL'")
 if(this.state.balance !== this.props.wallet.amount) {
-  console.log("not equal")
-this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
+  this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
 }
 })
 
@@ -257,14 +197,7 @@ renderBreadcrumbs() {
   const pageTitle = {
     'home': [<SaveButton />,
       <CompileButton />,
-    
-      <FileBrowser
-      icons={FontAwesomeIcons(4)}
-      files={ this.props.files }
-      openFolders = { {'examples_python/': true} }
-      selection = {'examples_python/domain.py'}
-      
-    />],
+      <FileBrowserWrapper/>],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
     'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],

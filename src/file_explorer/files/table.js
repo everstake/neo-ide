@@ -1,6 +1,8 @@
 import React from 'react'
 import Moment from 'moment'
 import ClassNames from 'classnames'
+
+import flow from 'lodash/flow'
 import { DragSource, DropTarget } from 'react-dnd'
 import { NativeTypes } from 'react-dnd-html5-backend'
 
@@ -100,13 +102,14 @@ class RawTableFile extends BaseFile {
   }
 }
 
-// @DragSource('file', BaseFileConnectors.dragSource, BaseFileConnectors.dragCollect)
-// @DropTarget(
-//   ['file', 'folder', NativeTypes.FILE],
-//   BaseFileConnectors.targetSource,
-//   BaseFileConnectors.targetCollect,
-// )
 class TableFile extends RawTableFile {}
 
-export default TableFile
+export default  flow(
+                  DragSource('file', BaseFileConnectors.dragSource, BaseFileConnectors.dragCollect),
+                  DropTarget(
+                    ['file', 'folder', NativeTypes.FILE],
+                    BaseFileConnectors.targetSource,
+                    BaseFileConnectors.targetCollect,
+                  )
+                )(TableFile)
 export { RawTableFile }

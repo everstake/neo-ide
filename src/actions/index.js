@@ -5,10 +5,25 @@ export const addLog = (text, group) => ({
   group: group
 })
 
-export const addFile = (file, lang) => ({
+export const addFile = (files, prefix) => ({
   type: 'ADD_FILE',
-  file: file,
-  lang: lang
+  files: files,
+  prefix: prefix
+})
+
+export const addFolder = (folderKey) => ({
+  type: 'ADD_FOLDER',
+  folderKey: folderKey
+})
+
+export const deleteFolder = (folderKey) => ({
+  type: 'DELETE_FOLDER',
+  folderKey: folderKey
+})
+
+export const deleteFile = (fileKey) => ({
+  type: 'DELETE_FILE',
+  fileKey: fileKey
 })
 
 export const changeCurrentFile = (name) => ({
@@ -49,4 +64,16 @@ export const addUserWallet = (address, coin_type, amount, network) => ({
 export const addNeo = (neo) => ({
   type: 'ADD_NEO',
   neo: neo
+})
+
+export const renameFolder = (currentKey, newKey) => ({
+  type: 'RENAME_FOLDER',
+  currentKey: currentKey,
+  newKey: newKey
+})
+
+export const renameFile = (currentKey, newKey) => ({
+  type: 'RENAME_FILE',
+  currentKey: currentKey,
+  newKey: newKey
 })
