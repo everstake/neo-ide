@@ -3,7 +3,11 @@ import Moment from 'moment'
 const filesReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_FILE': {
-        const newFiles = action.files.map((file) => {
+        const newFiles = [];
+        action.files.map((file) => {
+          
+          
+
           let newKey = action.prefix
           if (action.prefix !== '' && action.prefix.substring(action.prefix.length - 1, action.prefix.length) !== '/') {
             newKey += '/'
@@ -11,9 +15,17 @@ const filesReducer = (state = [], action) => {
           file.key = newKey + file.key
           file.lang = 'python'
           file.modified = +Moment()
-          return {
-            ...file,
+
+          for (let i = 0; i < state.length; i++) {
+            if (state[i].key === file.key){
+              alert("File with \"" + file.key +"\" name already exist")
+              return ;
+            }
           }
+
+          newFiles.push({
+            ...file
+          })
         })
         
         // let newState = [...state, ...newFiles];
@@ -108,6 +120,12 @@ const filesReducer = (state = [], action) => {
         });
       }
       case 'RENAME_FOLDER': {
+        for (let i = 0; i < state.length; i++) {
+          if (state[i].key === action.newKey){
+            alert("Folder with \"" + action.newKey +"\" name already exist")
+            return state;
+          }
+        }
         return state.map((file, i) => {
           if (file.key.substr(0, action.currentKey.length) === action.currentKey) {
             // Copy the object before mutating
@@ -119,6 +137,12 @@ const filesReducer = (state = [], action) => {
         });
       }
       case 'RENAME_FILE': {
+        for (let i = 0; i < state.length; i++) {
+          if (state[i].key === action.newKey){
+            alert("File with \"" + action.newKey +"\" name already exist")
+            return state;
+          }
+        }
         return state.map((file, i) => {
           if (file.key === action.currentKey) {
             // Copy the object before mutating

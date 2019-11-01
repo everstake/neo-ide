@@ -547,7 +547,6 @@ class RawFileBrowser extends React.Component {
       preview: this.preview,
 
       // item manipulation
-      createFile: this.props.onCreateFile ? this.onCreateFile : undefined,
       createFiles: this.props.onCreateFiles ? this.createFiles : undefined,
       createFolder: this.props.onCreateFolder ? this.createFolder : undefined,
       renameFile: this.props.onRenameFile ? this.renameFile : undefined,
@@ -564,7 +563,7 @@ class RawFileBrowser extends React.Component {
   renderActionBar(selectedItem) {
     const {
       icons, canFilter, filterRendererProps,
-      filterRenderer: FilterRenderer, onCreateFolder,
+      filterRenderer: FilterRenderer, onCreateFolder, onCreateFiles,
       onRenameFile, onRenameFolder, onDeleteFile, onDeleteFolder, onDownloadFile,
     } = this.props
     const selectionIsFolder = (selectedItem && !selectedItem.size)
@@ -620,6 +619,24 @@ class RawFileBrowser extends React.Component {
               >
                 {icons.Folder}
                 &nbsp;Add Subfolder
+              </a>
+            </li>
+          )
+        }
+        if (
+          selectionIsFolder &&
+          typeof onCreateFiles === 'function' &&
+          !this.state.nameFilter
+        ) {
+          actions.push(
+            <li key="action-add-file">
+              <a
+                onClick={this.handleActionBarAddFileClick}
+                href="#"
+                role="button"
+              >
+                {icons.File}
+                &nbsp;Add File
               </a>
             </li>
           )
