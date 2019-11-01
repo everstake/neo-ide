@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import * as path from 'path'
+
 // drag and drop
+import flow from 'lodash/flow'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContext } from 'react-dnd'
 
@@ -175,12 +177,9 @@ class RawFileBrowser extends React.Component {
   }
 
   componentDidMount() {
-//    console.log(this.props.files);
-   // this.props.files += this.props.files;
     if (this.props.renderStyle === 'table' && this.props.nestChildren) {
       console.warn('Invalid settings: Cannot nest table children in file browser')
     }
-
     window.addEventListener('click', this.handleGlobalClick)
     window.addEventListener('contextmenu', this.handContexteMenuGlobalClick)
   }
@@ -194,7 +193,6 @@ class RawFileBrowser extends React.Component {
 
   // item manipulation
   createFiles = (files, prefix) => {
-    
     this.setState(prevState => {
       const stateChanges = { selection: null }
       if (prefix) {
@@ -417,14 +415,14 @@ class RawFileBrowser extends React.Component {
     // TODO: updated old-to-new ref styles, but this ref was never set
     const inPreview = !!(this.previewRef && this.previewRef.contains(event.target))
 
-    // if (!inBrowser && !inPreview) {
-    //   this.setState({
-    //     selection: null,
-    //     actionTarget: null,
-    //     activeAction: null,
+    if (!inBrowser && !inPreview) {
+      this.setState({
+        selection: null,
+        actionTarget: null,
+        activeAction: null,
         
-    //   })
-    // }
+      })
+    }
   }
   handContexteMenuGlobalClick = (event) =>{
     if(event.path[2]=== window){
@@ -473,6 +471,45 @@ class RawFileBrowser extends React.Component {
       return stateChanges
     })
   }
+
+  handleActionBarAddFileClick = (event) => {
+    event.preventDefault()
+    
+    // this.setState(prevState => {
+    //   let addKey = ''
+    //   if (prevState.selection) {
+    //     addKey += prevState.selection
+    //     if (addKey.substr(addKey.length - 1, addKey.length) !== '/') {
+    //       addKey += '/'
+    //     }
+    //   }
+    //   addKey += '__new__/'
+    //   const stateChanges = {
+    //     actionTarget: addKey,
+    //     activeAction: 'createFolder',
+    //     selection: addKey,
+    //   }
+    //   if (prevState.selection) {
+    //     stateChanges.openFolders = {
+    //       ...prevState.openFolders,
+    //       [this.state.selection]: true,
+    //     }
+    //   }
+    //   return stateChanges
+    // })
+    
+    this.setState(prevState => {
+      let addKey = ''
+      if (prevState.selection) {
+        addKey += prevState.selection
+        if (addKey.substr(addKey.length - 1, addKey.length) !== '/') {
+          addKey += '/'
+        }
+      }
+      this.createFiles([{key: "untitled.py"}], addKey)
+    })
+  }
+
   handleActionBarDownloadClick = (event) => {
     event.preventDefault()
     this.downloadFile(this.state.selection)
@@ -526,7 +563,7 @@ class RawFileBrowser extends React.Component {
   renderActionBar(selectedItem) {
     const {
       icons, canFilter, filterRendererProps,
-      filterRenderer: FilterRenderer, onCreateFolder,
+      filterRenderer: FilterRenderer, onCreateFolder, onCreateFiles,
       onRenameFile, onRenameFolder, onDeleteFile, onDeleteFolder, onDownloadFile,
     } = this.props
     const selectionIsFolder = (selectedItem && !selectedItem.size)
@@ -582,6 +619,24 @@ class RawFileBrowser extends React.Component {
               >
                 {icons.Folder}
                 &nbsp;Add Subfolder
+              </a>
+            </li>
+          )
+        }
+        if (
+          selectionIsFolder &&
+          typeof onCreateFiles === 'function' &&
+          !this.state.nameFilter
+        ) {
+          actions.push(
+            <li key="action-add-file">
+              <a
+                onClick={this.handleActionBarAddFileClick}
+                href="#"
+                role="button"
+              >
+                {icons.File}
+                &nbsp;Add File
               </a>
             </li>
           )
@@ -664,6 +719,18 @@ class RawFileBrowser extends React.Component {
             </a>
           </li>
         )
+        actions.push(
+          <li key="action-add-file">
+            <a
+              onClick={this.handleActionBarAddFileClick}
+              href="#"
+              role="button"
+            >
+              {icons.File}
+              &nbsp;Add File
+            </a>
+          </li>
+        )
       }
       if (actions.length) {
         actions = (<ul className="item-actions">{actions}</ul>)
@@ -681,7 +748,6 @@ class RawFileBrowser extends React.Component {
   }
 
   renderFiles(files, depth) {
-    
     const {
       fileRenderer: FileRenderer, fileRendererProps,
       folderRenderer: FolderRenderer, folderRendererProps,
@@ -899,13 +965,6 @@ class RawFileBrowser extends React.Component {
             {renderedFiles}
           </div>
         </div>
-        {/* {this.state.previewFile !== null && (
-          <this.props.detailRenderer
-            file={this.state.previewFile}
-            close={this.closeDetail}
-            {...this.props.detailRendererProps}
-          />
-        )} */}
          <ContextMenu  contextmenu={ this.state.contextmenu}  /> 
       </div>
      
@@ -914,33 +973,7 @@ class RawFileBrowser extends React.Component {
   }
 }
 
-// @DragDropContext(HTML5Backend)
-class FileBrowser extends RawFileBrowser {
-
-  onChange = e =>{
-  //  console.log("sdfasdfs");
-    //console.log(this.props.fileKey)
-    // this.props.files.setState ({
-    //  file+= file" [ {
-    //     key: 'new-fohhlder/',
-    //     modified: 1,
-    //     size: 0,
-    //   }
-    //  ]
-    // });
-    //   let file = e.target.files[0];
-
-    //   var reader = new FileReader();
-    //   reader.readAsText(file);
-    //   reader.filenName = file.name
-
-    //   reader.onload = function(readerEvent) {
-    //     console.log(readerEvent.target.filenName);
-    //   }
-    // console.log(reader);
-  }
-
-}
+class FileBrowser extends RawFileBrowser {}
 
 const mapStateToProps = store => ({
   store: store,
@@ -950,5 +983,8 @@ const mapDispatchToProps = dispatch =>({
   changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FileBrowser);
+export default  flow(
+                  connect(mapStateToProps, mapDispatchToProps),
+                  DragDropContext(HTML5Backend)
+                )(FileBrowser)
 export const RawFileBrowserRedux = connect(mapStateToProps, mapDispatchToProps)(RawFileBrowser);

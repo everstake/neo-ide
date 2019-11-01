@@ -71,17 +71,13 @@ class BaseFile extends React.Component {
       key: this.props.fileKey,
       extension: this.getExtension(),
     })
-
-    
   }
+
   handleItemClick = (event) => {
-   // console.log(this.props.fileKey);
     event.stopPropagation()
     this.props.browserProps.select(this.props.fileKey, 'file')
-  
-    // var read = new FileReader();
-    // console.log(read.readAsArrayBuffer(this.props));
   }
+
   handleItemDoubleClick = (event) => {
     event.stopPropagation()
     this.handleFileClick()
@@ -93,10 +89,12 @@ class BaseFile extends React.Component {
     }
     this.props.browserProps.beginAction('rename', this.props.fileKey)
   }
+
   handleNewNameChange = (event) => {
     const newName = this.newNameRef.value
     this.setState({ newName: newName })
   }
+
   handleRenameSubmit = (event) => {
     if (event) {
       event.preventDefault()
@@ -114,6 +112,7 @@ class BaseFile extends React.Component {
       // })
       return
     }
+
     const invalidChar = ['/', '\\']
     if (invalidChar.some(char => newName.indexOf(char) !== -1)) return
     // todo: move to props handler
@@ -136,6 +135,7 @@ class BaseFile extends React.Component {
     }
     this.props.browserProps.beginAction('delete', this.props.fileKey)
   }
+  
   handleDeleteSubmit = (event) => {
     event.preventDefault()
     if (!this.props.browserProps.deleteFile) {
