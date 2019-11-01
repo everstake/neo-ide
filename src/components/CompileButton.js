@@ -37,9 +37,15 @@ class CustomButton extends React.Component {
   }
 
   compile() {
-    axios.get('https://api.github.com/users/maecapozzi').then(res => {
+    axios.post('http://0.0.0.0:5000/build_avm/py', {
+        text: ["def Main():\n", "  print(\"Hello World\")\n", "  return True"],
+        filename:"sdasdvf"
+    }).then(res => {
+      console.log(res)
       this.props.changeFileCompiled(this.props.file.key, res)
       this.props.addLog("Compiled\n", "compiler")
+    }).catch(err => {
+      console.log(err)
     })
   }
 
