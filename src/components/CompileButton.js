@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -36,8 +37,10 @@ class CustomButton extends React.Component {
   }
 
   compile() {
-    this.props.changeFileCompiled(this.props.file.key)
-    this.props.addLog("Compiled\n", "compiler")
+    axios.get('https://api.github.com/users/maecapozzi').then(res => {
+      this.props.changeFileCompiled(this.props.file.key, res)
+      this.props.addLog("Compiled\n", "compiler")
+    })
   }
 
   render() {

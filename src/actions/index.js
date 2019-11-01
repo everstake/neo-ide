@@ -37,9 +37,10 @@ export const changeFileSaved = (name, newContent) => ({
   newContent: newContent
 })
 
-export const changeFileCompiled = (name) => ({
+export const changeFileCompiled = (name, binary) => ({
   type: 'CHANGE_FILE_COMPILED',
   name: name,
+  binary: binary
 })
 
 export const changeFileDeployed = (name) => ({

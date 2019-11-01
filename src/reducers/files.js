@@ -88,6 +88,7 @@ const filesReducer = (state = [], action) => {
             // Copy the object before mutating
             return Object.assign({}, fileObj, {
               compiled: true,
+              binary: binary
             });
           }
           return fileObj
