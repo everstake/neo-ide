@@ -6,6 +6,7 @@ import React from "react";
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 import axios from 'axios';
+import errorBox from './errorBox';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -35,17 +36,28 @@ class CustomButton extends React.Component {
     
     this.compile = this.compile.bind(this);
   }
-
   compile() {
-    axios.post('http://0.0.0.0:5000/build_avm/py', {
-        text: ["def Main():\n", "  print(\"Hello World\")\n", "  return True"],
-        filename:"sdasdvf"
-    }).then(res => {
-      console.log(res)
-      this.props.changeFileCompiled(this.props.file.key, res)
-      this.props.addLog("Compiled\n", "compiler")
-    }).catch(err => {
-      console.log(err)
+    // axios.post('http://0.0.0.0:5000/build_avm/py', {
+    //     text: ["def Main():\n", "  print(\"Hello World\")\n", "  return True"],
+    //     filename:"sdasdvf"
+    // }, {timeout: 1000}).then(res => {
+    //   console.log(res)
+    //   this.props.changeFileCompiled(this.props.file.key, res)
+    //   this.props.addLog("Compiled\n", "compiler")
+    // }).catch(err => {
+    //   alert(err)
+    // })
+
+
+    this.props.enqueueSnackbar({
+      message: 'Failed fetching data.',
+      options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'warning',
+          action: key => (
+              <Button onClick={() => {this.props.closeSnackbar(key)}}>dissmiss me</Button>
+          ),
+      },
     })
   }
 
@@ -75,7 +87,8 @@ const mapStateToProps =  (store) => {
 
 const mapDispatchToProps = dispatch =>({
   changeFileCompiled: (name)=>dispatch(actions.changeFileCompiled(name)),
-  addLog: (a, b)=>dispatch(actions.addLog(a, b))
+  addLog: (a, b)=>dispatch(actions.addLog(a, b)),
+  enqueueSnackbar: (key)=>dispatch(actions.enqueueSnackbar(key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)

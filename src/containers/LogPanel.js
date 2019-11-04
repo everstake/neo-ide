@@ -7,6 +7,9 @@ import {ReactTerminalStateless} from 'react-terminal-component';
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 
+import ErrorBox from "../components/errorBox";
+import { SnackbarProvider } from 'notistack';
+
 import {
     EmulatorState, OutputFactory, CommandMapping,
     EnvironmentVariables, FileSystem, History,
@@ -77,8 +80,12 @@ componentDidMount() {
 render (){
     let logs = fetchLogs(this.props.logs, this.props.tab);
 
-    return (           
-        <ReactTerminal theme={{
+    return (
+        <div>
+            <SnackbarProvider>
+                <ErrorBox />
+            </SnackbarProvider>
+            <ReactTerminal theme={{
             background: '#272822',
             promptSymbolColor: '#6effe6',
             commandColor: '#fcfcfc',
@@ -91,6 +98,7 @@ render (){
             height: '50vh'
           }} inputStr={""}
         emulatorState={logs} style={{background: '#272822'}}/>
+        </div>           
     );
     }
 

@@ -43,7 +43,9 @@ class FileBrowserWrapper extends React.Component {
     }
     
     componentDidMount() {
-        this.setDefaultFiles()
+        if (this.props.files.length == 0) {
+            this.setDefaultFiles()
+        }
     }
     
     render() { 

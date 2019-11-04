@@ -6,7 +6,7 @@ function getTime() {
   return new Intl.DateTimeFormat('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', dayPeriod: ''}).format(timestamp).slice(0,-3)
 }
 
-const usersReducer = (state = [], action) => {
+const loggerReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_LOG': {
         logId++;
@@ -25,6 +25,4 @@ const usersReducer = (state = [], action) => {
   }
 }
 
- 
-  
-  export default usersReducer
+export default loggerReducer
