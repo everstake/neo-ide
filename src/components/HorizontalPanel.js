@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState, useEffect, withState} from "react";
 import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
@@ -12,18 +12,18 @@ import '../stylesheets/react-breadcrumbs.css'
 import styled from 'styled-components';
 import Select from 'react-select'
 import FileBrowserWrapper from '../containers/FileBrowserWrapper'
-
-
+import MultilineTextFields from './ParametrsPane'
+import Grid from '@material-ui/core/Grid';
 import Wallet from './Wallet'
-
+import { makeStyles } from '@material-ui/core/styles';
 import LogPanel from '../containers/LogPanel'
-
+import Paper from '@material-ui/core/Paper';
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 
-import SaveButton from '../components/SaveButton'
-import CompileButton from '../components/CompileButton'
-import DeployButton from '../components/DeployButton'
+import SaveButton from './SaveButton'
+import CompileButton from './CompileButton'
+import DeployButton from './DeployButton'
 
 import PanelsBlock from "./PanelsBlock";
 import neoReducer from "../reducers/neo";
@@ -35,6 +35,19 @@ const Main = styled.main`
     margin-left: 20px;
     
 `;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
+  },
+  paper: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+  },
+}));
 
 const mapStateToProps = store => ({
   logs: store,
@@ -60,83 +73,103 @@ const CCoptions = [
   { value: 'silver', label: 'Silver', color: '#666666' },
 ];
  
-class HorizontalPanel extends React.Component {
-  state = {
-    selected: 'home',
-    expanded: false,
-    account: '',
-    balance: null,
-    Neo: null,
-    Warning: null,
-};
+function HorizontalPanel(props) {
+//   state = {
+//     selected: 'home',
+//     expanded: false,
+//     account: '',
+//     balance: null,
+//     Neo: null,
+//     Warning: null,
+// };
 
-  constructor(props) {
-    super(props)
-  }
 
-  componentDidMount(){
+const [selected, setSelected] = useState('home');
+const [expanded, setExpanded] = useState(false);
+const [account, setAccount] = useState('');
+const [balance, setBalance] = useState(null);
+const [Neo, setNeo] = useState(null);
+const [Warning, setWarning] = useState(null);
 
+
+  // const constructor(props) {
+  //   super(props)
+  // }
+
+  useEffect(() => {
+    
+    // setNeo(1)
     // this.timerID = setInterval(() => {
 
-if(!this.state.Neo){
+if(!Neo){
 window.addEventListener('neoline.ready', () => {
 
   const neoline =  new global.NEOLine.Init()
  
+ setNeo(neoline)
+//   // this.setState({
+//   //     Neo: neoline,
+//   // })
 
+//   console.log(Neo)
+  props.addNeo(neoline)
 
-  this.setState({
-      Neo: neoline,
-  })
-  this.props.addNeo(neoline)
-
-  this.props.neo.neo.getAccount()
+  neoline.getAccount()
   .then(account => {
-    this.setState({
-    account:account
-  }) 
-  this.test( this.props.neo.neo)
+  //   this.setState({
+  //   account:account
+  // }) 
 
+  setAccount(account)
+  test(neoline, account)
+  console.log(account.address)
   })
   // this.test()\
 
 });
+// }
+
+// return function cleanup(){
+//   clearInterval(timerID);
+// }
 }
-  }
+});
 
-test (a) {
+function test (a,b) {
 
-  this.timerID = setInterval(() => {
-const neoline = a
 
-this.props.neo.neo.getBalance({
+  const timerID = setInterval(() => {
+console.log(b.address)
+a.getBalance({
         params: [
           {
-            address: this.state.account.address,
+            address: b.address,
             assets: ['NEO']
           },
         ],
         network: 'TestNet'
       })
       .then((results) => {
-       
+     
+        let labal = null;
         Object.keys(results).forEach(address => {
           const balances = results[address];
           balances.forEach(balance => {
             const { assetID, symbol, amount } = balance
       
             
-            this.setState({
-              balance:balance.amount,
-            })
-
-         
-           ;
+            // this.setState({
+            //   balance:balance.amount,
+            // })
+           labal = balance.amount
+            // console.log()
+           return balance
           });
+         
         });
-      }).then( () => {
-        
-        this.props.neo.neo.getNetworks()
+        return labal}).then(  c => {
+        // console.log(c)
+        a.getNetworks()
 .then(result => {
   
 
@@ -144,91 +177,105 @@ const {
   networks,
   defaultNetwork
 } = result;
-
-if(this.state.balance !== this.props.wallet.amount) {
-  this.props.addUserWallet(this.state.account.address, defaultNetwork, this.state.balance, 'this')
+console.log("G1")
+if(balance !== props.wallet.amount) {
+console.log(c)
+  props.addUserWallet(b.address, defaultNetwork, c, 'this')
 }
 })
 
-
       }).catch(e=>{     
                   console.log(e)});
-      
       
     }, 3000);
   
 }
   
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.timerID);
+  // }
 
  
-onSelect = (selected) => {
-    this.setState({ selected: selected });
+const onSelect = (selected) => {
+    // this.setState({ selected: selected });
+    setSelected(selected)
 };
-onToggle = (expanded) => {
-    this.setState({ expanded: expanded });
+const onToggle = (expanded) => {
+    // this.setState({ expanded: expanded });
+    setExpanded(expanded)
 };
 
 
-f = () => {
-  if(!this.state.Neo && !this.state.Warning){
+const f = () => {
+  if(!Neo && !Warning){
     alert("no wallet") 
   this.setState({
     Warning: true
   })}
 }
-onLoad = e => {
+const onLoad = e => {
   console.log("LLLLLLOOOAD")
 }
 
-walletclick =() =>{
+const walletclick =() =>{
 
   
 
 }
-renderBreadcrumbs() {
 
+const classes = useStyles();
+
+function renderBreadcrumbs() {
+
+  // console.log(useStyles[root]);
+  
+  
   const pageTitle = {
     'home': [<SaveButton />,
       <CompileButton />,
       <FileBrowserWrapper/>],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
-    'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],
+    'wallet' : [<Wallet account={account} balance={balance}></Wallet>, <MultilineTextFields></MultilineTextFields>],
     'settings/policies': ['Settings', 'Policies'],
     'settings/network': ['Settings', 'Network']
 }; 
-    const { selected } = this.state;
+    // const { selected } = this.state;
     const list = ensureArray(pageTitle[selected]);
 
     return (
-        <Breadcrumbs >
+      <div className={classes.root}>
+        
+        {/* <Grid container wrap="nowrap" spacing={2}> */}
+      
             {list.map((item, index) => (
-                <Breadcrumbs.Item
-                    active={index === list.length - 1}
-                    key={`${selected}_${index}`}
-                >
+               <Paper className={classes.paper}>
+                <Grid xs={12} container wrap="nowrap" spacing={2}>
+                   
+                
                     {item}
-                </Breadcrumbs.Item>
+                </Grid>
+                </Paper>
             ))}
-        </Breadcrumbs>
+           
+         {/* </Grid> */}
+       
+         </div>
     );
 }
 
-navigate = (pathname) => () => {
+const navigate = (pathname) => () => {
     this.setState({ selected: pathname });
 };
 
-render (){
 
-  const { expanded, selected } = this.state;
+
+  // const { expanded, selected } = this.state;
     return (
       <div >
         <SplitPane split="vertical" size={550} >
           <div >
-                <SideNav onSelect={this.onSelect} onToggle={this.onToggle}>
+                <SideNav onSelect={onSelect} onToggle={onToggle}>
                     <SideNav.Nav selected={selected}>
                         <NavItem eventKey="home">
                             <NavIcon>
@@ -236,13 +283,13 @@ render (){
                             </NavIcon>
                            
                         </NavItem>
-                        <NavItem onClick={this.f}  eventKey="devices">
+                        <NavItem onClick={f}  eventKey="devices">
                             <NavIcon>
                                 <i className="fa fa-fw fa-play-circle" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
                             
                         </NavItem>
-                        <NavItem onClick={this.walletclick} eventKey="wallet">
+                        <NavItem onClick={walletclick} eventKey="wallet">
                             <NavIcon>
                                 <i className="fa fa-fw fa-bank" style={{ fontSize: '1.75em', verticalAlign: 'middle' }} />
                             </NavIcon>
@@ -279,7 +326,7 @@ render (){
                     </SideNav.Nav>
                 </SideNav>
                 <Main className="main-breadcrumbs">
-                    {this.renderBreadcrumbs()}
+                    {renderBreadcrumbs()}
                 </Main>
             </div>
 
@@ -293,6 +340,6 @@ render (){
     )
   }
 
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HorizontalPanel);
