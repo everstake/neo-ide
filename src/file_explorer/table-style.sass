@@ -18,6 +18,7 @@ div.rendered-react-keyed-file-browser
       text-align: left
       margin: 0
       padding: $main-padding
+
     th
       font-weight: bold
 
@@ -31,6 +32,7 @@ div.rendered-react-keyed-file-browser
 
     thead th
       border-bottom: 0.1rem solid #ddd
+
     tr:not(:last-child) td
       border-bottom: 0.1rem solid #eee
 
@@ -40,22 +42,28 @@ div.rendered-react-keyed-file-browser
       form.renaming
         display: flex
         align-items: center
+
         i
           flex-grow: 0
           flex-shrink: 0
+
         input[type="text"]
           flex: 1
 
     tr
       td
         cursor: pointer
+
       &.selected
         td
           font-weight: bold
+
           input, button
             font-weight: normal
+
           &.name
             position: relative
+
             &:after
               content: ' '
               position: absolute
@@ -64,6 +72,7 @@ div.rendered-react-keyed-file-browser
               width: $selection-bar-size
               height: 100%
               background: darken($theme-colour-text, 20%)
+
       &.dragover
         td, th
           background: #eee

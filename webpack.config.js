@@ -1,5 +1,5 @@
-const path = require('path')
-const NodeExternals = require('webpack-node-externals')
+const path = require('path');
+const NodeExternals = require('webpack-node-externals');
 
 module.exports = {
   entry: './src/file_explorer/index.js',
@@ -26,4 +26,4 @@ module.exports = {
     ],
   },
   externals: NodeExternals(),
-}
+};

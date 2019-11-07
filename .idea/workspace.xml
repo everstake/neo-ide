@@ -3,6 +3,83 @@
   <component name="ChangeListManager">
     <list default="true" id="aa330877-3eba-4d24-bd5a-1597cd61e5b4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Button.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CompileButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CompileButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DeployButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DeployButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HorizontalPanel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PanelsBlock.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParametrsPane.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParametrsPane.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SaveButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SaveButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SplitButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SplitButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Tabs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Tabs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/VerticalPane.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/VerticalPane.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Wallet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/FileBrowserWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/FileBrowserWrapper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/LogPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/LogPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default_files/default_files.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default_files/default_files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default_files/domain.cs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default_files/domain.cs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/default_files/domain.py.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/default_files/domain.py.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/base-file.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/base-file.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/base-folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/base-folder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/browser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/browser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/browser.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/browser.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/contextmenu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/contextmenu.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/contextmenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/contextmenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/details/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/details/default.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/details/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/details/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/files/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/files/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/files/list-thumbnail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/files/list-thumbnail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/files/simple-list-thumbnail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/files/simple-list-thumbnail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/files/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/files/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/files/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/files/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/filters/default.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/filters/default.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/filters/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/filters/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/folders/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/folders/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/folders/list-thumbnail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/folders/list-thumbnail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/folders/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/folders/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/groupers/by-folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/groupers/by-folder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/groupers/by-modified.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/groupers/by-modified.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/groupers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/groupers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/groupers/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/groupers/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/headers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/headers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/headers/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/headers/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/icons/FontAwesome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/icons/FontAwesome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/list-style.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/list-style.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/sorters/by-modified.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/sorters/by-modified.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/sorters/by-name.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/sorters/by-name.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/sorters/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/sorters/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/sorters/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/sorters/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/table-style.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/table-style.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/file_explorer/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/file_explorer/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/jsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/logo.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/current_file.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/current_file.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/files.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/files.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/logs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/logs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/neo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/neo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/tabswitch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/tabswitch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/wallet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/wallet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/d.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/d.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/demos.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/demos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/ide.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/ide.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/react-breadcrumbs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/react-breadcrumbs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/resizer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/resizer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/table.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/table.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stylesheets/tabs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/stylesheets/tabs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <list id="f74e1b36-5adb-4715-9ad8-768e52ae3c62" name="Revert &quot;added src of file_explorer without storybook&quot;" comment="Revert &quot;added src of file_explorer without storybook&quot;&#10;&#10;This reverts commit afbe1701" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,13 +110,14 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="vcs.Mercurial" />
   </component>
   <component name="RecentsManager">
@@ -77,7 +155,7 @@
     </configuration>
   </component>
   <component name="SvnConfiguration">
-    <configuration>$USER_HOME$/.subversion</configuration>
+    <configuration>$PROJECT_DIR$/../.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -92,6 +170,7 @@
       <workItem from="1569585373181" duration="636000" />
       <workItem from="1570617304929" duration="1402000" />
       <workItem from="1571742002616" duration="1752000" />
+      <workItem from="1573089044568" duration="1165000" />
     </task>
     <task id="LOCAL-00001" summary="add(land): moved main panel&#10;add(scroller): moved scroller">
       <created>1569336315121</created>

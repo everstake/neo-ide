@@ -1,4 +1,4 @@
-const text= 'from boa.interop.Neo.Runtime import Log, Notify\n\
+const text = 'from boa.interop.Neo.Runtime import Log, Notify\n\
 from boa.interop.Neo.Storage import Get, Put, GetContext\n\
 from boa.interop.Neo.Runtime import GetTrigger,CheckWitness\n\
 from boa.builtins import concat\n\
@@ -105,5 +105,5 @@ def DeleteDomain(domain_name):\n\
 \n\
     Delete(context, domain_name)\n\
     return True\
-'
+';
 export default text;

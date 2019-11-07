@@ -1,7 +1,6 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import {makeStyles} from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
-import { fade, makeStyles } from "@material-ui/core/styles";
 
 // const BootstrapInput = withStyles(theme => ({
 //   root: {
@@ -40,34 +39,34 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 // }))(InputBase);
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // display: "flex",
-    // position: "relative",
-    // flexWrap: "wrap",
-    // padding: "1px 1px 1px 120px"
-  },
-  margin: {
-    color: "white",
-    //  display: "flex",
-    // position: "relative",
-    // margin: "1px 50px 1px 1px",
-    // padding: "1px 1px 11px 120px",
-    backgroundColor: "red"
-  }
+    root: {
+        // display: "flex",
+        // position: "relative",
+        // flexWrap: "wrap",
+        // padding: "1px 1px 1px 120px"
+    },
+    margin: {
+        color: "white",
+        //  display: "flex",
+        // position: "relative",
+        // margin: "1px 50px 1px 1px",
+        // padding: "1px 1px 11px 120px",
+        backgroundColor: "red"
+    }
 }));
 export default function MultilineTextFields() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState("Controlled");
+    const classes = useStyles();
+    const [value, setValue] = React.useState("Controlled");
 
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
+    const handleChange = event => {
+        setValue(event.target.value);
+    };
 
-  return (
-    <form className={classes.root} noValidate autoComplete="off">
-      <div>
-        <InputBase multiline className={classes.margin} rows="10" />
-      </div>
-    </form>
-  );
+    return (
+        <form className={classes.root} noValidate autoComplete="off">
+            <div>
+                <InputBase multiline className={classes.margin} rows="10"/>
+            </div>
+        </form>
+    );
 }
