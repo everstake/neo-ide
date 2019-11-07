@@ -1,13 +1,12 @@
 import Moment from 'moment'
+import React from "react"
+import Button from '@material-ui/core/Button'
 
 const filesReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_FILE': {
         const newFiles = [];
         action.files.map((file) => {
-          
-          
-
           let newKey = action.prefix
           if (action.prefix !== '' && action.prefix.substring(action.prefix.length - 1, action.prefix.length) !== '/') {
             newKey += '/'
@@ -18,37 +17,48 @@ const filesReducer = (state = [], action) => {
 
           for (let i = 0; i < state.length; i++) {
             if (state[i].key === file.key){
-              alert("File with \"" + file.key +"\" name already exist")
+              let alertKey = new Date().getTime() + Math.random()
+              let errorAlert = {
+                message: "File with \"" + file.key +"\" name already exist",
+                options: {
+                  variant: 'error',
+                  group: 'File browser',
+                  action: alertKey => (
+                    <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
+                  )
+                }
+              }
+              action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})  
               return ;
             }
           }
-
           newFiles.push({
             ...file
           })
         })
-        
-        // let newState = [...state, ...newFiles];
-        // const uniqueNewFiles = []
-        // newState.map((newFile) => {
-        //   let exists = false
-        //   newState.map((existingFile) => {
-        //     if (existingFile.key === newFile.key) {
-        //       exists = true
-        //     }
-        //   })
-        //   if (!exists) {
-        //     uniqueNewFiles.push(newFile)
-        //   }
-        // })
-
         return [
           ...state,
           ...newFiles
-          // ...uniqueNewFiles
         ]
       }
       case 'ADD_FOLDER': {
+        for (let i = 0; i < state.length; i++) {
+          if (state[i].key === action.folderKey){
+            let alertKey = new Date().getTime() + Math.random()
+            let errorAlert = {
+              message: "Folder with \"" + action.folderKey +"\" name already exist",
+              options: {
+                variant: 'error',
+                group: 'File browser',
+                action: alertKey => (
+                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
+                )
+              }
+            }
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
+            return state;
+          }
+        }
         return [
           ...state,
           {key: action.folderKey}
@@ -100,6 +110,7 @@ const filesReducer = (state = [], action) => {
             // Copy the object before mutating
             return Object.assign({}, fileObj, {
               deployed: true,
+              binary: action.binary
             });
           }
           return fileObj
@@ -123,7 +134,18 @@ const filesReducer = (state = [], action) => {
       case 'RENAME_FOLDER': {
         for (let i = 0; i < state.length; i++) {
           if (state[i].key === action.newKey){
-            alert("Folder with \"" + action.newKey +"\" name already exist")
+            let alertKey = new Date().getTime() + Math.random()
+            let errorAlert = {
+              message: "Folder with \"" + action.newKey +"\" name already exist",
+              options: {
+                variant: 'error',
+                group: 'File browser',
+                action: alertKey => (
+                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
+                )
+              }
+            }
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
             return state;
           }
         }
@@ -140,7 +162,18 @@ const filesReducer = (state = [], action) => {
       case 'RENAME_FILE': {
         for (let i = 0; i < state.length; i++) {
           if (state[i].key === action.newKey){
-            alert("File with \"" + action.newKey +"\" name already exist")
+            let alertKey = new Date().getTime() + Math.random()
+            let errorAlert = {
+              message: "File with \"" + action.newKey +"\" name already exist",
+              options: {
+                variant: 'error',
+                group: 'File browser',
+                action: alertKey => (
+                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
+                )
+              }
+            }
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
             return state;
           }
         }

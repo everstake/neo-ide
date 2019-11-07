@@ -192,9 +192,7 @@ walletclick =() =>{
 renderBreadcrumbs() {
 
   const pageTitle = {
-    'home': [<SaveButton />,
-      <CompileButton />,
-      <FileBrowserWrapper/>],
+    'home': [<SaveButton />, <CompileButton />, <DeployButton />],
     'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
     'reports': ['Reports'],
     'wallet' : [<Wallet account={this.state.account} balance={this.state.balance}></Wallet>],
@@ -205,6 +203,7 @@ renderBreadcrumbs() {
     const list = ensureArray(pageTitle[selected]);
 
     return (
+      <div>
         <Breadcrumbs >
             {list.map((item, index) => (
                 <Breadcrumbs.Item
@@ -215,6 +214,8 @@ renderBreadcrumbs() {
                 </Breadcrumbs.Item>
             ))}
         </Breadcrumbs>
+        <FileBrowserWrapper/>
+      </div>
     );
 }
 

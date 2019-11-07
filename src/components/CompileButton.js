@@ -6,7 +6,6 @@ import React from "react";
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import errorBox from './errorBox';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -36,28 +35,37 @@ class CustomButton extends React.Component {
     
     this.compile = this.compile.bind(this);
   }
+  
   compile() {
-    // axios.post('http://0.0.0.0:5000/build_avm/py', {
-    //     text: ["def Main():\n", "  print(\"Hello World\")\n", "  return True"],
-    //     filename:"sdasdvf"
-    // }, {timeout: 1000}).then(res => {
-    //   console.log(res)
-    //   this.props.changeFileCompiled(this.props.file.key, res)
-    //   this.props.addLog("Compiled\n", "compiler")
-    // }).catch(err => {
-    //   alert(err)
-    // })
-
-
-    this.props.enqueueSnackbar({
-      message: 'Failed fetching data.',
-      options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'warning',
+    let filePath = this.props.file.key.split('/');
+    axios.post('http://0.0.0.0:5000/build_avm/py', {
+        text: this.props.file.savedContent,
+        filename: filePath[filePath.length - 1]
+    }, {timeout: 1000}).then(res => {
+      console.log(res)
+      this.props.changeFileCompiled(this.props.file.key, res.data)
+      this.props.addLog("Compiled\n", "compiler")
+      this.props.enqueueSnackbar({
+        message: 'Compiled!',
+        options: {
+          variant: 'success',
+          group: 'Compiler',
           action: key => (
-              <Button onClick={() => {this.props.closeSnackbar(key)}}>dissmiss me</Button>
-          ),
-      },
+            <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
+          )
+        }
+      })
+    }).catch(err => {
+      this.props.enqueueSnackbar({
+        message: err.message,
+        options: {
+          variant: 'error',
+          group: 'Compiler',
+          action: key => (
+            <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
+          )
+        }
+      })
     })
   }
 
@@ -88,7 +96,8 @@ const mapStateToProps =  (store) => {
 const mapDispatchToProps = dispatch =>({
   changeFileCompiled: (name)=>dispatch(actions.changeFileCompiled(name)),
   addLog: (a, b)=>dispatch(actions.addLog(a, b)),
-  enqueueSnackbar: (key)=>dispatch(actions.enqueueSnackbar(key))
+  enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
+  closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)

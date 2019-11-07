@@ -1,0 +1,677 @@
+{
+    "avm": {
+        "name": "domain.avm",
+        "hash": "d11f2459938ca7bc0af84a1f99e71cc6"
+    },
+    "compiler": {
+        "name": "neo-boa",
+        "version": "0.6.0"
+    },
+    "files": [
+        {
+            "id": 1,
+            "url": "/home/unit-2/neo-online-ide-theia/compilers/domain.py.py"
+        },
+        {
+            "id": 2,
+            "url": "/home/unit-2/.local/lib/python3.6/site-packages/boa/builtins.py"
+        }
+    ],
+    "map": [
+        {
+            "start": 14,
+            "end": 22,
+            "file": 1,
+            "method": "Main",
+            "line": 2,
+            "file_line_no": 8
+        },
+        {
+            "start": 23,
+            "end": 30,
+            "file": 1,
+            "method": "Main",
+            "line": 3,
+            "file_line_no": 9
+        },
+        {
+            "start": 31,
+            "end": 71,
+            "file": 1,
+            "method": "Main",
+            "line": 4,
+            "file_line_no": 10
+        },
+        {
+            "start": 72,
+            "end": 76,
+            "file": 1,
+            "method": "Main",
+            "line": 5,
+            "file_line_no": 11
+        },
+        {
+            "start": 77,
+            "end": 89,
+            "file": 1,
+            "method": "Main",
+            "line": 7,
+            "file_line_no": 13
+        },
+        {
+            "start": 90,
+            "end": 99,
+            "file": 1,
+            "method": "Main",
+            "line": 8,
+            "file_line_no": 14
+        },
+        {
+            "start": 100,
+            "end": 111,
+            "file": 1,
+            "method": "Main",
+            "line": 9,
+            "file_line_no": 15
+        },
+        {
+            "start": 112,
+            "end": 125,
+            "file": 1,
+            "method": "Main",
+            "line": 11,
+            "file_line_no": 17
+        },
+        {
+            "start": 126,
+            "end": 135,
+            "file": 1,
+            "method": "Main",
+            "line": 12,
+            "file_line_no": 18
+        },
+        {
+            "start": 136,
+            "end": 147,
+            "file": 1,
+            "method": "Main",
+            "line": 13,
+            "file_line_no": 19
+        },
+        {
+            "start": 148,
+            "end": 163,
+            "file": 1,
+            "method": "Main",
+            "line": 15,
+            "file_line_no": 21
+        },
+        {
+            "start": 164,
+            "end": 171,
+            "file": 1,
+            "method": "Main",
+            "line": 16,
+            "file_line_no": 22
+        },
+        {
+            "start": 172,
+            "end": 230,
+            "file": 1,
+            "method": "Main",
+            "line": 17,
+            "file_line_no": 23
+        },
+        {
+            "start": 231,
+            "end": 235,
+            "file": 1,
+            "method": "Main",
+            "line": 18,
+            "file_line_no": 24
+        },
+        {
+            "start": 236,
+            "end": 245,
+            "file": 1,
+            "method": "Main",
+            "line": 19,
+            "file_line_no": 25
+        },
+        {
+            "start": 246,
+            "end": 255,
+            "file": 1,
+            "method": "Main",
+            "line": 20,
+            "file_line_no": 26
+        },
+        {
+            "start": 256,
+            "end": 271,
+            "file": 1,
+            "method": "Main",
+            "line": 21,
+            "file_line_no": 27
+        },
+        {
+            "start": 272,
+            "end": 287,
+            "file": 1,
+            "method": "Main",
+            "line": 23,
+            "file_line_no": 29
+        },
+        {
+            "start": 288,
+            "end": 295,
+            "file": 1,
+            "method": "Main",
+            "line": 24,
+            "file_line_no": 30
+        },
+        {
+            "start": 296,
+            "end": 359,
+            "file": 1,
+            "method": "Main",
+            "line": 25,
+            "file_line_no": 31
+        },
+        {
+            "start": 360,
+            "end": 364,
+            "file": 1,
+            "method": "Main",
+            "line": 26,
+            "file_line_no": 32
+        },
+        {
+            "start": 365,
+            "end": 374,
+            "file": 1,
+            "method": "Main",
+            "line": 27,
+            "file_line_no": 33
+        },
+        {
+            "start": 375,
+            "end": 384,
+            "file": 1,
+            "method": "Main",
+            "line": 28,
+            "file_line_no": 34
+        },
+        {
+            "start": 385,
+            "end": 412,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 29,
+            "file_line_no": 119
+        },
+        {
+            "start": 413,
+            "end": 436,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 2,
+            "file_line_no": 92
+        },
+        {
+            "start": 437,
+            "end": 460,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 3,
+            "file_line_no": 93
+        },
+        {
+            "start": 461,
+            "end": 490,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 5,
+            "file_line_no": 95
+        },
+        {
+            "start": 491,
+            "end": 520,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 6,
+            "file_line_no": 96
+        },
+        {
+            "start": 521,
+            "end": 526,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 7,
+            "file_line_no": 97
+        },
+        {
+            "start": 527,
+            "end": 576,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 8,
+            "file_line_no": 98
+        },
+        {
+            "start": 577,
+            "end": 581,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 9,
+            "file_line_no": 99
+        },
+        {
+            "start": 582,
+            "end": 614,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 11,
+            "file_line_no": 101
+        },
+        {
+            "start": 615,
+            "end": 676,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 12,
+            "file_line_no": 102
+        },
+        {
+            "start": 677,
+            "end": 681,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 13,
+            "file_line_no": 103
+        },
+        {
+            "start": 682,
+            "end": 709,
+            "file": 1,
+            "method": "DeleteDomain",
+            "line": 15,
+            "file_line_no": 105
+        },
+        {
+            "start": 710,
+            "end": 727,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 16,
+            "file_line_no": 85
+        },
+        {
+            "start": 728,
+            "end": 753,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 2,
+            "file_line_no": 71
+        },
+        {
+            "start": 754,
+            "end": 777,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 3,
+            "file_line_no": 72
+        },
+        {
+            "start": 778,
+            "end": 807,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 5,
+            "file_line_no": 74
+        },
+        {
+            "start": 808,
+            "end": 837,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 6,
+            "file_line_no": 75
+        },
+        {
+            "start": 838,
+            "end": 843,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 7,
+            "file_line_no": 76
+        },
+        {
+            "start": 844,
+            "end": 893,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 8,
+            "file_line_no": 77
+        },
+        {
+            "start": 894,
+            "end": 898,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 9,
+            "file_line_no": 78
+        },
+        {
+            "start": 899,
+            "end": 931,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 11,
+            "file_line_no": 80
+        },
+        {
+            "start": 932,
+            "end": 993,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 12,
+            "file_line_no": 81
+        },
+        {
+            "start": 994,
+            "end": 998,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 13,
+            "file_line_no": 82
+        },
+        {
+            "start": 999,
+            "end": 1008,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 15,
+            "file_line_no": 84
+        },
+        {
+            "start": 1009,
+            "end": 1086,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 16,
+            "file_line_no": 85
+        },
+        {
+            "start": 1087,
+            "end": 1091,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 17,
+            "file_line_no": 86
+        },
+        {
+            "start": 1092,
+            "end": 1120,
+            "file": 1,
+            "method": "TransferDomain",
+            "line": 18,
+            "file_line_no": 87
+        },
+        {
+            "start": 1121,
+            "end": 1137,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 19,
+            "file_line_no": 70
+        },
+        {
+            "start": 1138,
+            "end": 1163,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 2,
+            "file_line_no": 53
+        },
+        {
+            "start": 1164,
+            "end": 1187,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 3,
+            "file_line_no": 54
+        },
+        {
+            "start": 1188,
+            "end": 1220,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 5,
+            "file_line_no": 56
+        },
+        {
+            "start": 1221,
+            "end": 1286,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 6,
+            "file_line_no": 57
+        },
+        {
+            "start": 1287,
+            "end": 1291,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 7,
+            "file_line_no": 58
+        },
+        {
+            "start": 1292,
+            "end": 1321,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 9,
+            "file_line_no": 60
+        },
+        {
+            "start": 1322,
+            "end": 1351,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 10,
+            "file_line_no": 61
+        },
+        {
+            "start": 1352,
+            "end": 1357,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 11,
+            "file_line_no": 62
+        },
+        {
+            "start": 1358,
+            "end": 1407,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 12,
+            "file_line_no": 63
+        },
+        {
+            "start": 1408,
+            "end": 1412,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 13,
+            "file_line_no": 64
+        },
+        {
+            "start": 1413,
+            "end": 1441,
+            "file": 1,
+            "method": "RegisterDomain",
+            "line": 15,
+            "file_line_no": 66
+        },
+        {
+            "start": 1442,
+            "end": 1453,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 16,
+            "file_line_no": 53
+        },
+        {
+            "start": 1454,
+            "end": 1476,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 2,
+            "file_line_no": 39
+        },
+        {
+            "start": 1477,
+            "end": 1500,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 3,
+            "file_line_no": 40
+        },
+        {
+            "start": 1501,
+            "end": 1530,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 5,
+            "file_line_no": 42
+        },
+        {
+            "start": 1531,
+            "end": 1560,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 6,
+            "file_line_no": 43
+        },
+        {
+            "start": 1561,
+            "end": 1566,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 7,
+            "file_line_no": 44
+        },
+        {
+            "start": 1567,
+            "end": 1616,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 8,
+            "file_line_no": 45
+        },
+        {
+            "start": 1617,
+            "end": 1621,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 9,
+            "file_line_no": 46
+        },
+        {
+            "start": 1622,
+            "end": 1645,
+            "file": 1,
+            "method": "QueryDomain",
+            "line": 11,
+            "file_line_no": 48
+        },
+        {
+            "start": 1646,
+            "end": 1664,
+            "file": 2,
+            "method": "range",
+            "line": 12,
+            "file_line_no": 85
+        },
+        {
+            "start": 1665,
+            "end": 1676,
+            "file": 2,
+            "method": "range",
+            "line": 9,
+            "file_line_no": 82
+        },
+        {
+            "start": 1677,
+            "end": 1685,
+            "file": 2,
+            "method": "range",
+            "line": 11,
+            "file_line_no": 84
+        },
+        {
+            "start": 1686,
+            "end": 1691,
+            "file": 2,
+            "method": "range",
+            "line": 13,
+            "file_line_no": 86
+        },
+        {
+            "start": 1692,
+            "end": 1699,
+            "file": 2,
+            "method": "range",
+            "line": 15,
+            "file_line_no": 88
+        },
+        {
+            "start": 1700,
+            "end": 1711,
+            "file": 2,
+            "method": "range",
+            "line": 17,
+            "file_line_no": 90
+        },
+        {
+            "start": 1712,
+            "end": 1723,
+            "file": 2,
+            "method": "range",
+            "line": 18,
+            "file_line_no": 91
+        },
+        {
+            "start": 1724,
+            "end": 1734,
+            "file": 2,
+            "method": "range",
+            "line": 19,
+            "file_line_no": 92
+        },
+        {
+            "start": 1735,
+            "end": 1744,
+            "file": 2,
+            "method": "range",
+            "line": 20,
+            "file_line_no": 93
+        },
+        {
+            "start": 1745,
+            "end": 1762,
+            "file": 2,
+            "method": "range",
+            "line": 21,
+            "file_line_no": 94
+        },
+        {
+            "start": 1763,
+            "end": 1768,
+            "file": 2,
+            "line": 23
+        }
+    ],
+    "breakpoints": []
+}

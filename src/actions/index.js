@@ -11,30 +11,22 @@ export const addFile = (files, prefix) => ({
   prefix: prefix
 })
 
-export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
-export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
-export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
-
-export const enqueueSnackbar = notification => {
-    const key = notification.options && notification.options.key;
-    console.log("ALALAL")
-    return {
-        type: ENQUEUE_SNACKBAR,
-        notification: {
-            ...notification,
-            key: key || new Date().getTime() + Math.random(),
-        },
-    };
-};
+export const enqueueSnackbar = (alert) => ({
+  type: 'ENQUEUE_SNACKBAR',
+  alert: {
+    ...alert,
+    key: (alert.options && alert.options.key) || new Date().getTime() + Math.random()
+  }
+});
 
 export const closeSnackbar = key => ({
-    type: CLOSE_SNACKBAR,
-    dismissAll: !key, // dismiss all if no key has been defined
-    key,
+  type: 'CLOSE_SNACKBAR',
+  dismissAll: !key, // dismiss all if no key has been defined
+  key,
 });
 
 export const removeSnackbar = key => ({
-    type: REMOVE_SNACKBAR,
+    type: 'REMOVE_SNACKBAR',
     key,
 });
 
@@ -86,7 +78,7 @@ export const addUserWallet = (address, coin_type, amount, network) => ({
   address: address, 
   coin_type: coin_type,
   amount: amount,
-  network:network
+  network: network
 })
 
 export const addNeo = (neo) => ({
@@ -99,9 +91,10 @@ export const tabSwitch = (tab) => ({
   tab: tab
 })
 
-export const renameFolder = (currentKey, newKey) => ({
+export const renameFolder = (currentKey, newKey, onError) => ({
   type: 'RENAME_FOLDER',
   currentKey: currentKey,
+  onError: onError,
   newKey: newKey
 })
 

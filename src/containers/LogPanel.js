@@ -7,7 +7,7 @@ import {ReactTerminalStateless} from 'react-terminal-component';
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 
-import ErrorBox from "../components/errorBox";
+import AlertsBox from "../components/alertsBox";
 import { SnackbarProvider } from 'notistack';
 
 import {
@@ -15,22 +15,6 @@ import {
     EnvironmentVariables, FileSystem, History,
     Outputs, defaultCommandMapping
   } from 'javascript-terminal';
-
-const theme={
-  textAlign: 'left',
-  background: '#272822',
-  promptSymbolColor: '#6effe6',
-  commandColor: '#fcfcfc',
-  outputColor: '#fcfcfc',
-  errorOutputColor: '#ff89bd',
-  fontSize: '1.1rem',
-  spacing: '1%',
-  fontFamily: 'monospace',
-  width: '100%',
-  height: '100%',
-}
-
-
 
 function fetchLogs(logsArray, tab) {
     let newOutputs;
@@ -72,9 +56,9 @@ constructor(props){
 }
 
 componentDidMount() {
-    this.props.addLog('logger compile', 'Compile')
-    this.props.addLog('logger deploy', 'Deploy')
-    this.props.addLog('logger debug', 'Debug')
+    // this.props.addLog('logger compile', 'Compile')
+    // this.props.addLog('logger deploy', 'Deploy')
+    // this.props.addLog('logger debug', 'Debug')
 }
 
 render (){
@@ -82,8 +66,12 @@ render (){
 
     return (
         <div>
-            <SnackbarProvider>
-                <ErrorBox />
+            <SnackbarProvider   
+                anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}>
+                <AlertsBox />
             </SnackbarProvider>
             <ReactTerminal theme={{
             background: '#272822',

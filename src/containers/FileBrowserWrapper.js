@@ -17,7 +17,8 @@ class FileBrowserWrapper extends React.Component {
     }
     
     handleRenameFolder = (oldKey, newKey) => {
-        this.props.renameFolder(oldKey, newKey)
+        console.log("Func: ", this.props.enqueueSnackbar)
+        this.props.renameFolder(oldKey, newKey, this.props.enqueueSnackbar.bind(this))
     }
     
     handleRenameFile = (oldKey, newKey) => {
@@ -82,13 +83,14 @@ const mapStateToProps = store => ({
 });
   
 const mapDispatchToProps = dispatch =>({
+    enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
     addFile: (files, prefix) => dispatch(actions.addFile(files, prefix)),
     changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name)),
-    renameFolder: (currentKey, newKey)=>dispatch(actions.renameFolder(currentKey, newKey)),
+    renameFolder: (currentKey, newKey, onError)=>dispatch(actions.renameFolder(currentKey, newKey, onError)),
     renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey)),
     addFolder: (folderKey)=>dispatch(actions.addFolder(folderKey)),
     deleteFolder: (folderKey)=>dispatch(actions.deleteFolder(folderKey)),
-    deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey))
+    deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileBrowserWrapper)
