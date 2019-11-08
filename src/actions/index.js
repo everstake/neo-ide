@@ -1,15 +1,14 @@
-
 export const addLog = (text, group) => ({
-  type: 'ADD_LOG',
-  text: text,
-  group: group
-})
+    type: 'ADD_LOG',
+    text: text,
+    group: group
+});
 
 export const addFile = (files, prefix) => ({
-  type: 'ADD_FILE',
-  files: files,
-  prefix: prefix
-})
+    type: 'ADD_FILE',
+    files: files,
+    prefix: prefix
+});
 
 export const enqueueSnackbar = (alert) => ({
   type: 'ENQUEUE_SNACKBAR',
@@ -31,30 +30,30 @@ export const removeSnackbar = key => ({
 });
 
 export const addFolder = (folderKey) => ({
-  type: 'ADD_FOLDER',
-  folderKey: folderKey
-})
+    type: 'ADD_FOLDER',
+    folderKey: folderKey
+});
 
 export const deleteFolder = (folderKey) => ({
-  type: 'DELETE_FOLDER',
-  folderKey: folderKey
-})
+    type: 'DELETE_FOLDER',
+    folderKey: folderKey
+});
 
 export const deleteFile = (fileKey) => ({
-  type: 'DELETE_FILE',
-  fileKey: fileKey
-})
+    type: 'DELETE_FILE',
+    fileKey: fileKey
+});
 
 export const changeCurrentFile = (name) => ({
-  type: 'CHANGE_CURRENT_FILE',
-  name: name,
-})
+    type: 'CHANGE_CURRENT_FILE',
+    name: name,
+});
 
 export const changeFileSaved = (name, newContent) => ({
-  type: 'CHANGE_FILE_SAVED',
-  name: name,
-  newContent: newContent
-})
+    type: 'CHANGE_FILE_SAVED',
+    name: name,
+    newContent: newContent
+});
 
 export const changeFileCompiled = (name, binary) => ({
   type: 'CHANGE_FILE_COMPILED',
@@ -63,15 +62,15 @@ export const changeFileCompiled = (name, binary) => ({
 })
 
 export const changeFileDeployed = (name) => ({
-  type: 'CHANGE_FILE_DEPLOYED',
-  name: name,
-})
+    type: 'CHANGE_FILE_DEPLOYED',
+    name: name,
+});
 
 export const saveFile = (name, fileObj) => ({
-  type: 'SAVE_FILE',
-  name: name,
-  fileObj: fileObj
-})
+    type: 'SAVE_FILE',
+    name: name,
+    fileObj: fileObj
+});
 
 export const addUserWallet = (address, coin_type, amount, network) => ({
   type:'ADD_WALLET',
@@ -82,14 +81,14 @@ export const addUserWallet = (address, coin_type, amount, network) => ({
 })
 
 export const addNeo = (neo) => ({
-  type: 'ADD_NEO',
-  neo: neo
-})
+    type: 'ADD_NEO',
+    neo: neo
+});
 
 export const tabSwitch = (tab) => ({
-  type: 'TAB_SELECTED',
-  tab: tab
-})
+    type: 'TAB_SELECTED',
+    tab: tab
+});
 
 export const renameFolder = (currentKey, newKey, onError) => ({
   type: 'RENAME_FOLDER',
@@ -99,7 +98,7 @@ export const renameFolder = (currentKey, newKey, onError) => ({
 })
 
 export const renameFile = (currentKey, newKey) => ({
-  type: 'RENAME_FILE',
-  currentKey: currentKey,
-  newKey: newKey
-})
+    type: 'RENAME_FILE',
+    currentKey: currentKey,
+    newKey: newKey
+});

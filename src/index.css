@@ -1,52 +1,51 @@
-html,body {
-  padding: 0;
-  margin: 0;
+html, body {
+    padding: 0;
+    margin: 0;
 }
 
 .App {
-  font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 .split-pane {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .split-pane-top,
 .split-pane-bottom {
-  flex: 1;
-  overflow: hidden;
+    flex: 1;
+    overflow: hidden;
 }
+
 .split-pane-top {
-  background: linear-gradient(#ffffff 50%, rgba(255, 255, 255, 0) 0) 0 0,
-  radial-gradient(circle closest-side, #ffffff 53%, rgba(255, 255, 255, 0) 0)
-  0 0,
-  radial-gradient(circle closest-side, #ffffff 50%, rgba(255, 255, 255, 0) 0)
-  55px 0 #48b;
-  background-size: 110px 200px;
-  background-repeat: repeat-x;
+    background: linear-gradient(#ffffff 50%, rgba(255, 255, 255, 0) 0) 0 0,
+    radial-gradient(circle closest-side, #ffffff 53%, rgba(255, 255, 255, 0) 0) 0 0,
+    radial-gradient(circle closest-side, #ffffff 50%, rgba(255, 255, 255, 0) 0) 55px 0 #48b;
+    background-size: 110px 200px;
+    background-repeat: repeat-x;
 }
+
 .split-pane-bottom {
-  background: radial-gradient(
-          circle at 0% 50%,
-          rgba(96, 16, 48, 0) 9px,
-          #613 10px,
-          rgba(96, 16, 48, 0) 11px
-  )
-  0px 10px,
-  radial-gradient(
-          at 100% 100%,
-          rgba(96, 16, 48, 0) 9px,
-          #613 10px,
-          rgba(96, 16, 48, 0) 11px
-  ),
-  #8a3;
-  background-size: 20px 20px;
+    background: radial-gradient(
+            circle at 0% 50%,
+            rgba(96, 16, 48, 0) 9px,
+            #613 10px,
+            rgba(96, 16, 48, 0) 11px
+    ) 0px 10px,
+    radial-gradient(
+            at 100% 100%,
+            rgba(96, 16, 48, 0) 9px,
+            #613 10px,
+            rgba(96, 16, 48, 0) 11px
+    ),
+    #8a3;
+    background-size: 20px 20px;
 }
 
 .separator {
-  border: 5px solid black;
-  cursor: row-resize;
+    border: 5px solid black;
+    cursor: row-resize;
 }

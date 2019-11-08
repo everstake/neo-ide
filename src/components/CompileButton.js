@@ -1,3 +1,4 @@
+
 import Icon from '@material-ui/core/Icon';
 import SaveIcon from '@material-ui/icons/Save';
 import Button from '@material-ui/core/Button';
@@ -29,6 +30,14 @@ function CustomButtonView(props) {
     > { props.content } </Button>);
 }
 
+function toHex(str) {
+  var result = '';
+  for (var i=0; i<str.length; i++) {
+    result += str.charCodeAt(i).toString(16);
+  }
+  return result;
+}
+
 class CustomButton extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +52,7 @@ class CustomButton extends React.Component {
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
       console.log(res)
-      this.props.changeFileCompiled(this.props.file.key, res.data)
+      this.props.changeFileCompiled(this.props.file.key, toHex(res.data))
       this.props.addLog("Compiled\n", "compiler")
       this.props.enqueueSnackbar({
         message: 'Compiled!',
@@ -94,7 +103,7 @@ const mapStateToProps =  (store) => {
 };
 
 const mapDispatchToProps = dispatch =>({
-  changeFileCompiled: (name)=>dispatch(actions.changeFileCompiled(name)),
+  changeFileCompiled: (name, binary)=>dispatch(actions.changeFileCompiled(name, binary)),
   addLog: (a, b)=>dispatch(actions.addLog(a, b)),
   enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
   closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key))

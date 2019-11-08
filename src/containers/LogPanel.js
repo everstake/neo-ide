@@ -1,8 +1,6 @@
- 
-import React, { Component } from 'react';
+import React from 'react';
 
 import ReactTerminal from 'react-terminal-component';
-import {ReactTerminalStateless} from 'react-terminal-component';
 
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
@@ -10,11 +8,22 @@ import { connect } from 'react-redux';
 import AlertsBox from "../components/alertsBox";
 import { SnackbarProvider } from 'notistack';
 
-import {
-    EmulatorState, OutputFactory, CommandMapping,
-    EnvironmentVariables, FileSystem, History,
-    Outputs, defaultCommandMapping
-  } from 'javascript-terminal';
+import {EmulatorState, OutputFactory, Outputs} from 'javascript-terminal';
+
+const theme = {
+    textAlign: 'left',
+    background: '#272822',
+    promptSymbolColor: '#6effe6',
+    commandColor: '#fcfcfc',
+    outputColor: '#fcfcfc',
+    errorOutputColor: '#ff89bd',
+    fontSize: '1.1rem',
+    spacing: '1%',
+    fontFamily: 'monospace',
+    width: '100%',
+    height: '100%',
+};
+
 
 function fetchLogs(logsArray, tab) {
     let newOutputs;
@@ -25,9 +34,9 @@ function fetchLogs(logsArray, tab) {
         defaultOutputs, OutputFactory.makeTextOutput(
             ''
         )
-    )
+    );
 
-    logsArray.forEach(function(element) {
+    logsArray.forEach(function (element) {
         if (element.group === tab.tab) {
             newOutputs = Outputs.addRecord(
                 defaultOutputs, OutputFactory.makeTextOutput(
@@ -40,25 +49,22 @@ function fetchLogs(logsArray, tab) {
     return defaultState.setOutputs(newOutputs);
 }
 
-class LogPanel extends React.Component
-{
+class LogPanel extends React.Component {
 
-constructor(props){
-    super(props);
+    constructor(props) {
+        super(props);
 
-    // this.state = {
-    //     emulatorState: EmulatorState.createEmpty(),
-    //     inputStr: 'initial value'
-    // };
-    this.state = {
-
+        // this.state = {
+        //     emulatorState: EmulatorState.createEmpty(),
+        //     inputStr: 'initial value'
+        // };
+        this.state = {}
     }
-}
 
 componentDidMount() {
-    // this.props.addLog('logger compile', 'Compile')
-    // this.props.addLog('logger deploy', 'Deploy')
-    // this.props.addLog('logger debug', 'Debug')
+    this.props.addLog('logger compile', 'Compile')
+    this.props.addLog('logger deploy', 'Deploy')
+    this.props.addLog('logger debug', 'Debug')
 }
 
 render (){
@@ -97,8 +103,8 @@ const mapStateToProps = state => ({
     tab: state.tab,
 });
 
-const mapDispatchToProps = dispatch =>({
-    addLog: (a, b)=>dispatch(actions.addLog(a, b))
+const mapDispatchToProps = dispatch => ({
+    addLog: (a, b) => dispatch(actions.addLog(a, b))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogPanel);

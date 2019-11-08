@@ -1,6 +1,6 @@
-import FileBrowser, { RawFileBrowserRedux } from './browser'
-import BaseFile, { BaseFileConnectors } from './base-file'
-import BaseFolder, { BaseFolderConnectors } from './base-folder'
+import FileBrowser, {RawFileBrowserRedux} from './browser'
+import BaseFile, {BaseFileConnectors} from './base-file'
+import BaseFolder, {BaseFolderConnectors} from './base-folder'
 
 import * as Headers from './headers'
 import * as FileRenderers from './files'
@@ -15,21 +15,21 @@ import * as Utils from './utils'
 
 export default FileBrowser
 export {
-  RawFileBrowserRedux, // Use this one if you want to wrap with dragdrop context yourself.
+    RawFileBrowserRedux, // Use this one if you want to wrap with dragdrop context yourself.
 
-  BaseFile,
-  BaseFileConnectors,
-  BaseFolder,
-  BaseFolderConnectors,
+    BaseFile,
+    BaseFileConnectors,
+    BaseFolder,
+    BaseFolderConnectors,
 
-  Headers,
-  FileRenderers,
-  FolderRenderers,
+    Headers,
+    FileRenderers,
+    FolderRenderers,
 
-  Details,
-  Filters,
-  Groupers,
-  Sorters,
-  Icons,
-  Utils,
+    Details,
+    Filters,
+    Groupers,
+    Sorters,
+    Icons,
+    Utils,
 }

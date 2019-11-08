@@ -1,20 +1,18 @@
 import React from 'react';
 
 
-
 class VerticalPane extends React.Component {
 
 
-
     onMouseDown({target: resizer, pageX: initialPageX, pageY: initialPageY}) {
-     //   let e = new Emitt();
+        //   let e = new Emitt();
         console.log(resizer.className.match('h-multipane-resizer'));
         console.log("init");
         console.log(initialPageY);
         //  this.userSelect();
         if (resizer.className && resizer.className.match('h-multipane-resizer')) {
             let self = this;
-            let { $el: container, layout } = self;
+            let {$el: container, layout} = self;
             // resizer.ta
             let pane = resizer.previousElementSibling;
             let nextPane = resizer.nextElementSibling;
@@ -28,12 +26,12 @@ class VerticalPane extends React.Component {
 
             let usePercentage = !!(pane.style.height + '').match('%');
 
-            const { addEventListener, removeEventListener } = window;
+            const {addEventListener, removeEventListener} = window;
 
             const resize = (initialSize, offset = 0) => {
                 let containerHeight = container.clientHeight;
                 let paneHeight = initialSize + offset;
-                nextPane.style.height =100 - (paneHeight / containerHeight * 100) + '%';
+                nextPane.style.height = 100 - (paneHeight / containerHeight * 100) + '%';
                 return (pane.style.height = usePercentage
                     ? paneHeight / containerHeight * 100 + '%'
                     : paneHeight + 'px')
@@ -46,13 +44,13 @@ class VerticalPane extends React.Component {
             let size = resize();
 
             // Trigger paneResizeStart event
-          //  e.emit('paneResizeStart', pane, resizer, size);
+            //  e.emit('paneResizeStart', pane, resizer, size);
 
-            const onMouseMove = function ({ pageX, pageY }) {
+            const onMouseMove = function ({pageX, pageY}) {
                 size = resize(initialPaneHeight, pageY - initialPageX);
                 //self.$emit
 
-            //    e.emit('paneResize', pane, resizer, size)
+                //    e.emit('paneResize', pane, resizer, size)
                 //self.$emit('paneResize', nextPane, resizer, size)
             };
 
@@ -67,7 +65,7 @@ class VerticalPane extends React.Component {
                 removeEventListener('mousemove', onMouseMove);
                 removeEventListener('mouseup', onMouseUp);
 
-             //   e.emit('paneResizeStop', pane, resizer, size)
+                //   e.emit('paneResizeStop', pane, resizer, size)
             };
 
             addEventListener('mousemove', onMouseMove);
@@ -81,8 +79,8 @@ class VerticalPane extends React.Component {
 
         return (
             <div className='vertical-pane' onMouseDown={this.onMouseDown}>
-            <slot/>
-        </div>
+                <slot/>
+            </div>
 
 
         );

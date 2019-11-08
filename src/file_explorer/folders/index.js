@@ -1,10 +1,10 @@
-import ListThumbnailFolder, { RawListThumbnailFolder } from './list-thumbnail.js'
-import TableFolder, { RawTableFolder } from './table.js'
+import ListThumbnailFolder, {RawListThumbnailFolder} from './list-thumbnail.js'
+import TableFolder, {RawTableFolder} from './table.js'
 
 export {
-  ListThumbnailFolder,
-  TableFolder,
+    ListThumbnailFolder,
+    TableFolder,
 
-  RawListThumbnailFolder,
-  RawTableFolder,
+    RawListThumbnailFolder,
+    RawTableFolder,
 }

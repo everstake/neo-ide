@@ -11,17 +11,22 @@ div.rendered-file-browser
     li.file, li.folder
       &.pending, &.dragging
         opacity: 0.4
+
       &.dragover
         background: $dragover-colour
+
       &.selected > div.item
         color: $selection-text-colour
+
         .text-muted
           color: darken($selection-text-colour, 10%)
+
         a:not(.btn), &.folder a:not(.btn), i
           color: $selection-text-colour
         background: $selection-colour
 
     $file-spacing: 4px
+
     ul
       list-style: none
       padding: 0
@@ -31,9 +36,11 @@ div.rendered-file-browser
 
       $thumb-size: 120px
       $folder-size: 45px
+
       li
         &.folder
           grid-column: 1/4
+
           > div.item
             display: flex
             flex-direction: row
@@ -42,16 +49,20 @@ div.rendered-file-browser
             padding-left: 4px
 
             border: 1px solid #eee
+
             span.name
               flex: 1
               line-height: folder-size
+
             span.thumb
               flex-basis: $folder-size
               border: none
               text-align: center
+
               > i
                 line-height: $folder-size
                 font-size: $folder-size / 2.5
+
             form.renaming
               margin-top: 8px
               margin-right: 8px
@@ -70,18 +81,22 @@ div.rendered-file-browser
             border-bottom: 1px solid #eee
             border-left: 4px solid #eee
             border-right: 1px solid #eee
+
             &.selected
               border-bottom: 1px solid $selection-colour
               border-left: 4px solid $selection-colour
               border-right: 1px solid $selection-colour
+
         &.selected.folder > div.item
           border: 1px solid darken($selection-colour, 5%)
+
           span.thumb
             border: none
 
         &.file
           margin: $file-spacing
           padding: 0
+
           > div.item
             display: flex
             flex-direction: column
@@ -94,9 +109,11 @@ div.rendered-file-browser
               position: relative
               border: 1px solid #eee
               margin-bottom: 10px
+
               > i
                 font-size: 40px
                 line-height: $thumb-size
+
               div.image
                 position: absolute
                 top: 0
@@ -106,10 +123,13 @@ div.rendered-file-browser
                 background-size: cover
                 background-position: 50% 50%
                 background-repeat: no-repeat
+
         &.selected.file > div.item
           span.thumb
             border: 1px solid darken($selection-colour, 5%)
+
           span.thumb div.image
             opacity: 0.8
+
   p.loading, p.empty
     margin: 16px 0

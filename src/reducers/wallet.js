@@ -1,23 +1,26 @@
+const walletReducer = (state = {
+    address: 'AJVH7X6iLytXNp5Y9jQez48YBEpDzfRZCV',
+    coin_type: 'Loading...',
+    amount: 'Loading...',
+    network: 'Loading...'
+}, action) => {
 
+    switch (action.type) {
+        case 'ADD_WALLET':
 
-const walletReducer = (state =  {address:'', coin_type:'', amount:0, network:'' }, action) => {
+            return Object.assign({}, state, {
 
-  switch (action.type) {
-      case 'ADD_WALLET': 
-        
-        return Object.assign({}, state,  {
-      
-             address: action.address, 
-             coin_type: action.coin_type,
-             amount: action.amount,
-             network:action.network
-            
-          })
+                address: action.address,
+                coin_type: action.coin_type,
+                amount: action.amount,
+                network: action.network
 
-      default:
-        return state;
+            });
+
+        default:
+            return state;
     }
-  }
-  
-  export default walletReducer
+};
+
+export default walletReducer
 

@@ -1,13 +1,12 @@
-
 const currentFileReducer = (state = "", action) => {
-  
+
     switch (action.type) {
-      case 'CHANGE_CURRENT_FILE': {
-        return action.name;
-      }
-      default:
-        return state;
+        case 'CHANGE_CURRENT_FILE': {
+            return action.name;
+        }
+        default:
+            return state;
     }
-  }
-  
-  export default currentFileReducer
+};
+
+export default currentFileReducer
