@@ -12,7 +12,7 @@
 # production
 /build
 
-/compile
+/compilers/*
 
 # misc
 .DS_Store
