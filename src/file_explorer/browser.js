@@ -80,6 +80,7 @@ class RawFileBrowser extends React.Component {
         detailRenderer: PropTypes.func,
         detailRendererProps: PropTypes.object,
 
+        onUploadFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
         onCreateFiles: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
         onCreateFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
         onMoveFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
@@ -472,6 +473,12 @@ class RawFileBrowser extends React.Component {
         })
     };
 
+    handleActionBarUploadFileClick = (event) => {
+        event.preventDefault()
+        this.props.onUploadFile(event)
+    }
+
+
     handleActionBarAddFileClick = (event) => {
         event.preventDefault();
 
@@ -563,7 +570,7 @@ class RawFileBrowser extends React.Component {
     renderActionBar(selectedItem) {
         const {
             icons, canFilter, filterRendererProps,
-            filterRenderer: FilterRenderer, onCreateFolder, onCreateFiles,
+            filterRenderer: FilterRenderer, onCreateFolder, onUploadFile, onCreateFiles,
             onRenameFile, onRenameFolder, onDeleteFile, onDeleteFolder, onDownloadFile,
         } = this.props;
         const selectionIsFolder = (selectedItem && !selectedItem.size);
@@ -618,7 +625,7 @@ class RawFileBrowser extends React.Component {
                                 role="button"
                             >
                                 {icons.Folder}
-                                &nbsp;Add Subfolder
+                                &nbsp;Add File
                             </a>
                         </li>
                     )
@@ -694,6 +701,16 @@ class RawFileBrowser extends React.Component {
                         </li>
                     )
                 }
+                if (selectionIsFolder && typeof onUploadFile === 'function') {
+                    actions.push(
+                    <li key="action-upload-file" styles={{cursor: 'pointer'}} >
+                        <a>
+                            <label style={{cursor: 'pointer'}} for="file">{icons.Download}&nbsp;Upload File</label>
+                            <input onChange={this.handleActionBarUploadFileClick} type="file" id="file" name="file" multiple={false} />
+                        </a>
+                    </li>
+                    )
+                }
                 if (actions.length) {
                     actions = (<ul className="item-actions">{actions}</ul>)
                 } else {
@@ -728,6 +745,14 @@ class RawFileBrowser extends React.Component {
                         >
                             {icons.File}
                             &nbsp;Add File
+                        </a>
+                    </li>
+                )
+                actions.push(
+                    <li key="action-upload-file" styles={{cursor: 'pointer'}} >
+                        <a>
+                            <label style={{cursor: 'pointer'}} for="file">{icons.Download}&nbsp;Upload File</label>
+                            <input onChange={this.handleActionBarUploadFileClick} type="file" id="file" name="file" multiple={false} />
                         </a>
                     </li>
                 )
@@ -957,7 +982,7 @@ class RawFileBrowser extends React.Component {
 
             <div className="rendered-react-keyed-file-browser">
                 {this.props.actions}
-                <input type="file" id="pictureTest" hidden text="AAAAAA" capture></input>
+                {/* <input type="file" id="pictureTest" hidden text="AAAAAA" capture></input> */}
                 <div className="rendered-file-browser" ref={el => {
                     this.browserRef = el
                 }}

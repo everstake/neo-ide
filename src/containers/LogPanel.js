@@ -24,7 +24,6 @@ const theme = {
     height: '100%',
 };
 
-
 function fetchLogs(logsArray, tab) {
     let newOutputs;
     const defaultState = EmulatorState.createEmpty();
@@ -55,21 +54,21 @@ class LogPanel extends React.Component {
         super(props);
 
         // this.state = {
-        //     emulatorState: EmulatorState.createEmpty(),
-        //     inputStr: 'initial value'
+        //     classes: {}
         // };
-        this.state = {}
     }
 
 componentDidMount() {
     this.props.addLog('logger compile', 'Compile')
     this.props.addLog('logger deploy', 'Deploy')
     this.props.addLog('logger debug', 'Debug')
+    // const classes = useStyles();
+    // this.setState({ classes: classes });
+
 }
 
 render (){
     let logs = fetchLogs(this.props.logs, this.props.tab);
-
     return (
         <div>
             <SnackbarProvider   
