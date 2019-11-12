@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
-
+import Parameters_Panel from './Parameters_Panel'
 // const BootstrapInput = withStyles(theme => ({
 //   root: {
 //     "label + &": {
@@ -51,20 +51,49 @@ const useStyles = makeStyles(theme => ({
         // position: "relative",
         // margin: "1px 50px 1px 1px",
         // padding: "1px 1px 11px 120px",
-        backgroundColor: "red"
+        backgroundColor: "#323232"
     }
 }));
+
+const useForceUpdate = () => useState()[1];
 export default function MultilineTextFields() {
     const classes = useStyles();
     const [value, setValue] = React.useState("Controlled");
+    const [list, setList] = React.useState([]);
+    const [text, setText] = React.useState("");
+    const forceUpdate = useForceUpdate();
+    
+    function removeItem(index) {
+        console.log(index)
+        // console.log(list.length);
+    const f = list
+        // console.log(index);
+        f.splice(index, 1);
+        console.log(f)
+        // console.log(list);
+        // this.setState({ list });
+        setList( f)
+        forceUpdate();
+      }
 
+     const handleSubmit = e => {
+        e.preventDefault();
+        
+        setList(list => [...list, text])
+        setText("")
+       
+      }
     const handleChange = event => {
+
+        setText(event.target.value)
         setValue(event.target.value);
     };
 
-    return (
+    return ( 
+      
         <form className={classes.root} noValidate autoComplete="off">
             <div>
+              <Parameters_Panel></Parameters_Panel>
                 <InputBase multiline className={classes.margin} rows="10"/>
             </div>
         </form>
