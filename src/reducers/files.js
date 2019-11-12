@@ -12,8 +12,16 @@ const filesReducer = (state = [], action) => {
             newKey += '/'
           }
           file.key = newKey + file.key
-          file.lang = 'python'
+          file.lang = 'python' // todo
           file.modified = +Moment()
+          file.size = 0 //todo
+          file.file = true
+          file.saved = true
+          file.compiled = false
+          file.deployed = false
+          file.savedContent = file.savedContent || ""
+          file.currentContent = file.savedContent || ""
+          file.binary = ""
 
           for (let i = 0; i < state.length; i++) {
             if (state[i].key === file.key){
@@ -65,11 +73,21 @@ const filesReducer = (state = [], action) => {
         ]
       }
       case 'DELETE_FOLDER': {
+        console.log("1 ", state);
         const index = state.findIndex((val) => (val.key.substr(0, action.folderKey.length) === action.folderKey));
-        if (index !== -1) {
-          state.splice(index, 1);
-        }
-        return [...state]
+        let newFiles = []
+
+        state.map(el => {
+          if (!(el.key.substr(0, action.folderKey.length) === action.folderKey)) {
+            newFiles.push(el)
+          }
+        })
+        
+        // if (index !== -1) {
+        //   state.splice(index, 1);
+        // }
+        // console.log("2 ", state);
+        return newFiles
       }
       case 'DELETE_FILE': {
         const index = state.findIndex((val) => val.key === action.fileKey);

@@ -4,9 +4,52 @@ import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import defaultFiles from '../default_files/default_files'
-
+import Button from '@material-ui/core/Button';
 
 class FileBrowserWrapper extends React.Component {
+
+    handleUploadFile = (key) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            var preview = document.getElementById('file');
+            var file = document.querySelector('input[type=file]').files[0];
+            console.log(document.querySelector('input[type=file]').files[0])
+            var reader = new FileReader()
+   
+            var textFile = /text.*/;
+            
+            let props = this.props
+
+            if (file.type.match(textFile)) {
+               reader.onload = function (event) {
+                  console.log(event.target.result)
+                  props.addFile([{key: file.name, savedContent: event.target.result}], '')
+               }
+               reader.readAsText(file)
+            } else {
+                this.props.enqueueSnackbar({
+                    message: 'It doesn\'t seem to be a text file!',
+                    options: {
+                      variant: 'error',
+                      group: 'File browser',
+                      action: key => (
+                        <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
+                      )
+                    }
+                })
+            }
+      } else {
+         this.props.enqueueSnackbar({
+            message: 'Your browser is too old to support HTML5 File API',
+            options: {
+              variant: 'error',
+              group: 'File browser',
+              action: key => (
+                <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
+              )
+            }
+        })
+      }    
+    }
 
     handleCreateFolder = (key) => {
         this.props.addFolder(key)
@@ -17,7 +60,6 @@ class FileBrowserWrapper extends React.Component {
     };
 
     handleRenameFolder = (oldKey, newKey) => {
-        console.log("Func: ", this.props.enqueueSnackbar)
         this.props.renameFolder(oldKey, newKey, this.props.enqueueSnackbar.bind(this))
     }
     
@@ -27,6 +69,7 @@ class FileBrowserWrapper extends React.Component {
     };
 
     handleDeleteFolder = (folderKey) => {
+        console.log("KEYY: ", folderKey);
         this.props.deleteFolder(folderKey)
     };
 
@@ -73,6 +116,8 @@ class FileBrowserWrapper extends React.Component {
 
                 onDeleteFolder={this.handleDeleteFolder}
                 onDeleteFile={this.handleDeleteFile}
+
+                onUploadFile={this.handleUploadFile}
             />
         )
     }
@@ -91,6 +136,7 @@ const mapDispatchToProps = dispatch =>({
     addFolder: (folderKey)=>dispatch(actions.addFolder(folderKey)),
     deleteFolder: (folderKey)=>dispatch(actions.deleteFolder(folderKey)),
     deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey)),
+    closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileBrowserWrapper)
