@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Parameters_Panel from './Parameters_Panel'
+import { connect } from 'react-redux';
 // const BootstrapInput = withStyles(theme => ({
 //   root: {
 //     "label + &": {
@@ -56,7 +57,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const useForceUpdate = () => useState()[1];
-export default function MultilineTextFields() {
+function MultilineTextFields(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState("Controlled");
     const [list, setList] = React.useState([]);
@@ -88,14 +89,23 @@ export default function MultilineTextFields() {
         setText(event.target.value)
         setValue(event.target.value);
     };
+    
 
     return ( 
       
         <form className={classes.root} noValidate autoComplete="off">
             <div>
               <Parameters_Panel></Parameters_Panel>
-                <InputBase multiline className={classes.margin} rows="10"/>
+                <InputBase defaultValue={props.parameter.map((tods, idx)=> {
+        let df =  {Type: tods.type_of_value, Value: tods.value}
+          return `[\n    {\n     Type : ${tods.type_of_value},\n     Value: ${tods.value}\n    }\n]\n`
+        })} readOnly={true} multiline className={classes.margin} rows="10"/>
             </div>
         </form>
     );
 }
+
+const mapStateToProps = state => ({
+    parameter: state.parameter
+  });
+export default connect(mapStateToProps)(MultilineTextFields);

@@ -58,7 +58,7 @@ function Parameters_Panel(props)  {
   const clearInputAndAddTodo = _ => {
     
     
-    props.addParameter(null,null)
+    props.addParameter('','', '')
     
   
   };
