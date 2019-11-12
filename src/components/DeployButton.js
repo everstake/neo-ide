@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import React from "react";
 import * as actions from '../actions/index'
 import {connect} from 'react-redux';
-
+import notify from '../utils/notificator.js';
 
 
 
@@ -37,8 +37,8 @@ class CustomButton extends React.Component {
     deploy() {
         this.props.neo.neo.deploy({
             network: 'TestNet',
-            name: 'Hello world!',
-            version: 'v1.0.0',
+            name: 'Hello world3!',
+            version: 'v1.0.1',
             author: 'NEOLine',
             email: 'info@neoline.network',
             description: 'My first contract.',
@@ -50,31 +50,13 @@ class CustomButton extends React.Component {
             code: this.props.file.binary,
             networkFee: '0.001'
         }).then(({txid, nodeUrl}: InvokeOutput) => {
-            this.props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `, 'Deploy');
-            this.props.enqueueSnackbar({
-                message: 'Compiled!',
-                options: {
-                  variant: 'success',
-                  group: 'Deploy',
-                  action: key => (
-                    <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-                  )
-                }
-            })
+            let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
+            this.props.addLog(msg, 'Deploy');
+            this.props.enqueueSnackbar(notify(msg, 'success', 'Deploy', this.props.closeSnackbar));
             this.props.changeFileDeployed(this.props.file.key)
         }).catch(err => {
             this.props.addLog(err.description, 'Deploy');
-            console.log("Deploy error: ", err)
-            this.props.enqueueSnackbar({
-                message: err.description,
-                options: {
-                  variant: 'error',
-                  group: 'Deploy',
-                  action: key => (
-                    <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-                  )
-                }
-            })
+            this.props.enqueueSnackbar(notify(err.description, 'error', 'Deploy', this.props.closeSnackbar));
         })
     }
 
@@ -85,7 +67,6 @@ class CustomButton extends React.Component {
         } else {
             content = "deploy"
         }
-        console.log("deployed: ", this.props.file.saved);
         return (
             <CustomButtonView
                 disabled={(!this.props.file.compiled && !this.props.file.deployed) || (this.props.file.deployed)}

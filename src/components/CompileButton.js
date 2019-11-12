@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
 import * as actions from '../actions/index'
 import { connect } from 'react-redux';
+import notify from '../utils/notificator.js';
 import axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
@@ -45,6 +46,7 @@ class CustomButton extends React.Component {
   
   compile() {
     let filePath = this.props.file.key.split('/');
+    this.props.addLog("Request to compiler...", "Compiler")
     axios.post('http://0.0.0.0:5000/build_avm/py', {
         text: this.props.file.savedContent,
         filename: filePath[filePath.length - 1]
@@ -52,27 +54,12 @@ class CustomButton extends React.Component {
       console.log("Result: ", toHex(res.data))
       this.props.changeFileCompiled(this.props.file.key, toHex(res.data))
       this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
-      this.props.enqueueSnackbar({
-        message: 'Compiled!',
-        options: {
-          variant: 'success',
-          group: 'Compiler',
-          action: key => (
-            <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-          )
-        }
-      })
+      this.props.enqueueSnackbar(notify('Compiled!', 'success', 'Compiler', this.props.closeSnackbar));
     }).catch(err => {
-      this.props.enqueueSnackbar({
-        message: err.message,
-        options: {
-          variant: 'error',
-          group: 'Compiler',
-          action: key => (
-            <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-          )
-        }
-      })
+      let messageError = (err.response && err.response.data) || "Server is not responding, try again"
+      console.log(messageError);
+      this.props.addLog(messageError, "Compiler")
+      this.props.enqueueSnackbar(notify(messageError, 'error', 'Compiler', this.props.closeSnackbar));
     })
   }
 

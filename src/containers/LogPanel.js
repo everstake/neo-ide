@@ -36,7 +36,6 @@ function fetchLogs(logsArray, tab) {
     );
 
     logsArray.forEach(function (element) {
-        console.log(element)
         if (element.group === tab.tab) {
             newOutputs = Outputs.addRecord(
                 newOutputs, OutputFactory.makeTextOutput(

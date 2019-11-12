@@ -1,6 +1,8 @@
 import Moment from 'moment'
 import React from "react"
 import Button from '@material-ui/core/Button'
+import notify from '../utils/notificator.js';
+
 
 const filesReducer = (state = [], action) => {
     switch (action.type) {
@@ -26,17 +28,13 @@ const filesReducer = (state = [], action) => {
           for (let i = 0; i < state.length; i++) {
             if (state[i].key === file.key){
               let alertKey = new Date().getTime() + Math.random()
-              let errorAlert = {
-                message: "File with \"" + file.key +"\" name already exist",
-                options: {
-                  variant: 'error',
-                  group: 'File browser',
-                  action: alertKey => (
-                    <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
-                  )
-                }
-              }
-              action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})  
+              let alert = notify(
+                "File with \"" + file.key +"\" name already exist",
+                'error',
+                'File browser',
+                () => action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})
+              )
+              action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: alert})  
               return ;
             }
           }
@@ -53,17 +51,13 @@ const filesReducer = (state = [], action) => {
         for (let i = 0; i < state.length; i++) {
           if (state[i].key === action.folderKey){
             let alertKey = new Date().getTime() + Math.random()
-            let errorAlert = {
-              message: "Folder with \"" + action.folderKey +"\" name already exist",
-              options: {
-                variant: 'error',
-                group: 'File browser',
-                action: alertKey => (
-                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
-                )
-              }
-            }
-            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
+            let alert = notify(
+              "Folder with \"" + action.folderKey +"\" name already exist",
+              'error',
+              'File browser',
+              () => action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})
+            )
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: alert})
             return state;
           }
         }
@@ -153,17 +147,13 @@ const filesReducer = (state = [], action) => {
         for (let i = 0; i < state.length; i++) {
           if (state[i].key === action.newKey){
             let alertKey = new Date().getTime() + Math.random()
-            let errorAlert = {
-              message: "Folder with \"" + action.newKey +"\" name already exist",
-              options: {
-                variant: 'error',
-                group: 'File browser',
-                action: alertKey => (
-                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
-                )
-              }
-            }
-            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
+            let alert = notify(
+              "Folder with \"" + action.newKey +"\" name already exist",
+              'error',
+              'File browser',
+              () => action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})
+            )
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: alert})
             return state;
           }
         }
@@ -181,17 +171,13 @@ const filesReducer = (state = [], action) => {
         for (let i = 0; i < state.length; i++) {
           if (state[i].key === action.newKey){
             let alertKey = new Date().getTime() + Math.random()
-            let errorAlert = {
-              message: "File with \"" + action.newKey +"\" name already exist",
-              options: {
-                variant: 'error',
-                group: 'File browser',
-                action: alertKey => (
-                  <Button onClick={() => {action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})}}>close</Button>
-                )
-              }
-            }
-            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: errorAlert})
+            let alert = notify(
+              "File with \"" + action.newKey +"\" name already exist",
+              'error',
+              'File browser',
+              () => action.asyncDispatch({type: 'CLOSE_SNACKBAR', key: alertKey})
+            )
+            action.asyncDispatch({type: 'ENQUEUE_SNACKBAR', key: alertKey, alert: alert})
             return state;
           }
         }

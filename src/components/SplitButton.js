@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index'
+import notify from '../utils/notificator.js';
 
 const mapStateToProps = (store) => {
     let file = {};
@@ -59,31 +60,13 @@ function SplitButton(props) {
             code: props.file.binary,
             networkFee: '0.001'
         }).then(({txid, nodeUrl}: InvokeOutput) => {
-            props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `, 'Deploy');
-            props.enqueueSnackbar({
-                message: 'Compiled!',
-                options: {
-                  variant: 'success',
-                  group: 'Deploy',
-                  action: key => (
-                    <Button onClick={() => {props.closeSnackbar(key)}}>close</Button>
-                  )
-                }
-            })
-            props.changeFileDeployed(this.props.file.key)
+            let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
+            props.addLog(msg, 'Deploy');
+            props.enqueueSnackbar(notify(msg, 'success', 'Deploy', props.closeSnackbar));
+            props.changeFileDeployed(props.file.key)
         }).catch(err => {
             props.addLog(err.description, 'Deploy');
-            console.log("Deploy error: ", err)
-            props.enqueueSnackbar({
-                message: err.description,
-                options: {
-                  variant: 'error',
-                  group: 'Deploy',
-                  action: key => (
-                    <Button onClick={() => {props.closeSnackbar(key)}}>close</Button>
-                  )
-                }
-            })
+            props.enqueueSnackbar(notify(err.description, 'error', 'Deploy', props.closeSnackbar));
         })
 
     };

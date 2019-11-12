@@ -5,6 +5,7 @@ import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import defaultFiles from '../default_files/default_files'
 import Button from '@material-ui/core/Button';
+import notify from '../utils/notificator.js';
 
 class FileBrowserWrapper extends React.Component {
 
@@ -26,28 +27,10 @@ class FileBrowserWrapper extends React.Component {
                }
                reader.readAsText(file)
             } else {
-                this.props.enqueueSnackbar({
-                    message: 'It doesn\'t seem to be a text file!',
-                    options: {
-                      variant: 'error',
-                      group: 'File browser',
-                      action: key => (
-                        <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-                      )
-                    }
-                })
+                this.props.enqueueSnackbar(notify('It doesn\'t seem to be a text file!', 'error', 'File browser', this.props.closeSnackbar));
             }
       } else {
-         this.props.enqueueSnackbar({
-            message: 'Your browser is too old to support HTML5 File API',
-            options: {
-              variant: 'error',
-              group: 'File browser',
-              action: key => (
-                <Button onClick={() => {this.props.closeSnackbar(key)}}>close</Button>
-              )
-            }
-        })
+        this.props.enqueueSnackbar(notify('Your browser is too old to support HTML5 File API', this.props.closeSnackbar));
       }    
     }
 
