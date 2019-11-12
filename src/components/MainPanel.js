@@ -20,6 +20,7 @@ import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import SaveButton from './SaveButton'
 import CompileButton from './CompileButton'
+import DeployButton from './DeployButton'
 import Tab from './Tabs'
 import SplitButton from './SplitButton'
 
@@ -152,8 +153,7 @@ function MainPanel(props) {
 
     function renderBreadcrumbs() {
         const pageTitle = {
-            'home': [<SaveButton/>,
-                <CompileButton/>,
+            'home': [<div><SaveButton/><CompileButton/> <DeployButton/></div>,
                 <FileBrowserWrapper/>],
             'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
             'reports': ['Reports'],

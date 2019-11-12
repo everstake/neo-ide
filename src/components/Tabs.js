@@ -83,14 +83,14 @@ function SimpleTabs(props) {
 
 
     useEffect(() => {
-        props.tabSwitch('Compile');
+        props.tabSwitch('Compiler');
     }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
         console.log(newValue);
         if (newValue === 0) {
-            props.tabSwitch('Compile');
+            props.tabSwitch('Compiler');
         } else if (newValue === 1) {
             props.tabSwitch('Deploy');
         } else if (newValue === 2) {
@@ -104,7 +104,7 @@ function SimpleTabs(props) {
         <div>
             <AppBar className="AppBar" position="static">
                 <Tabs className="AppBarTabs" value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <AntTab label="Compile" {...a11yProps(0)} />
+                    <AntTab label="Compiler" {...a11yProps(0)} />
                     <AntTab label="Deploy" {...a11yProps(1)} />
                     <AntTab label="Debug" {...a11yProps(2)} />
                 </Tabs>

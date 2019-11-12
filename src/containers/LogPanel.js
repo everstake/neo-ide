@@ -36,9 +36,10 @@ function fetchLogs(logsArray, tab) {
     );
 
     logsArray.forEach(function (element) {
+        console.log(element)
         if (element.group === tab.tab) {
             newOutputs = Outputs.addRecord(
-                defaultOutputs, OutputFactory.makeTextOutput(
+                newOutputs, OutputFactory.makeTextOutput(
                     element.date + ' ' + element.text
                 )
             )
@@ -59,9 +60,9 @@ class LogPanel extends React.Component {
     }
 
 componentDidMount() {
-    this.props.addLog('logger compile', 'Compile')
-    this.props.addLog('logger deploy', 'Deploy')
-    this.props.addLog('logger debug', 'Debug')
+    // this.props.addLog('logger compile', 'Compile')
+    // this.props.addLog('logger deploy', 'Deploy')
+    // this.props.addLog('logger debug', 'Debug')
     // const classes = useStyles();
     // this.setState({ classes: classes });
 

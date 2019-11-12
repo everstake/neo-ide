@@ -1,6 +1,4 @@
-
-import Icon from '@material-ui/core/Icon';
-import SaveIcon from '@material-ui/icons/Save';
+import Settings from '@material-ui/icons/Settings';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
@@ -24,7 +22,7 @@ function CustomButtonView(props) {
       color="secondary"
       size="small"
       className={classes.button}
-      startIcon={<SaveIcon />}
+      startIcon={<Settings />}
       onClick={ props.compile }
       args={ props.args }
     > { props.content } </Button>);
@@ -51,9 +49,9 @@ class CustomButton extends React.Component {
         text: this.props.file.savedContent,
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
-      console.log(res)
+      console.log("Result: ", toHex(res.data))
       this.props.changeFileCompiled(this.props.file.key, toHex(res.data))
-      this.props.addLog("Compiled\n", "compiler")
+      this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
       this.props.enqueueSnackbar({
         message: 'Compiled!',
         options: {

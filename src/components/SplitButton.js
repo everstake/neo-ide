@@ -12,12 +12,6 @@ import MenuList from '@material-ui/core/MenuList';
 import {connect} from 'react-redux';
 import * as actions from '../actions/index'
 
-// const mapStateToProps = store => ({
-//     logs: store,
-//     wallet: store.wallet,
-//     neo: store.neo,
-// });
-
 const mapStateToProps = (store) => {
     let file = {};
     store.files.forEach(elem => {
@@ -33,9 +27,11 @@ const mapStateToProps = (store) => {
     };
 };
 
-
 const options = ['Deploy'];
 const mapDispatchToProps = dispatch => ({
+    changeFileDeployed: (name) => dispatch(actions.changeFileDeployed(name)),
+    enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
+    closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b))
 });
 
@@ -62,12 +58,33 @@ function SplitButton(props) {
             returnType: '05',
             code: props.file.binary,
             networkFee: '0.001'
+        }).then(({txid, nodeUrl}: InvokeOutput) => {
+            props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `, 'Deploy');
+            props.enqueueSnackbar({
+                message: 'Compiled!',
+                options: {
+                  variant: 'success',
+                  group: 'Deploy',
+                  action: key => (
+                    <Button onClick={() => {props.closeSnackbar(key)}}>close</Button>
+                  )
+                }
+            })
+            props.changeFileDeployed(this.props.file.key)
+        }).catch(err => {
+            props.addLog(err.description, 'Deploy');
+            console.log("Deploy error: ", err)
+            props.enqueueSnackbar({
+                message: err.description,
+                options: {
+                  variant: 'error',
+                  group: 'Deploy',
+                  action: key => (
+                    <Button onClick={() => {props.closeSnackbar(key)}}>close</Button>
+                  )
+                }
+            })
         })
-            .then(({txid, nodeUrl}: InvokeOutput) => {
-                props.addLog(`Deploy transaction success!\nTransaction ID: ${txid} `, 'Deploy');
-
-
-            }).catch(err => console.log(err))
 
     };
 
