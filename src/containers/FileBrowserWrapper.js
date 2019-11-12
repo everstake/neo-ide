@@ -69,6 +69,7 @@ class FileBrowserWrapper extends React.Component {
     };
 
     handleDeleteFolder = (folderKey) => {
+        console.log("KEYY: ", folderKey);
         this.props.deleteFolder(folderKey)
     };
 

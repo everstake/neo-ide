@@ -73,12 +73,21 @@ const filesReducer = (state = [], action) => {
         ]
       }
       case 'DELETE_FOLDER': {
-        
+        console.log("1 ", state);
         const index = state.findIndex((val) => (val.key.substr(0, action.folderKey.length) === action.folderKey));
-        if (index !== -1) {
-          state.splice(index, 1);
-        }
-        return [...state]
+        let newFiles = []
+
+        state.map(el => {
+          if (!(el.key.substr(0, action.folderKey.length) === action.folderKey)) {
+            newFiles.push(el)
+          }
+        })
+        
+        // if (index !== -1) {
+        //   state.splice(index, 1);
+        // }
+        // console.log("2 ", state);
+        return newFiles
       }
       case 'DELETE_FILE': {
         const index = state.findIndex((val) => val.key === action.fileKey);
