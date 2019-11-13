@@ -3,6 +3,7 @@ import {Paper, Grid, Button } from "@material-ui/core";
 import { connect } from 'react-redux';
 import * as actions from '../actions/index'
 import Selector from "./Selector";
+import Select from 'react-select'
 import {
   List,
   ListItem,
@@ -10,6 +11,7 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
+import { array } from "prop-types";
 
 const AddTodo = memo(props => (
   <Paper style={{ margin: 16, padding: 16 }}>
@@ -39,6 +41,7 @@ const TodoListItem = memo(props => (
       </IconButton>
     </ListItemSecondaryAction>
   </ListItem>
+
 ));
 
 const Layout = memo(props => (
@@ -52,16 +55,37 @@ const Layout = memo(props => (
 
 
 function Parameters_Panel(props)  {
-  console.log(props.parameter)
+  
   const [todos, setTodos] = useState([]);
-  // setTodos(props.parameter);
+
+  const [methods, setMethods] = useState([]);
+  const [selected_methods, selectMethods] = useState([]);
+
+  
+  let compiled_files =  props.file.map(f => (f.key))
   const clearInputAndAddTodo = _ => {
     
-    
-    props.addParameter('','', '')
+   
+    props.addParameter('','', '') // file_compiled
     
   
   };
+
+  function onC(e) {
+    
+    e.value ? setTodos([e.value]) : console.log("no contract")
+    console.log(e.methods.methods)
+    console.log(todos)
+    setMethods(e.methods.methods)
+    console.log(methods.map(f => (f)).length
+    ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }])
+
+  }
+
+
+  function onSelectMethods(method) {
+    selectMethods([method])
+  }
 
 
 function removeTodo(e){
@@ -72,8 +96,15 @@ function removeTodo(e){
   return (
     
     <Layout>
-      
-        <List style={{ overflow: "hidden" }}>
+      <Select options={  props.file.map(f => (f.key)).length
+     ?  props.file.map(f => ({value: f.key ,label: f.key, methods:f.methods})): [{label: "No compiled contracts" }] } onChange={i => onC(i)}></Select>
+     {todos.map((file, i) => (
+       <div key={`Div.Item.${i}`}>
+       <Select options={methods.map(f => (f)).length
+    ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }]} onChange={i => onSelectMethods(i)}></Select>
+            {selected_methods.map(f => (
+              <div>
+      <List key={`ListItem.${i}`} style={{ overflow: "hidden" }}>
           {props.parameter.map((todo, idx) => (
              
               <TodoListItem
@@ -89,17 +120,18 @@ function removeTodo(e){
             
           ))}
         </List>
-     
-      <AddTodo
-        onButtonClick={clearInputAndAddTodo}
-       
-      />
+
+      <AddTodo key={`AddItem.${i}`} onButtonClick={clearInputAndAddTodo}/> </div>
+      ))}
+      </div>
+          ))}
     </Layout>
   )
 };
 
 const mapStateToProps = state => ({
-  parameter: state.parameter
+  parameter: state.parameter,
+  file: state.files.filter((file) => file.file).filter(file => file.compiled),
 });
 const mapDispatchToProps = dispatch =>({
   

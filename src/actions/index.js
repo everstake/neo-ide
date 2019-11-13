@@ -55,10 +55,11 @@ export const changeFileSaved = (name, newContent) => ({
     newContent: newContent
 });
 
-export const changeFileCompiled = (name, binary) => ({
+export const changeFileCompiled = (name, binary, methods) => ({
   type: 'CHANGE_FILE_COMPILED',
   name: name,
-  binary: binary
+  binary: binary,
+  methods: methods,
 })
 
 export const changeFileDeployed = (name) => ({
@@ -104,11 +105,12 @@ export const renameFile = (currentKey, newKey) => ({
 });
 
 
-export const addParameter = (param_id, type_of_value, value) => ({
+export const addParameter = (param_id, type_of_value, value, file_compiled) => ({
     type: 'ADD_PARAMETER',
     param_id: param_id,
     type_of_value: type_of_value,
     value: value,
+    file_compiled: file_compiled,
 });
 
 export const changeParameterType = (param_id, type_of_value) => ({

@@ -158,7 +158,7 @@ function MainPanel(props) {
             'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
-                <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
+                <MultilineTextFields></MultilineTextFields>],
             'settings/policies': ['Settings', 'Policies'],
             'settings/network': ['Settings', 'Network']
         };

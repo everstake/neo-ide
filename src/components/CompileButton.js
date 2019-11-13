@@ -52,7 +52,7 @@ class CustomButton extends React.Component {
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
       console.log("Result: ", toHex(res.data))
-      this.props.changeFileCompiled(this.props.file.key, toHex(res.data))
+      this.props.changeFileCompiled(this.props.file.key, toHex(res.data),{methods:["name", "surname"]})
       this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
       this.props.enqueueSnackbar(notify('Compiled!', 'success', 'Compiler', this.props.closeSnackbar));
     }).catch(err => {
@@ -88,7 +88,7 @@ const mapStateToProps =  (store) => {
 };
 
 const mapDispatchToProps = dispatch =>({
-  changeFileCompiled: (name, binary)=>dispatch(actions.changeFileCompiled(name, binary)),
+  changeFileCompiled: (name, binary, methods)=>dispatch(actions.changeFileCompiled(name, binary, methods)),
   addLog: (a, b)=>dispatch(actions.addLog(a, b)),
   enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
   closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key))
