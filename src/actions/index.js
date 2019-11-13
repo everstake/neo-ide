@@ -105,12 +105,13 @@ export const renameFile = (currentKey, newKey) => ({
 });
 
 
-export const addParameter = (param_id, type_of_value, value, file_compiled) => ({
+export const addParameter = (param_id, type_of_value, value, file_compiled, param) => ({
     type: 'ADD_PARAMETER',
     param_id: param_id,
     type_of_value: type_of_value,
     value: value,
     file_compiled: file_compiled,
+    param: param
 });
 
 export const changeParameterType = (param_id, type_of_value) => ({

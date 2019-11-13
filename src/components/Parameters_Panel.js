@@ -54,6 +54,7 @@ const Layout = memo(props => (
 )); 
 
 
+
 function Parameters_Panel(props)  {
   
   const [todos, setTodos] = useState([]);
@@ -61,12 +62,20 @@ function Parameters_Panel(props)  {
   const [methods, setMethods] = useState([]);
   const [selected_methods, selectMethods] = useState([]);
 
-  
+  const [parameter, setParameter] = useState(props.parameter)
+ let checked_parameter = props.parameter.filter(f => ((f.file_compiled == todos[0] && f.param == selected_methods[0])))
+
+//   if (!checked_parameter[checked_parameter.length-1]){
+//     checked_parameter = []
+//   }
+// console.log(checked_parameter)
+//  file_compiled: "examples_python/domain.py", param: "name" }
   let compiled_files =  props.file.map(f => (f.key))
   const clearInputAndAddTodo = _ => {
     
-   
-    props.addParameter('','', '') // file_compiled
+   console.log(selected_methods[0])
+   console.log(todos[0])
+    props.addParameter('','', '',todos[0], selected_methods[0]) // file_compiled
     
   
   };
@@ -74,17 +83,18 @@ function Parameters_Panel(props)  {
   function onC(e) {
     
     e.value ? setTodos([e.value]) : console.log("no contract")
-    console.log(e.methods.methods)
-    console.log(todos)
+    // console.log(e.methods.methods)
+    // console.log(todos)
     setMethods(e.methods.methods)
-    console.log(methods.map(f => (f)).length
-    ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }])
+    // console.log(methods.map(f => (f)).length
+    // ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }])
 
   }
 
 
   function onSelectMethods(method) {
-    selectMethods([method])
+    selectMethods([method.value])
+    // console.log(method)
   }
 
 
@@ -103,9 +113,9 @@ function removeTodo(e){
        <Select options={methods.map(f => (f)).length
     ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }]} onChange={i => onSelectMethods(i)}></Select>
             {selected_methods.map(f => (
-              <div>
+              <div key={`Div.Item.${i}`}>
       <List key={`ListItem.${i}`} style={{ overflow: "hidden" }}>
-          {props.parameter.map((todo, idx) => (
+          {checked_parameter.map((todo, idx) => (
              
               <TodoListItem
                 
@@ -113,7 +123,7 @@ function removeTodo(e){
                 selector_id ={todo.param_id}
                 type={todo.type_of_value} 
                 value_field ={todo.value}
-                divider={idx !== props.parameter.length - 1}
+                divider={idx !==checked_parameter.length - 1}
                 onButtonClick={() => removeTodo(idx)}
                 
               />
@@ -135,7 +145,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch =>({
   
-  addParameter: (a,b,c) => dispatch(actions.addParameter(a,b,c)),
+  addParameter: (a,b,c,d,g) => dispatch(actions.addParameter(a,b,c,d,g)),
   delParameter: (param_id) => dispatch(actions.delParameter(param_id))
 
   // changeParameterType: (a,b) =>dispatch(actions.changeParameterType(a,b)),
