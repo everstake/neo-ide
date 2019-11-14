@@ -1,4 +1,4 @@
-<p align="center">
+<p align="right">
   <a href="https://neo.org/">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/UYZ3MCh.png" width="200">
   </a>
