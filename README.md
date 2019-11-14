@@ -214,3 +214,5 @@ When you enter the IDE page, two default contracts will be created for you. One 
 3. Submit Pull Request with comprehensive description of changes
 
 # License
+
+The Neo IDE project is licensed under the [Apache License Version 2.0](LICENSE)
