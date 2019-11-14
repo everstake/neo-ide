@@ -70,7 +70,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/4ugaIwh.png">
 </p>
 
-+ Write some code
++ Write some code in code editor field
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/fyfiBG4.png">
@@ -79,13 +79,13 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 #### Compile and deploy
 
-+ Save contract
++ Click `SAVE` button to save the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/Fh6YQpr.png">
 </p>
 
-+ Compile contract
++ Click `COMPILE` button to compile the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/LwA9cRf.png">
@@ -95,25 +95,31 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/kYHWs0D.png">
 </p>
 
-+ Deploy contract (select Testnet in wallet first)
++ Select testnet in NEOLine wallet
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/rOIZAJY.png">
+</p>
+
++ Click `DEPLOY` button to deploy the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/ofU85CM.png">
 </p>
 
-+ Unlock your wallet
++ Enter your password to unlock your wallet
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/73PlFho.png">
 </p>
 
-+ Confirm transaction
++ Enter your password to confirm transaction
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/PigkSkq.png">
 </p>
 
-+ Explore deployment transaction
++ Click on link in logger panel to explore deployment transaction
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
