@@ -1,108 +1,202 @@
 <p align="center">
-  <a href="https://gitpoint.co/">
+  <a href="https://neo.org/">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/UYZ3MCh.png" width="200">
   </a>
 </p>
 
 <p align="center">
-  The best online ide for NEO.
+  The best online IDE for Neo.
 </p>
 
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Features](#features)
+- [Requirements](#Requirements)
+- [Usage](#usage)
 - [Feedback](#feedback)
-- [Contributors](#contributors)
 - [Build Process](#build-process)
 - [Backers](#backers-)
 - [Sponsors](#sponsors-)
-- [Acknowledgments](#acknowledgments)
+- [How to Contribute](#how-to-contribute)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Introduction
 
-![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
-[![Build Status](https://travis-ci.org/anfederico/Clairvoyant.svg?branch=master)](https://travis-ci.org/anfederico/Clairvoyant)
-![Dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)
-[![GitHub Issues](https://img.shields.io/github/issues/anfederico/Clairvoyant.svg)](https://github.com/anfederico/Clairvoyant/issues)
+![Downloads](https://img.shields.io/github/downloads/everstake/neo-ide/total)
+[![GitHub Issues](https://img.shields.io/github/issues/everstake/neo-ide)](https://github.com/everstake/neo-ide/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<!-- [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT) -->
 
 
-View repository and user information, control your notifications and even manage your issues and pull requests. Built with React Native, GitPoint is one of the most feature-rich unofficial GitHub clients that is 100% free.
+Create contracts for the Neo platform without setting up the environment and downloading packages for developers, just open [Neo IDE](http://neo-ide.com/) in your browser and start creating the future.
 
-**Available for both iOS and Android.**
+**Available for Google chrome.**
 
-<p align="center">
-  <img src = "http://i.imgur.com/HowF6aM.png" width=350>
-</p>
+## Requirements
 
-## Features
+First you need to install NEOLine wallet chrome extension, it provides dapis for developers who want to interact easily with NEO blockchain. You can install the wallet by downloading the [source code](https://github.com/NeoNextClub/neoline/blob/master/install/en_US.md). Or install it from the store as described in [this manual](https://medium.com/@NE0NEXT/neoline-the-first-neo-wallet-plugin-218fac8558b2)
 
-A few of the things you can do with GitPoint:
+## Usage
 
-* View user activity feed
-* Communicate on your issue and pull request conversations
-* Close or lock issues
-* Apply labels and assignees
-* Review and merge pull requests
-* Create new issues
-* Star, watch and fork repositories
-* Control your unread and participating notifications
-* Easily search for any user or repository
+A few of the things you can do with Neo IDE:
 
-<p align="center">
-  <img src = "http://i.imgur.com/IkSnFRL.png" width=700>
-</p>
+* [`Create a project directly in the browser, develop smart contracts`](#create-a-project)
+* [`Compile and deploy created contracts`](#compile-and-deploy)
+* [`Interact with your contract using the invoke bar`](#invoke-your-contract)
+* [`Open contracts from the hard drive of your device, save contracts to the hard drive. Move and delete contracts`](#upload-and-save-contracts)
+* [`Configure the editor (autosave, autocompletion)`](#configure-the-editor)
+
+#### Create a project
+When you enter the IDE page, two default contracts will be created for you. One contract is written in python `examples_python/domain.py`, and the second in C# `examples_csharp/domain.cs`
+
++ You can modify current contracts, or create new ones
 
 <p align="center">
-  <img src = "http://i.imgur.com/0iorG20.png" width=700>
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/hzNS96W.png">
 </p>
 
-## Feedback
++ Click `Add Folder` to create a new folder
 
-Feel free to send us feedback on [Twitter](https://twitter.com/gitpointapp) or [file an issue](https://github.com/gitpoint/git-point/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/p02KNfo.png">
+</p>
 
-If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/git-point)!
++ Click `Add File` to create a new contract
 
-## Contributors
++ Select created contract and click `Rename` to set contract name (change file extension for correct syntax highlighting)
 
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification and is brought to you by these [awesome contributors](./CONTRIBUTORS.md).
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/4ugaIwh.png">
+</p>
 
-## Build Process
++ Write some code
 
-- Follow the [React Native Guide](https://facebook.github.io/react-native/docs/getting-started.html) for getting started building a project with native code. **A Mac is required if you wish to develop for iOS.**
-- Clone or download the repo
-- `yarn` to install dependencies
-- `yarn run link` to link react-native dependencies
-- `yarn start:ios` to start the packager and run the app in the iOS simulator (`yarn start:ios:logger` will boot the application with [redux-logger](<https://github.com/evgenyrodionov/redux-logger>))
-- `yarn start:android` to start the packager and run the app in the the Android device/emulator (`yarn start:android:logger` will boot the application with [redux-logger](https://github.com/evgenyrodionov/redux-logger))
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/fyfiBG4.png">
+</p>
 
-Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
-**Development Keys**: The `CLIENT_ID` and `CLIENT_SECRET` in `api/index.js` are for development purposes and do not represent the actual application keys. Feel free to use them or use a new set of keys by creating an [OAuth application](https://github.com/settings/applications/new) of your own. Set the "Authorization callback URL" to `gitpoint://welcome`.
+#### Compile and deploy
 
-## Backers [![Backers on Open Collective](https://opencollective.com/git-point/backers/badge.svg)](#backers)
++ Save contract
 
-Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/git-point#backer)]
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/Fh6YQpr.png">
+</p>
 
-<a href="https://opencollective.com/git-point#backers" target="_blank"><img src="https://opencollective.com/git-point/backers.svg?width=890"></a>
-## Sponsors [![Sponsors on Open Collective](https://opencollective.com/git-point/sponsors/badge.svg)](#sponsors)
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/git-point#sponsor)]
-<a href="https://opencollective.com/git-point/sponsor/0/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/1/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/2/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/3/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/4/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/5/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/6/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/7/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/8/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/git-point/sponsor/9/website" target="_blank"><img src="https://opencollective.com/git-point/sponsor/9/avatar.svg"></a>
-## Acknowledgments
-Thanks to [JetBrains](https://www.jetbrains.com) for supporting us with a [free Open Source License](https://www.jetbrains.com/buy/opensource).
++ Compile contract
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/LwA9cRf.png">
+</p>
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/kYHWs0D.png">
+</p>
+
++ Deploy contract (select Testnet in wallet first)
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/ofU85CM.png">
+</p>
+
++ Unlock your wallet
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/73PlFho.png">
+</p>
+
++ Confirm transaction
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/PigkSkq.png">
+</p>
+
++ Explore deployment transaction
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
+</p>
+
+#### Invoke your contract
+
++ Compile and deploy domain example
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="100px">
+</p>
+
++ Invoke contract
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
+</p>
+
++ Explore transaction
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
+</p>
+
+#### Upload and save contracts
+
+> Upload contract from hard drive
+
++ Click `Upload File` button
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="">
+</p>
+
++ Choose your contract and confirm operation
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="">
+</p>
+
++ Open uploaded contract
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="">
+</p>
+
+> Save contract to hard drive
+
++ Choose your contract
+
++ Click `Download` button
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="">
+</p>
+
+> Drag and drop files and folders to move them.
+
+> Select a file / folder and click `Delete` button to delete.
+
+#### Configure the editor
+
++ Use setting to configure the editor
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="">
+</p>
+
+# Local Installation
+
+1. Download [Neo IDE](https://github.com/everstake/neo-ide/releases) from Releases tab
+2. Install dependencies with `npm`:
+    + `$ cd neo-ide`
+    + `$ npm install`
+3. Run React application with compiler server:
+   + `$ npm run start`
+
+**How to Contribute**
+---
+
+1. Clone repo and create a new branch: `$ git checkout https://https://github.com/everstake/neo-ide -b name_for_new_branch`.
+2. Make changes and test
+3. Submit Pull Request with comprehensive description of changes
+
+# License

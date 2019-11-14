@@ -625,7 +625,7 @@ class RawFileBrowser extends React.Component {
                                 role="button"
                             >
                                 {icons.Folder}
-                                &nbsp;Add File
+                                &nbsp;Add Folder
                             </a>
                         </li>
                     )
