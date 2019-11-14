@@ -129,3 +129,14 @@ export const delParameter = (param_id) => ({
     type: 'DEL_PARAMETER',
     param_id: param_id,
 });
+
+
+export const selectCompiledContract = (contract) => ({
+    type: 'SELECT_CONTRACT',
+    contract: contract,
+})
+
+export const selectContractMethods = (methods) => ({
+    type: 'SELECT_METHODS',
+    methods: methods,
+})
