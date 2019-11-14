@@ -5,7 +5,7 @@ import groupLogReducer from './tabswitch'
 import filesReducer from './files'
 import currentFile from './current_file'
 import walletReducer from './wallet'
-
+import parameterReducer from './params'
 import neoReducer from './neo'
 
 const reducers = combineReducers({
@@ -16,6 +16,8 @@ const reducers = combineReducers({
   wallet: walletReducer,
   tab: groupLogReducer,
   neo: neoReducer,
+  parameter: parameterReducer,  
+
 })
 
 export default reducers

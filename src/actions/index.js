@@ -102,3 +102,27 @@ export const renameFile = (currentKey, newKey) => ({
     currentKey: currentKey,
     newKey: newKey
 });
+
+
+export const addParameter = (param_id, type_of_value, value) => ({
+    type: 'ADD_PARAMETER',
+    param_id: param_id,
+    type_of_value: type_of_value,
+    value: value,
+});
+
+export const changeParameterType = (param_id, type_of_value) => ({
+    type: 'CHANGE_PARAMETER_TYPE',
+    param_id: param_id,
+    type_of_value: type_of_value,
+});
+export const changeParameterValue = (param_id, value) => ({
+    type: 'CHANGE_PARAMETER_VALUE',
+    param_id: param_id,
+    value: value,
+});
+
+export const delParameter = (param_id) => ({
+    type: 'DEL_PARAMETER',
+    param_id: param_id,
+});
