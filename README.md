@@ -138,19 +138,19 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Compile and deploy domain example
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="50px">
 </p>
 
 + Invoke contract
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="50px">
 </p>
 
 + Explore transaction
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="50px">
 </p>
 
 #### Upload and save contracts
