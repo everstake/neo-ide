@@ -56,10 +56,6 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/N3BS5IO.png">
 </p>
 
-<p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/hzNS96W.png">
-</p>
-
 + Click `Add Folder` to create a new folder
 
 <p align="center">
