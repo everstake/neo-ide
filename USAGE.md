@@ -118,7 +118,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 #### Upload and save contracts
 
-> Upload contract from hard drive
+Upload contract from hard drive:
 
 + Click the `Upload File` button to upload contract from hard drive
 
@@ -138,7 +138,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/iSAkGGe.png">
 </p>
 
-> Save contract to hard drive
+Save contract to hard drive:
 
 + Choose your contract
 
@@ -148,9 +148,9 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/JMXpckf.png" width="300px">
 </p> -->
 
-> Drag and drop files and folders to move them.
+Drag and drop files and folders to move them.
 
-> Select a file / folder and click the `Delete` button to delete.
+Select a file / folder and click the `Delete` button to delete.
 
 #### Configure the editor
 
