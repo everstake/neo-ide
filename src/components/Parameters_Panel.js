@@ -11,7 +11,6 @@ import {
   ListItemSecondaryAction
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
-import { array } from "prop-types";
 
 const AddTodo = memo(props => (
   <Paper style={{ margin: 16, padding: 16 }}>
