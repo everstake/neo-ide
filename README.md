@@ -53,16 +53,25 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + You can modify current contracts, or create new ones
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/N3BS5IO.png">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/xcBhpuJ.png">
 </p>
 
-+ Click `Add Folder` to create a new folder
++ Click the `Add Folder` button and enter a name to create a new folder
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/p02KNfo.png">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/tqBRNsT.png">
 </p>
 
-+ Click `Add File` to create a new contract
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/KPuzWY9.png">
+</p>
+
++ Click the `Add File` button to create a new contract
+
+<p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/eafdEFn.png
+">
+</p>
 
 + Select created contract and click `Rename` to set contract name (change file extension for correct syntax highlighting)
 
@@ -79,13 +88,13 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 #### Compile and deploy
 
-+ Click `SAVE` button to save the contract
++ Click the `SAVE` button to save the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/Fh6YQpr.png">
 </p>
 
-+ Click `COMPILE` button to compile the contract
++ Click the `COMPILE` button to compile the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/LwA9cRf.png">
@@ -101,7 +110,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/rOIZAJY.png">
 </p>
 
-+ Click `DEPLOY` button to deploy the contract
++ Click the `DEPLOY` button to deploy the contract
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/ofU85CM.png">
@@ -149,7 +158,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 > Upload contract from hard drive
 
-+ Click `Upload File` button
++ Click the `Upload File` button to upload contract from hard drive
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/at4ecCU.png">
@@ -161,7 +170,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/1i5gXvf.png">
 </p>
 
-+ Open uploaded contract
++ Click on uploaded contract to open it
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/iSAkGGe.png">
@@ -171,7 +180,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 + Choose your contract
 
-+ Click `Download` button
++ Click the `Download` button to save selected contract on your hard drive
 
 <p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
@@ -179,7 +188,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 > Drag and drop files and folders to move them.
 
-> Select a file / folder and click `Delete` button to delete.
+> Select a file / folder and click the `Delete` button to delete.
 
 #### Configure the editor
 
