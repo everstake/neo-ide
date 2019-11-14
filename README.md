@@ -69,8 +69,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Click the `Add File` button to create a new contract
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/eafdEFn.png
-">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/eafdEFn.png">
 </p>
 
 + Select created contract and click `Rename` to set contract name (change file extension for correct syntax highlighting)
