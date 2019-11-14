@@ -129,9 +129,9 @@ When you enter the IDE page, two default contracts will be created for you. One 
 
 + Click on link in logger panel to explore deployment transaction
 
-<p align="center">
+<!-- <p align="center">
     <img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/JMXpckf.png">
-</p>
+</p> -->
 
 #### Invoke your contract
 
