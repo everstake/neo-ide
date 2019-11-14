@@ -1,6 +1,6 @@
 ## Usage
 
-[Back to readme](README)
+[Back to readme](README.md)
 
 A few of the things you can do with Neo IDE:
 
