@@ -53,6 +53,10 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + You can modify current contracts, or create new ones
 
 <p align="center">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/N3BS5IO.png">
+</p>
+
+<p align="center">
     <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/hzNS96W.png">
 </p>
 
@@ -124,19 +128,19 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Compile and deploy domain example
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="100px">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
 </p>
 
 + Invoke contract
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
 </p>
 
 + Explore transaction
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
 </p>
 
 #### Upload and save contracts
@@ -146,19 +150,19 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Click `Upload File` button
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/at4ecCU.png">
 </p>
 
 + Choose your contract and confirm operation
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/1i5gXvf.png">
 </p>
 
 + Open uploaded contract
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/iSAkGGe.png">
 </p>
 
 > Save contract to hard drive
@@ -168,7 +172,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Click `Download` button
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/JMXpckf.png" width="300px">
 </p>
 
 > Drag and drop files and folders to move them.
@@ -180,7 +184,7 @@ When you enter the IDE page, two default contracts will be created for you. One 
 + Use setting to configure the editor
 
 <p align="center">
-    <img alt="GitPoint" title="GitPoint" src="">
+    <img alt="GitPoint" title="GitPoint" src="https://i.imgur.com/RzSod2V.png">
 </p>
 
 # Local Installation
