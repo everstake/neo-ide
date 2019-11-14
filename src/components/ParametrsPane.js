@@ -63,14 +63,17 @@ function MultilineTextFields(props) {
     const [list, setList] = React.useState([]);
     const [text, setText] = React.useState("");
     const forceUpdate = useForceUpdate();
-    
+    let checked_parameter = props.parameter.filter(f => ((f.file_compiled == props.contract.map(f => f.contract)[0] && f.param ==props.methods.map(f => f.methods)[0])))
+    // console.log(props.contract.map(f => f.contract)[0])
+    //     console.log(props.methods.map(f => f.methods)[0])
     function removeItem(index) {
-        console.log(index)
+        // console.log(index)
         // console.log(list.length);
     const f = list
         // console.log(index);
         f.splice(index, 1);
-        console.log(f)
+        // console.log(props.contract[0])
+        // console.log(props.methods[0])
         // console.log(list);
         // this.setState({ list });
         setList( f)
@@ -96,7 +99,7 @@ function MultilineTextFields(props) {
         <form className={classes.root} noValidate autoComplete="off">
             <div>
               <Parameters_Panel></Parameters_Panel>
-                <InputBase defaultValue={props.parameter.map((tods, idx)=> {
+                <InputBase defaultValue={checked_parameter.map((tods, idx)=> {
         let df =  {Type: tods.type_of_value, Value: tods.value}
           return `[\n    {\n     Type : ${tods.type_of_value},\n     Value: ${tods.value}\n    }\n]\n`
         })} readOnly={true} multiline className={classes.margin} rows="10"/>
@@ -106,6 +109,8 @@ function MultilineTextFields(props) {
 }
 
 const mapStateToProps = state => ({
-    parameter: state.parameter
+    parameter: state.parameter,
+    contract: state.contract,
+    methods: state.methods,
   });
 export default connect(mapStateToProps)(MultilineTextFields);
