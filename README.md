@@ -34,7 +34,7 @@ Create contracts for the Neo platform without setting up the environment and dow
 First you need to install NEOLine wallet chrome extension, it provides dapis for developers who want to interact easily with NEO blockchain. You can install the wallet by downloading the [source code](https://github.com/NeoNextClub/neoline/blob/master/install/en_US.md). Or install it from the store as described in [this manual](https://medium.com/@NE0NEXT/neoline-the-first-neo-wallet-plugin-218fac8558b2)
 
 # Usage
-### [Usage page](USAGE)
+### [Usage page](USAGE.md)
 
 # Local Installation
 
