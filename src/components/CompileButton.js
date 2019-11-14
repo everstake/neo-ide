@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-
+let v = 0;
 
 function CustomButtonView(props) {
     const classes = useStyles();
@@ -51,8 +51,9 @@ class CustomButton extends React.Component {
         text: this.props.file.savedContent,
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
-      console.log("Result: ", toHex(res.data))
-      this.props.changeFileCompiled(this.props.file.key, toHex(res.data),{methods:["name", "surname"]})
+      v++;
+    
+      this.props.changeFileCompiled(this.props.file.key, toHex(res.data),{methods:[`param.${v}`, `next.${v+1}`,]})
       this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
       this.props.enqueueSnackbar(notify('Compiled!', 'success', 'Compiler', this.props.closeSnackbar));
     }).catch(err => {
