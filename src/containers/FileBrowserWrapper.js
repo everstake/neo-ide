@@ -3,9 +3,11 @@ import FileBrowser from '../file_explorer'
 import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import * as actions from '../actions/index'
 import {connect} from 'react-redux';
-import defaultFiles from '../default_files/default_files'
-import Button from '@material-ui/core/Button';
 import notify from '../utils/notificator.js';
+import defaultFiles from '../default_files/default_files'
+import { saveAs } from 'file-saver';
+var FileSaver = require('file-saver');
+
 
 class FileBrowserWrapper extends React.Component {
 
@@ -58,6 +60,8 @@ class FileBrowserWrapper extends React.Component {
 
     handleDeleteFile = (fileKey) => {
         this.props.deleteFile(fileKey)
+        var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, "hello world.txt");
     };
 
     setDefaultFiles() {
@@ -77,31 +81,33 @@ class FileBrowserWrapper extends React.Component {
 
     render() {
         return (
-            <FileBrowser
-                icons={FontAwesomeIcons(4)}
-                files={this.props.files}
-                openFolders={{'examples_python/': true}}
-                selection={'examples_python/domain.py'}
+            <div>
+                <FileBrowser
+                    icons={FontAwesomeIcons(4)}
+                    files={this.props.files}
+                    openFolders={{'examples_python/': true}}
+                    selection={'examples_python/domain.py'}
 
-                headerRenderer={false}
+                    headerRenderer={false}
 
-                // onDownloadFile = { (hi) => console.log(hi)}
+                    // onDownloadFile = { (hi) => console.log(hi)}
 
-                onCreateFolder={this.handleCreateFolder}
+                    onCreateFolder={this.handleCreateFolder}
 
-                onCreateFiles={this.handleCreateFiles}
+                    onCreateFiles={this.handleCreateFiles}
 
-                onMoveFolder={this.handleRenameFolder}
-                onMoveFile={this.handleRenameFile}
+                    onMoveFolder={this.handleRenameFolder}
+                    onMoveFile={this.handleRenameFile}
 
-                onRenameFolder={this.handleRenameFolder}
-                onRenameFile={this.handleRenameFile}
+                    onRenameFolder={this.handleRenameFolder}
+                    onRenameFile={this.handleRenameFile}
 
-                onDeleteFolder={this.handleDeleteFolder}
-                onDeleteFile={this.handleDeleteFile}
+                    onDeleteFolder={this.handleDeleteFolder}
+                    onDeleteFile={this.handleDeleteFile}
 
-                onUploadFile={this.handleUploadFile}
-            />
+                    onUploadFile={this.handleUploadFile}
+                />
+            </div>
         )
     }
 }

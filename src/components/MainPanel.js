@@ -24,6 +24,7 @@ import DeployButton from './DeployButton'
 import Tab from './Tabs'
 import SplitButton from './SplitButton'
 import SettingsPanel from '../containers/SettingsPanel'
+import DiskButtons from '../containers/DiskButtons'
 
 const Main = styled.main`
     margin-left: 20px;
@@ -154,8 +155,15 @@ function MainPanel(props) {
 
     function renderBreadcrumbs() {
         const pageTitle = {
-            'home': [<div><SaveButton/><CompileButton/> <DeployButton/></div>,
-                <FileBrowserWrapper/>],
+            'home': [
+                <div>
+                    <SaveButton/>
+                    <CompileButton/>
+                    <DeployButton/>
+                </div>,
+                 <DiskButtons/>,
+                <FileBrowserWrapper/>
+            ],
             'devices': [<div className='select'><Select options={CCoptions}></Select><ButtonM></ButtonM></div>],
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
