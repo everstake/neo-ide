@@ -30,7 +30,7 @@
 
 
 // import Tab from './Tabs'
-// const Main = styled.main`
+// const Main = styled.main`proudetochagetheworld123
    
    
 //     margin-left: 20px;

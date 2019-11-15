@@ -90,15 +90,18 @@ setMethods(props.file.filter(f => f.key == props.contract.map(f => f.contract)[0
   }, [])
 
   function onSelectFiles(e) {
-    console.log(e.value)
-    console.log(e.methods)
+    // console.log(e.value)
+    // console.log(e.methods.methods[0])
     // console.log(e.methods.methods)
     // e.value ? (setTodos([e.value])): console.log("no contract")
     props.selectCompiledContract(e.value) 
+    props.selectContractMethods(e.methods.methods[0])
     // console.log(e.methods.methods)
     // console.log(todos)
     
     e.methods ? setMethods(e.methods.methods) : setMethods([])
+    // e.methods ? setMethods(e.methods.methods) : setMethods([])
+  //  props.selectContractMethods(e.methods)
     // console.log(methods.map(f => (f)).length
     // ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }])
 
@@ -120,13 +123,13 @@ function removeTodo(e){
     props.delParameter(e)
   }
   return (
-   
+  //  console.log([{value: methods.map(f => f.methods)[0], label:methods.map(f => f.methods)[0]}])
     <Layout>
       <Select defaultValue={[{value: props.contract.map(f => f.contract)[0], label: props.contract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.key)).length
      ?  props.file.map(f => ({value: f.key ,label: f.key, methods:f.methods})): [{label: "No compiled contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
      {props.contract.map((file, i) => (
        <div key={`Div.Item.${i}`}>
-       <Select defaultValue={[{value: props.methods.map(f => f.methods)[0], label:props.methods.map(f => f.methods)[0]}]} 
+       <Select value={[{value: props.methods.map(f => f.methods)[0], label:props.methods.map(f => f.methods)[0]}]}
        options={methods.map(f => (f)).length
     ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income", isDisabled: true }]} 
     
