@@ -140,3 +140,11 @@ export const selectContractMethods = (methods) => ({
     type: 'SELECT_METHODS',
     methods: methods,
 })
+
+export const addeployField = (contract, name, version, email) => ({
+    type: 'ADD_DEPLOY_FIELD',
+    contract: contract,
+    name: name,
+    version: version,
+    email: email,
+})

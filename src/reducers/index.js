@@ -9,6 +9,7 @@ import parameterReducer from './params'
 import neoReducer from './neo'
 import contractReducer from './contract'
 import methodsReducer from './methods'
+import deployfiledReducer from './deployfiels'
 
 const reducers = combineReducers({
   alerts: alertsReducer,
@@ -20,7 +21,8 @@ const reducers = combineReducers({
   neo: neoReducer,
   parameter: parameterReducer,  
   contract: contractReducer,
-  methods: methodsReducer
+  methods: methodsReducer,
+  deployfield: deployfiledReducer,
 })
 
 export default reducers

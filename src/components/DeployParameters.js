@@ -1,5 +1,7 @@
 import React, { memo, useState, useEffects } from "react";
 import { Paper, Grid, Button } from "@material-ui/core";
+import { connect } from 'react-redux';
+import * as actions from '../actions/index'
 
 import {
   fade,
@@ -75,27 +77,106 @@ const Layout = memo(props => (
 
 function TodoListItem(props) {
   const classes = useStyles();
+ 
+
+  function OnC(e , type) {
+
+    console.log(e.target.value)
+    console.log(type)
+    console.log(props.contract)
+    console.log(props.deployfield)
+  }
+
 
   return (
     <Paper>
-    <ListItem divider={1}>
-      <InputLabel shrink htmlFor="bootstrap-input">
-        Bootstrap
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {props.name}
       </InputLabel>
-      <BootstrapInput defaultValue="react-bootstrap" id="bootstrap-input" />
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
   );
 }
-export default function DeployParameters() {
+ function DeployParameters(props) {
+
+  
+  function OnC(e , type) {
+
+    console.log(e.target.value)
+    console.log(type)
+    console.log(props.contract)
+    console.log(props.deployfield)
+  }
+
+
+  
   return (
     <Layout>
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
-      <TodoListItem />
+       <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"name"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"version"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"email"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"par"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"par"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, "par")}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"par"}
+      </InputLabel>
+      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
     </Layout>
   );
 }
+
+const mapStateToProps = state => ({
+  contract: state.contract,
+  deployfield: state.deployfield,
+});
+
+
+const mapDispatchToProps = dispatch =>({
+  
+  addeployField: (contract, name, version, email) => dispatch(actions.addeployField(contract, name, version, email))
+
+  // changeParameterType: (a,b) =>dispatch(actions.changeParameterType(a,b)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeployParameters)

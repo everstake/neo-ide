@@ -16,16 +16,6 @@ const parameterReducer = (state = [], action) => {
                     param: action.param
                 }
             ]
-            // case 'DEL_PARAMETER':
-
-            // return Object.assign({}, state, {
-
-            //     address: action.address,
-            //     coin_type: action.coin_type,
-            //     amount: action.amount,
-            //     network: action.network
-
-            // });
         }
         case 'CHANGE_PARAMETER_TYPE': {
             
@@ -39,9 +29,6 @@ const parameterReducer = (state = [], action) => {
                 } 
                 return file
               });
-            
-
-
         }
         case 'CHANGE_PARAMETER_VALUE': {
             return state.map((file, i) => {
@@ -56,10 +43,8 @@ const parameterReducer = (state = [], action) => {
               });
         }
         case 'DEL_PARAMETER': {
-           
-        
-         
-        return state.filter((todo, index) => action.param_id !== index)
+
+           return state.filter((todo, index) => action.param_id !== index)
         }
 
         default:

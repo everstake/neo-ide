@@ -1,26 +1,46 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper';
-
+import { connect } from 'react-redux';
+import * as actions from '../actions/index'
 import Select from 'react-select'
-const CCoptions = [
-    {value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true},
-    {value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true},
-    {value: 'purple', label: 'Purple', color: '#5243AA'},
-    {value: 'red', label: 'Red', color: '#FF5630', isFixed: true},
-    {value: 'orange', label: 'Orange', color: '#FF8B00'},
-    {value: 'yellow', label: 'Yellow', color: '#FFC400'},
-    {value: 'green', label: 'Green', color: '#36B37E'},
-    {value: 'forest', label: 'Forest', color: '#00875A'},
-    {value: 'slate', label: 'Slate', color: '#253858'},
-    {value: 'silver', label: 'Silver', color: '#666666'},
-];
-export default function SelectDeploy() {
 
 
+
+
+
+function SelectDeploy(props) {
+
+
+
+
+    function onSelectFiles(e) {
+         props.selectCompiledContract(e.value) 
+         props.addeployField(e.value, '', '', '');
+
+
+      }
 
     return(
         <Paper>
-<Select options={CCoptions}></Select>
+    <Select defaultValue={[{value: props.contract.map(f => f.contract)[0], label: props.contract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.key)).length
+     ?  props.file.map(f => ({value: f.key ,label: f.key, methods:f.methods})): [{label: "No compiled contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
 </Paper>
     )
     }
+
+
+
+const mapStateToProps = state => ({
+
+    file: state.files.filter((file) => file.file).filter(file => file.compiled),
+    contract: state.contract,
+
+  });
+
+  const mapDispatchToProps = dispatch =>({
+    
+    selectCompiledContract: (contract) => dispatch(actions.selectCompiledContract(contract)),
+    addeployField: (contract, name, version, email) => dispatch(actions.addeployField(contract, name, version, email))
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(SelectDeploy);
