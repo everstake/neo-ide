@@ -56,10 +56,11 @@ export const changeFileSaved = (name, newContent, autosave) => ({
     autosave: autosave
 });
 
-export const changeFileCompiled = (name, binary) => ({
+export const changeFileCompiled = (name, binary, methods) => ({
   type: 'CHANGE_FILE_COMPILED',
   name: name,
-  binary: binary
+  binary: binary,
+  methods: methods,
 })
 
 export const changeFileDeployed = (name) => ({
@@ -104,11 +105,13 @@ export const renameFile = (currentKey, newKey) => ({
     newKey: newKey
 });
 
-export const addParameter = (param_id, type_of_value, value) => ({
+export const addParameter = (param_id, type_of_value, value, file_compiled, param) => ({
     type: 'ADD_PARAMETER',
     param_id: param_id,
     type_of_value: type_of_value,
     value: value,
+    file_compiled: file_compiled,
+    param: param
 });
 
 export const changeParameterType = (param_id, type_of_value) => ({
@@ -131,4 +134,14 @@ export const changeSetting = (param, value) => ({
     type: 'SET_SETTINGS',
     param: param,
     value: value
+})
+
+export const selectCompiledContract = (contract) => ({
+    type: 'SELECT_CONTRACT',
+    contract: contract,
+})
+
+export const selectContractMethods = (methods) => ({
+    type: 'SELECT_METHODS',
+    methods: methods,
 })

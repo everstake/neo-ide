@@ -12,6 +12,8 @@ const parameterReducer = (state = [], action) => {
                     param_id: parametrID,
                     type_of_value: action.type_of_value,
                     value: action.value,
+                    file_compiled: action.file_compiled,
+                    param: action.param
                 }
             ]
             // case 'DEL_PARAMETER':
