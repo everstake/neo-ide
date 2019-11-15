@@ -11,12 +11,12 @@ import Select from 'react-select'
 function SelectDeploy(props) {
 
 
-
-
     function onSelectFiles(e) {
          props.selectCompiledContract(e.value) 
-         props.addeployField(e.value, '', '', '');
-
+         if(props.deployfield.length) {
+           console.log("d")
+         props.addeployField(e.value, '', '', '','', '', '','', '');
+         }
 
       }
 
@@ -34,13 +34,14 @@ const mapStateToProps = state => ({
 
     file: state.files.filter((file) => file.file).filter(file => file.compiled),
     contract: state.contract,
+    deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
 
   });
 
   const mapDispatchToProps = dispatch =>({
     
     selectCompiledContract: (contract) => dispatch(actions.selectCompiledContract(contract)),
-    addeployField: (contract, name, version, email) => dispatch(actions.addeployField(contract, name, version, email))
+    addeployField: (contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable) => dispatch(actions.addeployField(contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable))
   });
   
   export default connect(mapStateToProps, mapDispatchToProps)(SelectDeploy);

@@ -2,7 +2,7 @@ import React, { memo, useState, useEffects } from "react";
 import { Paper, Grid, Button } from "@material-ui/core";
 import { connect } from 'react-redux';
 import * as actions from '../actions/index'
-
+import Switch from '@material-ui/core/Switch';
 import {
   fade,
   ThemeProvider,
@@ -75,51 +75,55 @@ const Layout = memo(props => (
   </Paper>
 ));
 
-function TodoListItem(props) {
-  const classes = useStyles();
- 
 
-  function OnC(e , type) {
-
-    console.log(e.target.value)
-    console.log(type)
-    console.log(props.contract)
-    console.log(props.deployfield)
-  }
-
-
-  return (
-    <Paper>
-    <ListItem >
-      <InputLabel  shrink htmlFor="bootstrap-input">
-      {props.name}
-      </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
-    </ListItem>
-    </Paper>
-  );
-}
  function DeployParameters(props) {
 
   
   function OnC(e , type) {
 
+
+    if (type === "name"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
+    if (type === "version"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
+    if (type === "author"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
+    if (type === "email"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
+    if (type === "description"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
+
+
+    // name: action.name,
+    //               version: action.version,
+    //               author: action.author,
+    //               email: action.email,
+    //               description: action.description,
+    //               needsStorage: action.needsStorage,
+    //               dynamicInvoke: action.dynamicInvoke,
+    //               isPayable: action.isPayable,
     console.log(e.target.value)
     console.log(type)
     console.log(props.contract)
     console.log(props.deployfield)
+
   }
 
 
   
   return (
     <Layout>
-       <Paper>
+       {/* <Paper>
     <ListItem >
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"name"}
       </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.name)[0]} onChange={t => OnC(t, "name")}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
     <Paper>
@@ -127,7 +131,15 @@ function TodoListItem(props) {
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"version"}
       </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.version)[0]} onChange={t => OnC(t, "version")}  id="bootstrap-input"  />
+    </ListItem>
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"author"}
+      </InputLabel>
+      <BootstrapInput value={props.deployfield.map(f =>f.author)[0]} onChange={t => OnC(t, "author")}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
     <Paper>
@@ -135,32 +147,25 @@ function TodoListItem(props) {
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"email"}
       </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.email)[0]} onChange={t => OnC(t, "email")}  id="bootstrap-input"  />
     </ListItem>
-    </Paper>
+    </Paper>*/}
     <Paper>
     <ListItem >
       <InputLabel  shrink htmlFor="bootstrap-input">
-      {"par"}
+      {"description"}
       </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
-    </ListItem>
+      <BootstrapInput defaultValue={props.deployfield.map(f =>f.description)[0]} onChange={t => OnC(t, "description")}  id="bootstrap-input"  />
+    </ListItem> 
     </Paper>
     <Paper>
-    <ListItem >
-      <InputLabel  shrink htmlFor="bootstrap-input">
-      {"par"}
-      </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, "par")}  id="bootstrap-input"  />
-    </ListItem>
+    <Switch />
     </Paper>
     <Paper>
-    <ListItem >
-      <InputLabel  shrink htmlFor="bootstrap-input">
-      {"par"}
-      </InputLabel>
-      <BootstrapInput onChange={t => OnC(t, props.name)}  id="bootstrap-input"  />
-    </ListItem>
+    <Switch />
+    </Paper>
+    <Paper>
+    <Switch />
     </Paper>
     </Layout>
   );
@@ -168,14 +173,14 @@ function TodoListItem(props) {
 
 const mapStateToProps = state => ({
   contract: state.contract,
-  deployfield: state.deployfield,
+  deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
 });
 
 
 const mapDispatchToProps = dispatch =>({
   
-  addeployField: (contract, name, version, email) => dispatch(actions.addeployField(contract, name, version, email))
-
+  addeployField: (contract, name, version, email) => dispatch(actions.addeployField(contract, name, version, email)),
+  changeNameField: (contract, field_name, value) => dispatch(actions.changeNameField(contract, field_name, value))
   // changeParameterType: (a,b) =>dispatch(actions.changeParameterType(a,b)),
 });
 
