@@ -18,7 +18,8 @@ class Afpp extends React.Component {
     }
 
     onChange(newValue) {
-        this.props.changeFileSaved(this.props.currentFile, newValue);
+        console.log("IN AUTOSACE: ", this.props.autosave)
+        this.props.changeFileSaved(this.props.currentFile, newValue, this.props.autosave);
     }
 
     updateDimensions = () => {
@@ -59,11 +60,16 @@ const mapStateToProps = (store) => {
             fileLang = elem.lang;
         }
     });
-    return {value: fileContent, currentFile: store.currentFile, fileLang: fileLang};
+    return {
+        value: fileContent,
+        currentFile: store.currentFile,
+        fileLang: fileLang,
+        autosave: store.settings.autosave
+    };
 };
 
 const mapDispatchToProps = dispatch => ({
-    changeFileSaved: (fileName, newContent) => dispatch(actions.changeFileSaved(fileName, newContent))
+    changeFileSaved: (fileName, newContent, autosave) => dispatch(actions.changeFileSaved(fileName, newContent, autosave))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Afpp);

@@ -23,6 +23,7 @@ import CompileButton from './CompileButton'
 import DeployButton from './DeployButton'
 import Tab from './Tabs'
 import SplitButton from './SplitButton'
+import SettingsPanel from '../containers/SettingsPanel'
 
 const Main = styled.main`
     margin-left: 20px;
@@ -159,8 +160,8 @@ function MainPanel(props) {
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
-            'settings/policies': ['Settings', 'Policies'],
-            'settings/network': ['Settings', 'Network']
+            'settings/editor': [<SettingsPanel />],
+            // 'settings/network': ['Settings', 'Network']
         };
 
         const list = ensureArray(pageTitle[selected]);
@@ -232,9 +233,9 @@ function MainPanel(props) {
                                 <NavText style={{paddingRight: 32}} title="Settings">
                                     Settings
                                 </NavText>
-                                <NavItem eventKey="settings/policies">
-                                    <NavText title="Policies">
-                                        Policies
+                                <NavItem eventKey="settings/editor">
+                                    <NavText title="Editor">
+                                        Editor
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="settings/network">

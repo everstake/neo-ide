@@ -39,15 +39,20 @@ class CustomButton extends React.Component {
 
     render() {
         let content;
-        if (this.props.saved) {
+        if (this.props.autosave) {
+            content = "autosave"
+        } else if (this.props.saved) {
             content = "saved"
         } else {
             content = "save"
         }
 
         return (
-            <CustomButtonView disabled={this.props.file.saved} content={content} saveFile={this.saveFile}
-                              args={{lala: 15}}/>
+            <CustomButtonView 
+                disabled={this.props.file.saved} 
+                content={content} 
+                saveFile={this.saveFile}
+            />
         );
     }
 }
@@ -59,7 +64,7 @@ const mapStateToProps = (store) => {
             file = elem;
         }
     });
-    return {file: file};
+    return {file: file, autosave: store.settings.autosave};
 };
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,4 @@
 import Moment from 'moment'
-import React from "react"
-import Button from '@material-ui/core/Button'
 import notify from '../utils/notificator.js';
 
 
@@ -94,11 +92,13 @@ const filesReducer = (state = [], action) => {
         return state.map((fileObj, i) => {
           if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
             // Copy the object before mutating
+            console.log("AUTOSAVE: ", action)
             return Object.assign({}, fileObj, {
-              saved: false,
+              saved: action.autosave,
               compiled: false,
               deployed: false,
-              currentContent: action.newContent
+              currentContent: action.newContent,
+              savedContent: (action.autosave && action.newContent) || fileObj.savedContent
             });
           }
           return fileObj
