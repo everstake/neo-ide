@@ -141,7 +141,7 @@ export const selectContractMethods = (methods) => ({
     methods: methods,
 })
 
-export const addeployField = (contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable) => ({
+export const addeployField = (contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable, networkFee) => ({
     type: 'ADD_DEPLOY_FIELD',
     contract: contract,
     name: name,
@@ -152,6 +152,7 @@ export const addeployField = (contract, name, version, author, email, descriptio
     needsStorage: needsStorage,
     dynamicInvoke: dynamicInvoke,
     isPayable: isPayable,
+    networkFee: networkFee,
 
 })
 

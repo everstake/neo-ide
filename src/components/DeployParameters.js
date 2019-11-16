@@ -1,26 +1,13 @@
-import React, { memo, useState, useEffects } from "react";
-import { Paper, Grid, Button } from "@material-ui/core";
+import React, { memo } from "react";
+import { Paper,   ListItem, } from "@material-ui/core";
 import { connect } from 'react-redux';
 import * as actions from '../actions/index'
 import Switch from '@material-ui/core/Switch';
-import {
-  fade,
-  ThemeProvider,
-  withStyles,
-  makeStyles,
-  createMuiTheme
-} from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
+import { fade, withStyles,} from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {
-  List,
-  ListItem,
-  TextField,
-  IconButton,
-  ListItemSecondaryAction
-} from "@material-ui/core";
+
 
 const BootstrapInput = withStyles(theme => ({
   root: {
@@ -57,15 +44,6 @@ const BootstrapInput = withStyles(theme => ({
   }
 }))(InputBase);
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  margin: {
-    margin: theme.spacing(1)
-  }
-}));
 
 const Layout = memo(props => (
   <Paper
@@ -110,20 +88,10 @@ const Layout = memo(props => (
     if (type === "isPayable"){
       props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.checked)
     }
+    if (type === "networkFee"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
+    }
     
-
-    // name: action.name,
-    //               version: action.version,
-    //               author: action.author,
-    //               email: action.email,
-    //               description: action.description,
-    //               needsStorage: action.needsStorage,
-    //               dynamicInvoke: action.dynamicInvoke,
-    //               isPayable: action.isPayable,
-    // console.log(e.target.value)
-    // console.log(type)
-    // console.log(props.contract)
-    // console.log(props.deployfield)
 
   }
 
@@ -169,6 +137,14 @@ const Layout = memo(props => (
       {"description"}
       </InputLabel>
       <BootstrapInput value={props.deployfield.map(f =>f.description)[0] ? props.deployfield.map(f =>f.description)[0]: ""} onChange={t => OnC(t, "description")}  id="bootstrap-input"  />
+    </ListItem> 
+    </Paper>
+    <Paper>
+    <ListItem >
+      <InputLabel  shrink htmlFor="bootstrap-input">
+      {"networkFee"}
+      </InputLabel>
+      <BootstrapInput value={props.deployfield.map(f =>f.networkFee)[0] ? props.deployfield.map(f =>f.networkFee)[0]: ""} onChange={t => OnC(t, "networkFee")}  id="bootstrap-input"  />
     </ListItem> 
     </Paper>
     <Paper>

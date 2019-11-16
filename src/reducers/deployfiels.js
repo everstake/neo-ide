@@ -15,6 +15,7 @@ const deployfiledReducer = (state = [], action) => {
                   needsStorage: action.needsStorage,
                   dynamicInvoke: action.dynamicInvoke,
                   isPayable: action.isPayable,
+                  networkFee: action.networkFee
                 }
             ]
         }
@@ -66,6 +67,11 @@ const deployfiledReducer = (state = [], action) => {
               if(action.field_name === 'isPayable') {
                 return Object.assign({}, file, {
                   isPayable: action.value,
+                });
+              } 
+              if(action.field_name === 'networkFee') {
+                return Object.assign({}, file, {
+                  networkFee: action.value,
                 });
               } 
               

@@ -19,7 +19,7 @@ function SelectDeploy(props) {
           //  console.log(props.deployfield.map(f => f.contract === e.value)[0])
 
            if(!props.deployfield.map(f => f.contract === e.value)[0]){
-            props.addeployField(e.value, '', '', '','', '', '','', '');
+            props.addeployField(e.value, '', '', '','', '', '','', '', '');
            }
           // props.addeployField(e.value, '', '', '','', '', '','', '');
         //  }
@@ -47,7 +47,7 @@ const mapStateToProps = state => ({
   const mapDispatchToProps = dispatch =>({
     
     selectCompiledContract: (contract) => dispatch(actions.selectCompiledContract(contract)),
-    addeployField: (contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable) => dispatch(actions.addeployField(contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable))
+    addeployField: (contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable, networkFee) => dispatch(actions.addeployField(contract, name, version, author, email, description, needsStorage, dynamicInvoke, isPayable, networkFee))
   });
   
   export default connect(mapStateToProps, mapDispatchToProps)(SelectDeploy);
