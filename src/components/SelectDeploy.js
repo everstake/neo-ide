@@ -13,10 +13,16 @@ function SelectDeploy(props) {
 
     function onSelectFiles(e) {
          props.selectCompiledContract(e.value) 
-         if(props.deployfield.length) {
-           console.log("d")
-         props.addeployField(e.value, '', '', '','', '', '','', '');
-         }
+        // props.deployfield.map(f => f.contract !== e.value)
+        //  if(props.deployfield.map(f => f.contract !== e.value)[0]) {
+          // console.log(e.value)
+          //  console.log(props.deployfield.map(f => f.contract === e.value)[0])
+
+           if(!props.deployfield.map(f => f.contract === e.value)[0]){
+            props.addeployField(e.value, '', '', '','', '', '','', '');
+           }
+          // props.addeployField(e.value, '', '', '','', '', '','', '');
+        //  }
 
       }
 

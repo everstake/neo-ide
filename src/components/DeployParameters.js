@@ -81,7 +81,9 @@ const Layout = memo(props => (
   
   function OnC(e , type) {
 
-
+    console.log(props.contract)
+    console.log(props.deployfield)
+    console.log(props.deployfield.map(f =>f.description)[0])
     if (type === "name"){
       props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
     }
@@ -107,10 +109,10 @@ const Layout = memo(props => (
     //               needsStorage: action.needsStorage,
     //               dynamicInvoke: action.dynamicInvoke,
     //               isPayable: action.isPayable,
-    console.log(e.target.value)
-    console.log(type)
-    console.log(props.contract)
-    console.log(props.deployfield)
+    // console.log(e.target.value)
+    // console.log(type)
+    // console.log(props.contract)
+    // console.log(props.deployfield)
 
   }
 
@@ -118,12 +120,12 @@ const Layout = memo(props => (
   
   return (
     <Layout>
-       {/* <Paper>
+       <Paper>
     <ListItem >
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"name"}
       </InputLabel>
-      <BootstrapInput value={props.deployfield.map(f =>f.name)[0]} onChange={t => OnC(t, "name")}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.name)[0] ? props.deployfield.map(f =>f.name)[0]: ""} onChange={t => OnC(t, "name")}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
     <Paper>
@@ -131,7 +133,7 @@ const Layout = memo(props => (
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"version"}
       </InputLabel>
-      <BootstrapInput value={props.deployfield.map(f =>f.version)[0]} onChange={t => OnC(t, "version")}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.version)[0] ? props.deployfield.map(f =>f.version)[0]: ""} onChange={t => OnC(t, "version")}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
     <Paper>
@@ -139,7 +141,7 @@ const Layout = memo(props => (
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"author"}
       </InputLabel>
-      <BootstrapInput value={props.deployfield.map(f =>f.author)[0]} onChange={t => OnC(t, "author")}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.author)[0] ? props.deployfield.map(f =>f.author)[0]: ""}onChange={t => OnC(t, "author")}  id="bootstrap-input"  />
     </ListItem>
     </Paper>
     <Paper>
@@ -147,15 +149,15 @@ const Layout = memo(props => (
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"email"}
       </InputLabel>
-      <BootstrapInput value={props.deployfield.map(f =>f.email)[0]} onChange={t => OnC(t, "email")}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.email)[0] ? props.deployfield.map(f =>f.email)[0]: ""} onChange={t => OnC(t, "email")}  id="bootstrap-input"  />
     </ListItem>
-    </Paper>*/}
+    </Paper>
     <Paper>
     <ListItem >
       <InputLabel  shrink htmlFor="bootstrap-input">
       {"description"}
       </InputLabel>
-      <BootstrapInput defaultValue={props.deployfield.map(f =>f.description)[0]} onChange={t => OnC(t, "description")}  id="bootstrap-input"  />
+      <BootstrapInput value={props.deployfield.map(f =>f.description)[0] ? props.deployfield.map(f =>f.description)[0]: ""} onChange={t => OnC(t, "description")}  id="bootstrap-input"  />
     </ListItem> 
     </Paper>
     <Paper>
