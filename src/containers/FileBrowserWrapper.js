@@ -5,9 +5,6 @@ import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import notify from '../utils/notificator.js';
 import defaultFiles from '../default_files/default_files'
-import { saveAs } from 'file-saver';
-var FileSaver = require('file-saver');
-
 
 class FileBrowserWrapper extends React.Component {
 
@@ -54,14 +51,11 @@ class FileBrowserWrapper extends React.Component {
     };
 
     handleDeleteFolder = (folderKey) => {
-        console.log("KEYY: ", folderKey);
         this.props.deleteFolder(folderKey)
     };
 
     handleDeleteFile = (fileKey) => {
         this.props.deleteFile(fileKey)
-        var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-        FileSaver.saveAs(blob, "hello world.txt");
     };
 
     setDefaultFiles() {

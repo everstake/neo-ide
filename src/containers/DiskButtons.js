@@ -6,7 +6,17 @@ import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import notify from '../utils/notificator.js';
 
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Fade from '@material-ui/core/Fade';
+
+import { saveAs } from 'file-saver';
+var FileSaver = require('file-saver');
+
 const diskButtons = function GroupedButtons(props) {
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleUploadFile = () => {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -31,15 +41,51 @@ const diskButtons = function GroupedButtons(props) {
     }    
   }
 
-  const handleDownloadFile = () => {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
+  const saveFile = (name, content) => {
+    var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+    FileSaver.saveAs(blob, name);
+  }
 
-    } else {
-      props.enqueueSnackbar(notify('Your browser is too old to support HTML5 File API', props.closeSnackbar));
-    }    
+  const handleDownloadCurrentFile = () => {
+    setAnchorEl(null);
+    saveFile(props.currentFile, props.value)
+  }
+
+  const handleDownloadAllFiles = () => {
+    setAnchorEl(null);
+    props.files.forEach(file => {
+      if (file.file) {
+        let fileName = file.key.replace(/^.*[\\\/]/, '')
+        saveFile(fileName, file.currentContent)
+      }
+    })
+  }
+
+  const handleDownloadFile = filePath => {
+    setAnchorEl(null);
+    props.files.forEach(file => {
+      if (file.key === filePath) {
+        let fileName = filePath.replace(/^.*[\\\/]/, '')
+        saveFile(fileName, file.currentContent)
+      }
+    })    
   }
   
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
   
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  let isAnyFiles = false
+
+  props.files.forEach(file => {
+    if (file.file) {
+      isAnyFiles = true
+    }
+  })
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} md={15}>
@@ -58,16 +104,61 @@ const diskButtons = function GroupedButtons(props) {
               style={{ display: "none" }}
             />
           </Button>
-          <Button>Download</Button>
+          <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
+            Download
+          </Button>
+          <Menu
+            id="fade-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Fade}
+          >
+            {
+              ( 
+                isAnyFiles &&
+                [
+                  <MenuItem onClick={handleDownloadCurrentFile}>Download current</MenuItem>,
+                  <MenuItem onClick={handleDownloadAllFiles}>Download all</MenuItem>,
+                  props.files.map((file, id) => {
+                    if (file.file) {
+                      return (
+                        <MenuItem onClick={() => {handleDownloadFile(file.key)}}>{file.key}</MenuItem>
+                      )
+                    }  
+                  })
+                ]
+              ) || (
+                <MenuItem onClick={handleClose}>
+                  Create file first
+                </MenuItem>
+              )
+            }
+          </Menu>
         </ButtonGroup>
       </Grid>
     </Grid>
   );
 }
 
-const mapStateToProps = store => ({
-  files: store.files,
-});
+const mapStateToProps = (store) => {
+  let fileContent = "";
+  let fileLang;
+  store.files.forEach(elem => {
+      if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
+          fileContent = elem.currentContent;
+          fileLang = elem.lang;
+      }
+  });
+  return {
+      files: store.files,
+      value: fileContent,
+      currentFile: store.currentFile,
+      fileLang: fileLang,
+      autosave: store.settings.autosave
+  };
+};
 
 const mapDispatchToProps = dispatch =>({
   enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
