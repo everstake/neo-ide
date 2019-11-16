@@ -13,6 +13,7 @@ import {
 import { green } from "@material-ui/core/colors";
 import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {
   List,
   ListItem,
@@ -99,7 +100,17 @@ const Layout = memo(props => (
     if (type === "description"){
       props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.value)
     }
-
+    if (type === "needsStorage"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.checked)
+      
+    }
+    if (type === "dynamicInvoke"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.checked)
+    }
+    if (type === "isPayable"){
+      props.changeNameField(props.contract.map(f => f.contract)[0], type, e.target.checked)
+    }
+    
 
     // name: action.name,
     //               version: action.version,
@@ -161,13 +172,28 @@ const Layout = memo(props => (
     </ListItem> 
     </Paper>
     <Paper>
-    <Switch />
+    <FormControlLabel
+    control={
+    <Switch checked={props.deployfield.map(f =>f.needsStorage)[0] ? props.deployfield.map(f =>f.needsStorage)[0]: false}  onChange={t =>OnC(t, "needsStorage")} value="needsStorage" />
+    }
+    label="needsStorage"
+    />
     </Paper>
     <Paper>
-    <Switch />
+    <FormControlLabel
+    control={
+    <Switch checked={props.deployfield.map(f =>f.dynamicInvoke)[0] ? props.deployfield.map(f =>f.dynamicInvoke)[0]: false}  onChange={t =>OnC(t, "dynamicInvoke")} value="dynamicInvoke" />
+    }
+    label="dynamicInvoke"
+    />
     </Paper>
     <Paper>
-    <Switch />
+    <FormControlLabel
+    control={
+    <Switch checked={props.deployfield.map(f =>f.isPayable)[0] ? props.deployfield.map(f =>f.isPayable)[0]: false}  onChange={t =>OnC(t, "isPayable")} value="isPayable" />
+    }
+    label="isPayable"
+    />
     </Paper>
     </Layout>
   );
