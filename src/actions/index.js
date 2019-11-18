@@ -87,9 +87,10 @@ export const addNeo = (neo) => ({
     neo: neo
 });
 
-export const tabSwitch = (tab) => ({
+export const tabSwitch = (tab, index) => ({
     type: 'TAB_SELECTED',
-    tab: tab
+    tab: tab,
+    tabIndex: index
 });
 
 export const renameFolder = (currentKey, newKey, onError) => ({

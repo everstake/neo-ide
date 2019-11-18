@@ -84,8 +84,6 @@ class FileBrowserWrapper extends React.Component {
 
                     headerRenderer={false}
 
-                    // onDownloadFile = { (hi) => console.log(hi)}
-
                     onCreateFolder={this.handleCreateFolder}
 
                     onCreateFiles={this.handleCreateFiles}

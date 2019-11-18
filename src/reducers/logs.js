@@ -15,6 +15,10 @@ const loggerReducer = (state = [], action) => {
     switch (action.type) {
         case 'ADD_LOG': {
             logId++;
+
+            // switch logger tab
+            action.asyncDispatch({type: 'TAB_SELECTED', tab: action.group, index: 0})
+
             return [
                 ...state,
                 {

@@ -12,17 +12,16 @@ import '../stylesheets/tabs.css'
 import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 
-
 function TabPanel(props) {
-    const {children, value, index, ...other} = props;
+    const {children, value, tabIndex, ...other} = props;
 
     return (
         <Typography
             component="div"
             role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
+            hidden={value !== tabIndex}
+            id={`simple-tabpanel-${tabIndex}`}
+            aria-labelledby={`simple-tab-${tabIndex}`}
             {...other}
         >
             <Box className="jej" p={3}>{children}</Box>
@@ -79,25 +78,10 @@ const AntTab = withStyles(theme => ({
 }))(props => <Tab disableRipple {...props} />);
 
 function SimpleTabs(props) {
-    const [value, setValue] = React.useState(0);
-
-
-    useEffect(() => {
-        props.tabSwitch('Compiler');
-    }, []);
+    let value = props.tabIndex
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
-        console.log(newValue);
-        if (newValue === 0) {
-            props.tabSwitch('Compiler');
-        } else if (newValue === 1) {
-            props.tabSwitch('Deploy');
-        } else if (newValue === 2) {
-            props.tabSwitch('Debug');
-        }
-
-
+        props.tabSwitch(event.target.textContent);
     };
 
     return (
@@ -117,10 +101,10 @@ function SimpleTabs(props) {
 }
 
 const mapStateToProps = state => ({
-    tab: state.tab
+    tabIndex: state.tab.index
 });
 
 const mapDispatchToProps = dispatch => ({
-    tabSwitch: (a) => dispatch(actions.tabSwitch(a))
+    tabSwitch: (a, b) => dispatch(actions.tabSwitch(a, b))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleTabs);
