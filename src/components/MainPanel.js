@@ -25,6 +25,9 @@ import Tab from './Tabs'
 import SplitButton from './SplitButton'
 import DeployParameters from './DeployParameters'
 import SelectDeploy from './SelectDeploy'
+import SettingsPanel from '../containers/SettingsPanel'
+import DiskButtons from '../containers/DiskButtons'
+
 const Main = styled.main`
     margin-left: 20px;
 `;
@@ -143,14 +146,21 @@ function MainPanel(props) {
 
     function renderBreadcrumbs() {
         const pageTitle = {
-            'home': [<div><SaveButton/><CompileButton/> <DeployButton/></div>,
-                <FileBrowserWrapper/>],
+            'home': [
+                <div>
+                    <SaveButton/>
+                    <CompileButton/>
+                    <DeployButton/>
+                </div>,
+                 <DiskButtons/>,
+                <FileBrowserWrapper/>
+            ],
             'devices': [<div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div>],
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
-                <MultilineTextFields></MultilineTextFields>],
-            'settings/policies': ['Settings', 'Policies'],
-            'settings/network': ['Settings', 'Network']
+                <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
+            'settings/editor': [<SettingsPanel />],
+            // 'settings/network': ['Settings', 'Network']
         };
 
         const list = ensureArray(pageTitle[selected]);
@@ -222,9 +232,9 @@ function MainPanel(props) {
                                 <NavText style={{paddingRight: 32}} title="Settings">
                                     Settings
                                 </NavText>
-                                <NavItem eventKey="settings/policies">
-                                    <NavText title="Policies">
-                                        Policies
+                                <NavItem eventKey="settings/editor">
+                                    <NavText title="Editor">
+                                        Editor
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="settings/network">

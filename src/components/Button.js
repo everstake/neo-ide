@@ -27,7 +27,7 @@ function GroupedButtons(props) {
                 dynamicInvoke: props.deployfield.map(f => f.dynamicInvoke)[0],
                 isPayable: props.deployfield.map(f => f.isPayable)[0],
                 parameterList: '0710',
-                returnType: '',
+                returnType: '05',
                 code: props.files.map(f => f.binary)[0],
                 networkFee: props.deployfield.map(f => f.networkFee)[0]+ "",
 

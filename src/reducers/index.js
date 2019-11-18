@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import settings from './settings'
 import alertsReducer from './alerts'
 import usersReducer from './logs'
 import groupLogReducer from './tabswitch'
@@ -12,6 +13,7 @@ import methodsReducer from './methods'
 import deployfiledReducer from './deployfiels'
 
 const reducers = combineReducers({
+  settings: settings,
   alerts: alertsReducer,
   logs: usersReducer,
   files: filesReducer,

@@ -49,10 +49,11 @@ export const changeCurrentFile = (name) => ({
     name: name,
 });
 
-export const changeFileSaved = (name, newContent) => ({
+export const changeFileSaved = (name, newContent, autosave) => ({
     type: 'CHANGE_FILE_SAVED',
     name: name,
-    newContent: newContent
+    newContent: newContent,
+    autosave: autosave
 });
 
 export const changeFileCompiled = (name, binary, methods) => ({
@@ -104,7 +105,6 @@ export const renameFile = (currentKey, newKey) => ({
     newKey: newKey
 });
 
-
 export const addParameter = (param_id, type_of_value, value, file_compiled, param) => ({
     type: 'ADD_PARAMETER',
     param_id: param_id,
@@ -130,6 +130,11 @@ export const delParameter = (param_id) => ({
     param_id: param_id,
 });
 
+export const changeSetting = (param, value) => ({
+    type: 'SET_SETTINGS',
+    param: param,
+    value: value
+})
 
 export const selectCompiledContract = (contract) => ({
     type: 'SELECT_CONTRACT',
