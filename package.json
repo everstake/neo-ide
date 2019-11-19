@@ -21,6 +21,7 @@
     "javascript-terminal": "^1.0.3",
     "moment": "^2.17.0",
     "n-readlines": "^1.0.0",
+    "neo-dapi": "^2.0.4",
     "notistack": "^0.9.5",
     "prop-types": "^15.5.8",
     "react": "^16.9.0",

@@ -28,6 +28,8 @@ import SelectDeploy from './SelectDeploy'
 import SettingsPanel from '../containers/SettingsPanel'
 import DiskButtons from '../containers/DiskButtons'
 
+
+import neoDapi from 'neo-dapi'
 const Main = styled.main`
     margin-left: 20px;
 `;
@@ -47,13 +49,11 @@ const useStyles = makeStyles(theme => ({
 
 const mapStateToProps = store => ({
     logs: store,
-    wallet: store.wallet,
     neo: store.neo,
 });
 
 const mapDispatchToProps = dispatch => ({
-    addUserWallet: (a, b, c, d) => dispatch(actions.addUserWallet(a, b, c, d)),
-    addNeo: (a) => dispatch(actions.addNeo(a)),
+    changeNEOField: (type, value) => dispatch(actions.changeNEOField(type, value)),
 });
 
 
@@ -62,68 +62,111 @@ function MainPanel(props) {
 
     const [selected, setSelected] = useState('home');
     const [expanded, setExpanded] = useState(false);
-    const [account, setAccount] = useState('');
+    const [account, setAccount] = useState(false);
+
+    const [network, setNetwork] = useState(false);
     const [balance, setBalance] = useState(null);
     const [Neo, setNeo] = useState(null);
     const [Warning, setWarning] = useState(null);
 
+    // useEffect(() => {
+    //     if (!Neo) {
+            
+    //         window.addEventListener('neoline.ready', () => {
+    //             const neoline = new global.NEOLine.Init();
+    //             setNeo(neoline);
+    //             props.addNeo(neoline);
+    //             neoline.getAccount()
+    //                 .then(account => {
+    //                     setAccount(account);
+    //                     test(neoline, account)
+
+    //                 })
+    //         });
+    //     }
+    // });
+
     useEffect(() => {
-        if (!Neo) {
-            window.addEventListener('neoline.ready', () => {
-                const neoline = new global.NEOLine.Init();
-                setNeo(neoline);
-                props.addNeo(neoline);
-                neoline.getAccount()
-                    .then(account => {
-                        setAccount(account);
-                        test(neoline, account)
+        let timer = setInterval(function dd(){
+            // console.log(props.neo)
+           
+            // console.log(i)
 
-                    })
-            });
-        }
-    });
+            
+          if(props.neo.neo){
+            
+              if(!props.neo.address){
+          
+                  neoDapi.getAccount().then(f =>
+                       {
+    
+                           props.changeNEOField("address", f.address)
+                       }).catch(e =>     props.changeNEOField("neo", false))
+              }
 
-    function test(a, b) {
-        const timerID = setInterval(() => {
-            // console.log(b.address);
-            a.getBalance({
-                params: [
-                    {
-                        address: b.address,
-                        assets: ['NEO']
-                    },
-                ],
-                network: 'TestNet'
-            })
-                .then((results) => {
-                    let labal = null;
-                    Object.keys(results).forEach(address => {
-                        const balances = results[address];
-                        balances.forEach(balance => {
-                            labal = balance.amount;
-                            return balance
-                        });
+               if(props.neo.address){
+                neoDapi.getNetworks()
+                .then(f =>props.changeNEOField("network", f.defaultNetwork)).catch(e =>     props.changeNEOField("neo", false))
+               
+             }
 
-                    });
-                    return labal
-                }).then(c => {
-                a.getNetworks()
-                    .then(result => {
+             if(props.neo.network && !props.neo.amount){
 
-                        const {networks ,defaultNetwork} = result;
+                neoDapi.getBalance({
+                            params: [
+                                {
+                                    address: props.neo.address +'',
+                                    assets: ['NEO', 'GAS']
+                                },
+                            ],
+                            network: props.neo.network + ''
+                        }).then(results => {
+                            Object.keys(results).forEach(address => {
+                                const balances = results[address];
+                                let asset = []
+                                let balanci = []
+                                balances.forEach(balance => {
+                                  const { assetID, symbol, amount } = balance
+                                  asset.push(symbol)
+                                  balanci.push(amount)
+                              
+                                })
+                                props.changeNEOField("coin_type", asset)
+                                props.changeNEOField("amount", balanci)
+                                
 
-                        if (balance !== props.wallet.amount) {
 
-                            props.addUserWallet(b.address, defaultNetwork, c, 'this')
-                        }
-                    })
+                                
+                            })
+                        }).catch (e =>     props.changeNEOField("neo", false))
+                        
+             } 
+            
+          }
+          else{
+          checkneoDapi()
+          }
+        
+        }, 1000)
+          return () => {
+            clearInterval(timer)
+          };
+        }, [props])
 
-            }).catch(e => {
-                console.log(e)
-            });
+    const checkneoDapi = () => {
 
-        }, 3000);
+        neoDapi.getProvider().then(f => { 
+        
+            props.changeNEOField("neo", true)
+        
+        }).catch(e => {
+            props.changeNEOField("neo", false)
+          console.log(e) ;
+
+        })
     }
+
+  
 
     const onSelect = (selected) => {
 
@@ -132,14 +175,6 @@ function MainPanel(props) {
     const onToggle = (expanded) => {
 
         setExpanded(expanded)
-    };
-
-
-    const f = () => {
-        if (!Neo && !Warning) {
-            alert("no wallet");
-           setWarning(true)
-        }
     };
 
     const classes = useStyles();
@@ -155,7 +190,7 @@ function MainPanel(props) {
                  <DiskButtons/>,
                 <FileBrowserWrapper/>
             ],
-            'devices': [<div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div>],
+            'devices': props.neo.network ? [<div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div>]: [<Paper> There is no wallet</Paper>],
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
@@ -199,7 +234,7 @@ function MainPanel(props) {
                                 </NavIcon>
 
                             </NavItem>
-                            <NavItem onClick={f} eventKey="devices">
+                            <NavItem eventKey="devices">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-play-circle"
                                        style={{fontSize: '1.75em', verticalAlign: 'middle'}}/>

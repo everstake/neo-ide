@@ -3,6 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import Parameters_Panel from './Parameters_Panel'
 import { connect } from 'react-redux';
+import ButtonInvoke from './ButtonInvoke'
 // const BootstrapInput = withStyles(theme => ({
 //   root: {
 //     "label + &": {
@@ -104,6 +105,7 @@ function MultilineTextFields(props) {
           return `[\n    {\n     Type : ${tods.type_of_value},\n     Value: ${tods.value}\n    }\n]\n`
         })} readOnly={true} multiline className={classes.margin} rows="10"/>
             </div>
+<ButtonInvoke></ButtonInvoke>
         </form>
     );
 }

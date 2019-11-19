@@ -21,6 +21,7 @@ const filesReducer = (state = [], action) => {
           file.savedContent = file.savedContent || ""
           file.currentContent = file.savedContent || ""
           file.binary = ""
+          file.tx_id = ""
 
           for (let i = 0; i < state.length; i++) {
             if (state[i].key === file.key){
@@ -99,6 +100,7 @@ const filesReducer = (state = [], action) => {
         });
       }
       case 'CHANGE_FILE_COMPILED': {
+        console.log(action.name)
         return state.map((fileObj, i) => {
           if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
             // Copy the object before mutating
@@ -117,7 +119,7 @@ const filesReducer = (state = [], action) => {
             // Copy the object before mutating
             return Object.assign({}, fileObj, {
               deployed: true,
-              binary: action.binary
+              tx_id: action.tx_id,
             });
           }
           return fileObj

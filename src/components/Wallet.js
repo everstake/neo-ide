@@ -34,11 +34,11 @@ function createData(name, calories) {
 function Wallet(props) {
     const classes = useStyles();
     // console.log(props.wallet.amount);
-
+console.log(props.files)
     const rows = [
-        createData('Address', props.wallet.address + ''),
-        createData('NEO', props.wallet.amount + ''),
-        createData('CurrentNetwork', props.wallet.coin_type)
+        createData('Address', props.neo.address + ''),
+        createData('NEO', props.neo.amount[0] + ''),
+        createData('CurrentNetwork', props.neo.coin_type[0])
 
     ];
     return (
@@ -71,7 +71,8 @@ function Wallet(props) {
 
 
 const mapStateToProps = state => ({
-        wallet: state.wallet
+        neo: state.neo,
+        files: state.files,
     }
 
 );

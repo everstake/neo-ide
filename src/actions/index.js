@@ -68,9 +68,10 @@ export const changeFileCompiled = (name, binary, methods) => ({
   methods: methods,
 })
 
-export const changeFileDeployed = (name) => ({
+export const changeFileDeployed = (name, tx_id) => ({
     type: 'CHANGE_FILE_DEPLOYED',
     name: name,
+    tx_id: tx_id,
 });
 
 export const saveFile = (name, fileObj) => ({
@@ -79,18 +80,13 @@ export const saveFile = (name, fileObj) => ({
     fileObj: fileObj
 });
 
-export const addUserWallet = (address, coin_type, amount, network) => ({
-  type:'ADD_WALLET',
-  address: address, 
-  coin_type: coin_type,
-  amount: amount,
-  network: network
-})
 
-export const addNeo = (neo) => ({
-    type: 'ADD_NEO',
-    neo: neo
-});
+export const changeNEOField = ( field_name, value) => ({
+    type: 'CHANGE_NEO_FIELD',
+    field_name: field_name,
+    value: value,
+
+})
 
 export const tabSwitch = (tab, index) => ({
     type: 'TAB_SELECTED',
@@ -144,6 +140,11 @@ export const changeSetting = (param, value) => ({
 
 export const selectCompiledContract = (contract) => ({
     type: 'SELECT_CONTRACT',
+    contract: contract,
+})
+
+export const selectDeployedContract = (contract) => ({
+    type: 'SELECT_DEP_CONTRACT',
     contract: contract,
 })
 

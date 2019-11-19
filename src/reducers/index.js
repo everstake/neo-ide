@@ -5,26 +5,25 @@ import usersReducer from './logs'
 import groupLogReducer from './tabswitch'
 import filesReducer from './files'
 import currentFile from './current_file'
-import walletReducer from './wallet'
 import parameterReducer from './params'
 import neoReducer from './neo'
 import contractReducer from './contract'
 import methodsReducer from './methods'
 import deployfiledReducer from './deployfiels'
-
+import deployedcontractReducer from './deployed_contract'
 const reducers = combineReducers({
   settings: settings,
   alerts: alertsReducer,
   logs: usersReducer,
   files: filesReducer,
   currentFile: currentFile,
-  wallet: walletReducer,
   tab: groupLogReducer,
   neo: neoReducer,
   parameter: parameterReducer,  
   contract: contractReducer,
   methods: methodsReducer,
   deployfield: deployfiledReducer,
+  deployedcontract: deployedcontractReducer,
 })
 
 export default reducers

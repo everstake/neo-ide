@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/index'
 import notify from '../utils/notificator.js';
 import neoDapi from 'neo-dapi';
-function GroupedButtons(props) {
+function ButtonInvoke(props) {
 
 
     function handleClick(e) {
@@ -15,33 +15,25 @@ function GroupedButtons(props) {
             // console.log(props.deployfield.map(f => f.name)[0])
             console.log(props.neo.network)
 
-            console.log("NET: ", props.neo.network)
-            neoDapi.deploy({
-                network: props.neo.network+ "",
-                name: props.deployfield.map(f => f.name)[0] + "",
-                version: props.deployfield.map(f => f.version)[0]+ "",
-                author: props.deployfield.map(f => f.author)[0]+ "",
-                email: props.deployfield.map(f => f.emai)[0]+ "",
-                description: props.deployfield.map(f => f.description)[0]+ "",
-                needsStorage: props.deployfield.map(f => f.needsStorage)[0],
-                dynamicInvoke: props.deployfield.map(f => f.dynamicInvoke)[0],
-                isPayable: props.deployfield.map(f => f.isPayable)[0],
-                parameterList: '0710',
-                returnType: '05',
-                code: props.files.map(f => f.binary)[0] + "",
-                networkFee: props.deployfield.map(f => f.networkFee)[0]+ "",
 
-
-
-            }).then(({txid, nodeUrl}: InvokeOutput) => {
-                let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
-                props.addLog(msg, 'Deploy');
-                props.enqueueSnackbar(notify(msg, 'success', 'Deploy', props.closeSnackbar));
-                console.log(txid)
-                props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
-
-        
-            }).catch(err => {
+neoDapi.invokeRead({
+    scriptHash: 'cb9f3b7c6fb1cf2c13a40637c189bdd066a272b4',
+    operation: 'calculatorAdd',
+    args: [
+      {
+        type: neoDapi.Constants.ArgumentDataType.INTEGER,
+        value: 2
+      },
+      {
+        type: neoDapi.Constants.ArgumentDataType.INTEGER,
+        value: 10
+      }
+    ],
+    network: 'PrivateNet'
+  })
+  .then((result: Object) => {
+    console.log('Read invocation result: ' + JSON.stringify(result));
+  }).catch(err => {
                 console.log(err)
                 props.addLog(err.description, 'Deploy');
                 props.enqueueSnackbar(notify(err.description, 'error', 'Deploy', props.closeSnackbar));
@@ -61,7 +53,7 @@ function GroupedButtons(props) {
                         size="large"
                         aria-label="large contained secondary button group"
                     >
-                        <Button onClick={handleClick}>Deploy</Button>
+                        <Button onClick={handleClick}>Invoke</Button>
                     </ButtonGroup>
                 </Grid>
             </Grid>
@@ -72,9 +64,9 @@ function GroupedButtons(props) {
 
 const mapStateToProps = state => ({
     neo: state.neo,
-    contract: state.contract,
-    deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
-    files: state.files.filter(f => f.key === state.contract.map(f => f.contract)[0])
+    deployedcontract: state.deployedcontract,
+    deployfield: state.deployfield.filter(f => f.contract === state.deployedcontract.map(f => f.contract)[0]),
+    files: state.files.filter(f => f.tx_id === state.deployedcontract.map(f => f.contract)[0])
   });
   
 
@@ -86,4 +78,4 @@ const mapDispatchToProps = dispatch => ({
     addLog: (a, b) => dispatch(actions.addLog(a, b))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupedButtons)
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonInvoke)
