@@ -1,7 +1,6 @@
 import Moment from 'moment'
 import notify from '../utils/notificator.js';
 
-
 const filesReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_FILE': {
@@ -65,8 +64,6 @@ const filesReducer = (state = [], action) => {
         ]
       }
       case 'DELETE_FOLDER': {
-        console.log("1 ", state);
-        const index = state.findIndex((val) => (val.key.substr(0, action.folderKey.length) === action.folderKey));
         let newFiles = []
 
         state.map(el => {
@@ -74,17 +71,14 @@ const filesReducer = (state = [], action) => {
             newFiles.push(el)
           }
         })
-        
-        // if (index !== -1) {
-        //   state.splice(index, 1);
-        // }
-        // console.log("2 ", state);
+        action.asyncDispatch({type: 'SET_CURRENT_FILE_IF_ANY', files: newFiles})
         return newFiles
       }
       case 'DELETE_FILE': {
         const index = state.findIndex((val) => val.key === action.fileKey);
         if (index !== -1) {
           state.splice(index, 1);
+          action.asyncDispatch({type: 'SET_CURRENT_FILE_IF_ANY', files: state})
         }
         return [...state]
       }

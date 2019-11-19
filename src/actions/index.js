@@ -49,6 +49,11 @@ export const changeCurrentFile = (name) => ({
     name: name,
 });
 
+export const setCurrentFileIfAny = (files) => ({
+    type: 'SET_CURRENT_FILE_IF_ANY',
+    files: files
+});
+
 export const changeFileSaved = (name, newContent, autosave) => ({
     type: 'CHANGE_FILE_SAVED',
     name: name,
