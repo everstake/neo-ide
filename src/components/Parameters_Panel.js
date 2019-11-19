@@ -162,7 +162,7 @@ function removeTodo(e){
 
 const mapStateToProps = state => ({
   parameter: state.parameter,
-  file: state.files.filter((file) => file.file).filter(file => file.compiled),
+  file: state.files.filter((file) => file.file).filter(file => file.deployed),
   contract: state.contract,
   methods: state.methods
 });
