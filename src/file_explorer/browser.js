@@ -108,7 +108,7 @@ class RawFileBrowser extends React.Component {
     static defaultProps = {
         showActionBar: true,
         canFilter: true,
-        noFilesMessage: 'No files.',
+        noFilesMessage: 'Create or upload a new file.',
 
         group: GroupByFolder,
         sort: SortByName,
