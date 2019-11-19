@@ -15,7 +15,7 @@ function GroupedButtons(props) {
             // console.log(props.deployfield.map(f => f.name)[0])
             console.log(props.neo.network)
 
-
+            console.log("NET: ", props.neo.network)
             neoDapi.deploy({
                 network: props.neo.network+ "",
                 name: props.deployfield.map(f => f.name)[0] + "",
