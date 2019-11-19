@@ -132,6 +132,11 @@ export const selectCompiledContract = (contract) => ({
     contract: contract,
 })
 
+export const selectDeployedContract = (contract) => ({
+    type: 'SELECT_DEP_CONTRACT',
+    contract: contract,
+})
+
 export const selectContractMethods = (methods) => ({
     type: 'SELECT_METHODS',
     methods: methods,

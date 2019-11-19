@@ -63,11 +63,6 @@ function Parameters_Panel(props)  {
 
  let checked_parameter = props.parameter.filter(f => ((f.file_compiled == props.contract.map(f => f.contract)[0] && f.param ==props.methods.map(f => f.methods)[0])))
 
-//   if (!checked_parameter[checked_parameter.length-1]){
-//     checked_parameter = []
-//   }
-// console.log(checked_parameter)
-//  file_compiled: "examples_python/domain.py", param: "name" }
   let compiled_files =  props.file.map(f => (f.key))
   const clearInputAndAddTodo = _ => {
     
@@ -77,42 +72,33 @@ function Parameters_Panel(props)  {
     
   
   };
-
+console.log(props.deployedcontract)
   useEffect(() => {
-    // effect
+
 setMethods(props.file.filter(f => f.key == props.contract.map(f => f.contract)[0] ).map(f => f.methods).map(f => f.methods)[0])
-    // console.log()
+
     return () => {
-      // props.selectContractMethods()
+
    
     };
   }, [])
 
   function onSelectFiles(e) {
-    // console.log(e.value)
-    // console.log(e.methods.methods[0])
-    // console.log(e.methods.methods)
-    // e.value ? (setTodos([e.value])): console.log("no contract")
-    props.selectCompiledContract(e.value) 
-    props.selectContractMethods(e.methods.methods[0])
-    // console.log(e.methods.methods)
-    // console.log(todos)
-    
-    e.methods ? setMethods(e.methods.methods) : setMethods([])
-    // e.methods ? setMethods(e.methods.methods) : setMethods([])
-  //  props.selectContractMethods(e.methods)
-    // console.log(methods.map(f => (f)).length
-    // ?  methods.map(f => ({value: f ,label: f, methods:f})): [{label: "No Methods income" }])
 
-    // console.log(props.contract)
-    // console.log(props.methods)
+    console.log(e)
+    props.selectDeployedContract(e.value)
+ 
+    props.selectContractMethods(e.methods.methods[0])
+
+    e.methods ? setMethods(e.methods.methods) : setMethods([])
+
   }
 
 
   function onSelectMethods(method) {
   
     props.selectContractMethods(method.value)
-    // console.log(method)
+
   }
 
 
@@ -122,11 +108,11 @@ function removeTodo(e){
     props.delParameter(e)
   }
   return (
-  //  console.log([{value: methods.map(f => f.methods)[0], label:methods.map(f => f.methods)[0]}])
+
     <Layout>
-      <Select defaultValue={[{value: props.contract.map(f => f.contract)[0], label: props.contract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.key)).length
-     ?  props.file.map(f => ({value: f.key ,label: f.key, methods:f.methods})): [{label: "No compiled contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
-     {props.contract.map((file, i) => (
+      <Select defaultValue={[{value: props.deployedcontract.map(f => f.contract)[0], label: props.deployedcontract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.tx_id)).length
+     ?  props.file.map(f => ({value: f.tx_id ,label: f.tx_id, methods:f.methods})): [{label: "No deployed contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
+     {props.deployedcontract.map((file, i) => (
        <div key={`Div.Item.${i}`}>
        <Select value={[{value: props.methods.map(f => f.methods)[0], label:props.methods.map(f => f.methods)[0]}]}
        options={methods.map(f => (f)).length
@@ -164,7 +150,8 @@ const mapStateToProps = state => ({
   parameter: state.parameter,
   file: state.files.filter((file) => file.file).filter(file => file.deployed),
   contract: state.contract,
-  methods: state.methods
+  methods: state.methods,
+  deployedcontract: state.deployedcontract,
 });
 const mapDispatchToProps = dispatch =>({
   
@@ -172,6 +159,7 @@ const mapDispatchToProps = dispatch =>({
   delParameter: (param_id) => dispatch(actions.delParameter(param_id)),
   selectCompiledContract: (contract) => dispatch(actions.selectCompiledContract(contract)),
   selectContractMethods: (methods) => dispatch(actions.selectContractMethods(methods)),
+  selectDeployedContract: (contract) => dispatch(actions.selectDeployedContract(contract))
 
   // changeParameterType: (a,b) =>dispatch(actions.changeParameterType(a,b)),
 });
