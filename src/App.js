@@ -1,51 +1,78 @@
 import React from 'react';
-import AceEditor from 'react-ace';
-import './test.css'
-import 'brace/mode/python';
-import 'brace/theme/monokai';
+import MonacoEditor from 'react-monaco-editor';
 import {connect} from 'react-redux';
 import * as actions from './actions/index'
 
 class Afpp extends React.Component {
-
     constructor(props, context) {
         super(props, context);
         this.state = {
-            width: window.innerWidth, height: window.innerHeight,
+            width: window.innerWidth,
+            height: window.innerHeight,
         };
-
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(newValue) {
-        console.log("IN AUTOSACE: ", this.props.autosave)
-        this.props.changeFileSaved(this.props.currentFile, newValue, this.props.autosave);
-    }
-
     updateDimensions = () => {
-        this.setState({width: window.innerWidth,});
+        this.setState({
+            width: window.innerWidth,
+        });
     };
 
     componentDidMount() {
         window.addEventListener('resize', this.updateDimensions.bind(this));
     }
 
+    editorDidMount(editor, monaco) {
+        console.log('editorDidMount', editor);
+        editor.focus();
+    }
+
+    onChange(newValue, e) {
+        this.props.changeFileSaved(
+            this.props.currentFile,
+            newValue,
+            this.props.autosave,
+        );
+    }
+
+    editorWillMount(monaco) {
+        console.log(monaco);
+        // monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+        //     validate: true,
+        //     schemas: [{
+        //         uri: "http://myserver/foo-schema.json",
+        //         fileMatch: ['*'],
+        //         schema: {
+        //             type: "object",
+        //             properties: {
+        //                 p1: {
+        //                     enum: [ "v1", "v2"]
+        //                 },
+        //                 p2: {
+        //                     $ref: "http://myserver/bar-schema.json"
+        //                 }
+        //             }
+        //         }
+        //     }]
+        // });
+    }
+
     render() {
+        const options = {
+            selectOnLineNumbers: true,
+        };
         return (
-            <AceEditor value={this.props.value}
-                       fontSize={'15px'}
-                       mode={this.props.fileLang}
-                       theme="monokai"
-                       height='100%'
-                       width={this.state.width + 'px'}
-                       onChange={this.onChange}
-                       options={{
-                           enableBasicAutocompletion: true,
-                           enableLiveAutocompletion: true,
-                           enableSnippets: false,
-                           showLineNumbers: true,
-                           tabSize: 2,
-                       }}
+            <MonacoEditor
+                width={this.state.width}
+                height={this.state.height}
+                language="python"
+                theme="vs-dark"
+                value={this.props.value}
+                options={options}
+                onChange={this.onChange}
+                editorDidMount={this.editorDidMount}
+                editorWillMount={this.editorWillMount}
             />
         );
     }

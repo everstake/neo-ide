@@ -1,7 +1,19 @@
 {
-  "name": "ide",
+  "name": "neo-ide",
   "version": "0.1.0",
   "main": "./src/file_explorer/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "node-env-run server --exec nodemon",
+    "dev": "run-p server start"
+  },
+  "peerDependencies": {
+    "react": "0.14.x || 15.x || 16.x",
+    "react-dom": "0.14.x || 15.x || 16.x"
+  },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.1.6",
     "@material-ui/core": "^4.5.1",
@@ -20,28 +32,27 @@
     "events": "^3.0.0",
     "javascript-terminal": "^1.0.3",
     "moment": "^2.17.0",
+    "monaco-editor": "0.18.1",
+    "monaco-editor-webpack-plugin": "^1.7.0",
     "n-readlines": "^1.0.0",
     "neo-dapi": "^2.0.4",
     "notistack": "^0.9.5",
     "prop-types": "^15.5.8",
     "react": "^16.9.0",
-    "react-ace": "^7.0.4",
     "react-broadcast": "^0.7.1",
     "react-codemirror": "^1.0.0",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dropdown": "^1.6.4",
     "react-emit": "^2.1.0",
+    "react-monaco-editor": "^0.32.1",
     "react-pivot": "^4.1.0",
     "react-redux": "^7.1.1",
     "react-scripts": "3.1.2",
     "react-select": "^3.0.8",
     "react-split-pane": "^0.1.87",
-    "react-terminal-component": "^1.4.1"
-  },
-  "peerDependencies": {
-    "react": "0.14.x || 15.x || 16.x",
-    "react-dom": "0.14.x || 15.x || 16.x"
+    "react-terminal-component": "^1.4.1",
+    "webpack-dev-server": "^3.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -54,6 +65,7 @@
     "babel-cli": "^6.6.4",
     "babel-eslint": "10.0.3",
     "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.5",
     "eslint": "^6.1.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-jsx": "^6.0.2",
@@ -72,17 +84,9 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "webpack": "4.40.2",
+    "webpack": "^4.40.2",
     "webpack-cli": "^3.2.3",
     "webpack-node-externals": "^1.5.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "node-env-run server --exec nodemon",
-    "dev": "run-p server start"
   },
   "browserslist": {
     "production": [
