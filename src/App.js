@@ -66,7 +66,7 @@ class Afpp extends React.Component {
             <MonacoEditor
                 width={this.state.width}
                 height={this.state.height}
-                language="python"
+                language="csharp"
                 theme="vs-dark"
                 value={this.props.value}
                 options={options}
