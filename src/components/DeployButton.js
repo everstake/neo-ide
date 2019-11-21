@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import notify from '../utils/notificator.js';
 import neoDapi from 'neo-dapi';
 import * as Config from 'Config';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -51,6 +52,7 @@ class CustomButton extends React.Component {
             networkFee: Config.deploy.defaultFee + "",
         }).then(({txid, nodeUrl}: InvokeOutput) => {
             let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
+            // let msg = <Link>{txid}</Link>
             this.props.addLog(msg, 'Deploy');
             this.props.enqueueSnackbar(notify('Deploy transaction success!', 'success', 'Deploy', this.props.closeSnackbar));
             this.props.changeFileDeployed(this.props.file.key, txid)

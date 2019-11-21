@@ -10,20 +10,58 @@ import { SnackbarProvider } from 'notistack';
 
 import {EmulatorState, OutputFactory, Outputs} from 'javascript-terminal';
 
-const theme = {
-    textAlign: 'left',
-    background: '#272822',
-    promptSymbolColor: '#6effe6',
-    commandColor: '#fcfcfc',
-    outputColor: '#fcfcfc',
-    errorOutputColor: '#ff89bd',
-    fontSize: '1.1rem',
-    spacing: '1%',
-    fontFamily: 'monospace',
-    width: '100%',
-    height: '100%',
-};
 
+import HeaderOutput from 'react-terminal-component';
+
+import {
+    CommandMapping,
+    defaultCommandMapping
+  } from 'javascript-terminal';
+  
+  const PAPER_TYPE = 'paper';
+  const HEADER_TYPE = 'header'
+  
+  const paperStyles = {
+    backgroundColor: 'white',
+    color: 'black',
+    fontFamily: 'sans-serif',
+    padding: '1em',
+    margin: '1em 0',
+    borderRadius: '0.2em'
+  };
+  
+  const PaperOutput = ({ content }) => (
+    <div style={paperStyles}>
+      <h1>{content.title}</h1>
+  
+      {content.body}
+    </div>
+  );
+  
+  const createPaperRecord = (title, body) => {
+    return new OutputFactory.OutputRecord({
+      type: PAPER_TYPE,
+      content: {
+        title,
+        body
+      }
+    });
+  };
+  const customState = EmulatorState.create({
+    'commandMapping': CommandMapping.create({
+      ...defaultCommandMapping,
+      'print': {
+        'function': (state, opts) => {
+          const userInput = opts.join(' ');
+
+          return {
+            output: createPaperRecord('A custom renderer', userInput)
+          };
+        },
+        'optDef': {}
+      }
+    })
+  });
 function fetchLogs(logsArray, tab) {
     let newOutputs;
     const defaultState = EmulatorState.createEmpty();
@@ -52,23 +90,13 @@ class LogPanel extends React.Component {
 
     constructor(props) {
         super(props);
-
-        // this.state = {
-        //     classes: {}
-        // };
     }
 
 componentDidMount() {
-    // this.props.addLog('logger compile', 'Compile')
-    // this.props.addLog('logger deploy', 'Deploy')
-    // this.props.addLog('logger debug', 'Debug')
-    // const classes = useStyles();
-    // this.setState({ classes: classes });
-
 }
 
 render (){
-    let logs = fetchLogs(this.props.logs, this.props.tab);
+    // let logs = fetchLogs(this.props.logs, this.props.tab);
     return (
         <div>
             <SnackbarProvider   
@@ -78,19 +106,27 @@ render (){
             }}>
                 <AlertsBox />
             </SnackbarProvider>
-            <ReactTerminal theme={{
-            background: '#272822',
-            promptSymbolColor: '#6effe6',
-            commandColor: '#fcfcfc',
-            outputColor: '#fcfcfc',
-            errorOutputColor: '#ff89bd',
-            fontSize: '1.1rem',
-            spacing: '1%',
-            fontFamily: 'monospace',
-            width: '100%',
-            height: '50vh'
-          }} inputStr={""}
-        emulatorState={logs} style={{background: '#272822'}}/>
+            <ReactTerminal 
+                // theme={{
+                //     background: '#272822',
+                //     promptSymbolColor: '#6effe6',
+                //     commandColor: '#fcfcfc',
+                //     outputColor: '#fcfcfc',
+                //     errorOutputColor: '#ff89bd',
+                //     fontSize: '1.1rem',
+                //     spacing: '1%',
+                //     fontFamily: 'monospace',
+                //     width: '100%',
+                //     height: '50vh'
+                // }} 
+                // inputStr={""}
+                outputRenderers={{
+                    [HEADER_TYPE]: HeaderOutput,
+                    [PAPER_TYPE]: PaperOutput
+                }}
+                emulatorState={customState}
+                // style={{background: '#272822'}}
+            />
         </div>           
     );
     }
