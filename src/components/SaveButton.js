@@ -41,7 +41,7 @@ class CustomButton extends React.Component {
         let content;
         if (this.props.autosave) {
             content = "autosave"
-        } else if (this.props.saved) {
+        } else if (this.props.file.saved) {
             content = "saved"
         } else {
             content = "save"

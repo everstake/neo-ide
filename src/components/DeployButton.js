@@ -5,8 +5,8 @@ import React from "react";
 import * as actions from '../actions/index'
 import {connect} from 'react-redux';
 import notify from '../utils/notificator.js';
-
-
+import neoDapi from 'neo-dapi';
+import * as Config from 'Config';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -35,34 +35,40 @@ class CustomButton extends React.Component {
     }
 
     deploy() {
-        this.props.neo.neo.deploy({
-            network: 'TestNet',
-            name: 'Hello world3!',
-            version: 'v1.0.1',
-            author: 'NEOLine',
-            email: 'info@neoline.network',
-            description: 'My first contract.',
-            needsStorage: true,
-            dynamicInvoke: false,
-            isPayable: false,
+        neoDapi.deploy({
+            network: this.props.neo.network+ "",
+            name: this.props.deployfield.map(f => f.name)[0] + "",
+            version: this.props.deployfield.map(f => f.version)[0]+ "",
+            author: this.props.deployfield.map(f => f.author)[0]+ "",
+            email: this.props.deployfield.map(f => f.emai)[0]+ "",
+            description: this.props.deployfield.map(f => f.description)[0]+ "",
+            needsStorage: this.props.deployfield.map(f => f.needsStorage)[0],
+            dynamicInvoke: this.props.deployfield.map(f => f.dynamicInvoke)[0],
+            isPayable: this.props.deployfield.map(f => f.isPayable)[0],
             parameterList: '0710',
             returnType: '05',
-            code: this.props.file.binary,
-            networkFee: '0.001'
+            code: this.props.file.binary + "",
+            networkFee: Config.deploy.defaultFee + "",
         }).then(({txid, nodeUrl}: InvokeOutput) => {
             let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
             this.props.addLog(msg, 'Deploy');
-            this.props.enqueueSnackbar(notify(msg, 'success', 'Deploy', this.props.closeSnackbar));
-            this.props.changeFileDeployed(this.props.file.key)
+            this.props.enqueueSnackbar(notify('Deploy transaction success!', 'success', 'Deploy', this.props.closeSnackbar));
+            this.props.changeFileDeployed(this.props.file.key, txid)
+    
         }).catch(err => {
-            this.props.addLog(err.description, 'Deploy');
-            this.props.enqueueSnackbar(notify(err.description, 'error', 'Deploy', this.props.closeSnackbar));
+            console.log(err)
+            this.props.addLog(err.description.message || err.description || "Transaction rejected!", 'Deploy');
+            this.props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction rejected!", 'error', 'Deploy', this.props.closeSnackbar));
+            // Error with bed specification https://github.com/NeoResearch/neocompiler-eco/issues/45
+            if (err.description.message && (err.description.message === 'Error: One of the Policy filters failed.')) {
+                this.props.enqueueSnackbar(notify("Try to increase the amount of fee", 'info', 'Deploy', this.props.closeSnackbar));
+            }
         })
     }
 
     render() {
         let content;
-        if (this.props.saved) {
+        if (this.props.file.deployed) {
             content = "deployed"
         } else {
             content = "deploy"
@@ -84,7 +90,10 @@ const mapStateToProps = (store) => {
     });
     return {
             file: file,
-            neo: store.neo
+            neo: store.neo,
+            contract: store.contract,
+            deployfield: store.deployfield.filter(f => f.contract === store.contract.map(f => f.contract)[0]),
+            file: file
         };
 };
 

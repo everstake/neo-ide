@@ -519,6 +519,9 @@ module.exports = function(webpackEnv) {
         },
       ],
     },
+    externals: {
+      'Config': JSON.stringify(isEnvProduction ? require('./config.prod.json') : require('./config.dev.json'))
+    },
     plugins: [
       new MonacoWebpackPlugin(),
       // Generates an `index.html` file with the <script> injected.

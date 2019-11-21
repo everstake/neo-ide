@@ -1,10 +1,9 @@
 import Moment from 'moment'
 import notify from '../utils/notificator.js';
-
-const defaultLang = '123'
+import * as Config from 'Config';
 
 const getFileLangByName = (fileName) => {
-  let lang = defaultLang
+  let lang = Config.editor.defaultLang
   let fileExtension = (fileName.replace(/^.*[\\\/]/, '')).split('.')[1]
 
   if (fileExtension === 'py') {
@@ -101,7 +100,6 @@ const filesReducer = (state = [], action) => {
         return state.map((fileObj, i) => {
           if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
             // Copy the object before mutating
-            console.log("AUTOSAVE: ", action)
             return Object.assign({}, fileObj, {
               saved: action.autosave,
               compiled: false,

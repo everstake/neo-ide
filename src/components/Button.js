@@ -42,7 +42,7 @@ function GroupedButtons(props) {
         
             }).catch(err => {
                 console.log(err)
-                props.addLog(err.description.message, 'Deploy');
+                props.addLog(err.description.message || err.description || "Transaction rejected!", 'Deploy');
                 props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction rejected!", 'error', 'Deploy', props.closeSnackbar));
                 // Error with bed specification https://github.com/NeoResearch/neocompiler-eco/issues/45
                 if (err.description.message && (err.description.message === 'Error: One of the Policy filters failed.')) {
@@ -73,12 +73,13 @@ function GroupedButtons(props) {
     );
 }
 
+
 const mapStateToProps = state => ({
     neo: state.neo,
     contract: state.contract,
     deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
     files: state.files.filter(f => f.key === state.contract.map(f => f.contract)[0])
-  });
+});
   
 
 const options = ['Deploy'];

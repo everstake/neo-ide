@@ -6,6 +6,7 @@ import * as actions from '../actions/index'
 import { connect } from 'react-redux';
 import notify from '../utils/notificator.js';
 import axios from 'axios';
+import * as Config from 'Config';
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -47,7 +48,7 @@ class CustomButton extends React.Component {
   compile() {
     let filePath = this.props.file.key.split('/');
     this.props.addLog("Request to compiler...", "Compiler")
-    axios.post('http://0.0.0.0:5000/build_avm/py', {
+    axios.post(Config.compiler.pyEndpoint, {
         text: this.props.file.savedContent,
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
@@ -66,7 +67,7 @@ class CustomButton extends React.Component {
 
   render() {
     let content;
-    if (this.props.saved) {
+    if (this.props.file.compiled) {
       content = "compiled"
     } else {
       content = "compile"
