@@ -36,15 +36,18 @@ function GroupedButtons(props) {
             }).then(({txid, nodeUrl}: InvokeOutput) => {
                 let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
                 props.addLog(msg, 'Deploy');
-                props.enqueueSnackbar(notify(msg, 'success', 'Deploy', props.closeSnackbar));
+                props.enqueueSnackbar(notify('Deploy transaction success!', 'success', 'Deploy', props.closeSnackbar));
                 console.log(txid)
-                props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
-
+                // props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
         
             }).catch(err => {
                 console.log(err)
-                props.addLog(err.description, 'Deploy');
-                props.enqueueSnackbar(notify(err.description, 'error', 'Deploy', props.closeSnackbar));
+                props.addLog(err.description.message, 'Deploy');
+                props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction rejected!", 'error', 'Deploy', props.closeSnackbar));
+                // Error with bed specification https://github.com/NeoResearch/neocompiler-eco/issues/45
+                if (err.description.message && (err.description.message === 'Error: One of the Policy filters failed.')) {
+                    props.enqueueSnackbar(notify("Try to increase the amount of fee", 'info', 'Deploy', props.closeSnackbar));
+                }
             })
     
     }
