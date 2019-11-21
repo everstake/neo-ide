@@ -1,6 +1,20 @@
 import Moment from 'moment'
 import notify from '../utils/notificator.js';
 
+const defaultLang = '123'
+
+const getFileLangByName = (fileName) => {
+  let lang = defaultLang
+  let fileExtension = (fileName.replace(/^.*[\\\/]/, '')).split('.')[1]
+
+  if (fileExtension === 'py') {
+    lang = 'python'
+  } else if (fileExtension === 'cs') {
+    lang = 'csharp'
+  }
+  return lang
+}
+
 const filesReducer = (state = [], action) => {
     switch (action.type) {
       case 'ADD_FILE': {
@@ -11,7 +25,7 @@ const filesReducer = (state = [], action) => {
             newKey += '/'
           }
           file.key = newKey + file.key
-          file.lang = 'python' // todo
+          file.lang = getFileLangByName(file.key)
           file.modified = +Moment()
           file.size = 0 //todo
           file.file = true
@@ -178,11 +192,13 @@ const filesReducer = (state = [], action) => {
             return state;
           }
         }
+        let newFileLang = getFileLangByName(action.newKey)
         return state.map((file, i) => {
           if (file.key === action.currentKey) {
             // Copy the object before mutating
             return Object.assign({}, file, {
               key: action.newKey,
+              lang: newFileLang
             });
           }
           return file

@@ -61,14 +61,19 @@ class Afpp extends React.Component {
     render() {
         const options = {
             selectOnLineNumbers: true,
+            readOnly: !this.props.currentFile
         };
+        let editorContent = this.props.value
+        if (!this.props.currentFile) {
+            editorContent = '// create or upload a file to get started'
+        }
         return (
             <MonacoEditor
                 width={this.state.width}
                 height={this.state.height}
-                language="csharp"
+                language={this.props.fileLang}
                 theme="vs-dark"
-                value={this.props.value}
+                value={editorContent}
                 options={options}
                 onChange={this.onChange}
                 editorDidMount={this.editorDidMount}
