@@ -13,7 +13,10 @@ function GroupedButtons(props) {
     function handleClick(e) {
             // console.log(props.contract)
             // console.log(props.deployfield.map(f => f.name)[0])
-            console.log(props.neo.network)
+            console.log(props.deployfield)
+            console.log(props.deployfield.map(f => f.name)[0].length && props.deployfield.map(f => f.version)[0].length && 
+            props.deployfield.map(f => f.author)[0].length && props.deployfield.map(f => f.email)[0].length
+            && props.deployfield.map(f => f.networkFee)[0].length )
 
             console.log("NET: ", props.neo.network)
             neoDapi.deploy({
@@ -21,7 +24,7 @@ function GroupedButtons(props) {
                 name: props.deployfield.map(f => f.name)[0] + "",
                 version: props.deployfield.map(f => f.version)[0]+ "",
                 author: props.deployfield.map(f => f.author)[0]+ "",
-                email: props.deployfield.map(f => f.emai)[0]+ "",
+                email: props.deployfield.map(f => f.email)[0]+ "",
                 description: props.deployfield.map(f => f.description)[0]+ "",
                 needsStorage: props.deployfield.map(f => f.needsStorage)[0],
                 dynamicInvoke: props.deployfield.map(f => f.dynamicInvoke)[0],
@@ -60,6 +63,9 @@ function GroupedButtons(props) {
                         color="secondary"
                         size="large"
                         aria-label="large contained secondary button group"
+                        disabled={props.deployfield.map(f => f.name)[0].length && props.deployfield.map(f => f.version)[0].length && 
+                            props.deployfield.map(f => f.author)[0].length && props.deployfield.map(f => f.email)[0].length
+                            && props.deployfield.map(f => f.networkFee)[0].length  ? false : true}
                     >
                         <Button onClick={handleClick}>Deploy</Button>
                     </ButtonGroup>
