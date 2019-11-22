@@ -54,9 +54,8 @@ class CustomButton extends React.Component {
         filename: filePath[filePath.length - 1]
     }, {timeout: 1000}).then(res => {
       v++;
-      let msg = <Link>https://stackoverflow.com/questions/10464611/javascript-split-a-string</Link>
       this.props.changeFileCompiled(this.props.file.key, toHex(res.data),{methods:[`param.${v}`, `next.${v+1}`,]})
-      this.props.addLog(msg, "Compiler")
+      this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
       this.props.enqueueSnackbar(notify('Compiled!', 'success', 'Compiler', this.props.closeSnackbar));
     }).catch(err => {
       let messageError = (err.response && err.response.data) || "Server is not responding, try again"

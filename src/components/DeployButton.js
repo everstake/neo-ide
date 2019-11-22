@@ -1,9 +1,9 @@
 import Telegram from '@material-ui/icons/Telegram';
 import Button from '@material-ui/core/Button';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import React from "react";
 import * as actions from '../actions/index'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import notify from '../utils/notificator.js';
 import neoDapi from 'neo-dapi';
 import * as Config from 'Config';
@@ -23,7 +23,7 @@ function CustomButtonView(props) {
         color="primary"
         size="small"
         className={classes.button}
-        startIcon={<Telegram/>}
+        startIcon={<Telegram />}
         onClick={props.deploy}
         args={props.args}
     > {props.content} </Button>);
@@ -37,12 +37,12 @@ class CustomButton extends React.Component {
 
     deploy() {
         neoDapi.deploy({
-            network: this.props.neo.network+ "",
+            network: this.props.neo.network + "",
             name: this.props.deployfield.map(f => f.name)[0] + "",
-            version: this.props.deployfield.map(f => f.version)[0]+ "",
-            author: this.props.deployfield.map(f => f.author)[0]+ "",
-            email: this.props.deployfield.map(f => f.emai)[0]+ "",
-            description: this.props.deployfield.map(f => f.description)[0]+ "",
+            version: this.props.deployfield.map(f => f.version)[0] + "",
+            author: this.props.deployfield.map(f => f.author)[0] + "",
+            email: this.props.deployfield.map(f => f.emai)[0] + "",
+            description: this.props.deployfield.map(f => f.description)[0] + "",
             needsStorage: this.props.deployfield.map(f => f.needsStorage)[0],
             dynamicInvoke: this.props.deployfield.map(f => f.dynamicInvoke)[0],
             isPayable: this.props.deployfield.map(f => f.isPayable)[0],
@@ -50,13 +50,12 @@ class CustomButton extends React.Component {
             returnType: '05',
             code: this.props.file.binary + "",
             networkFee: Config.deploy.defaultFee + "",
-        }).then(({txid, nodeUrl}: InvokeOutput) => {
-            let msg = `Deploy transaction success!\nTransaction ID: ${txid} `
-            // let msg = <Link>{txid}</Link>
+        }).then(({ txid, nodeUrl }: InvokeOutput) => {
+            let msg = `Deploy transaction success!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`
             this.props.addLog(msg, 'Deploy');
             this.props.enqueueSnackbar(notify('Deploy transaction success!', 'success', 'Deploy', this.props.closeSnackbar));
             this.props.changeFileDeployed(this.props.file.key, txid)
-    
+
         }).catch(err => {
             console.log(err)
             this.props.addLog(err.description.message || err.description || "Transaction rejected!", 'Deploy');
@@ -78,7 +77,7 @@ class CustomButton extends React.Component {
         return (
             <CustomButtonView
                 disabled={(!this.props.file.compiled && !this.props.file.deployed) || (this.props.file.deployed)}
-                content={content} deploy={this.deploy} args={{lala: 15}}/>
+                content={content} deploy={this.deploy} args={{ lala: 15 }} />
         );
     }
 }
@@ -91,18 +90,18 @@ const mapStateToProps = (store) => {
         }
     });
     return {
-            file: file,
-            neo: store.neo,
-            contract: store.contract,
-            deployfield: store.deployfield.filter(f => f.contract === store.contract.map(f => f.contract)[0]),
-            file: file
-        };
+        file: file,
+        neo: store.neo,
+        contract: store.contract,
+        deployfield: store.deployfield.filter(f => f.contract === store.contract.map(f => f.contract)[0]),
+        file: file
+    };
 };
 
 const mapDispatchToProps = dispatch => ({
     changeFileDeployed: (name) => dispatch(actions.changeFileDeployed(name)),
-    enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
-    closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key)),
+    enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message, options)),
+    closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b))
 });
 
