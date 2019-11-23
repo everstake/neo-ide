@@ -14,8 +14,6 @@
 # production
 /build
 
-/compilers/*
-
 # misc
 .DS_Store
 .env.local

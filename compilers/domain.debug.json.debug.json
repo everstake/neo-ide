@@ -1,0 +1,33 @@
+{
+    "avm": {
+        "name": "domain.avm",
+        "hash": "a73f61152738c9d0c7f808bf86872dbc"
+    },
+    "compiler": {
+        "name": "neo-boa",
+        "version": "0.6.0"
+    },
+    "files": [
+        {
+            "id": 1,
+            "url": "/home/su/compilers/domain.py.py"
+        }
+    ],
+    "map": [
+        {
+            "start": 3,
+            "end": 68,
+            "file": 1,
+            "method": "main",
+            "line": 2,
+            "file_line_no": 2
+        },
+        {
+            "start": 69,
+            "end": 72,
+            "file": 1,
+            "line": 3
+        }
+    ],
+    "breakpoints": []
+}
