@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useCallback} from "react";
 import '../stylesheets/d.css';
 import Afpp from '../App';
 import SplitPane from 'react-split-pane';
@@ -50,6 +50,7 @@ const useStyles = makeStyles(theme => ({
 const mapStateToProps = store => ({
     logs: store,
     neo: store.neo,
+    contract: store.contract
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -64,109 +65,104 @@ function MainPanel(props) {
     const [expanded, setExpanded] = useState(false);
     const [account, setAccount] = useState(false);
 
-    const [network, setNetwork] = useState(false);
     const [balance, setBalance] = useState(null);
-    const [Neo, setNeo] = useState(null);
-    const [Warning, setWarning] = useState(null);
 
-    // useEffect(() => {
-    //     if (!Neo) {
+
+    const handleReady= useCallback(event => {    
+        console.log("EVEEET")
+
+        console.log(event)
+        neoDapi.getAccount().then(f =>
+                   {
+                            console.log(f.address)
+                       props.changeNEOField("address", f.address)
+                   }).catch(e => {  console.log(e) 
+                    props.changeNEOField("neo", false)})
+
+
+      }, []);
+
+
+      const handleBalance= (event, m) => {    
+       
+
+        console.log(event)
+        console.log(m)
+
+
+        // let t = setInterval(function () {
+             neoDapi.getBalance({
+                params: [
+                    {
+                        address: m +'',
+                        assets: ['NEO', 'GAS']
+                    },
+                ],
+                network: event+ ''
+            }).then(results => {
+                Object.keys(results).forEach(address => {
+                    const balances = results[address];
+                    let asset = []
+                    let balanci = []
+                    balances.forEach(balance => {
+                      const { assetID, symbol, amount } = balance
+                      asset.push(symbol)
+                      balanci.push(amount)
+                  
+                    })
+                    props.changeNEOField("coin_type", asset)
+                    props.changeNEOField("amount", balanci)
+                    
+
+                    console.log(asset)
+                    console.log(balanci)
+                    
+                })
+            }).catch (e =>  console.log(e) )
+
+        // }, 1000)
+
+
+      };
+
+      const handleConnected = useCallback(event => {
+        // const { key, keyCode } = event;
+    
+        console.log("CON")
+        console.log(event)
+
+
+        neoDapi.getNetworks()
+        .then(f =>
+            {
+                props.changeNEOField("network", f.defaultNetwork)
+                return f 
+            }
             
-    //         window.addEventListener('neoline.ready', () => {
-    //             const neoline = new global.NEOLine.Init();
-    //             setNeo(neoline);
-    //             props.addNeo(neoline);
-    //             neoline.getAccount()
-    //                 .then(account => {
-    //                     setAccount(account);
-    //                     test(neoline, account)
+            ).then(f => { handleBalance(f.defaultNetwork, event.address)} )
+}, []);
 
-    //                 })
-    //         });
-    //     }
-    // });
+
+      const handleChangeNetwork= useCallback(event => {    
+        props.changeNEOField("network", event.defaultNetwork)
+     
+      }, []);
+
 
     useEffect(() => {
-        let timer = setInterval(function dd(){
-            // console.log(props.neo)
-           
-            // console.log(i)
-
-            
-          if(props.neo.neo){
-            
-              if(!props.neo.address){
-          
-                  neoDapi.getAccount().then(f =>
-                       {
-    
-                           props.changeNEOField("address", f.address)
-                       }).catch(e =>     props.changeNEOField("neo", false))
-              }
-
-               if(props.neo.address){
-                neoDapi.getNetworks()
-                .then(f =>props.changeNEOField("network", f.defaultNetwork)).catch(e =>     props.changeNEOField("neo", false))
-               
-             }
-
-             if(props.neo.network && !props.neo.amount){
-
-                neoDapi.getBalance({
-                            params: [
-                                {
-                                    address: props.neo.address +'',
-                                    assets: ['NEO', 'GAS']
-                                },
-                            ],
-                            network: props.neo.network + ''
-                        }).then(results => {
-                            Object.keys(results).forEach(address => {
-                                const balances = results[address];
-                                let asset = []
-                                let balanci = []
-                                balances.forEach(balance => {
-                                  const { assetID, symbol, amount } = balance
-                                  asset.push(symbol)
-                                  balanci.push(amount)
-                              
-                                })
-                                props.changeNEOField("coin_type", asset)
-                                props.changeNEOField("amount", balanci)
-                                
-
-
-                                
-                            })
-                        }).catch (e =>     props.changeNEOField("neo", false))
-                        
-             } 
-            
-          }
-          else{
-          checkneoDapi()
-          }
+        neoDapi.addEventListener(neoDapi.Constants.EventName.READY, handleReady)
+        neoDapi.addEventListener(neoDapi.Constants.EventName.CONNECTED, handleConnected)
+        neoDapi.addEventListener(neoDapi.Constants.EventName.NETWORK_CHANGED, handleChangeNetwork)
         
-        }, 1000)
           return () => {
-            clearInterval(timer)
+            
+            neoDapi.removeEventListener(neoDapi.Constants.EventName.NETWORK_CHANGED);
+            neoDapi.removeEventListener(neoDapi.Constants.EventName.CONNECTED);
+            neoDapi.removeEventListener(neoDapi.Constants.EventName.READY);
+            
           };
-        }, [props])
+        }, [handleReady, handleConnected, handleChangeNetwork])
 
-    const checkneoDapi = () => {
-
-        neoDapi.getProvider().then(f => { 
-        
-            props.changeNEOField("neo", true)
-        
-        }).catch(e => {
-            props.changeNEOField("neo", false)
-          console.log(e) ;
-
-        })
-    }
-
-  
 
     const onSelect = (selected) => {
 
@@ -180,6 +176,7 @@ function MainPanel(props) {
     const classes = useStyles();
 
     function renderBreadcrumbs() {
+        console.log(!props.contract.length)
         const pageTitle = {
             'home': [
                 <div>
@@ -190,7 +187,7 @@ function MainPanel(props) {
                  <DiskButtons/>,
                 <FileBrowserWrapper/>
             ],
-            'devices': props.neo.network ? [<div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div>]: [<Paper> There is no wallet</Paper>],
+            'devices': props.neo.network ? [props.contract.length ? <div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div>: <div className='select'><SelectDeploy></SelectDeploy></div>]: [<Paper> There is no wallet</Paper>],
             'reports': ['Reports'],
             'wallet': [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>, <SplitButton/>],

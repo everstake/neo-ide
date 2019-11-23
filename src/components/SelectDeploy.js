@@ -27,7 +27,8 @@ function SelectDeploy(props) {
       }
 
     return(
-        <Paper>
+        <Paper  elevation={0}
+        style={{ padding: 25, margin: 0, backgroundColor: "#fafafa" }}>
     <Select defaultValue={[{value: props.contract.map(f => f.contract)[0], label: props.contract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.key)).length
      ?  props.file.map(f => ({value: f.key ,label: f.key, methods:f.methods})): [{label: "No compiled contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
 </Paper>

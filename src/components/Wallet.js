@@ -34,7 +34,7 @@ function createData(name, calories) {
 function Wallet(props) {
     const classes = useStyles();
     // console.log(props.wallet.amount);
-console.log(props.files)
+    console.log(props.neo)
     const rows = [
         createData('Address', props.neo.address + ''),
         createData('NEO', props.neo.amount[0] + ''),

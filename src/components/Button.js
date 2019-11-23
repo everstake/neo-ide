@@ -11,28 +11,20 @@ function GroupedButtons(props) {
 
 
     function handleClick(e) {
-        // console.log(props.contract)
-        // console.log(props.deployfield.map(f => f.name)[0])
-        console.log(props.neo.network)
-
-        console.log("NET: ", props.neo.network)
-        neoDapi.deploy({
-            network: props.neo.network + "",
-            name: props.deployfield.map(f => f.name)[0] + "",
-            version: props.deployfield.map(f => f.version)[0] + "",
-            author: props.deployfield.map(f => f.author)[0] + "",
-            email: props.deployfield.map(f => f.emai)[0] + "",
-            description: props.deployfield.map(f => f.description)[0] + "",
-            needsStorage: props.deployfield.map(f => f.needsStorage)[0],
-            dynamicInvoke: props.deployfield.map(f => f.dynamicInvoke)[0],
-            isPayable: props.deployfield.map(f => f.isPayable)[0],
-            parameterList: '0710',
-            returnType: '05',
-            code: props.files.map(f => f.binary)[0] + "",
-            networkFee: props.deployfield.map(f => f.networkFee)[0] + "",
-
-
-
+            neoDapi.deploy({
+                network: props.neo.network+ "",
+                name: props.deployfield.map(f => f.name)[0] + "",
+                version: props.deployfield.map(f => f.version)[0]+ "",
+                author: props.deployfield.map(f => f.author)[0]+ "",
+                email: props.deployfield.map(f => f.email)[0]+ "",
+                description: props.deployfield.map(f => f.description)[0]+ "",
+                needsStorage: props.deployfield.map(f => f.needsStorage)[0],
+                dynamicInvoke: props.deployfield.map(f => f.dynamicInvoke)[0],
+                isPayable: props.deployfield.map(f => f.isPayable)[0],
+                parameterList: '0710',
+                returnType: '05',
+                code: props.files.map(f => f.binary)[0] + "",
+                networkFee: props.deployfield.map(f => f.networkFee)[0]+ "",
         }).then(({ txid, nodeUrl }: InvokeOutput) => {
             let msg = `Deploy transaction success!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`
             props.addLog(msg, 'Deploy');
@@ -55,20 +47,23 @@ function GroupedButtons(props) {
 
     return (
         <Paper>
-            <Grid item xs={12} md={6}>
-                <Grid container spacing={1} direction="column" alignItems="center">
-                    <Grid item>
-                        <ButtonGroup
-                            variant="contained"
-                            color="secondary"
-                            size="large"
-                            aria-label="large contained secondary button group"
-                        >
-                            <Button onClick={handleClick}>Deploy</Button>
-                        </ButtonGroup>
-                    </Grid>
+        <Grid item xs={12} md={6}>
+            <Grid container spacing={1} direction="column" alignItems="center">
+                <Grid item>
+                    <ButtonGroup
+                        variant="contained"
+                        color="secondary"
+                        size="large"
+                        aria-label="large contained secondary button group"
+                        disabled={props.deployfield.map(f => f.name)[0].length && props.deployfield.map(f => f.version)[0].length && 
+                            props.deployfield.map(f => f.author)[0].length && props.deployfield.map(f => f.email)[0].length
+                            && props.deployfield.map(f => f.networkFee)[0].length  ? false : true}
+                    >
+                        <Button onClick={handleClick}>Deploy</Button>
+                    </ButtonGroup>
                 </Grid>
             </Grid>
+        </Grid>
         </Paper>
     );
 }
