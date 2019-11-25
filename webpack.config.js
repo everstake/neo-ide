@@ -55,6 +55,6 @@ module.exports = {
             },
         }),
         new UglifyJsPlugin(),
-        new CopyPlugin([{ from: 'public', to: 'dist' }]),
+        new CopyPlugin([{ from: './public/', to: './' }]),
     ]
 };

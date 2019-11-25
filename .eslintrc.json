@@ -1,0 +1,69 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "jest": true,
+        "mocha": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "block-spacing": "warn",
+        "no-class-assign": "warn",
+        "space-infix-ops": "warn",
+        "no-debugger": "off",
+        "no-undef": "warn",
+        "no-extra-semi": "warn",
+        "no-inner-declarations": "warn",
+        "no-irregular-whitespace": "warn",
+        "no-trailing-spaces": "warn",
+        "comma-dangle": ["warn", "always-multiline"],
+        "no-multiple-empty-lines": "warn",
+        "no-redeclare": "warn",
+        "no-useless-escape": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "eol-last": "warn",
+        "indent": [
+            "warn",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
+        "quotes": [
+            "warn",
+            "double"
+        ],
+        "react/jsx-uses-react": "warn",
+        "react/jsx-uses-vars": "warn",
+        "semi": [
+            "warn",
+            "always"
+        ],
+        "space-before-blocks": "warn",
+        "switch-colon-spacing": [
+            "warn",
+            {
+                "after": true,
+                "before": false
+            }
+        ]
+    },
+    "extends": [
+        "typescript"
+    ]
+}
