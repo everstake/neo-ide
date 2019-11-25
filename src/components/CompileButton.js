@@ -10,30 +10,30 @@ import * as Config from 'Config';
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
-    button: {
-      margin: theme.spacing(1),
-    },
-  }));
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 let v = 0;
 
 function CustomButtonView(props) {
-    const classes = useStyles();
-    return (<Button 
-      disabled={ props.disabled }
-      variant="contained"
-      color="secondary"
-      size="small"
-      className={classes.button}
-      startIcon={<Settings />}
-      onClick={ props.compile }
-      args={ props.args }
-    > { props.content } </Button>);
+  const classes = useStyles();
+  return (<Button
+    disabled={props.disabled}
+    variant="contained"
+    color="secondary"
+    size="small"
+    className={classes.button}
+    startIcon={<Settings />}
+    onClick={props.compile}
+    args={props.args}
+  > {props.content} </Button>);
 }
 
 function toHex(str) {
   var result = '';
-  for (var i=0; i<str.length; i++) {
+  for (var i = 0; i < str.length; i++) {
     result += str.charCodeAt(i).toString(16);
   }
   return result;
@@ -42,19 +42,20 @@ function toHex(str) {
 class CustomButton extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.compile = this.compile.bind(this);
   }
-  
+
   compile() {
     let filePath = this.props.file.key.split('/');
     this.props.addLog("Request to compiler...", "Compiler")
     axios.post(Config.compiler.pyEndpoint, {
-        text: this.props.file.savedContent,
-        filename: filePath[filePath.length - 1]
-    }, {timeout: 1000}).then(res => {
+      text: this.props.file.savedContent,
+      filename: filePath[filePath.length - 1]
+    }, { timeout: 1000 }).then(res => {
       v++;
-      this.props.changeFileCompiled(this.props.file.key, toHex(res.data),{methods:[`param.${v}`, `next.${v+1}`,]})
+      console.log('====> ', res)
+      this.props.changeFileCompiled(this.props.file.key, toHex(res.data), { methods: [`param.${v}`, `next.${v + 1}`,] })
       this.props.addLog("Compiled: " + toHex(res.data), "Compiler")
       this.props.enqueueSnackbar(notify('Compiled!', 'success', 'Compiler', this.props.closeSnackbar));
     }).catch(err => {
@@ -72,28 +73,28 @@ class CustomButton extends React.Component {
     } else {
       content = "compile"
     }
-   
+
     return (
-      <CustomButtonView disabled={ !(this.props.file.saved && !this.props.file.compiled) } content={ content } compile= {this.compile} args={{lala: 15}}/>
+      <CustomButtonView disabled={!(this.props.file.saved && !this.props.file.compiled)} content={content} compile={this.compile} args={{ lala: 15 }} />
     );
   }
 }
 
-const mapStateToProps =  (store) => {
+const mapStateToProps = (store) => {
   let file = {};
   store.files.forEach(elem => {
     if (elem.file === true && elem.key.slice(-store.currentFile.length) === store.currentFile) {
       file = elem;
-    }  
+    }
   });
-  return {file: file};
+  return { file: file };
 };
 
-const mapDispatchToProps = dispatch =>({
-  changeFileCompiled: (name, binary, methods)=>dispatch(actions.changeFileCompiled(name, binary, methods)),
-  addLog: (a, b)=>dispatch(actions.addLog(a, b)),
-  enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message, options)),
-  closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key))
+const mapDispatchToProps = dispatch => ({
+  changeFileCompiled: (name, binary, methods) => dispatch(actions.changeFileCompiled(name, binary, methods)),
+  addLog: (a, b) => dispatch(actions.addLog(a, b)),
+  enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message, options)),
+  closeSnackbar: (key) => dispatch(actions.closeSnackbar(key))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)
