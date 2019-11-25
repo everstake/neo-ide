@@ -1,7 +1,0 @@
-{ 
-    "compiler": {
-        "pyEndpoint": "???/build_avm/py",
-        "csEndpoint": "???/build_avm/cs"
-    }
-}
-

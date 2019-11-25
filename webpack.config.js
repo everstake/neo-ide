@@ -1,58 +1,60 @@
-const path = require('path');
-const NodeExternals = require('webpack-node-externals');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: {
-    "app": './src/file_explorer/index.js', 
-    "editor.worker": 'monaco-editor/esm/vs/editor/editor.worker.js',
-    "json.worker": 'monaco-editor/esm/vs/language/json/json.worker',
-    "css.worker": 'monaco-editor/esm/vs/language/css/css.worker',
-    "html.worker": 'monaco-editor/esm/vs/language/html/html.worker',
-    "ts.worker": 'monaco-editor/esm/vs/language/typescript/ts.worker',
-  },
-  output: {
-    path: path.join(__dirname, '/dist'),
-    filename: 'react-keyed-file-browser.js',
-    library: 'react-keyed-file-browser',
-    libraryTarget: 'umd',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /.*\.sass*/,
-        loader: ['style-loader', 'css-loader', 'sass-loader'],
-        include: path.join(__dirname, '/src'),
-      },
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, './src'),
-        use: [{
-          loader: 'style-loader',
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            namedExport: true,
-          },
-        }],
-      },
-      {
-        test: /\.css$/,
-        include: path.resolve(__dirname, './node_modules/monaco-editor'),
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-  externals: NodeExternals(),
-  plugins: [
-    new MonacoWebpackPlugin(),
-  ],
+    mode: process.env.NODE_ENV === "production" ? "production" : "development",
+    devtool: "inline-source-map",
+    entry: "./src/index.tsx",
+    output: {
+        path: __dirname + "/dist",
+        filename: "bundle.js"
+    },
+    devServer: {
+        inline: true,
+        contentBase: './public',
+        port: 3000
+    },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js"]
+    },
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                loader: "ts-loader"
+            },
+            {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                enforce: "pre",
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+        ]
+    },
+    plugins: [
+        new HtmlWebPackPlugin({
+            title: "Neo IDE",
+            template: "./public/index.html",
+            filename: "index.html",
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+            },
+        }),
+        new UglifyJsPlugin(),
+        new CopyPlugin([{ from: 'public', to: 'dist' }]),
+    ]
 };
