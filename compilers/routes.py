@@ -3,7 +3,6 @@ from flask import Flask, flash, request, redirect, url_for, send_file, jsonify, 
 from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
-#from server import app
 import json
 from func_for_python_file import create_base_file, create_avm_file, delete_file
 from func_for_cs_file import code64_generator
@@ -24,18 +23,16 @@ def build_avm_file():
     try:
         data = request.get_json(force=True)
         text = data['text']
-        print(text)
         filename = data['filename']
-        print(text, filename)
-        path_to_py_file, method = create_base_file(text, filename, '.py')
+        path_to_py_file, method = create_base_file(text, filename)
         # print(path_to_py_file)
         # path_to_py_file = '/'
-        print("Hallo => ", method)
         try:
             path = create_avm_file(path_to_py_file)
         except Exception as e:
             return make_response(jsonify(str(e)), 400)
-        return path, method
+        method = json.dumps(method)
+        return jsonify({'avm':path, 'method':method})
     except Exception as e:
         return make_response(jsonify({'error': e}), 500)
 
