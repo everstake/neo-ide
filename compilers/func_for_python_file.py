@@ -12,7 +12,6 @@ def create_base_file(text, filename):
     text = text.split('\n')
     for i in range(0, len(text)):
         text[i] = text[i] + '\n'
-    print("Hallo ", text, type(text))
     for elem in text:
         f.write(elem)
         if elem.partition("def")[2][elem.partition("def")[2].find("Main"): elem.partition("def")[2].find("(")] == 'Main':
@@ -25,7 +24,6 @@ def create_base_file(text, filename):
     f.close()
     path = os.getcwd()
     full_path = str(path+'/'+f.name)
-    print(full_path)
     return full_path, method
 
 
