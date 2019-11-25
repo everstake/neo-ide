@@ -19,7 +19,7 @@ def hello():
 
 @app.route('/build_avm/py', methods=['POST'])
 @cross_origin()
-def build_avm_file():
+def build_avm_file_from_py():
     try:
         data = request.get_json(force=True)
         text = data['text']
@@ -38,7 +38,7 @@ def build_avm_file():
 
 
 @app.route('/build_avm/cs', methods=['POST'])
-def upload_file():
+def build_avm_file_from_cs():
     try:
         data = request.get_json(force=True)
         text = data['text']
