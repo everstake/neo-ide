@@ -1,9 +1,12 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+
+const isEnvProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-    mode: process.env.NODE_ENV === "production" ? "production" : "development",
+    mode: isEnvProduction ? "production" : "development",
     devtool: "inline-source-map",
     entry: "./src/index.tsx",
     output: {
@@ -36,7 +39,11 @@ module.exports = {
             },
         ]
     },
+    externals: {
+        "Config": JSON.stringify(isEnvProduction ? require("./config.prod.json") : require("./config.dev.json"))
+    },
     plugins: [
+        new MonacoWebpackPlugin(),
         new HtmlWebPackPlugin({
             title: "Neo IDE",
             template: "./public/index.html",
@@ -54,7 +61,7 @@ module.exports = {
                 minifyURLs: true,
             },
         }),
-        new UglifyJsPlugin(),
+        (isEnvProduction ? new UglifyJsPlugin() : undefined),
         new CopyPlugin([{ from: './public/', to: './' }]),
     ]
 };

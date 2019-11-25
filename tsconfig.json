@@ -2,13 +2,19 @@
     "compilerOptions": {
         "outDir": "./dist",
         "sourceMap": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "module": "commonjs",
         "target": "es5",
         "jsx": "react",
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "Config": [
+                "./config.dev.json"
+            ]
+        }
     },
     "include": [
         "./src/**/*"

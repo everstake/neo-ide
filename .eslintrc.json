@@ -1,5 +1,6 @@
 {
     "env": {
+        "node": true,
         "browser": true,
         "commonjs": true,
         "jest": true,
@@ -26,12 +27,15 @@
         "no-inner-declarations": "warn",
         "no-irregular-whitespace": "warn",
         "no-trailing-spaces": "warn",
-        "comma-dangle": ["warn", "always-multiline"],
+        "comma-dangle": [
+            "warn",
+            "always-multiline"
+        ],
         "no-multiple-empty-lines": "warn",
         "no-redeclare": "warn",
         "no-useless-escape": "warn",
         "no-unreachable": "warn",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "eol-last": "warn",
         "indent": [
             "warn",
@@ -40,10 +44,7 @@
                 "SwitchCase": 1
             }
         ],
-        "linebreak-style": [
-            "warn",
-            "windows"
-        ],
+        "linebreak-style": "off",
         "quotes": [
             "warn",
             "double"
@@ -61,7 +62,11 @@
                 "after": true,
                 "before": false
             }
-        ]
+        ],
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/no-unused-vars": 0,
+        "@typescript-eslint/camelcase": 0
     },
     "extends": [
         "typescript"
