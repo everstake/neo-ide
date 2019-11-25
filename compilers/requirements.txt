@@ -1,4 +1,0 @@
-flask
-werkzeug
-flask_cors
-locust

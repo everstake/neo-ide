@@ -1,8 +1,0 @@
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/bin/Debug/netstandard2.0/NeoContractDemo.deps.json
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/bin/Debug/netstandard2.0/NeoContractDemo.dll
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/bin/Debug/netstandard2.0/NeoContractDemo.pdb
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/obj/Debug/netstandard2.0/NeoContractDemo.csprojAssemblyReference.cache
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/obj/Debug/netstandard2.0/NeoContractDemo.AssemblyInfoInputs.cache
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/obj/Debug/netstandard2.0/NeoContractDemo.AssemblyInfo.cs
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/obj/Debug/netstandard2.0/NeoContractDemo.dll
-/home/oleg/workspace/and/neo-online-ide-react/compilers/NeoContractDemo/obj/Debug/netstandard2.0/NeoContractDemo.pdb
