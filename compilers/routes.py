@@ -32,7 +32,7 @@ def build_avm_file():
         except Exception as e:
             return make_response(jsonify(str(e)), 400)
         method = json.dumps(method)
-        return jsonify({'avm':path, 'method':method})
+        return jsonify({'avm':path, 'method':method}, 200)
     except Exception as e:
         return make_response(jsonify({'error': e}), 500)
 
