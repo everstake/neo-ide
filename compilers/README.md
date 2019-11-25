@@ -11,7 +11,7 @@ docker build -t neo-online-ide .
 ```
 and command to run in 5000 port
 ```bash
-sudo docker run -it --rm -p 5000:5000 neo-online-ide
+docker run -it --rm -p 5000:5000 neo-online-ide
 ```
 
 route `/build_avm/py` with parameters `text` (string or list of lines) and `filename` (string)
