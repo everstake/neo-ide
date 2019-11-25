@@ -3,11 +3,11 @@ import Moment from 'moment'
 import ClassNames from 'classnames'
 
 import flow from 'lodash/flow'
-import {DragSource, DropTarget} from 'react-dnd'
-import {NativeTypes} from 'react-dnd-html5-backend'
+import { DragSource, DropTarget } from 'react-dnd'
+import { NativeTypes } from 'react-dnd-html5-backend'
 
-import BaseFile, {BaseFileConnectors} from './../base-file.js'
-import {fileSize} from './utils.js'
+import BaseFile, { BaseFileConnectors } from './../base-file.js'
+import { fileSize } from './utils.js'
 
 class RawTableFile extends BaseFile {
     render() {
@@ -89,11 +89,11 @@ class RawTableFile extends BaseFile {
                 onDoubleClick={this.handleItemDoubleClick}
             >
                 <td className="name">
-                    <div style={{paddingLeft: (depth * 16) + 'px'}}>
+                    <div style={{ paddingLeft: (depth * 16) + 'px' }}>
                         {draggable}
                     </div>
                 </td>
-                <td className="size">{fileSize(size)}</td>
+                <td className="size">{/*(fileSize(size)*/}</td>
                 <td className="modified">
                     {typeof modified === 'undefined' ? '-' : Moment(modified, 'x').fromNow()}
                 </td>
@@ -115,4 +115,4 @@ export default flow(
         BaseFileConnectors.targetCollect,
     )
 )(TableFile)
-export {RawTableFile}
+export { RawTableFile }
