@@ -30,7 +30,7 @@ const mapStateToProps = (store) => {
 
 const options = ["Deploy"];
 const mapDispatchToProps = dispatch => ({
-    changeFileDeployed: (name) => dispatch(actions.changeFileDeployed(name)),
+    changeFileDeployed: (name, i) => dispatch(actions.changeFileDeployed(name, i)),
     enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
@@ -63,7 +63,7 @@ function SplitButton(props) {
             const msg = `Transaction has been successfully deployed!\nTransaction ID: ${txid} `;
             props.addLog(msg, "Deploy");
             props.enqueueSnackbar(notify(msg, "success", "Deploy", props.closeSnackbar));
-            props.changeFileDeployed(props.file.key);
+            props.changeFileDeployed(props.file.key, txid);
         }).catch(err => {
             props.addLog(err.description, "Deploy");
             props.enqueueSnackbar(notify(err.description, "error", "Deploy", props.closeSnackbar));

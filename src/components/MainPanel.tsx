@@ -82,12 +82,6 @@ function MainPanel(props) {
 
 
     const handleBalance = (event, m) => {
-
-
-        console.log(event);
-        console.log(m);
-
-
         // let t = setInterval(function () {
         neoDapi.getBalance({
             params: [
@@ -98,6 +92,7 @@ function MainPanel(props) {
             ],
             network: event + "",
         }).then(results => {
+            console.log("### RESULTS: ", results);
             Object.keys(results).forEach(address => {
                 const balances = results[address];
                 const asset = [];
@@ -119,8 +114,6 @@ function MainPanel(props) {
         }).catch (e =>  console.log(e) );
 
         // }, 1000)
-
-
     };
 
     const handleConnected = useCallback(event => {
@@ -174,7 +167,7 @@ function MainPanel(props) {
     const classes = useStyles(props);
 
     function renderBreadcrumbs() {
-        console.log(!props.contract.length);
+        // console.log(!props.contract.length);
         const pageTitle = {
             "home": [
                 <div>
@@ -188,7 +181,7 @@ function MainPanel(props) {
             "devices": props.neo.network ? [props.contract.length ? <div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div> : <div className='select'><SelectDeploy></SelectDeploy></div>] : [<Paper> There is no wallet</Paper>],
             "reports": ["Reports"],
             "wallet": [<Wallet account={account} balance={balance}></Wallet>,
-                <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
+                <MultilineTextFields></MultilineTextFields>],
             "settings/editor": [<SettingsPanel />],
             // 'settings/network': ['Settings', 'Network']
         };

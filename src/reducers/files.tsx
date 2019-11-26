@@ -8,9 +8,9 @@ const getFileLangByName = (fileName) => {
 
     Config.editor.supportedLanguages.forEach(lang => {
         if (fileExtension === lang.shortCut) {
-            fileLang = lang.monacoName
+            fileLang = lang.monacoName;
         }
-    })
+    });
     return fileLang;
 };
 
@@ -34,7 +34,7 @@ const filesReducer = (state = [], action) => {
                 file.savedContent = file.savedContent || "";
                 file.currentContent = file.savedContent || "";
                 file.binary = "";
-                file.abi = "";
+                file.abi = "[\"query\", \"delete\", \"register\", \"transfer\"]";
                 file.tx_id = "";
 
                 for (let i = 0; i < state.length; i++) {
