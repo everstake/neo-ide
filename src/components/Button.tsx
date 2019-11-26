@@ -11,6 +11,8 @@ function GroupedButtons(props) {
 
 
     function handleClick(e) {
+
+   
         neoDapi.deploy({
             network: props.neo.network + "",
             name: props.deployfield.map(f => f.name)[0] + "",
@@ -30,9 +32,10 @@ function GroupedButtons(props) {
             props.addLog(msg, "Deploy");
             props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", props.closeSnackbar));
             console.log(txid);
-            // props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
+            props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
 
         }).catch(err => {
+            props.changeFileDeployed(props.files.map(f => f.key)[0], 1)
             console.log(err);
             props.addLog(err.description.message || err.description || "Transaction has been rejected!", "Deploy");
             props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction has been rejected!", "error", "Deploy", props.closeSnackbar));

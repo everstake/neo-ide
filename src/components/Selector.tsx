@@ -39,9 +39,7 @@ function Selector(props) {
     // // props.addParameter(props.number, "a", "s")
 
         props.changeParameterValue(props.number, e.target.value);
-        console.log(props.number);
-        console.log(props.type);
-        console.log(props.value_field);
+
     };
     const handleClose = () => {
         setOpen(false);

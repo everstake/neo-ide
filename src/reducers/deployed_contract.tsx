@@ -2,9 +2,9 @@ const deployedcontractReducer = (state = [], action) => {
     switch (action.type) {
         case "SELECT_DEP_CONTRACT":  {
 
-
+            
             if(!state.length) {
-
+                console.log("ASDASDADASDSDA")
                 return [
                     ...state,
                     {

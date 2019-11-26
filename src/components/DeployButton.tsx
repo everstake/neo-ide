@@ -35,7 +35,7 @@ class CustomButton extends React.Component<any, any> {
     }
 
     deploy() {
-        neoDapi.deploy({
+        const args = {
             network: this.props.neo.network + "",
             name: this.props.deployfield.map(f => f.name)[0] + "",
             version: this.props.deployfield.map(f => f.version)[0] + "",
@@ -49,7 +49,10 @@ class CustomButton extends React.Component<any, any> {
             returnType: "05",
             code: this.props.file.binary + "",
             networkFee: Config.deploy.defaultFee + "",
-        }).then(({ txid, nodeUrl }) => {
+        };
+        console.log("### args:", args);
+        neoDapi.deploy(args).then(({ txid, nodeUrl }) => {
+            console.log("### nodeUrl:", nodeUrl);
             const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
             this.props.addLog(msg, "Deploy");
             this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
@@ -97,11 +100,10 @@ const mapStateToProps = (store) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    changeFileDeployed: (name) => dispatch(actions.changeFileDeployed(name)),
+    changeFileDeployed: (name, i) => dispatch(actions.changeFileDeployed(name, i)),
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)
-;
+export default connect(mapStateToProps, mapDispatchToProps)(CustomButton);
