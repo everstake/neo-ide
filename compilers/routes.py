@@ -32,6 +32,7 @@ def build_avm_file_from_py():
         except Exception as e:
             return make_response(jsonify(str(e)), 400)
         method = json.dumps(method)
+        print(method)
         return jsonify({'avm':path, 'method':method}, 200)
     except Exception as e:
         return make_response(jsonify({'error': e}), 500)
@@ -44,9 +45,9 @@ def build_avm_file_from_cs():
         text = data['text']
     except Exception as e:
         return make_response(jsonify({'error': e}), 500)
-    answer = code64_generator(text, False)
+    abi, avm, output = code64_generator(text, False)
 
-    return make_response(jsonify(answer))
+    return make_response(jsonify({'avm':avm, 'abi':abi, 'output': output}, 200))
 
 
 if __name__ == '__main__':
