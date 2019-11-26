@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-let v = 0;
+const v = 0;
 
 function CustomButtonView(props) {
     const classes = useStyles(props);
@@ -47,18 +47,18 @@ class CustomButton extends React.Component<any, any> {
 
     compile() {
         const filePath = this.props.file.key.split("/");
+        const compilerEndpoint = (this.props.file.lang === "python" && Config.compiler.pyEndpoint) || Config.compiler.csEndpoint;
         this.props.addLog("Request to compiler...", "Compiler");
-        axios.post(Config.compiler.pyEndpoint, {
+        axios.post(compilerEndpoint, {
             text: this.props.file.savedContent,
             filename: filePath[filePath.length - 1],
-        }, { timeout: 1000 }).then(res => {
-            v++;
+        }, { timeout: 10000 }).then(res => {
             console.log("====> ", res);
-            this.props.changeFileCompiled(this.props.file.key, toHex(res.data), { methods: [`param.${v}`, `next.${v + 1}`] });
-            this.props.addLog("Compiled: " + toHex(res.data), "Compiler");
+            this.props.changeFileCompiled(this.props.file.key, toHex(res.data[0].avm), res.data[0].method || res.data[0].abi); // todo: change data from array to object
+            this.props.addLog("Compiled: " + toHex(res.data[0].avm), "Compiler");
             this.props.enqueueSnackbar(notify("Compiled!", "success", "Compiler", this.props.closeSnackbar));
         }).catch(err => {
-            const messageError = (err.response && err.response.data) || "Server is not responding, try again";
+            const messageError = (err.response && err.response.data) || "Server did not respond, please try again later";
             console.log(messageError);
             this.props.addLog(messageError, "Compiler");
             this.props.enqueueSnackbar(notify(messageError, "error", "Compiler", this.props.closeSnackbar));
@@ -90,7 +90,7 @@ const mapStateToProps = (store) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    changeFileCompiled: (name, binary, methods) => dispatch(actions.changeFileCompiled(name, binary, methods)),
+    changeFileCompiled: (name, binary, abi) => dispatch(actions.changeFileCompiled(name, binary, abi)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),

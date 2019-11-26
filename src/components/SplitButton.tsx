@@ -60,7 +60,7 @@ function SplitButton(props) {
             code: props.file.binary,
             networkFee: "0.001",
         }).then(({txid, nodeUrl}) => {
-            const msg = `Deploy transaction success!\nTransaction ID: ${txid} `;
+            const msg = `Transaction has been successfully deployed!\nTransaction ID: ${txid} `;
             props.addLog(msg, "Deploy");
             props.enqueueSnackbar(notify(msg, "success", "Deploy", props.closeSnackbar));
             props.changeFileDeployed(props.file.key);

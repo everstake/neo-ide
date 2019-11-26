@@ -50,15 +50,15 @@ class CustomButton extends React.Component<any, any> {
             code: this.props.file.binary + "",
             networkFee: Config.deploy.defaultFee + "",
         }).then(({ txid, nodeUrl }) => {
-            const msg = `Deploy transaction success!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
+            const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
             this.props.addLog(msg, "Deploy");
-            this.props.enqueueSnackbar(notify("Deploy transaction success!", "success", "Deploy", this.props.closeSnackbar));
+            this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
             this.props.changeFileDeployed(this.props.file.key, txid);
 
         }).catch(err => {
             console.log(err);
-            this.props.addLog(err.description.message || err.description || "Transaction rejected!", "Deploy");
-            this.props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction rejected!", "error", "Deploy", this.props.closeSnackbar));
+            this.props.addLog(err.description.message || err.description || "Transaction has been rejected!", "Deploy");
+            this.props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction has been rejected!", "error", "Deploy", this.props.closeSnackbar));
             // Error with bed specification https://github.com/NeoResearch/neocompiler-eco/issues/45
             if (err.description.message && (err.description.message === "Error: One of the Policy filters failed.")) {
                 this.props.enqueueSnackbar(notify("Try to increase the amount of fee", "info", "Deploy", this.props.closeSnackbar));

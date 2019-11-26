@@ -26,16 +26,16 @@ function GroupedButtons(props) {
             code: props.files.map(f => f.binary)[0] + "",
             networkFee: props.deployfield.map(f => f.networkFee)[0] + "",
         }).then(({ txid, nodeUrl }) => {
-            const msg = `Deploy transaction success!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
+            const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
             props.addLog(msg, "Deploy");
-            props.enqueueSnackbar(notify("Deploy transaction success!", "success", "Deploy", props.closeSnackbar));
+            props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", props.closeSnackbar));
             console.log(txid);
             // props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
 
         }).catch(err => {
             console.log(err);
-            props.addLog(err.description.message || err.description || "Transaction rejected!", "Deploy");
-            props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction rejected!", "error", "Deploy", props.closeSnackbar));
+            props.addLog(err.description.message || err.description || "Transaction has been rejected!", "Deploy");
+            props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction has been rejected!", "error", "Deploy", props.closeSnackbar));
             // Error with bed specification https://github.com/NeoResearch/neocompiler-eco/issues/45
             if (err.description.message && (err.description.message === "Error: One of the Policy filters failed.")) {
                 props.enqueueSnackbar(notify("Try to increase the amount of fee", "info", "Deploy", props.closeSnackbar));
