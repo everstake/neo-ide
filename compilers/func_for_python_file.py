@@ -31,9 +31,3 @@ def create_avm_file(path_to_py_file):
     comp = Compiler.load(path_to_py_file)
     data = comp.write()
     return data.hex()
-
-
-def delete_file(path):
-    os.remove(path)
-
-

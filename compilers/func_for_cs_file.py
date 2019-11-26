@@ -22,4 +22,3 @@ def code64_generator(text: str, is_compatible: bool = False):
     avm = streamdata['avm']
     output = streamdata['output']
     return abi, avm, output
-
