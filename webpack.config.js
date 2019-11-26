@@ -61,7 +61,7 @@ module.exports = {
                 minifyURLs: true,
             },
         }),
-        (isEnvProduction ? new UglifyJsPlugin() : undefined),
+        // (isEnvProduction ? new UglifyJsPlugin() : undefined),
         new CopyPlugin([{ from: './public/', to: './' }]),
     ]
 };
