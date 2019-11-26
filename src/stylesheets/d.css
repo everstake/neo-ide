@@ -1,5 +1,5 @@
 .Resizer {
-    background: black;
+    background: transparent;
     opacity: .4;
     z-index: 1;
     -moz-box-sizing: border-box;
@@ -10,24 +10,14 @@
     background-clip: padding-box;
 }
 
-.Resizer:hover {
-    -webkit-transition: all 2s ease;
-    transition: all 2s ease;
-}
-
 .Resizer.horizontal {
     height: 10px;
     margin: 0 -5px;
     z-index: 8;
-    border-top: 5px solid black;
-    border-bottom: 5px transparent black;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
     cursor: row-resize;
     width: 100%;
-}
-
-.Resizer.horizontal:hover {
-    border-top: 5px solid rgba(0, 0, 0, 0.5);
-    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
 }
 
 .Resizer.vertical {

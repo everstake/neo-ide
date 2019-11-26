@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import notify from "../utils/notificator";
 import defaultFiles from "../default_files/default_files";
 
-import * as Config from "Config"
+import * as Config from "Config";
 
 class FileBrowserWrapper extends React.Component<any, any> {
     handleUploadFile = (key) => {

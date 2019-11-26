@@ -8,7 +8,7 @@ import store from "./store";
 import "./index.css";
 
 // Prevents page reload
-window.onbeforeunload = () => "";
+// window.onbeforeunload = () => "";
 
 ReactDOM.render(
     <Provider store={store}>
