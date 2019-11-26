@@ -25,8 +25,6 @@ def build_avm_file_from_py():
         text = data['text']
         filename = data['filename']
         path_to_py_file, method = create_base_file(text, filename)
-        # print(path_to_py_file)
-        # path_to_py_file = '/'
         try:
             path = create_avm_file(path_to_py_file)
         except Exception as e:
