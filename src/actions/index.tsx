@@ -61,11 +61,11 @@ export const changeFileSaved = (name, newContent, autosave) => ({
     autosave: autosave,
 });
 
-export const changeFileCompiled = (name, binary, methods) => ({
+export const changeFileCompiled = (name, binary, abi) => ({
     type: "CHANGE_FILE_COMPILED",
     name: name,
     binary: binary,
-    methods: methods,
+    abi: abi,
 });
 
 export const changeFileDeployed = (name, tx_id?) => ({
@@ -81,7 +81,7 @@ export const saveFile = (name, fileObj) => ({
 });
 
 
-export const changeNEOField = ( field_name, value) => ({
+export const changeNEOField = (field_name, value) => ({
     type: "CHANGE_NEO_FIELD",
     field_name: field_name,
     value: value,
