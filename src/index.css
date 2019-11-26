@@ -2,3 +2,35 @@ html, body {
     padding: 0;
     margin: 0;
 }
+
+a, span, div * {
+    font-family: 'Montserrat' !important;
+}
+
+.makeStyles-root-1 {
+    padding: 0 0 0 40px !important;
+}
+
+span.PrivateTabIndicator-colorSecondary-228 {
+    background-color: #02e49b !important;
+}
+
+button.MuiButton-containedSecondary {
+    background-color: #02e49b !important;
+}
+
+span.MuiTab-wrapper {
+    color: #ffffff !important;
+}
+
+nav.sidenav---sidenav---_2tBP {
+    background-color: #353535 !important;
+}
+
+.sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T * {
+    color: #e3e3e3 !important;
+}
+
+.terminalContainer {
+    margin-top: -5px;
+}
