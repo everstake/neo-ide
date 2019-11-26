@@ -2,9 +2,11 @@ import React from "react";
 import FileBrowser from "../file_explorer";
 import FontAwesomeIcons from "../file_explorer/icons/FontAwesome";
 import * as actions from "../actions/index";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import notify from "../utils/notificator";
 import defaultFiles from "../default_files/default_files";
+
+import * as Config from "Config"
 
 class FileBrowserWrapper extends React.Component<any, any> {
     handleUploadFile = (key) => {
@@ -22,7 +24,7 @@ class FileBrowserWrapper extends React.Component<any, any> {
             if (file.type.match(textFile)) {
                 reader.onload = function (event) {
                     console.log(event.target.result);
-                    props.addFile([{key: file.name, savedContent: event.target.result}], "");
+                    props.addFile([{ key: file.name, savedContent: event.target.result }], "");
                 };
                 reader.readAsText(file);
             } else {
@@ -64,7 +66,7 @@ class FileBrowserWrapper extends React.Component<any, any> {
         });
 
         this.props.addFile(defaultFiles.files, "");
-        this.props.changeCurrentFile("domain.py");
+        this.props.changeCurrentFile(Config.browser.defaultSelectedFileName);
     }
 
     componentDidMount() {
@@ -79,8 +81,8 @@ class FileBrowserWrapper extends React.Component<any, any> {
                 <FileBrowser
                     icons={FontAwesomeIcons(4)}
                     files={this.props.files}
-                    openFolders={{"examples_python/": true}}
-                    selection={"examples_python/domain.py"}
+                    openFolders={Config.browser.defaultOpenFolders}
+                    selection={Config.browser.defaultSelection}
 
                     headerRenderer={false}
 
@@ -108,16 +110,16 @@ const mapStateToProps = store => ({
     files: store.files,
 });
 
-const mapDispatchToProps = dispatch =>({
-    enqueueSnackbar: (message, options)=>dispatch(actions.enqueueSnackbar(message /*options*/)),
+const mapDispatchToProps = dispatch => ({
+    enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     addFile: (files, prefix) => dispatch(actions.addFile(files, prefix)),
-    changeCurrentFile: (name)=>dispatch(actions.changeCurrentFile(name)),
-    renameFolder: (currentKey, newKey, onError)=>dispatch(actions.renameFolder(currentKey, newKey, onError)),
-    renameFile: (currentKey, newKey)=>dispatch(actions.renameFile(currentKey, newKey)),
-    addFolder: (folderKey)=>dispatch(actions.addFolder(folderKey)),
-    deleteFolder: (folderKey)=>dispatch(actions.deleteFolder(folderKey)),
-    deleteFile: (fileKey)=>dispatch(actions.deleteFile(fileKey)),
-    closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key)),
+    changeCurrentFile: (name) => dispatch(actions.changeCurrentFile(name)),
+    renameFolder: (currentKey, newKey, onError) => dispatch(actions.renameFolder(currentKey, newKey, onError)),
+    renameFile: (currentKey, newKey) => dispatch(actions.renameFile(currentKey, newKey)),
+    addFolder: (folderKey) => dispatch(actions.addFolder(folderKey)),
+    deleteFolder: (folderKey) => dispatch(actions.deleteFolder(folderKey)),
+    deleteFile: (fileKey) => dispatch(actions.deleteFile(fileKey)),
+    closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileBrowserWrapper);

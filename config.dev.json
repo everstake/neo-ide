@@ -1,6 +1,24 @@
 {
+    "browser": {
+        "newFileDefaultName": "untitled.py",
+        "defaultOpenFolders": {
+            "examples_python/": true
+        },
+        "defaultSelection": "examples_python/domain.py",
+        "defaultSelectedFileName": "domain.py"
+    },
     "editor": {
-        "defaultLang": "python"
+        "defaultLang": "python",
+        "supportedLanguages": [
+            {
+                "monacoName": "python",
+                "shortCut": "py"
+            },
+            {
+                "monacoName": "csharp",
+                "shortCut": "cs"
+            }
+        ]
     },
     "compiler": {
         "pyEndpoint": "http://0.0.0.0:5000/build_avm/py",
@@ -8,5 +26,9 @@
     },
     "deploy": {
         "defaultFee": 2
+    },
+    "settings": {
+        "autosave": true,
+        "autocomplete": true
     }
 }

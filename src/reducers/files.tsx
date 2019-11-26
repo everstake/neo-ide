@@ -3,15 +3,15 @@ import notify from "../utils/notificator";
 import * as Config from "Config";
 
 const getFileLangByName = (fileName) => {
-    let lang = Config.editor.defaultLang;
+    let fileLang = Config.editor.defaultLang;
     const fileExtension = (fileName.replace(/^.*[\\\/]/, "")).split(".")[1];
 
-    if (fileExtension === "py") {
-        lang = "python";
-    } else if (fileExtension === "cs") {
-        lang = "csharp";
-    }
-    return lang;
+    Config.editor.supportedLanguages.forEach(lang => {
+        if (fileExtension === lang.shortCut) {
+            fileLang = lang.monacoName
+        }
+    })
+    return fileLang;
 };
 
 const filesReducer = (state = [], action) => {
@@ -26,7 +26,7 @@ const filesReducer = (state = [], action) => {
                 file.key = newKey + file.key;
                 file.lang = getFileLangByName(file.key);
                 file.modified = +Moment();
-                file.size = 0; //todo
+                file.size = 0; // canceled
                 file.file = true;
                 file.saved = true;
                 file.compiled = false;
@@ -43,10 +43,10 @@ const filesReducer = (state = [], action) => {
                             "File with \"" + file.key + "\" name already exist",
                             "error",
                             "File browser",
-                            () => action.asyncDispatch({type: "CLOSE_SNACKBAR", key: alertKey}),
+                            () => action.asyncDispatch({ type: "CLOSE_SNACKBAR", key: alertKey }),
                         );
-                        action.asyncDispatch({type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert});
-                        return ;
+                        action.asyncDispatch({ type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert });
+                        return;
                     }
                 }
                 newFiles.push({
@@ -66,15 +66,15 @@ const filesReducer = (state = [], action) => {
                         "Folder with \"" + action.folderKey + "\" name already exist",
                         "error",
                         "File browser",
-                        () => action.asyncDispatch({type: "CLOSE_SNACKBAR", key: alertKey}),
+                        () => action.asyncDispatch({ type: "CLOSE_SNACKBAR", key: alertKey }),
                     );
-                    action.asyncDispatch({type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert});
+                    action.asyncDispatch({ type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert });
                     return state;
                 }
             }
             return [
                 ...state,
-                {key: action.folderKey},
+                { key: action.folderKey },
             ];
         }
         case "DELETE_FOLDER": {
@@ -85,20 +85,20 @@ const filesReducer = (state = [], action) => {
                     newFiles.push(el);
                 }
             });
-            action.asyncDispatch({type: "SET_CURRENT_FILE_IF_ANY", files: newFiles});
+            action.asyncDispatch({ type: "SET_CURRENT_FILE_IF_ANY", files: newFiles });
             return newFiles;
         }
         case "DELETE_FILE": {
             const index = state.findIndex((val) => val.key === action.fileKey);
             if (index !== -1) {
                 state.splice(index, 1);
-                action.asyncDispatch({type: "SET_CURRENT_FILE_IF_ANY", files: state});
+                action.asyncDispatch({ type: "SET_CURRENT_FILE_IF_ANY", files: state });
             }
             return [...state];
         }
         case "CHANGE_FILE_SAVED": {
             return state.map((fileObj, i) => {
-                if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+                if (fileObj.file === true && fileObj.key.slice(-action.name.length) === action.name) {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         saved: action.autosave,
@@ -114,7 +114,7 @@ const filesReducer = (state = [], action) => {
         case "CHANGE_FILE_COMPILED": {
             console.log(action.name);
             return state.map((fileObj, i) => {
-                if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+                if (fileObj.file === true && fileObj.key.slice(-action.name.length) === action.name) {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         compiled: true,
@@ -127,7 +127,7 @@ const filesReducer = (state = [], action) => {
         }
         case "CHANGE_FILE_DEPLOYED": {
             return state.map((fileObj, i) => {
-                if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+                if (fileObj.file === true && fileObj.key.slice(-action.name.length) === action.name) {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         deployed: true,
@@ -139,7 +139,7 @@ const filesReducer = (state = [], action) => {
         }
         case "SAVE_FILE": {
             return state.map((fileObj, i) => {
-                if (fileObj.file === true  && fileObj.key.slice(-action.name.length) === action.name) {
+                if (fileObj.file === true && fileObj.key.slice(-action.name.length) === action.name) {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         saved: true,
@@ -160,9 +160,9 @@ const filesReducer = (state = [], action) => {
                         "Folder with \"" + action.newKey + "\" name already exist",
                         "error",
                         "File browser",
-                        () => action.asyncDispatch({type: "CLOSE_SNACKBAR", key: alertKey}),
+                        () => action.asyncDispatch({ type: "CLOSE_SNACKBAR", key: alertKey }),
                     );
-                    action.asyncDispatch({type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert});
+                    action.asyncDispatch({ type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert });
                     return state;
                 }
             }
@@ -184,9 +184,9 @@ const filesReducer = (state = [], action) => {
                         "File with \"" + action.newKey + "\" name already exist",
                         "error",
                         "File browser",
-                        () => action.asyncDispatch({type: "CLOSE_SNACKBAR", key: alertKey}),
+                        () => action.asyncDispatch({ type: "CLOSE_SNACKBAR", key: alertKey }),
                     );
-                    action.asyncDispatch({type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert});
+                    action.asyncDispatch({ type: "ENQUEUE_SNACKBAR", key: alertKey, alert: alert });
                     return state;
                 }
             }

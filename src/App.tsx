@@ -1,7 +1,9 @@
 import React from "react";
 import MonacoEditor from "react-monaco-editor";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import * as actions from "./actions/index";
+
+import * as Config from "Config";
 
 class App extends React.Component<any, any> {
     constructor(props, context) {
@@ -62,6 +64,7 @@ class App extends React.Component<any, any> {
         const options = {
             selectOnLineNumbers: true,
             readOnly: !this.props.currentFile,
+            wordBasedSuggestions: this.props.autocomplete
         };
         let editorContent = this.props.value;
         if (!this.props.currentFile) {
@@ -97,6 +100,7 @@ const mapStateToProps = (store) => {
         currentFile: store.currentFile,
         fileLang: fileLang,
         autosave: store.settings.autosave,
+        autocomplete: store.settings.autocomplete
     };
 };
 

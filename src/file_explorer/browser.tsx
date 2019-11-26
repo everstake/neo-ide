@@ -4,24 +4,26 @@ import * as path from "path";
 // drag and drop
 import flow from "lodash/flow";
 import HTML5Backend from "react-dnd-html5-backend";
-import {DragDropContext} from "react-dnd";
+import { DragDropContext } from "react-dnd";
 // default components (most overridable)
-import {DefaultDetail} from "./details";
-import {DefaultFilter} from "./filters";
+import { DefaultDetail } from "./details";
+import { DefaultFilter } from "./filters";
 // default renderers
-import {TableHeader} from "./headers";
-import {TableFile} from "./files";
-import {TableFolder} from "./folders";
+import { TableHeader } from "./headers";
+import { TableFile } from "./files";
+import { TableFolder } from "./folders";
 // redux
 import * as actions from "../actions/index";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 // default processors
-import {GroupByFolder} from "./groupers";
-import {SortByName} from "./sorters";
+import { GroupByFolder } from "./groupers";
+import { SortByName } from "./sorters";
 
-import {isFolder} from "./utils";
+import { isFolder } from "./utils";
 
 import ContextMenu from "./contextmenu";
+
+import * as Config from "Config";
 
 const SEARCH_RESULTS_PER_PAGE = 20;
 
@@ -195,7 +197,7 @@ class RawFileBrowser extends React.Component<any, any> {
     // item manipulation
     createFiles = (files, prefix) => {
         this.setState(prevState => {
-            const stateChanges: any = {selection: null};
+            const stateChanges: any = { selection: null };
             if (prefix) {
                 stateChanges.openFolders = {
                     ...prevState.openFolders,
@@ -297,7 +299,7 @@ class RawFileBrowser extends React.Component<any, any> {
                 selection: null,
             };
             if (key in prevState.openFolders) {
-                stateChanges.openFolders = {...prevState.openFolders};
+                stateChanges.openFolders = { ...prevState.openFolders };
                 delete stateChanges.openFolders[key];
             }
             return stateChanges;
@@ -325,13 +327,13 @@ class RawFileBrowser extends React.Component<any, any> {
 
     endAction = () => {
         if (this.state.selection !== null && this.state.selection.indexOf("__new__") !== -1) {
-            this.setState({selection: null});
+            this.setState({ selection: null });
         }
         this.beginAction(null, null);
     };
 
     select = (key, selectedType) => {
-        const {actionTarget} = this.state;
+        const { actionTarget } = this.state;
         const shouldClearState = actionTarget !== null && actionTarget !== key;
         const selected = this.getFile(key);
 
@@ -382,7 +384,7 @@ class RawFileBrowser extends React.Component<any, any> {
         const isOpen = folderKey in this.state.openFolders;
         this.setState(prevState => {
             const stateChanges = {
-                openFolders: {...prevState.openFolders},
+                openFolders: { ...prevState.openFolders },
             };
             if (isOpen) {
                 delete stateChanges.openFolders[folderKey];
@@ -513,7 +515,7 @@ class RawFileBrowser extends React.Component<any, any> {
                     addKey += "/";
                 }
             }
-            this.createFiles([{key: "untitled.py"}], addKey);
+            this.createFiles([{ key: Config.browser.newFileDefaultName }], addKey);
         });
     };
 
@@ -968,13 +970,13 @@ class RawFileBrowser extends React.Component<any, any> {
                 <div className="rendered-file-browser" ref={el => {
                     (this as any).browserRef = el;
                 }}
-                onClick={(this as any).onChange}>
+                    onClick={(this as any).onChange}>
                     {this.props.showActionBar && this.renderActionBar(selectedItem)}
                     <div className="files">
                         {renderedFiles}
                     </div>
                 </div>
-                <ContextMenu contextmenu={this.state.contextmenu}/>
+                <ContextMenu contextmenu={this.state.contextmenu} />
             </div>
 
 
