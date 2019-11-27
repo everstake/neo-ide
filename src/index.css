@@ -20,7 +20,7 @@ html, body {
     margin: 10px 0 !important;
     padding: 0 !important;
     max-width: 100% !important;
-    height: 100%;
+    height: 100% !important;
     box-shadow: none;
     border-bottom: 1px solid #474747;
     background-color: #353535;
@@ -175,8 +175,38 @@ nav.sidenav---sidenav---_2tBP {
     color: #ffffff !important;
 }
 
+.MuiPaper-root.MuiPaper-elevation1.makeStyles-paper-2.MuiPaper-rounded,
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 {
+    overflow-y: scroll !important;
+}
+
 .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 .select {
     display: flex !important;
     flex-direction: column !important;
     padding-left: 10px !important;
+    overflow-y: scroll !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 .select .MuiPaper-root.MuiPaper-elevation0.MuiPaper-rounded {
+    background-color: transparent !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-animated.MuiInputLabel-shrink {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-family: 'Montserrat' !important;
+    text-transform: capitalize !important;
+    min-width: 100px !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-animated.MuiInputLabel-shrink
+.MuiInputBase-input {
+    background-color: transparent !important;
+    font-size: 1rem !important;
+    font-family: 'Montserrat' !important;
+    text-transform: capitalize !important;
+    min-width: 200px !important;
 }

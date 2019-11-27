@@ -82,12 +82,6 @@ function MainPanel(props) {
 
 
     const handleBalance = (event, m) => {
-
-
-        console.log(event);
-        console.log(m);
-
-
         // let t = setInterval(function () {
         neoDapi.getBalance({
             params: [
@@ -120,8 +114,6 @@ function MainPanel(props) {
         }).catch (e =>  console.log(e) );
 
         // }, 1000)
-
-
     };
 
     const handleConnected = useCallback(event => {
