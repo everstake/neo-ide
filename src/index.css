@@ -20,10 +20,11 @@ html, body {
     margin: 10px 0 !important;
     padding: 0 !important;
     max-width: 100% !important;
-    height: 100%;
+    height: 100% !important;
     box-shadow: none;
     border-bottom: 1px solid #474747;
     background-color: #353535;
+    /* overflow-y: auto !important; */
 }
 
 .Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root .MuiGrid-item {
@@ -174,3 +175,72 @@ nav.sidenav---sidenav---_2tBP {
 .makeStyles-root-259 .MuiTableCell-root {
     color: #ffffff !important;
 }
+
+/* .MuiPaper-root.MuiPaper-elevation1.makeStyles-paper-2.MuiPaper-rounded,
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 {
+    overflow-y: auto !important;
+} */
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 .select {
+    display: flex !important;
+    flex-direction: column !important;
+    padding-left: 10px !important;
+    /* overflow-y: auto !important; */
+    min-height: 100px !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 .select .MuiPaper-root.MuiPaper-elevation0.MuiPaper-rounded {
+    background-color: transparent !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-animated.MuiInputLabel-shrink {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-family: 'Montserrat' !important;
+    text-transform: capitalize !important;
+    min-width: 100px !important;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-animated.MuiInputLabel-shrink
+.MuiInputBase-input {
+    background-color: transparent !important;
+    font-size: 1rem !important;
+    font-family: 'Montserrat' !important;
+    text-transform: capitalize !important;
+    min-width: 200px !important;
+}
+
+.makeStyles-root-1084 {
+    overflow-y: hidden !important;
+}
+
+span.MuiTypography-root.MuiFormControlLabel-label.MuiTypography-body1,
+th.MuiTableCell-root.MuiTableCell-alignLeft.MuiTableCell-sizeSmall.MuiTableCell-body,
+td.MuiTableCell-root.MuiTableCell-alignRight.MuiTableCell-sizeSmall.MuiTableCell-body {
+    color: #ffffff !important;
+}
+
+table.MuiTable-root {
+    min-width: auto !important;
+}
+
+table.MuiTable-root .MuiTableHead-root {
+    display: none !important;
+    margin-top: 10px !important;
+}
+
+.makeStyles-root-1107 {
+    margin-left: 10px !important;
+    width: 200px !important;
+}
+
+.MuiSwitch-colorSecondary.Mui-checked {
+    color: #00af92 !important;
+}
+
+/* textarea.MuiInputBase-input.MuiInputBase-inputMultiline {
+    background-color: transparent !important;
+} */

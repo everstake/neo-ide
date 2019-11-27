@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --open --hot",
     "devbuild": "webpack --mode development",
     "build": "webpack --mode production",
     "eslint": "eslint src/*.tsx --fix",
@@ -44,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^2.9.0",
     "@typescript-eslint/parser": "^2.9.0",
     "copy-webpack-plugin": "^5.0.5",
+    "css-hot-loader": "^1.4.4",
     "css-loader": "^3.2.0",
     "eslint": "^6.7.1",
     "eslint-config-typescript": "^3.0.0",

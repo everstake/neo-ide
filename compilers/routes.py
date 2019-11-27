@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import json
-from func_for_python_file import create_base_file, create_avm_file, delete_file
+from func_for_python_file import create_base_file, create_avm_file
 from func_for_cs_file import code64_generator
 
 

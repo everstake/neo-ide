@@ -39,7 +39,7 @@ class App extends React.Component<any, any> {
                 theme="vs-dark"
                 value={editorContent}
                 options={options}
-                onChange={this.onChange}
+                onChange={this.onChange.bind(this)}
             />
         );
     }
