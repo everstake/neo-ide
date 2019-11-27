@@ -27,11 +27,14 @@
 
 Create contracts for the Neo platform without setting up the environment and downloading packages for developers, just open [Neo IDE](http://neo-ide.com/) in your browser and start creating the future.
 
-**Available for Google chrome.**
-
+**Available for:**
+- **Mac OSX**
+- **Windows**
+- **Linux**
+- **Android (.APK)**
 ## Requirements
 
-First you need to install NEOLine wallet chrome extension, it provides dapis for developers who want to interact easily with NEO blockchain. You can install the wallet by downloading the [source code](https://github.com/NeoNextClub/neoline/blob/master/install/en_US.md). Or install it from the store as described in [this manual](https://medium.com/@NE0NEXT/neoline-the-first-neo-wallet-plugin-218fac8558b2)
+First you need to install O3 wallet, it provides dAPI for developers who want to interact easily with NEO blockchain. You can download O3 wallet from [this page](https://o3.network/).
 
 # Usage
 ### [Usage page](USAGE.md)
@@ -42,8 +45,9 @@ First you need to install NEOLine wallet chrome extension, it provides dapis for
 2. Install dependencies with `npm`:
     + `$ cd neo-ide`
     + `$ npm install`
-3. Run React application with compiler server:
+3. Run React application:
    + `$ npm run start`
+4. Run docker container with compilers (guide in `./compilers` folder)
 
 **How to Contribute**
 ---
