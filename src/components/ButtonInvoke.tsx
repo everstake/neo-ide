@@ -35,7 +35,7 @@ function ButtonInvoke(props) {
                  }
                      return a
                  }),
-            network: "PrivateNet",
+            network: props.neo.network + "",
         })
             .then((result: Record<string, any>) => {
                 console.log("Read invocation result: " + JSON.stringify(result));
