@@ -181,7 +181,7 @@ function MainPanel(props) {
             "devices": props.neo.network ? [props.contract.length ? <div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div> : <div className='select'><SelectDeploy></SelectDeploy></div>] : [<Paper> There is no wallet</Paper>],
             "reports": ["Reports"],
             "wallet": [<Wallet account={account} balance={balance}></Wallet>,
-                <MultilineTextFields></MultilineTextFields>, <SplitButton/>],
+                <MultilineTextFields></MultilineTextFields>],
             "settings/editor": [<SettingsPanel />],
             // 'settings/network': ['Settings', 'Network']
         };

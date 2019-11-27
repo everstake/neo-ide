@@ -68,7 +68,7 @@ export const changeFileCompiled = (name, binary, abi) => ({
     abi: abi,
 });
 
-export const changeFileDeployed = (name, tx_id?) => ({
+export const changeFileDeployed = (name, tx_id) => ({
     type: "CHANGE_FILE_DEPLOYED",
     name: name,
     tx_id: tx_id,

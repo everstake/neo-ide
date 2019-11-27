@@ -10,41 +10,37 @@ import neoDapi from "neo-dapi";
 function ButtonInvoke(props) {
 
 
-
     useEffect(()=>{
         // console.log(props.parameter.map(f => console.log(f.param)))
         // console.log()
-       console.log(props.deployedcontract.map(f => f.contract)[0])
+        console.log(props.deployedcontract.map(f => f.contract)[0]);
 
-    })
+    });
     function handleClick(e) {
-        // console.log(props.contract)
-        // console.log(props.deployfield.map(f => f.name)[0])
-        console.log(props.neo.network);
-        var d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0])
-       
-       
+        const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
 
-        neoDapi.invokeRead({
-            scriptHash: props.deployedcontract.map(f => f.contract)[0]+ "",
+        neoDapi.invoke({
+            scriptHash: "505663a29d83663a838eee091249abd167e928f5",//props.deployedcontract.map(f => f.contract)[0] + "",
             operation: props.methods.map(f => f.methods)[0],
             args:  d.map(f => {
-          
-                var a =  {type: f.type_of_value,
-                 value: f.value
-                 }
-                     return a
-                 }),
+
+                const a =  {type: f.type_of_value,
+                    value: f.value,
+                };
+                return a;
+            }),
             network: props.neo.network + "",
         })
             .then((result: Record<string, any>) => {
-                console.log("Read invocation result: " + JSON.stringify(result));
+                console.log("Read invocation result: ", result);
+                const msg = `Transaction has been successfully broadcasted!\nTransaction ID:\n    ${result.txid} (viewing the transaction by reference will be available after adding it to the block)`;
+                props.addLog(msg, "Deploy");
+                props.enqueueSnackbar(notify("Invoked successfully!", "success", "Broadcast successful", props.closeSnackbar));
             }).catch(err => {
                 console.log(err);
                 props.addLog(err.description, "Deploy");
                 props.enqueueSnackbar(notify(err.description, "error", "Deploy", props.closeSnackbar));
             });
-
     }
 
 

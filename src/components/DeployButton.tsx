@@ -100,11 +100,10 @@ const mapStateToProps = (store) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    changeFileDeployed: (name) => dispatch(actions.changeFileDeployed(name)),
+    changeFileDeployed: (name, i) => dispatch(actions.changeFileDeployed(name, i)),
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomButton)
-;
+export default connect(mapStateToProps, mapDispatchToProps)(CustomButton);

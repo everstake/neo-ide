@@ -8,9 +8,9 @@ const getFileLangByName = (fileName) => {
 
     Config.editor.supportedLanguages.forEach(lang => {
         if (fileExtension === lang.shortCut) {
-            fileLang = lang.monacoName
+            fileLang = lang.monacoName;
         }
-    })
+    });
     return fileLang;
 };
 
@@ -30,12 +30,12 @@ const filesReducer = (state = [], action) => {
                 file.file = true;
                 file.saved = true;
                 file.compiled = false;
-                file.deployed = true;
+                file.deployed = false;
                 file.savedContent = file.savedContent || "";
                 file.currentContent = file.savedContent || "";
                 file.binary = "";
                 file.abi = "[\"query\", \"delete\", \"register\", \"transfer\"]";
-                file.tx_id = "c57bd8ad2c8cc44d1e760bcf75d71c7490656aa2bbea8c5c00c01ebaba639f27";
+                file.tx_id = "";
 
                 for (let i = 0; i < state.length; i++) {
                     if (state[i].key === file.key) {
