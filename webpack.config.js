@@ -1,7 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const CopyPlugin = require('copy-webpack-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const isEnvProduction = process.env.NODE_ENV === "production";
 
@@ -11,22 +11,22 @@ module.exports = {
     entry: "./src/index.tsx",
     output: {
         path: __dirname + "/dist",
-        filename: "bundle.js"
+        filename: "bundle.js",
     },
     devServer: {
         inline: true,
-        contentBase: './public',
-        port: 3000
+        contentBase: "./public",
+        port: 3000,
     },
     resolve: {
-        extensions: [".ts", ".tsx", ".js"]
+        extensions: [".ts", ".tsx", ".js"],
     },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
-                loader: "ts-loader"
+                loader: "ts-loader",
             },
             {
                 test: /\.js$/,
@@ -35,12 +35,12 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: ["css-hot-loader", "style-loader", "css-loader"],
             },
-        ]
+        ],
     },
     externals: {
-        "Config": JSON.stringify(isEnvProduction ? require("./config.prod.json") : require("./config.dev.json"))
+        "Config": JSON.stringify(isEnvProduction ? require("./config.prod.json") : require("./config.dev.json")),
     },
     plugins: [
         new MonacoWebpackPlugin(),
@@ -62,6 +62,6 @@ module.exports = {
             },
         }),
         ...(isEnvProduction ? [new UglifyJsPlugin()] : []),
-        new CopyPlugin([{ from: './public/', to: './' }]),
-    ]
+        new CopyPlugin([{ from: "./public/", to: "./" }]),
+    ],
 };

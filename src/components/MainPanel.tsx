@@ -82,12 +82,6 @@ function MainPanel(props) {
 
 
     const handleBalance = (event, m) => {
-
-
-        console.log(event);
-        console.log(m);
-
-
         // let t = setInterval(function () {
         neoDapi.getBalance({
             params: [
@@ -98,6 +92,7 @@ function MainPanel(props) {
             ],
             network: event + "",
         }).then(results => {
+            console.log("### RESULTS: ", results);
             Object.keys(results).forEach(address => {
                 const balances = results[address];
                 const asset = [];
@@ -119,8 +114,6 @@ function MainPanel(props) {
         }).catch (e =>  console.log(e) );
 
         // }, 1000)
-
-
     };
 
     const handleConnected = useCallback(event => {
@@ -174,7 +167,7 @@ function MainPanel(props) {
     const classes = useStyles(props);
 
     function renderBreadcrumbs() {
-        console.log(!props.contract.length);
+        // console.log(!props.contract.length);
         const pageTitle = {
             "home": [
                 <div>
