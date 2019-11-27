@@ -15,9 +15,13 @@ def create_base_file(text, filename):
     for elem in text:
         f.write(elem)
         if elem.partition("def")[2][elem.partition("def")[2].find("Main"): elem.partition("def")[2].find("(")] == 'Main':
+            print(elem.partition("def")[2])
+            print(elem.partition("def")[2].find("("))
             operation = elem.partition("def")[2][elem.partition("def")[2].find("(")+1: elem.partition("def")[2].find(",")]
 
         if operation:
+            print('here')
+            print(elem.partition(str(operation))[2])
             if re.findall(r'\'(.+?)\'',elem.partition(str(operation))[2]) != []:
                 method.append(re.findall(r'\'(.+?)\'',elem.partition(str(operation))[2])[0])
 
