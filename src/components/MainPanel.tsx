@@ -174,7 +174,7 @@ function MainPanel(props) {
     const classes = useStyles(props);
 
     function renderBreadcrumbs() {
-        console.log(!props.contract.length);
+        // console.log(!props.contract.length);
         const pageTitle = {
             "home": [
                 <div>

@@ -73,7 +73,9 @@ function Parameters_Panel(props)  {
     console.log(props.deployedcontract);
     useEffect(() => {
 
-        setMethods(props.file.filter(f => f.key == props.contract.map(f => f.contract)[0] ).map(f => f.methods).map(f => f.methods)[0]);
+
+        // console.log( props.contract.map(f => f.contract)[0]);
+        // setMethods(props.file.filter(f => f.key == props.contract.map(f => f.contract)[0] ).map(f => f.methods).map(f => f.methods)[0]);
 
         return () => {
 
@@ -83,12 +85,15 @@ function Parameters_Panel(props)  {
 
     function onSelectFiles(e) {
 
-        console.log(e);
+        console.log(e.lang)
+        console.log(atob(e.methods))
+        var d = (e.methods).match(/\b(\w|')+\b/gim);
+        console.log(d.map(f => console.log(f)));
         props.selectDeployedContract(e.value);
 
-        props.selectContractMethods(e.methods.methods[0]);
+        props.selectContractMethods(d[0]);
 
-        e.methods ? setMethods(e.methods.methods) : setMethods([]);
+        e.methods ? setMethods(d) : setMethods([]);
 
     }
 
@@ -109,7 +114,7 @@ function Parameters_Panel(props)  {
 
         <Layout>
             <Select defaultValue={[{value: props.deployedcontract.map(f => f.contract)[0], label: props.deployedcontract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.tx_id)).length
-                ?  props.file.map(f => ({value: f.tx_id ,label: f.tx_id, methods:f.methods})) : [{label: "No deployed contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
+                ?  props.file.map(f => ({value: f.tx_id ,label: f.tx_id, methods:f.abi, lang:f.lang})) : [{label: "No deployed contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
             {props.deployedcontract.map((file, i) => (
                 <div key={`Div.Item.${i}`}>
                     <Select value={[{value: props.methods.map(f => f.methods)[0], label:props.methods.map(f => f.methods)[0]}]}
