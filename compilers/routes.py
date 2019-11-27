@@ -38,6 +38,7 @@ def build_avm_file_from_py():
 
 
 @app.route('/build_avm/cs', methods=['POST'])
+@cross_origin()
 def build_avm_file_from_cs():
     try:
         data = request.get_json(force=True)
