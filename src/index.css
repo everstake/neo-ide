@@ -174,3 +174,9 @@ nav.sidenav---sidenav---_2tBP {
 .makeStyles-root-259 .MuiTableCell-root {
     color: #ffffff !important;
 }
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 .select {
+    display: flex !important;
+    flex-direction: column !important;
+    padding-left: 10px !important;
+}
