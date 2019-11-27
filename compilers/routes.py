@@ -57,7 +57,6 @@ def build_avm_file_from_cs():
             print(elem.partition(str('case'))[2])
             if re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2]) != []:
                 method.append(re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2])[0])
-    print(method)
 
     return make_response(jsonify({'avm':avm, 'abi':abi, 'output': output, 'method': method}, 200))
 
