@@ -12,7 +12,7 @@ function GroupedButtons(props) {
 
     function handleClick(e) {
 
-        console.log( props.files.map(f => f.binary)[0])
+   
         neoDapi.deploy({
             network: props.neo.network + "",
             name: props.deployfield.map(f => f.name)[0] + "",

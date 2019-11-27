@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -10,25 +10,31 @@ import neoDapi from "neo-dapi";
 function ButtonInvoke(props) {
 
 
+
+    useEffect(()=>{
+        // console.log(props.parameter.map(f => console.log(f.param)))
+        // console.log()
+       console.log(props.deployedcontract.map(f => f.contract)[0])
+
+    })
     function handleClick(e) {
         // console.log(props.contract)
         // console.log(props.deployfield.map(f => f.name)[0])
         console.log(props.neo.network);
-
+        var d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0])
+       
+       
 
         neoDapi.invokeRead({
-            scriptHash: "cb9f3b7c6fb1cf2c13a40637c189bdd066a272b4",
-            operation: "calculatorAdd",
-            args: [
-                {
-                    type: neoDapi.Constants.ArgumentDataType.INTEGER,
-                    value: 2,
-                },
-                {
-                    type: neoDapi.Constants.ArgumentDataType.INTEGER,
-                    value: 10,
-                },
-            ],
+            scriptHash: props.deployedcontract.map(f => f.contract)[0]+ "",
+            operation: props.methods.map(f => f.methods)[0],
+            args:  d.map(f => {
+          
+                var a =  {type: f.type_of_value,
+                 value: f.value
+                 }
+                     return a
+                 }),
             network: "PrivateNet",
         })
             .then((result: Record<string, any>) => {
@@ -63,6 +69,8 @@ function ButtonInvoke(props) {
 }
 
 const mapStateToProps = state => ({
+    methods: state.methods,
+    parameter: state.parameter,
     neo: state.neo,
     deployedcontract: state.deployedcontract,
     deployfield: state.deployfield.filter(f => f.contract === state.deployedcontract.map(f => f.contract)[0]),

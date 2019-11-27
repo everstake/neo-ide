@@ -30,12 +30,12 @@ const filesReducer = (state = [], action) => {
                 file.file = true;
                 file.saved = true;
                 file.compiled = false;
-                file.deployed = false;
+                file.deployed = true;
                 file.savedContent = file.savedContent || "";
                 file.currentContent = file.savedContent || "";
                 file.binary = "";
-                file.abi = "";
-                file.tx_id = "";
+                file.abi = "[\"query\", \"delete\", \"register\", \"transfer\"]";
+                file.tx_id = "c57bd8ad2c8cc44d1e760bcf75d71c7490656aa2bbea8c5c00c01ebaba639f27";
 
                 for (let i = 0; i < state.length; i++) {
                     if (state[i].key === file.key) {
