@@ -244,3 +244,11 @@ table.MuiTable-root .MuiTableHead-root {
 /* textarea.MuiInputBase-input.MuiInputBase-inputMultiline {
     background-color: transparent !important;
 } */
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-2.MuiGrid-wrap-xs-nowrap.MuiGrid-grid-xs-12 form {
+    width: 100% !important;
+}
+
+.makeStyles-root-1 {
+    overflow-y: scroll !important;
+}
