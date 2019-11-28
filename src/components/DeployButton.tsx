@@ -37,26 +37,30 @@ class CustomButton extends React.Component<any, any> {
     deploy() {
         const args = {
             network: this.props.neo.network + "",
-            name: this.props.deployfield.map(f => f.name)[0] + "",
-            version: this.props.deployfield.map(f => f.version)[0] + "",
-            author: this.props.deployfield.map(f => f.author)[0] + "",
-            email: this.props.deployfield.map(f => f.emai)[0] + "",
-            description: this.props.deployfield.map(f => f.description)[0] + "",
-            needsStorage: this.props.deployfield.map(f => f.needsStorage)[0],
-            dynamicInvoke: this.props.deployfield.map(f => f.dynamicInvoke)[0],
-            isPayable: this.props.deployfield.map(f => f.isPayable)[0],
+            name: "ne2", //this.props.deployfield.map(f => f.name)[0] + "",
+            version: "1.0.1", //this.props.deployfield.map(f => f.version)[0] + "",
+            author: "fuggy", //this.props.deployfield.map(f => f.author)[0] + "",
+            email: "fuggy", //this.props.deployfield.map(f => f.emai)[0] + "",
+            description: "fuggy", //this.props.deployfield.map(f => f.description)[0] + "",
+            needsStorage: false, //this.props.deployfield.map(f => f.needsStorage)[0],
+            dynamicInvoke: false, //this.props.deployfield.map(f => f.dynamicInvoke)[0],
+            isPayable: false, //this.props.deployfield.map(f => f.isPayable)[0],
             parameterList: "0710",
             returnType: "05",
             code: this.props.file.binary + "",
             networkFee: Config.deploy.defaultFee + "",
         };
         console.log("### args:", args);
-        neoDapi.deploy(args).then(({ txid, nodeUrl }) => {
-            console.log("### nodeUrl:", nodeUrl);
-            const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
-            this.props.addLog(msg, "Deploy");
-            this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
-            this.props.changeFileDeployed(this.props.file.key, txid);
+        neoDapi.deploy(args).then((result) => {
+            console.log(result);
+            neoDapi.getTransaction(result.txid, "PrivateNet").then(res => console.log("# GET TX RESULT: ", res)).catch(err => console.log("# GET TX RESULT: ", err)).finally(res => console.log("# GET TX RESULT: ", res));
+            neoDapi.getApplicationLog(result.txid, "PrivateNet").then(res => console.log("# GET TX RESULT: ", res)).catch(err => console.log("# GET TX RESULT: ", err)).finally(res => console.log("# GET TX RESULT: ", res));
+
+            // console.log("### nodeUrl:", nodeUrl);
+            // const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
+            // this.props.addLog(msg, "Deploy");
+            // this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
+            // this.props.changeFileDeployed(this.props.file.key, txid);
 
         }).catch(err => {
             console.log(err);

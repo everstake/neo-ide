@@ -8,7 +8,6 @@ from func_for_python_file import create_base_file, create_avm_file
 from func_for_cs_file import code64_generator
 import re
 
-
 app = Flask(__name__)
 cors = CORS(app)
 
