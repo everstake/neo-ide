@@ -115,7 +115,7 @@ function Parameters_Panel(props)  {
 
         <Layout>
             <Select defaultValue={[{value: props.deployedcontract.map(f => f.contract)[0], label: props.deployedcontract.map(f => f.contract)[0]}]}options={  props.file.map(f => (f.tx_id)).length
-                ?  props.file.map(f => ({value: f.tx_id ,label: f.tx_id, methods:f.abi, lang:f.lang})) : [{label: "No deployed contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
+                ?  props.file.map(f => ({value: f.scriptHash ,label: f.key, methods:f.abi, lang:f.lang})) : [{label: "No deployed contracts", isDisabled: true}] } onChange={i => onSelectFiles(i)}></Select>
             {props.deployedcontract.map((file, i) => (
                 <div key={`Div.Item.${i}`}>
                     <Select value={[{value: props.methods.map(f => f.methods)[0], label:props.methods.map(f => f.methods)[0]}]}

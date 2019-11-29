@@ -34,7 +34,7 @@ const filesReducer = (state = [], action) => {
                 file.savedContent = file.savedContent || "";
                 file.currentContent = file.savedContent || "";
                 file.binary = "";
-                file.abi = "[\"query\", \"delete\", \"register\", \"transfer\"]";
+                file.abi = "";
                 file.tx_id = "";
 
                 for (let i = 0; i < state.length; i++) {
@@ -122,6 +122,7 @@ const filesReducer = (state = [], action) => {
                         binary: action.binary,
                         abi: action.abi,
                         methods: action.methods,
+                        scriptHash: action.scriptHash
                     });
                 }
                 return fileObj;
