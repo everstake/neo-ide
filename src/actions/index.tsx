@@ -61,11 +61,12 @@ export const changeFileSaved = (name, newContent, autosave) => ({
     autosave: autosave,
 });
 
-export const changeFileCompiled = (name, binary, abi) => ({
+export const changeFileCompiled = (name, binary, abi, scriptHash) => ({
     type: "CHANGE_FILE_COMPILED",
     name: name,
     binary: binary,
     abi: abi,
+    scriptHash: scriptHash
 });
 
 export const changeFileDeployed = (name, tx_id) => ({

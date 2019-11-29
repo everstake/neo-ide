@@ -50,17 +50,11 @@ class CustomButton extends React.Component<any, any> {
             code: this.props.file.binary + "",
             networkFee: Config.deploy.defaultFee + "",
         };
-        console.log("### args:", args);
         neoDapi.deploy(args).then((result) => {
-            console.log(result);
-            neoDapi.getTransaction(result.txid, "PrivateNet").then(res => console.log("# GET TX RESULT: ", res)).catch(err => console.log("# GET TX RESULT: ", err)).finally(res => console.log("# GET TX RESULT: ", res));
-            neoDapi.getApplicationLog(result.txid, "PrivateNet").then(res => console.log("# GET TX RESULT: ", res)).catch(err => console.log("# GET TX RESULT: ", err)).finally(res => console.log("# GET TX RESULT: ", res));
-
-            // console.log("### nodeUrl:", nodeUrl);
-            // const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
-            // this.props.addLog(msg, "Deploy");
-            // this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
-            // this.props.changeFileDeployed(this.props.file.key, txid);
+            const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${result.txid} (viewing the transaction by reference will be available after adding it to the block)`;
+            this.props.addLog(msg, "Deploy");
+            this.props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", this.props.closeSnackbar));
+            this.props.changeFileDeployed(this.props.file.key, result.txid);
 
         }).catch(err => {
             console.log(err);

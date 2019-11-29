@@ -4,7 +4,7 @@ from flask_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 import json
-from func_for_python_file import create_base_file, create_avm_file
+from func_for_python_file import create_base_file, compile
 from func_for_cs_file import code64_generator
 import re
 
@@ -26,12 +26,12 @@ def build_avm_file_from_py():
         filename = data['filename']
         path_to_py_file, method = create_base_file(text, filename)
         try:
-            path = create_avm_file(path_to_py_file)
+            result = compile(path_to_py_file)
         except Exception as e:
             return make_response(jsonify(str(e)), 400)
-        method = json.dumps(method)
+        abi = json.dumps(method)
         os.remove(path_to_py_file)
-        return jsonify({'avm':path, 'method':method}, 200)
+        return make_response(jsonify({'avm': result['avm'], 'abi': abi, 'scriptHash': result['scriptHash']}), 200)
     except Exception as e:
         return make_response(jsonify({'error': e}), 500)
 

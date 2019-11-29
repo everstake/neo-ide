@@ -18,9 +18,9 @@ function ButtonInvoke(props) {
     });
     function handleClick(e) {
         const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
-
-        neoDapi.invoke({
-            scriptHash: "505663a29d83663a838eee091249abd167e928f5",//props.deployedcontract.map(f => f.contract)[0] + "",
+        console.log("ALAL+++++>>>>>>>> ", props.deployedcontract)
+        neoDapi.invoke({    
+            scriptHash: props.deployedcontract[0].contract,
             operation: props.methods.map(f => f.methods)[0],
             args:  d.map(f => {
 

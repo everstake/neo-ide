@@ -54,9 +54,8 @@ class CustomButton extends React.Component<any, any> {
             filename: filePath[filePath.length - 1],
         }, { timeout: 10000 }).then(res => {
             console.log("====> ", res);
-            // this.props.changeFileDeployed(this.props.file.key, 1);
-            this.props.changeFileCompiled(this.props.file.key, toHex(res.data[0].avm), res.data[0].method || res.data[0].abi); // todo: change data from array to object
-            this.props.addLog("Compiled: " + toHex(res.data[0].avm), "Compiler");
+            this.props.changeFileCompiled(this.props.file.key, res.data.avm, res.data.abi, res.data.scriptHash);
+            this.props.addLog("Compiled: " + res.data.avm, "Compiler");
             this.props.enqueueSnackbar(notify("Compiled!", "success", "Compiler", this.props.closeSnackbar));
         }).catch(err => {
             const messageError = (err.response && err.response.data) || "Server did not respond, please try again later";
@@ -92,7 +91,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = dispatch => ({
     changeFileDeployed: (name, txid) => dispatch(actions.changeFileDeployed(name, txid)),
-    changeFileCompiled: (name, binary, abi) => dispatch(actions.changeFileCompiled(name, binary, abi)),
+    changeFileCompiled: (name, binary, abi, hash) => dispatch(actions.changeFileCompiled(name, binary, abi, hash)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
