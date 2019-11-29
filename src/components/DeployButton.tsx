@@ -37,7 +37,7 @@ class CustomButton extends React.Component<any, any> {
     deploy() {
         const args = {
             network: this.props.neo.network + "",
-            name: "ne2", //this.props.deployfield.map(f => f.name)[0] + "",
+            name: "nefff", //this.props.deployfield.map(f => f.name)[0] + "",
             version: "1.0.1", //this.props.deployfield.map(f => f.version)[0] + "",
             author: "fuggy", //this.props.deployfield.map(f => f.author)[0] + "",
             email: "fuggy", //this.props.deployfield.map(f => f.emai)[0] + "",

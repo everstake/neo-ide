@@ -18,22 +18,21 @@ function ButtonInvoke(props) {
     });
     function handleClick(e) {
         const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
-        console.log("ALAL+++++>>>>>>>> ", props.deployedcontract)
-        neoDapi.invoke({    
+        console.log("ALAL+++++>>>>>>>> ", props.deployedcontract);
+        neoDapi.invoke({
             scriptHash: props.deployedcontract[0].contract,
             operation: props.methods.map(f => f.methods)[0],
-            args:  d.map(f => {
-
-                const a =  {type: f.type_of_value,
-                    value: f.value,
-                };
-                return a;
-            }),
+            args:  [{
+                "ByteArray": "424242",
+            }],
             network: props.neo.network + "",
         })
             .then((result: Record<string, any>) => {
-                console.log("Read invocation result: ", result);
+                console.log("Read : ", result);
                 const msg = `Transaction has been successfully broadcasted!\nTransaction ID:\n    ${result.txid} (viewing the transaction by reference will be available after adding it to the block)`;
+                neoDapi.getTransaction({txid: result.txid, network: "PrivateNet"}).then(res => console.log("====> Invocation result: ", res)).catch(err => console.log("====> Invocation result: ", err));
+                neoDapi.getApplicationLog({txid: result.txid, network: "PrivateNet"}).then(res => console.log("====> getApplicationLog result: ", res)).catch(err => console.log("====> getApplicationLog result: ", err));
+
                 props.addLog(msg, "Deploy");
                 props.enqueueSnackbar(notify("Invoked successfully!", "success", "Broadcast successful", props.closeSnackbar));
             }).catch(err => {
