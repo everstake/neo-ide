@@ -223,10 +223,9 @@ def ToScriptHash(data, unhex=True):
         return UInt160(data=binascii.unhexlify(bytes(Hash160(data), encoding='utf-8')))
 
 
-def create_avm_file(path_to_py_file):
+def compile(path_to_py_file):
     comp = Compiler.load(path_to_py_file)
-    data = comp.write()
-    print(ToScriptHash(data, False))
-    # Module.write_methods()
-    # print(GetExecutingScriptHash(data.hex()))
-    return data.hex()
+    script = binascii.hexlify(comp.write())
+    scriptHash = ToScriptHash(script, True).ToString()
+    print(scriptHash, type(scriptHash))
+    return {"avm": script.decode("utf-8"), "scriptHash": scriptHash} 
