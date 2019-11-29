@@ -67,12 +67,12 @@ function MainPanel(props) {
 
 
     const handleReady = useCallback(event => {
-        console.log("EVEEET");
+        // console.log("EVEEET");
 
-        console.log(event);
+        // console.log(event);
         neoDapi.getAccount().then(f =>
         {
-            console.log(f.address);
+            //console.log(f.address);
             props.changeNEOField("address", f.address);
         }).catch(e => {  console.log(e);
             props.changeNEOField("neo", false) ; });
@@ -107,8 +107,8 @@ function MainPanel(props) {
                 props.changeNEOField("amount", balanci);
 
 
-                console.log(asset);
-                console.log(balanci);
+                //console.log(asset);
+                //console.log(balanci);
 
             });
         }).catch (e =>  console.log(e) );
@@ -119,8 +119,8 @@ function MainPanel(props) {
     const handleConnected = useCallback(event => {
         // const { key, keyCode } = event;
 
-        console.log("CON");
-        console.log(event);
+        // console.log("CON");
+        // console.log(event);
 
 
         neoDapi.getNetworks()

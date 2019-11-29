@@ -13,20 +13,30 @@ function ButtonInvoke(props) {
     useEffect(()=>{
         // console.log(props.parameter.map(f => console.log(f.param)))
         // console.log()
-        console.log(props.deployedcontract.map(f => f.contract)[0]);
+        const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
+        //  console.log( neoDapi.Constants.ArgumentDataType.STRING);
+        //console.log( d.map(f => {
+        //
+        //          const a =  {type: f.type_of_value,
+        //            value: f.value,
+        //      };
+        //    return a;
+        //}),
+        //);
 
     });
     function handleClick(e) {
         const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
         neoDapi.invoke({
             scriptHash: props.deployedcontract[0].contract,
-            operation: "hello", // props.methods.map(f => f.methods)[0],
-            args: [
-                {
-                    type: neoDapi.Constants.ArgumentDataType.STRING,
-                    value: "hello",
-                },
-            ],
+            operation: props.methods.map(f => f.methods)[0].toString(), // props.methods.map(f => f.methods)[0],
+            args:d.map(f => {
+
+                const a =  {type: f.type_of_value,
+                    value: f.value,
+                };
+                return a;
+            }),
             network: props.neo.network + "",
         })
             .then((result: Record<string, any>) => {
