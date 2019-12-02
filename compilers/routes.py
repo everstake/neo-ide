@@ -7,6 +7,7 @@ import json
 from func_for_python_file import create_base_file, compile
 from func_for_cs_file import code64_generator
 import re
+import binascii
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -58,7 +59,7 @@ def build_avm_file_from_cs():
             if re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2]) != []:
                 method.append(re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2])[0])
 
-    return make_response(jsonify({'avm':avm, 'abi':abi, 'output': output, 'method': method}, 200))
+    return make_response(jsonify({'avm': avm, 'abi':abi, 'output': output, 'method': method}), 200)
 
 
 if __name__ == '__main__':
