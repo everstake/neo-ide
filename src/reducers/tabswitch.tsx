@@ -4,8 +4,10 @@ const getIndex = (val) => {
             return 0;
         case "Deploy":
             return 1;
-        case "Debug":
+        case "Invoke":
             return 2;
+        case "Debug":
+            return 3;
         default:
             return 0;
     }

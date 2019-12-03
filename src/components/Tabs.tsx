@@ -90,7 +90,8 @@ function SimpleTabs(props) {
                 <Tabs className="AppBarTabs" value={value} onChange={handleChange} aria-label="simple tabs example">
                     <AntTab label="Compiler" {...a11yProps(0)} />
                     <AntTab label="Deploy" {...a11yProps(1)} />
-                    <AntTab label="Debug" {...a11yProps(2)} />
+                    <AntTab label="Invoke" {...a11yProps(2)} />
+                    <AntTab label="Debug" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
 
