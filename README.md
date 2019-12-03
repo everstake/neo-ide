@@ -1,4 +1,4 @@
-<p align="right">
+<p align="center">
   <a href="https://neo.org/">
     <img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/UYZ3MCh.png" width="200">
   </a>
