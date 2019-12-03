@@ -26,6 +26,7 @@ function ButtonInvoke(props) {
 
     });
     function handleClick(e) {
+        console.log(props.deployedcontract[0].contract);
         const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
         neoDapi.invoke({
             scriptHash: props.deployedcontract[0].contract,
@@ -48,12 +49,12 @@ function ButtonInvoke(props) {
                     neoDapi.getApplicationLog({txid: result.txid, network: "PrivateNet"}).then(res => console.log("====> getApplicationLog result: ", res)).catch(err => console.log("====> getApplicationLog result: ", err));
                 }, 5000);
 
-                props.addLog(msg, "Deploy");
+                props.addLog(msg, "Invoke");
                 props.enqueueSnackbar(notify("Invoked successfully!", "success", "Broadcast successful", props.closeSnackbar));
             }).catch(err => {
                 console.log(err);
-                props.addLog(err.description, "Deploy");
-                props.enqueueSnackbar(notify(err.description, "error", "Deploy", props.closeSnackbar));
+                props.addLog(err.description, "Invoke");
+                props.enqueueSnackbar(notify(err.description, "error", "Invoke", props.closeSnackbar));
             });
     }
 
@@ -84,7 +85,7 @@ const mapStateToProps = state => ({
     neo: state.neo,
     deployedcontract: state.deployedcontract,
     deployfield: state.deployfield.filter(f => f.contract === state.deployedcontract.map(f => f.contract)[0]),
-    files: state.files.filter(f => f.tx_id === state.deployedcontract.map(f => f.contract)[0]),
+    files: state.files.filter(f => f.scriptHash === state.deployedcontract.map(f => f.contract)[0]),
 });
 
 

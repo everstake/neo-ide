@@ -142,7 +142,7 @@ class RawFileBrowser extends React.Component<any, any> {
         }, //    Called after onSelect, only on file selection
         onSelectFolder: (folder) => {
 
-            console.log(folder);
+            // console.log(folder);
 
 
         }, //    Called after onSelect, only on folder selection
@@ -970,7 +970,7 @@ class RawFileBrowser extends React.Component<any, any> {
                 <div className="rendered-file-browser" ref={el => {
                     (this as any).browserRef = el;
                 }}
-                    onClick={(this as any).onChange}>
+                onClick={(this as any).onChange}>
                     {this.props.showActionBar && this.renderActionBar(selectedItem)}
                     <div className="files">
                         {renderedFiles}

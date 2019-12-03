@@ -55,7 +55,7 @@ def build_avm_file_from_cs():
         if elem.partition("public static object")[2][elem.partition("public static object")[2].find("Main"): elem.partition("public static object")[2].find("(")] == 'Main':
             operation = elem.partition("public static object")[2][elem.partition("public static object")[2].find(" ", 1)+1: elem.partition("public static object")[2].find(",")]
         if operation:
-            print(elem.partition(str('case'))[2])
+            # print(elem.partition(str('case'))[2])
             if re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2]) != []:
                 method.append(re.findall(r'\"(.+?)\"',elem.partition(str('case'))[2])[0])
 

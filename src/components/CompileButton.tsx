@@ -53,8 +53,20 @@ class CustomButton extends React.Component<any, any> {
             text: this.props.file.savedContent,
             filename: filePath[filePath.length - 1],
         }, { timeout: 10000 }).then(res => {
-            console.log("====> ", res);
-            this.props.changeFileCompiled(this.props.file.key, res.data.avm, res.data.abi, res.data.scriptHash);
+            // console.log("====> ", this.props.file.lang);
+            if(this.props.file.lang == "csharp") {
+                console.log("lang is csharp");
+                console.log("=======>", res.data.abi.split(",")[0].split(":")[1]);
+                console.log("====> ", res.data.abi.split(",")[0].split(":")[1].split("0x")[1]);
+                console.log("====> ", res.data.method);
+
+                this.props.changeFileCompiled(this.props.file.key, res.data.avm, res.data.method, res.data.abi.split(",")[0].split(":")[1].split("0x")[1]);
+            }
+            else {
+                // console.log(res.data.abi);
+                // console.log((res.data.abi).match(/\b(\w|')+\b/gim));
+                this.props.changeFileCompiled(this.props.file.key, res.data.avm, (res.data.abi).match(/\b(\w|')+\b/gim), res.data.scriptHash);
+            }
             this.props.addLog("Compiled: " + res.data.avm, "Compiler");
             this.props.enqueueSnackbar(notify("Compiled!", "success", "Compiler", this.props.closeSnackbar));
         }).catch(err => {

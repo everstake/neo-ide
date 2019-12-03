@@ -113,7 +113,7 @@ const filesReducer = (state = [], action) => {
             });
         }
         case "CHANGE_FILE_COMPILED": {
-            console.log(action.name);
+            // console.log(action.name);
             return state.map((fileObj, i) => {
                 if (fileObj.file === true && fileObj.key.slice(-action.name.length) === action.name) {
                     // Copy the object before mutating
@@ -122,7 +122,7 @@ const filesReducer = (state = [], action) => {
                         binary: action.binary,
                         abi: action.abi,
                         methods: action.methods,
-                        scriptHash: action.scriptHash
+                        scriptHash: action.scriptHash,
                     });
                 }
                 return fileObj;

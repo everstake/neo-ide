@@ -88,14 +88,16 @@ function Parameters_Panel(props)  {
     function onSelectFiles(e) {
 
         // console.log(e.methods)
-        const d = (e.methods).match(/\b(\w|')+\b/gim);
+        // const d = (e.methods).match(/\b(\w|')+\b/gim);
         // console.log(d.map(f => console.log(f)));
-        console.log(e);
-        props.selectDeployedContract(e.label);
+        console.log(e.methods);
+        // console.log(d[0]);
+        // console.log(props.file);
+        props.selectDeployedContract(e.value);
 
-        props.selectContractMethods(d[0]);
+        props.selectContractMethods(e.methods[0]);
 
-        e.methods ? setMethods(d) : setMethods([]);
+        e.methods ? setMethods(e.methods) : setMethods([]);
 
     }
 

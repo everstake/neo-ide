@@ -92,7 +92,7 @@ function MainPanel(props) {
             ],
             network: event + "",
         }).then(results => {
-            console.log("### RESULTS: ", results);
+            // console.log("### RESULTS: ", results);
             Object.keys(results).forEach(address => {
                 const balances = results[address];
                 const asset = [];
