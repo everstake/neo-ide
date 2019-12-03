@@ -4,7 +4,6 @@ const deployedcontractReducer = (state = [], action) => {
 
             
             if(!state.length) {
-                console.log("ASDASDADASDSDA")
                 return [
                     ...state,
                     {

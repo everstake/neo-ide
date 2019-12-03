@@ -66,15 +66,17 @@ function Selector(props) {
                         <em>None</em>
                     </MenuItem>
 
-                    <MenuItem value={"0x00"}>Signature</MenuItem>
-                    <MenuItem value={"0x01"}>Boolean</MenuItem>
-                    <MenuItem value={"0x02"}>Hash160</MenuItem>
-                    <MenuItem value={"0x03"}>Hash256</MenuItem>
-                    <MenuItem value={"0x04"}>ByteArray</MenuItem>
-                    <MenuItem value={"0x05"}>PublicKey</MenuItem>
-                    <MenuItem value={"0x06"}>Array</MenuItem>
-                    <MenuItem value={"0x07"}>InteropInterface</MenuItem>
-                    <MenuItem value={"0x08"}>Void</MenuItem>
+                    <MenuItem value={"Signature"}>Signature</MenuItem>
+                    <MenuItem value={"Boolean"}>Boolean</MenuItem>
+                    <MenuItem value={"Integer"}>Integer</MenuItem>
+                    <MenuItem value={"Hash160"}>Hash160</MenuItem>
+                    <MenuItem value={"Hash256"}>Hash256</MenuItem>
+                    <MenuItem value={"ByteArray"}>ByteArray</MenuItem>
+                    <MenuItem value={"PublicKey"}>PublicKey</MenuItem>
+                    <MenuItem value={"String"}>String</MenuItem>
+                    <MenuItem value={"Array"}>Array</MenuItem>
+                    <MenuItem value={"InteropInterface"}>InteropInterface</MenuItem>
+                    <MenuItem value={"Void"}>Void</MenuItem>
 
                 </Select>
 

@@ -1,8 +1,8 @@
-import subprocess
 import os
+import binascii
 import re
-import json
 from boa.compiler import Compiler
+from script_hash_func import ToScriptHash
 
 
 def create_base_file(text, filename):
@@ -27,7 +27,8 @@ def create_base_file(text, filename):
     return full_path, method
 
 
-def create_avm_file(path_to_py_file):
+def compile(path_to_py_file):
     comp = Compiler.load(path_to_py_file)
-    data = comp.write()
-    return data.hex()
+    script = binascii.hexlify(comp.write())
+    scriptHash = ToScriptHash(script, True).ToString()
+    return {"avm": script.decode("utf-8"), "scriptHash": scriptHash} 

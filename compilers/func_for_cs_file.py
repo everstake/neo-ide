@@ -18,7 +18,7 @@ def code64_generator(text: str, is_compatible: bool = False):
     sub = subprocess.Popen("/entrypoint.sh", env=env_vars, stdout=subprocess.PIPE)
     streamdata = sub.communicate()[0]
     streamdata = json.loads(streamdata)
-    abi = streamdata['abi']
-    avm = streamdata['avm']
-    output = streamdata['output']
-    return abi, avm, output
+    abi = base64.b64decode(streamdata['abi'])
+    avm = base64.b64decode(streamdata['avm'])
+    output = base64.b64decode(streamdata['output'])
+    return str(abi, "utf-8").replace('\"', '').replace('\n', ''), str(avm, "utf-8").replace('\"', '').replace('\n', ''), str(output, "utf-8").replace('\"', '').replace('\n', '')
