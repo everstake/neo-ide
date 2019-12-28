@@ -25,6 +25,8 @@ import ContextMenu from "./contextmenu";
 
 import * as Config from "Config";
 
+import { withTranslation } from "react-i18next";
+
 const SEARCH_RESULTS_PER_PAGE = 20;
 
 function getItemProps(file, browserProps) {
@@ -627,7 +629,7 @@ class RawFileBrowser extends React.Component<any, any> {
                                 role="button"
                             >
                                 {icons.Folder}
-                                &nbsp;Add Folder
+                                &nbsp;{this.props.t("Add Folder")}
                             </a>
                         </li>,
                     );
@@ -645,7 +647,7 @@ class RawFileBrowser extends React.Component<any, any> {
                                 role="button"
                             >
                                 {icons.File}
-                                &nbsp;Add File
+                                &nbsp;{this.props.t("Add File")}
                             </a>
                         </li>,
                     );
@@ -664,7 +666,7 @@ class RawFileBrowser extends React.Component<any, any> {
                                 role="button"
                             >
                                 {icons.Rename}
-                                &nbsp;Rename
+                                &nbsp;{this.props.t("Rename")}
                             </a>
                         </li>,
                     );
@@ -684,7 +686,7 @@ class RawFileBrowser extends React.Component<any, any> {
                                 role="button"
                             >
                                 {icons.Delete}
-                                &nbsp;Delete
+                                &nbsp;{this.props.t("Delete")}
                             </a>
                         </li>,
                     );
@@ -724,7 +726,7 @@ class RawFileBrowser extends React.Component<any, any> {
                             role="button"
                         >
                             {icons.Folder}
-                            &nbsp;Add Folder
+                            &nbsp;{this.props.t("Add Folder")}
                         </a>
                     </li>,
                 );
@@ -736,7 +738,7 @@ class RawFileBrowser extends React.Component<any, any> {
                             role="button"
                         >
                             {icons.File}
-                            &nbsp;Add File
+                            &nbsp;{this.props.t("Add File")}
                         </a>
                     </li>,
                 );
@@ -871,7 +873,7 @@ class RawFileBrowser extends React.Component<any, any> {
                     } else {
                         contents = (<tr>
                             <td colSpan={100}>
-                                {this.props.noFilesMessage}
+                                {this.props.t(this.props.noFilesMessage)}
                             </td>
                         </tr>);
                     }
@@ -998,5 +1000,6 @@ const mapDispatchToProps = dispatch => ({
 export default flow(
     connect(mapStateToProps, mapDispatchToProps),
     DragDropContext(HTML5Backend),
+    withTranslation(),
 )(FileBrowser);
 export const RawFileBrowserRedux = connect(mapStateToProps, mapDispatchToProps)(RawFileBrowser);

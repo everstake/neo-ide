@@ -1,6 +1,6 @@
 import * as Config from "Config";
 
-const defaultSettings = Config.settings
+const defaultSettings = {...Config.settings, lang: Config.defaultLang};
 
 const settings = (state = defaultSettings, action) => {
     switch (action.type) {

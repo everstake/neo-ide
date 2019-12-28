@@ -11,6 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Fade from "@material-ui/core/Fade";
 
 import * as FileSaver from "file-saver";
+import { withTranslation } from "react-i18next";
 
 const diskButtons = function GroupedButtons(props) {
 
@@ -94,7 +95,7 @@ const diskButtons = function GroupedButtons(props) {
                         variant="text"
                         component="label"
                     >
-            Upload
+                        {props.t("upload")}
                         <input
                             onChange={handleUploadFile}
                             type="file"
@@ -105,7 +106,7 @@ const diskButtons = function GroupedButtons(props) {
                         />
                     </Button>
                     <Button aria-controls="fade-menu" aria-haspopup="true" onClick={handleClick}>
-            Download
+                        {props.t("download")}
                     </Button>
                     <Menu
                         id="fade-menu"
@@ -119,8 +120,8 @@ const diskButtons = function GroupedButtons(props) {
                             (
                                 isAnyFiles &&
                 [
-                    <MenuItem onClick={handleDownloadCurrentFile}>Download current</MenuItem>,
-                    <MenuItem onClick={handleDownloadAllFiles}>Download all</MenuItem>,
+                    <MenuItem onClick={handleDownloadCurrentFile}>{props.t("Download current")}</MenuItem>,
+                    <MenuItem onClick={handleDownloadAllFiles}>{props.t("Download all")}</MenuItem>,
                     props.files.map((file, id) => {
                         if (file.file) {
                             return (
@@ -131,7 +132,7 @@ const diskButtons = function GroupedButtons(props) {
                 ]
                             ) || (
                                 <MenuItem onClick={handleClose}>
-                  Create file first
+                                    {props.t("Create file first")}
                                 </MenuItem>
                             )
                         }
@@ -172,4 +173,4 @@ const mapDispatchToProps = dispatch =>({
     closeSnackbar: (key)=>dispatch(actions.closeSnackbar(key)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(diskButtons);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(diskButtons));

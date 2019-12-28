@@ -3,6 +3,8 @@ import MonacoEditor from "react-monaco-editor";
 import { connect } from "react-redux";
 import * as actions from "./actions/index";
 
+import { withTranslation } from "react-i18next";
+
 class App extends React.Component<any, any> {
     constructor(props, context) {
         super(props, context);
@@ -29,7 +31,7 @@ class App extends React.Component<any, any> {
         };
         let editorContent = this.props.value;
         if (!this.props.currentFile) {
-            editorContent = "// create or upload a file to get started";
+            editorContent = this.props.t("// create or upload a file to get started");
         }
         return (
             <MonacoEditor
@@ -67,4 +69,4 @@ const mapDispatchToProps = dispatch => ({
     changeFileSaved: (fileName, newContent, autosave) => dispatch(actions.changeFileSaved(fileName, newContent, autosave)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(App));

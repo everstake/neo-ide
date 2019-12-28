@@ -15,23 +15,24 @@ import * as actions from "../actions/index";
 import AlertsBox from "../components/alertsBox";
 
 import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import * as Config from "Config";
 
 const LINK_OUTPUT_TYPE = "LINK_OUTPUT_TYPE";
 
-const LinkOutput = ({ content: { beforeLink, link, afterLink } }) => (
+const LinkOutput = ({ content: { beforeLink, endpoint, link, afterLink } }) => (
     <div>
         {beforeLink && <span>{beforeLink}&nbsp;</span>}
-        {link && <Link href={"https://neoscan-testnet.io/transaction/" + link} target="_blank" rel="noreferrer"> {link} </Link>}
+        {link && <Link href={endpoint + link} target="_blank" rel="noreferrer"> {link} </Link>}
         {afterLink && <span>&nbsp;{afterLink}</span>}
     </div>
 );
 
-const createLinkOutput = (beforeLink, link, afterLink) => {
+const createLinkOutput = (beforeLink, endpoint, link, afterLink) => {
     return new OutputFactory.OutputRecord({
         type: LINK_OUTPUT_TYPE,
         content: {
             beforeLink,
+            endpoint,
             link,
             afterLink,
         },
@@ -51,7 +52,22 @@ function isLink(msg) {
     return { msgBegin, link, msgEnd };
 }
 
-function fetchLogs(logsArray, tab) {
+const getNameByIndex = (val) => {
+    switch (val) {
+        case 0:
+            return "Compiler";
+        case 1:
+            return "Deploy";
+        case 2:
+            return "Debug";
+        case 3:
+            return "Invoke";
+        default:
+            return "Compiler";
+    }
+};
+
+function fetchLogs(logsArray, tab, network) {
     let newOutputs;
     const defaultState = EmulatorState.createEmpty();
     const defaultOutputs = defaultState.getOutputs();
@@ -61,15 +77,16 @@ function fetchLogs(logsArray, tab) {
             "",
             "",
             "",
+            "",
         ),
     );
 
     logsArray.forEach(function (element) {
-        if (element.group === tab.tab) {
+        if (element.group === getNameByIndex(tab.tab)) {
             const { msgBegin, link, msgEnd } = isLink(element.text);
             newOutputs = Outputs.addRecord(
                 newOutputs, createLinkOutput(
-                    element.date + " " + msgBegin, link, msgEnd,
+                    element.date + " " + msgBegin, Config.blockExplorerEndpoints[network], link, msgEnd,
                 ),
             );
         }
@@ -80,7 +97,7 @@ function fetchLogs(logsArray, tab) {
 
 class LogPanel extends React.Component<any, any> {
     render() {
-        const logs = fetchLogs(this.props.logs, this.props.tab);
+        const logs = fetchLogs(this.props.logs, this.props.tab, this.props.network);
         return (
             <div>
                 <SnackbarProvider
@@ -116,10 +133,10 @@ class LogPanel extends React.Component<any, any> {
         );
     }
 }
-
 const mapStateToProps = state => ({
     logs: state.logs,
     tab: state.tab,
+    network: state.neo.network,
 });
 
 const mapDispatchToProps = dispatch => ({

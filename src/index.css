@@ -23,7 +23,7 @@ html, body {
     height: 100% !important;
     box-shadow: none;
     border-bottom: 1px solid #474747;
-    background-color: #353535;
+    background-color: transparent;
     /* overflow-y: auto !important; */
 }
 
@@ -42,9 +42,37 @@ html, body {
     margin-bottom: 0 !important;
     padding: 10px 5px !important;
     background-color: transparent;
-    color: #ffffff !important;
     font-size: 14px !important;
     border: none;
+}
+
+/* 
+.Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root .MuiGrid-item .MuiButtonBase-root:hover {
+    background-color: #474747 !important;
+} */
+
+.Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root > label.MuiFormControlLabel-root {
+    margin-left: 5px !important;
+}
+
+.Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root:last-child > label.MuiFormControlLabel-root {
+    margin-left: 0px !important;
+}
+
+.btn-primary {
+    background-color: #00af92 !important;
+}
+
+.btn-primary:hover {
+    background-color: #00bd9d !important;
+}
+
+.btn-primary span {
+    color: #fff !important;
+}
+
+.btn-primary button:disabled span {
+    color: rgba(0, 0, 0, 0.4) !important;
 }
 
 .MuiPaper-rounded {
@@ -109,15 +137,10 @@ button.MuiButton-containedSecondary {
 }
 
 .Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root .MuiGrid-item .MuiButtonBase-root {
-    background-color: #353535 !important;
     border-radius: 0 !important;
     font-family: 'Montserrat' !important;
     font-weight: 700 !important;
     color: #ffffff !important;
-}
-
-.Pane1 > div > .main-breadcrumbs > .makeStyles-root-1 .MuiPaper-root .MuiGrid-item .MuiButtonBase-root:hover {
-    background-color: #474747 !important;
 }
 
 .file.selected .name::after,
@@ -139,7 +162,18 @@ button.MuiButton-containedSecondary {
     padding: 7px 5px;
 }
 
-span.PrivateTabIndicator-colorSecondary-228 {
+.rendered-file-browser .action-bar ul.item-actions {
+    text-align: left !important;
+}
+
+.rendered-file-browser .files form input {
+    background-color: transparent !important;
+    outline: none !important;
+    border: none !important;
+    font-size: 16px !important;
+}
+
+span.MuiTabs-indicator {
     background-color: #00af92 !important;
 }
 

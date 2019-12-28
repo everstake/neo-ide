@@ -1,14 +1,9 @@
 import Telegram from "@material-ui/icons/Telegram";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { connect } from "react-redux";
+import CustomButtonView from "../components/ButtonView";
 
-const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
+import { withTranslation } from "react-i18next";
 
 const mouseClickEvents = ["mousedown", "click", "mouseup"];
 function simulateMouseClick(element) {
@@ -22,19 +17,6 @@ function simulateMouseClick(element) {
             }),
         ),
     );
-}
-
-function CustomButtonView(props) {
-    const classes = useStyles(props);
-    return (<Button
-        disabled={props.disabled}
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<Telegram />}
-        onClick={props.deploy}
-    > {props.content} </Button>);
 }
 
 class CustomButton extends React.Component<any, any> {
@@ -58,7 +40,10 @@ class CustomButton extends React.Component<any, any> {
         return (
             <CustomButtonView
                 disabled={(!this.props.file.compiled && !this.props.file.deployed) || (this.props.file.deployed)}
-                content={content} deploy={this.deploy} args={{ lala: 15 }} />
+                content={content}
+                icon={Telegram}
+                onClick={this.deploy}
+            />
         );
     }
 }
@@ -75,4 +60,4 @@ const mapStateToProps = (store) => {
     };
 };
 
-export default connect(mapStateToProps)(CustomButton);
+export default withTranslation()(connect(mapStateToProps)(CustomButton));

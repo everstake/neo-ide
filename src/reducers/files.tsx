@@ -31,6 +31,7 @@ const filesReducer = (state = [], action) => {
                 file.saved = true;
                 file.compiled = false;
                 file.deployed = false;
+                file.processing = false;
                 file.savedContent = file.savedContent || "";
                 file.currentContent = file.savedContent || "";
                 file.binary = "";
@@ -112,6 +113,17 @@ const filesReducer = (state = [], action) => {
                 return fileObj;
             });
         }
+        case "CHANGE_FILE_PROCESSING": {
+            return state.map((fileObj, i) => {
+                if (fileObj.file === true && fileObj.key.slice(-action.file.key.length) === action.file.key) {
+                    // Copy the object before mutating
+                    return Object.assign({}, fileObj, {
+                        processing: action.processing,
+                    });
+                }
+                return fileObj;
+            });
+        }
         case "CHANGE_FILE_COMPILED": {
             // console.log(action.name);
             return state.map((fileObj, i) => {
@@ -119,6 +131,7 @@ const filesReducer = (state = [], action) => {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         compiled: true,
+                        processing: false,
                         binary: action.binary,
                         abi: action.abi,
                         methods: action.methods,
@@ -134,6 +147,7 @@ const filesReducer = (state = [], action) => {
                     // Copy the object before mutating
                     return Object.assign({}, fileObj, {
                         deployed: true,
+                        processing: false,
                         tx_id: action.tx_id,
                     });
                 }

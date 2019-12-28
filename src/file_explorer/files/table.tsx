@@ -9,6 +9,7 @@ import { NativeTypes } from "react-dnd-html5-backend";
 import BaseFile, { BaseFileConnectors } from "../base-file";
 import { fileSize } from "./utils";
 
+import { withTranslation } from "react-i18next";
 class RawTableFile extends BaseFile {
     render() {
         const {
@@ -52,6 +53,7 @@ class RawTableFile extends BaseFile {
                         onChange={this.handleNewNameChange}
                         onBlur={this.handleCancelEdit}
                         autoFocus
+                        spellCheck={false}
                     />
                 </form>
             );
@@ -95,7 +97,7 @@ class RawTableFile extends BaseFile {
                 </td>
                 <td className="size">{/*(fileSize(size)*/}</td>
                 <td className="modified">
-                    {typeof modified === "undefined" ? "-" : Moment(modified, "x").fromNow()}
+                    {this.props.t(typeof modified === "undefined" ? "-" : Moment(modified, "x").fromNow())}
                 </td>
             </tr>
         );
@@ -114,5 +116,6 @@ export default flow(
         BaseFileConnectors.targetSource,
         BaseFileConnectors.targetCollect,
     ),
+    withTranslation(),
 )(TableFile);
 export { RawTableFile };

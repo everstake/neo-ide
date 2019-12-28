@@ -54,6 +54,12 @@ export const setCurrentFileIfAny = (files) => ({
     files: files,
 });
 
+export const changeFileProcessing = (file, processing) => ({
+    type: "CHANGE_FILE_PROCESSING",
+    file: file,
+    processing: processing,
+});
+
 export const changeFileSaved = (name, newContent, autosave) => ({
     type: "CHANGE_FILE_SAVED",
     name: name,
@@ -66,7 +72,7 @@ export const changeFileCompiled = (name, binary, abi, scriptHash) => ({
     name: name,
     binary: binary,
     abi: abi,
-    scriptHash: scriptHash
+    scriptHash: scriptHash,
 });
 
 export const changeFileDeployed = (name, tx_id) => ({
@@ -89,10 +95,9 @@ export const changeNEOField = (field_name, value) => ({
 
 });
 
-export const tabSwitch = (tab, index) => ({
+export const tabSwitch = (tab) => ({
     type: "TAB_SELECTED",
     tab: tab,
-    tabIndex: index,
 });
 
 export const renameFolder = (currentKey, newKey, onError) => ({

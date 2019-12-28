@@ -12,6 +12,8 @@ import "../stylesheets/tabs.css";
 import * as actions from "../actions/index";
 import {connect} from "react-redux";
 
+import { withTranslation } from "react-i18next";
+
 function TabPanel(props) {
     const {children, value, tabIndex, ...other} = props;
 
@@ -19,7 +21,7 @@ function TabPanel(props) {
         <Typography
             component="div"
             role="tabpanel"
-            hidden={value !== tabIndex}
+            hidden={false}
             id={`simple-tabpanel-${tabIndex}`}
             aria-labelledby={`simple-tab-${tabIndex}`}
             {...other}
@@ -81,17 +83,17 @@ function SimpleTabs(props) {
     const value = props.tabIndex;
 
     const handleChange = (event, newValue) => {
-        props.tabSwitch(event.target.textContent);
+        props.tabSwitch(newValue);
     };
 
     return (
         <div>
             <AppBar className="AppBar" position="static">
                 <Tabs className="AppBarTabs" value={value} onChange={handleChange} aria-label="simple tabs example">
-                    <AntTab label="Compiler" {...a11yProps(0)} />
-                    <AntTab label="Deploy" {...a11yProps(1)} />
-                    <AntTab label="Invoke" {...a11yProps(2)} />
-                    <AntTab label="Debug" {...a11yProps(3)} />
+                    <AntTab label={props.t("Compiler")} value={0} {...a11yProps(0)} />
+                    <AntTab label={props.t("Deploy")}  value={1} {...a11yProps(1)} />
+                    <AntTab label={props.t("Debug")}  value={2} {...a11yProps(2)} />
+                    <AntTab label={props.t("Invoke")} value={3} {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
 
@@ -102,10 +104,10 @@ function SimpleTabs(props) {
 }
 
 const mapStateToProps = state => ({
-    tabIndex: state.tab.index,
+    tabIndex: state.tab.tab,
 });
 
 const mapDispatchToProps = dispatch => ({
-    tabSwitch: (a, b) => dispatch(actions.tabSwitch(a, b)),
+    tabSwitch: (a) => dispatch(actions.tabSwitch(a)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(SimpleTabs);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(SimpleTabs));

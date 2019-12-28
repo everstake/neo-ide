@@ -7,6 +7,8 @@ import Switch from "@material-ui/core/Switch";
 import * as actions from "../actions/index";
 import {connect} from "react-redux";
 
+import { withTranslation } from "react-i18next";
+
 const mapStateToProps = (store) => {
     let fileContent = "";
     let fileLang;
@@ -54,7 +56,7 @@ const settingsPanel = function CustomizedSwitches(props) {
 
     return (
         <FormGroup>
-            <p>Editor settings:</p>
+            <p>{props.t("Editor settings")}</p>
             <FormControlLabel
                 control={
                     <PurpleSwitch
@@ -63,7 +65,7 @@ const settingsPanel = function CustomizedSwitches(props) {
                         // value="checkedA"
                     />
                 }
-                label="Autosave"
+                label={props.t("Autosave")}
             />
             <FormControlLabel
                 control={
@@ -73,10 +75,10 @@ const settingsPanel = function CustomizedSwitches(props) {
                         // value="checkedB"
                     />
                 }
-                label="Autocompletion"
+                label={props.t("Autocompletion")}
             />
         </FormGroup>
     );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(settingsPanel);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(settingsPanel));

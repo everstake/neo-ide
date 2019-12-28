@@ -8,6 +8,8 @@ import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
+import { withTranslation } from "react-i18next";
+
 const BootstrapInput = withStyles(theme => ({
     root: {
         "label + &": {
@@ -99,7 +101,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"name"}
+                        {props.t("name")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.name)[0] ? props.deployfield.map(f =>f.name)[0] : ""} onChange={t => OnC(t, "name")}  id="bootstrap-input"  />
                 </ListItem>
@@ -107,7 +109,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"version"}
+                        {props.t("version")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.version)[0] ? props.deployfield.map(f =>f.version)[0] : ""} onChange={t => OnC(t, "version")}  id="bootstrap-input"  />
                 </ListItem>
@@ -115,7 +117,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"author"}
+                        {props.t("author")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.author)[0] ? props.deployfield.map(f =>f.author)[0] : ""}onChange={t => OnC(t, "author")}  id="bootstrap-input"  />
                 </ListItem>
@@ -123,7 +125,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"email"}
+                        {props.t("email")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.email)[0] ? props.deployfield.map(f =>f.email)[0] : ""} onChange={t => OnC(t, "email")}  id="bootstrap-input"  />
                 </ListItem>
@@ -131,7 +133,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"description"}
+                        {props.t("description")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.description)[0] ? props.deployfield.map(f =>f.description)[0] : ""} onChange={t => OnC(t, "description")}  id="bootstrap-input"  />
                 </ListItem>
@@ -139,7 +141,7 @@ function DeployParameters(props) {
             <Paper>
                 <ListItem >
                     <InputLabel  shrink htmlFor="bootstrap-input">
-                        {"networkFee"}
+                        {props.t("networkFee")}
                     </InputLabel>
                     <BootstrapInput value={props.deployfield.map(f =>f.networkFee)[0] ? props.deployfield.map(f =>f.networkFee)[0] : ""} onChange={t => OnC(t, "networkFee")}  id="bootstrap-input"  />
                 </ListItem>
@@ -149,7 +151,7 @@ function DeployParameters(props) {
                     control={
                         <Switch checked={props.deployfield.map(f =>f.needsStorage)[0] ? props.deployfield.map(f =>f.needsStorage)[0] : false}  onChange={t =>OnC(t, "needsStorage")} value="needsStorage" />
                     }
-                    label="needsStorage"
+                    label={props.t("needsStorage")}
                 />
             </Paper>
             <Paper>
@@ -157,7 +159,7 @@ function DeployParameters(props) {
                     control={
                         <Switch checked={props.deployfield.map(f =>f.dynamicInvoke)[0] ? props.deployfield.map(f =>f.dynamicInvoke)[0] : false}  onChange={t =>OnC(t, "dynamicInvoke")} value="dynamicInvoke" />
                     }
-                    label="dynamicInvoke"
+                    label={props.t("dynamicInvoke")}
                 />
             </Paper>
             <Paper>
@@ -165,7 +167,7 @@ function DeployParameters(props) {
                     control={
                         <Switch checked={props.deployfield.map(f =>f.isPayable)[0] ? props.deployfield.map(f =>f.isPayable)[0] : false}  onChange={t =>OnC(t, "isPayable")} value="isPayable" />
                     }
-                    label="isPayable"
+                    label={props.t("isPayable")}
                 />
             </Paper>
         </Layout>
@@ -185,4 +187,4 @@ const mapDispatchToProps = dispatch =>({
     // changeParameterType: (a,b) =>dispatch(actions.changeParameterType(a,b)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeployParameters);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(DeployParameters));

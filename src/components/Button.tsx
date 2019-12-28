@@ -7,12 +7,14 @@ import { connect } from "react-redux";
 import * as actions from "../actions/index";
 import notify from "../utils/notificator";
 import neoDapi from "neo-dapi";
+
+import { withTranslation } from "react-i18next";
+
 function GroupedButtons(props) {
 
 
     function handleClick(e) {
-
-   
+        props.changeFileProcessing(props.file, true);
         neoDapi.deploy({
             network: props.neo.network + "",
             name: props.deployfield.map(f => f.name)[0] + "",
@@ -28,14 +30,14 @@ function GroupedButtons(props) {
             code: props.files.map(f => f.binary)[0] + "",
             networkFee: props.deployfield.map(f => f.networkFee)[0] + "",
         }).then(({ txid, nodeUrl }) => {
-            const msg = `Transaction has been successfully deployed!\nTransaction ID:\n    ${txid} (viewing the transaction by reference will be available after adding it to the block)`;
+            const deployedMsg = props.t("Transaction has been successfully deployed!");
+            const viewLinkMsg = props.t("(viewing the transaction by reference will be available after adding it to the block)");
+            const msg = deployedMsg + "\n" + props.t("Transaction ID:") + `\n    ${txid} ` + viewLinkMsg;
             props.addLog(msg, "Deploy");
-            props.enqueueSnackbar(notify("Transaction has been successfully deployed!", "success", "Deploy", props.closeSnackbar));
-            console.log(txid);
-            props.changeFileDeployed(props.files.map(f => f.key)[0], txid)
-
+            props.enqueueSnackbar(notify(deployedMsg, "success", "Deploy", props.closeSnackbar));
+            props.changeFileDeployed(props.files.map(f => f.key)[0], txid);
         }).catch(err => {
-            props.changeFileDeployed(props.files.map(f => f.key)[0], 1)
+            // props.changeFileDeployed(props.files.map(f => f.key)[0], 1); // why do we need this?
             console.log(err);
             props.addLog(err.description.message || err.description || "Transaction has been rejected!", "Deploy");
             props.enqueueSnackbar(notify(err.description.message || err.description || "Transaction has been rejected!", "error", "Deploy", props.closeSnackbar));
@@ -43,6 +45,7 @@ function GroupedButtons(props) {
             if (err.description.message && (err.description.message === "Error: One of the Policy filters failed.")) {
                 props.enqueueSnackbar(notify("Try to increase the amount of fee", "info", "Deploy", props.closeSnackbar));
             }
+            props.changeFileProcessing(props.file, false);
         });
 
     }
@@ -54,15 +57,24 @@ function GroupedButtons(props) {
                 <Grid container spacing={1} direction="column" alignItems="center">
                     <Grid item>
                         <ButtonGroup
+                            className="btn-primary"
                             variant="contained"
                             color="secondary"
                             size="large"
                             aria-label="large contained secondary button group"
                             disabled={props.deployfield.map(f => f.name)[0].length && props.deployfield.map(f => f.version)[0].length &&
                             props.deployfield.map(f => f.author)[0].length && props.deployfield.map(f => f.email)[0].length
-                            && props.deployfield.map(f => f.networkFee)[0].length  ? false : true}
+                            && props.deployfield.map(f => f.networkFee)[0].length && !props.file.processing && !props.file.deployed ? false : true}
                         >
-                            <Button onClick={handleClick}>Deploy</Button>
+                            <Button onClick={handleClick}>
+                                {
+                                    props.t(
+                                        (props.file.deployed && "Deployed") ||
+                                        (props.file.processing && "Deploying") ||
+                                        "Deploy",
+                                    )
+                                }
+                            </Button>
                         </ButtonGroup>
                     </Grid>
                 </Grid>
@@ -71,14 +83,21 @@ function GroupedButtons(props) {
     );
 }
 
-
-const mapStateToProps = state => ({
-    neo: state.neo,
-    contract: state.contract,
-    deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
-    files: state.files.filter(f => f.key === state.contract.map(f => f.contract)[0]),
-});
-
+const mapStateToProps = (state) => {
+    let file = {};
+    state.files.forEach(elem => {
+        if (elem.file === true && elem.key.slice(-state.currentFile.length) === state.currentFile) {
+            file = elem;
+        }
+    });
+    return {
+        neo: state.neo,
+        contract: state.contract,
+        deployfield: state.deployfield.filter(f => f.contract === state.contract.map(f => f.contract)[0]),
+        files: state.files.filter(f => f.key === state.contract.map(f => f.contract)[0]),
+        file: file,
+    };
+};
 
 const options = ["Deploy"];
 const mapDispatchToProps = dispatch => ({
@@ -86,7 +105,8 @@ const mapDispatchToProps = dispatch => ({
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
     closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
+    changeFileProcessing: (key, processing) => dispatch(actions.changeFileProcessing(key, processing)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupedButtons)
-;
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(GroupedButtons));
+

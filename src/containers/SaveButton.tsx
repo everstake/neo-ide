@@ -1,29 +1,9 @@
-import SaveIcon from "@material-ui/icons/Save";
-import Button from "@material-ui/core/Button";
-import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
 import * as actions from "../actions/index";
 import {connect} from "react-redux";
+import CustomButtonView from "../components/ButtonView";
 
-const useStyles = makeStyles(theme => ({
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
-
-function CustomButtonView(props) {
-    const classes = useStyles(props);
-    return (<Button
-        disabled={props.disabled}
-        variant="contained"
-        color="primary"
-        size="small"
-        className={classes.button}
-        startIcon={<SaveIcon/>}
-        onClick={props.saveFile}
-        // args={props.args}
-    > {props.content} </Button>);
-}
+import SaveIcon from "@material-ui/icons/Save";
 
 class CustomButton extends React.Component<any, any> {
     constructor(props) {
@@ -50,7 +30,8 @@ class CustomButton extends React.Component<any, any> {
             <CustomButtonView
                 disabled={this.props.file.saved}
                 content={content}
-                saveFile={this.saveFile}
+                onClick={this.saveFile}
+                icon={SaveIcon}
             />
         );
     }

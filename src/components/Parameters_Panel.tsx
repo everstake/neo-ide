@@ -13,7 +13,9 @@ import {
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 import { CodeNode } from "source-list-map";
 
-const AddTodo = memo((props: any) => (
+import { withTranslation } from "react-i18next";
+
+const AddTodoComponent = memo((props: any) => (
     <Paper style={{ margin: 16, padding: 16 }}>
         <Grid container>
             <Grid xs={12} md={1} item>
@@ -23,12 +25,14 @@ const AddTodo = memo((props: any) => (
                     variant="outlined"
                     onClick={props.onButtonClick}
                 >
-          Add Parameter
+                    {props.t("Add Parameter")}
                 </Button>
             </Grid>
         </Grid>
     </Paper>
 ));
+
+const AddTodo = withTranslation()(AddTodoComponent);
 
 const TodoListItem = memo((props: any) => (
     <ListItem divider={props.divider}>

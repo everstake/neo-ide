@@ -7,9 +7,10 @@ import { connect } from "react-redux";
 import * as actions from "../actions/index";
 import notify from "../utils/notificator";
 import neoDapi from "neo-dapi";
+
+import { withTranslation } from "react-i18next";
+
 function ButtonInvoke(props) {
-
-
     useEffect(()=>{
         // console.log(props.parameter.map(f => console.log(f.param)))
         // console.log()
@@ -29,7 +30,7 @@ function ButtonInvoke(props) {
         console.log(props.deployedcontract[0].contract);
         const d = props.parameter.filter(f => f.param === props.methods.map(f => f.methods)[0]);
         neoDapi.invoke({
-            scriptHash: props.deployedcontract[0].contract,
+            scriptHash: "cb9f3b7c6fb1cf2c13a40637c189bdd066a272b4",//props.deployedcontract[0].contract,
             operation: props.methods.map(f => f.methods)[0].toString(), // props.methods.map(f => f.methods)[0],
             args:d.map(f => {
 
@@ -41,8 +42,10 @@ function ButtonInvoke(props) {
             network: props.neo.network + "",
         })
             .then((result: Record<string, any>) => {
-                console.log("Read : ", result);
-                const msg = `Transaction has been successfully broadcasted!\nTransaction ID:\n    ${result.txid} (viewing the transaction by reference will be available after adding it to the block)`;
+                const broadcastedMsg = props.t("Transaction has been successfully broadcasted!");
+                const viewLinkMsg = props.t("(viewing the transaction by reference will be available after adding it to the block)");
+                const msg = broadcastedMsg + "\n" + props.t("Transaction ID:") + `\n    ${result.txid} ` + "\n" + viewLinkMsg;
+
                 neoDapi.getTransaction({txid: result.txid, network: "PrivateNet"}).then(res => console.log("====> Invocation result: ", res)).catch(err => console.log("====> Invocation result: ", err));
 
                 setTimeout(function () {
@@ -50,7 +53,7 @@ function ButtonInvoke(props) {
                 }, 5000);
 
                 props.addLog(msg, "Invoke");
-                props.enqueueSnackbar(notify("Invoked successfully!", "success", "Broadcast successful", props.closeSnackbar));
+                props.enqueueSnackbar(notify(props.t("Invoked successfully!"), "success", "Broadcast successful", props.closeSnackbar));
             }).catch(err => {
                 console.log(err);
                 props.addLog(err.description, "Invoke");
@@ -70,7 +73,7 @@ function ButtonInvoke(props) {
                             size="large"
                             aria-label="large contained secondary button group"
                         >
-                            <Button onClick={handleClick}>Invoke</Button>
+                            <Button onClick={handleClick}>{props.t("Invoke")}</Button>
                         </ButtonGroup>
                     </Grid>
                 </Grid>
@@ -97,5 +100,5 @@ const mapDispatchToProps = dispatch => ({
     addLog: (a, b) => dispatch(actions.addLog(a, b)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ButtonInvoke)
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(ButtonInvoke))
 ;

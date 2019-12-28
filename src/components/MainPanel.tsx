@@ -9,7 +9,6 @@ import SideNav, {NavIcon, NavItem, NavText} from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "../stylesheets/react-breadcrumbs.css";
 import styled from "styled-components";
-import Select from "react-select";
 import FileBrowserWrapper from "../containers/FileBrowserWrapper";
 import MultilineTextFields from "./ParametrsPane";
 import Grid from "@material-ui/core/Grid";
@@ -18,17 +17,19 @@ import {makeStyles} from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import * as actions from "../actions/index";
 import {connect} from "react-redux";
-import SaveButton from "./SaveButton";
-import CompileButton from "./CompileButton";
-import DeployButton from "./DeployButton";
+import SaveButton from "../containers/SaveButton";
+import CompileButton from "../containers/CompileButton";
+import DeployButton from "../containers/DeployButton";
 import Tab from "./Tabs";
 import SplitButton from "./SplitButton";
 import DeployParameters from "./DeployParameters";
 import SelectDeploy from "./SelectDeploy";
 import SettingsPanel from "../containers/SettingsPanel";
 import DiskButtons from "../containers/DiskButtons";
-
 import neoDapi from "neo-dapi";
+
+import { withTranslation } from "react-i18next";
+
 const Main = styled.main`
     margin-left: 20px;
 `;
@@ -183,7 +184,6 @@ function MainPanel(props) {
             "wallet": [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>],
             "settings/editor": [<SettingsPanel />],
-            // 'settings/network': ['Settings', 'Network']
         };
 
         const list = ensureArray(pageTitle[selected]);
@@ -253,16 +253,21 @@ function MainPanel(props) {
                                         style={{fontSize: "1.5em", verticalAlign: "middle"}}/>
                                 </NavIcon>
                                 <NavText style={{paddingRight: 32}} title="Settings">
-                                    Settings
+                                    {props.t("Settings")}
                                 </NavText>
                                 <NavItem eventKey="settings/editor">
                                     <NavText title="Editor">
-                                        Editor
+                                        {props.t("Editor")}
+                                    </NavText>
+                                </NavItem>
+                                <NavItem eventKey="settings/language">
+                                    <NavText title="Language">
+                                        {props.t("Language")}
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="settings/network">
                                     <NavText title="Network">
-                                        Network
+                                        {props.t("Network")}
                                     </NavText>
                                 </NavItem>
                             </NavItem>
@@ -282,4 +287,4 @@ function MainPanel(props) {
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPanel);
+export default withTranslation()(connect(mapStateToProps, mapDispatchToProps)(MainPanel));
