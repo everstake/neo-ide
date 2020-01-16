@@ -9,6 +9,7 @@ import SideNav, {NavIcon, NavItem, NavText} from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
 import "../stylesheets/react-breadcrumbs.css";
 import styled from "styled-components";
+// import Select from "react-select";
 import FileBrowserWrapper from "../containers/FileBrowserWrapper";
 import MultilineTextFields from "./ParametrsPane";
 import Grid from "@material-ui/core/Grid";
@@ -21,15 +22,17 @@ import SaveButton from "../containers/SaveButton";
 import CompileButton from "../containers/CompileButton";
 import DeployButton from "../containers/DeployButton";
 import Tab from "./Tabs";
-import SplitButton from "./SplitButton";
+// import SplitButton from "./SplitButton";
 import DeployParameters from "./DeployParameters";
 import SelectDeploy from "./SelectDeploy";
 import SettingsPanel from "../containers/SettingsPanel";
 import DiskButtons from "../containers/DiskButtons";
 import neoDapi from "neo-dapi";
-
+// import Debug from "../containers/debug";
 import { withTranslation } from "react-i18next";
-
+import deb from "../debug/index"
+// import Layout from "../debug/containers/layout/index"
+// import { Link } from 'react-router-dom';
 const Main = styled.main`
     margin-left: 20px;
 `;
@@ -180,7 +183,7 @@ function MainPanel(props) {
                 <FileBrowserWrapper/>,
             ],
             "devices": props.neo.network ? [props.contract.length ? <div className='select'><SelectDeploy></SelectDeploy><DeployParameters></DeployParameters><ButtonM></ButtonM></div> : <div className='select'><SelectDeploy></SelectDeploy></div>] : [<Paper> There is no wallet</Paper>],
-            "reports": ["Reports"],
+            "reports":  [deb()],
             "wallet": [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>],
             "settings/editor": [<SettingsPanel />],
@@ -258,11 +261,6 @@ function MainPanel(props) {
                                 <NavItem eventKey="settings/editor">
                                     <NavText title="Editor">
                                         {props.t("Editor")}
-                                    </NavText>
-                                </NavItem>
-                                <NavItem eventKey="settings/language">
-                                    <NavText title="Language">
-                                        {props.t("Language")}
                                     </NavText>
                                 </NavItem>
                                 <NavItem eventKey="settings/network">

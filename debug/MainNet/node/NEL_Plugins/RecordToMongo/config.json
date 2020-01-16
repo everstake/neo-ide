@@ -1,0 +1,15 @@
+﻿{
+  "PluginConfiguration": {
+    "Conn": "",
+    "DataBase": "",
+    "Coll_Operation": "",
+    "Coll_Operation_Nep5": "",
+    "Coll_DumpInfo": "",
+    "Coll_Block": "",
+    "Coll_Application": "",
+    "Coll_SystemCounter": "",
+    "Coll_Nep5State": "",
+    "MongoDbIndexs": [
+    ]
+  }
+}

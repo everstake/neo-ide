@@ -2,6 +2,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2020-01-16
+### Added
+- Debuger
+
+
 ## [1.0.1] - 2019-12-28
 ### Added
 - Processing stage for "Compile" button

@@ -5,6 +5,10 @@ import * as Config from "Config";
 // the translations
 // (tip move them in a JSON file and import them)
 const resources = {
+    en: {
+        translation: {
+        },
+    },
 
 };
 

@@ -8,10 +8,15 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import LogPanel from "../containers/LogPanel";
 import "../stylesheets/tabs.css";
-
+// import * as PropTypes from 'prop-types';
 import * as actions from "../actions/index";
 import {connect} from "react-redux";
+import intl from "../debug/store/intl";
+import debugStore from "../debug/containers/debug/store/debug.store";
+import OutputStore from '../debug/containers/output/store/index.store';
+import CodeBox from '../debug/containers/code';
 
+import OutDeb from '../debug/containers/outbox/index';
 import { withTranslation } from "react-i18next";
 
 function TabPanel(props) {
@@ -80,11 +85,29 @@ const AntTab = withStyles(theme => ({
 }))((props: any) => <Tab disableRipple {...props} />);
 
 function SimpleTabs(props) {
+    
     const value = props.tabIndex;
 
     const handleChange = (event, newValue) => {
         props.tabSwitch(newValue);
     };
+    var contextTypes = {
+        router: PropTypes.shape({
+          history: PropTypes.shape({
+            push: PropTypes.func.isRequired,
+            replace: PropTypes.func.isRequired,
+          }).isRequired
+        }).isRequired
+      }
+     var codeEditor = React.createRef<CodeBox>();
+   const onSizeChange = () => {
+        if (codeEditor.current) {
+          codeEditor.current.editorLayout();
+        }
+      }
+
+
+
 
     return (
         <div>
@@ -96,8 +119,10 @@ function SimpleTabs(props) {
                     <AntTab label={props.t("Invoke")} value={3} {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
-
-            <LogPanel></LogPanel>
+            {
+             <LogPanel></LogPanel>
+            }
+          
 
         </div>
     );

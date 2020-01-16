@@ -11,7 +11,7 @@ import {
     ListItemSecondaryAction,
 } from "@material-ui/core";
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
-import { CodeNode } from "source-list-map";
+// import { CodeNode } from "source-list-map";
 
 import { withTranslation } from "react-i18next";
 

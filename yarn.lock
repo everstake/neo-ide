@@ -6138,16 +6138,15 @@ toposort@^1.0.0:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.7.tgz#2e68442d9f64ec720b8cc89e6443ac6caa950029"
   integrity sha1-LmhELZ9k7HILjMieZEOsbKqVACk=
 
-ts-loader@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/ts-loader/-/ts-loader-6.2.1.tgz#67939d5772e8a8c6bdaf6277ca023a4812da02ef"
-  integrity sha512-Dd9FekWuABGgjE1g0TlQJ+4dFUfYGbYcs52/HQObE0ZmUNjQlmLAS7xXsSzy23AMaMwipsx5sNHvoEpT2CZq1g==
+ts-loader@^2.3.7:
+  version "2.3.7"
+  resolved "https://registry.npm.taobao.org/ts-loader/download/ts-loader-2.3.7.tgz#a9028ced473bee12f28a75f9c5b139979d33f2fc"
+  integrity sha1-qQKM7Uc77hLyinX5xbE5l50z8vw=
   dependencies:
-    chalk "^2.3.0"
-    enhanced-resolve "^4.0.0"
+    chalk "^2.0.1"
+    enhanced-resolve "^3.0.0"
     loader-utils "^1.0.2"
-    micromatch "^4.0.0"
-    semver "^6.0.0"
+    semver "^5.0.1"
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.10.0"

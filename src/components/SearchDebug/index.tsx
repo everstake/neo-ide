@@ -1,0 +1,166 @@
+
+import * as React from "react";
+// import { observer } from "mobx-react";
+// import EventHandler from "@/utils/event";
+import classnames from "classnames";
+import "./index.less";
+// import { format } from "@/utils/formatTime";
+export interface IOptions {
+	txid: string;
+	time: string;
+}
+interface IProps {
+	options: IOptions[];
+	text: string;
+	onCallback?: (event: IOptions) => void;
+	big?: boolean;
+	size?: string;
+	style?: object;
+	placeholder?: string;
+	defaultValue?: string | number;
+	current?: IOptions;
+	value?: string;
+	disable?: boolean;
+	onChange?: (value: string) => void;
+	onClick?: () => void;
+}
+
+interface IState {
+	options: IOptions;
+	expand: boolean;
+	value: string;
+}
+
+// @observer
+export default class Search extends React.Component<IProps, IState> {
+	public state = {
+
+	    options: { txid: "", time: "" },
+	    expand: false,
+	    value: "",
+	}
+	public componentDidMount() {
+	    /*if (this.props.defaultValue) {
+			this.setState({
+				options: this.props.options.filter((item) => item.time === this.props.defaultValue)[ 0 ]
+			}, () => {
+				if (this.props.onCallback) {
+					this.props.onCallback(this.state.options);
+				}
+			});
+		} else */if (!this.props.placeholder) {
+	        this.setState({
+	            options: this.props.options[ 0 ],
+	        });
+	        if (this.props.onCallback) {
+	            this.props.onCallback(this.props.options[ 0 ]);
+	        }
+	    }
+
+
+	    // EventHandler.add(this.globalClick);
+	}
+
+	public globalClick = () => {
+	    this.setState({ expand: false });
+	}
+
+	public onSelect = (item) => {
+
+	    this.setState({ options: item, expand: false, value: item.txid });
+
+	    if (this.props.onCallback) {
+	        this.props.onCallback(item);
+	    }
+	    if (this.props.onChange) {
+	        this.props.onChange(item.txid);
+	    }
+	}
+
+	public onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	    if (this.props.onChange && !this.props.disable) {
+	        this.props.onChange(event.target.value ? event.target.value : "");
+	        this.setState({ value: event.target.value });
+	    }
+	}
+
+
+	public onExpand = (e) => {
+	    if (!this.props.disable) {
+
+	        const expand = !this.state.expand;
+
+	        this.setState({
+	            expand: expand,
+	        });
+	        if (expand && this.props.onClick) {
+	            this.props.onClick();
+	        }
+	    }
+
+	    e.stopPropagation();
+	}
+	public componentWillUnmount() {
+
+	    // EventHandler.remove(this.globalClick);
+	}
+
+	public render() {
+	    const selectBox = classnames("select-box", { "disNone": !this.state.expand });
+	    const selectWrap = classnames("select-wrapper", this.props.size ? { [ this.props.size ]: true } : { "big-box": this.props.big });
+	    const { options = [] } = this.props;
+	    // let showName: string = this.props.placeholder || (options.length > 0 ? options[ 0 ][ name ] : "");
+	    // // let iconstr: string = "";
+	    // if (this.state.options && this.state.options.name) {
+	    // 	showName = this.state.options.name;
+	    // 	// iconstr = this.state.options.icon;
+	    // }
+	    // if (this.props.current) {
+	    // 	// this.setState({ options: this.props.current })
+	    // 	showName = this.props.current.name;
+	    // }
+	    return (
+	        <div className={ selectWrap }
+	            onClick={ this.onExpand }
+	        >
+	            { this.props.text !== "" && (<div className="select-type">{ this.props.text }</div>) }
+	            <div className="selected-text" style={ this.props.style }>
+	                {/* <span><img src={ iconstr } alt="" /></span> */ }
+	                {/* <span>{ showName }</span> */ }
+	                <input type="text" placeholder={ this.props.placeholder } value={ this.props.value } onChange={ this.onChange } />
+	                <div className="triangle" >
+	                    {/* <img src={ require("@/img/xiala.png") } alt="" /> */}
+	                </div>
+	            </div>
+	            <div className={ selectBox } style={ this.props.style }>
+	                <div className="ul">
+	                    {
+	                        options.length > 0 ?
+	                            options.map((item, index) => {
+	                                return (
+	                                    <div className="li" key={ index } onClick={ this.onSelect.bind(this, item) }>
+	                                        {/* <div className={ `box-icon ${!!!item.icon ? 'noicon' : ''}` }>
+											{ !!item.icon && <img src={ item.icon } alt="" /> }
+										</div> */}
+	                                        <div className="box-text">
+	                                            <div style={ { float: "left" } }>
+	                                                { item.txid.substr(0, 4) }...{ item.txid.substr(item.txid.length - 4, 4) }
+	                                            </div>
+	                                            <div style={ { float: "right" } }>
+	                                                {/* { format("yyyy/MM/dd hh:mm:ss", item.time) } //format("yyyy/MM/dd hh:mm:ss", item.time) */}
+	                                            </div>
+	                                        </div>
+	                                    </div>
+	                                );
+	                            })
+	                            :
+	                            <div className="li">
+	                                <div className="box-text">{ this.props.defaultValue }</div>
+	                            </div>
+	                    }
+	                </div>
+	            </div>
+	        </div>
+	    );
+	}
+}
