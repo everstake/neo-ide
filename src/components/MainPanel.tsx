@@ -26,6 +26,7 @@ import Tab from "./Tabs";
 import DeployParameters from "./DeployParameters";
 import SelectDeploy from "./SelectDeploy";
 import SettingsPanel from "../containers/SettingsPanel";
+import NetworkPanel from "../containers/NetworkPanel";
 import DiskButtons from "../containers/DiskButtons";
 import neoDapi from "neo-dapi";
 // import Debug from "../containers/debug";
@@ -187,6 +188,7 @@ function MainPanel(props) {
             "wallet": [<Wallet account={account} balance={balance}></Wallet>,
                 <MultilineTextFields></MultilineTextFields>],
             "settings/editor": [<SettingsPanel />],
+            "settings/network": [<NetworkPanel />],
         };
 
         const list = ensureArray(pageTitle[selected]);

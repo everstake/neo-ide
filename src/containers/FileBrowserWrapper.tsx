@@ -112,6 +112,7 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     enqueueSnackbar: (message, options) => dispatch(actions.enqueueSnackbar(message /*options*/)),
+    closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
     addFile: (files, prefix) => dispatch(actions.addFile(files, prefix)),
     changeCurrentFile: (name) => dispatch(actions.changeCurrentFile(name)),
     renameFolder: (currentKey, newKey, onError) => dispatch(actions.renameFolder(currentKey, newKey, onError)),
@@ -119,7 +120,6 @@ const mapDispatchToProps = dispatch => ({
     addFolder: (folderKey) => dispatch(actions.addFolder(folderKey)),
     deleteFolder: (folderKey) => dispatch(actions.deleteFolder(folderKey)),
     deleteFile: (fileKey) => dispatch(actions.deleteFile(fileKey)),
-    closeSnackbar: (key) => dispatch(actions.closeSnackbar(key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FileBrowserWrapper);
