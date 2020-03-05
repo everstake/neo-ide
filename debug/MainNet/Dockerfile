@@ -17,7 +17,6 @@ RUN apt-get update
 RUN apt-get install dotnet-runtime-2.1 -y
 
 
-
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | tee /etc/apt/sources.list.d/mono-official-stable.list
 RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg
@@ -31,8 +30,6 @@ RUN apt-get update
 RUN apt-get install git -y
 RUN apt-get install libleveldb-dev sqlite3 libsqlite3-dev libunwind8-dev -y
 RUN apt-get install tmux -y
-#RUN add-apt-repository ppa:jonathonf/python-3.6 -y
-#RUN apt-get updateu
 RUN apt-get install python3.7 -y
 RUN apt-get -y install python3-pip -y
 RUN pip3 install --upgrade setuptools
@@ -41,11 +38,9 @@ RUN pip3 install flask
 RUN pip3 install flask_cors
 RUN pip3 install pymongo
 
-COPY neo-cli-nel/ .
-RUN dotnet build
-#RUN cd neo-cli-nel/bin/Debug/netcoreapp2.1 && python3 api_deb.py &
+COPY node/ .
 EXPOSE 27017
-EXPOSE 5000
+EXPOSE 6000
 
 CMD ["mongod"]
 
