@@ -27,18 +27,19 @@ class DebugStore implements IDebugStore {
     public contractFiles: {} = {};
     public simVM: ThinNeo.Debug.SimVM;
     @action public initTxList = async () => {
-       
-        var txID = store.getState().files.filter(f => f.file).filter(f => f.deployed).map(f=>f.tx_id)
-      
-        var d = []
-        console.log(txID.forEach(el => d.push({txid:el, time: "1"})))
 
-        const f = "834254f66a956e872985c50ef5fbc1e072fb0ed2b35d4bdd5f6838a7df34a199";
+        // var txID = store.getState().files.filter(f => f.file).filter(f => f.deployed).map(f=>f.tx_id);
+
+        var d = [];
+        // console.log(txID.forEach(el => d.push({txid:el, time: "1"})))
+
+        const f = "1a328cdd53c7f1710b4006304e8c75236a9b18523f037cdf069a96f0d7f01379";
         const s = "1";
+        d.push({txid:f, time: "1"}));
         // if (common.address && codeStore.deploy) {
             try {
                 // const result = await getTxidByAddressAndContract(common.address, codeStore.codeid, 1, 20);
-                this.txlist = d;
+                this.txlist = [{txid: f , time:s}];
             } catch (error) {
                 this.txlist = [];
             }
@@ -66,7 +67,7 @@ class DebugStore implements IDebugStore {
                 codeoption[ 'readOnly' ] = true;
                 codeStore.option = codeoption;
                 const dumpinfostr = dumpResult[ 0 ][ 'dimpInfo' ];
-                
+
                 const lzma: nid.LZMA = new nid.LZMA();
                 nid.utils.MEMORY.reset();
                 const srcbytes = dumpinfostr.hexToBytes();

@@ -38,7 +38,11 @@ RUN pip3 install flask
 RUN pip3 install flask_cors
 RUN pip3 install pymongo
 
+COPY neo-cli-nel/ .
+COPY node/protocol.json .
+COPY node/config.json .
 COPY node/ .
+
 EXPOSE 27017
 EXPOSE 6000
 

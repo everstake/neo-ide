@@ -10,12 +10,12 @@
       "DumpInfo_splitIndex": 0
     },
     "P2P": {
-      "Port": 20333,
-      "WsPort": 20334
+      "Port": 10333,
+      "WsPort": 10334
     },
     "RPC": {
       "BindAddress": "0.0.0.0",
-      "Port": 20332,
+      "Port": 10332,
       "SslCert": "",
       "SslCertPassword": ""
     },

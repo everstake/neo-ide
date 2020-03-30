@@ -23,13 +23,24 @@ cd TestNet/ or cd MainNet/
 sudo docker build -t test_net_neo .
 ```
 - Next start container, port 5000:5000 should be different for different container ( it need for differentiating endpoint in frontend )
+TestNet: 
 ```bash
- sudo docker run -d -p 27017-27019:27017-27019 -p 5000:5000 --name test_net_neo test_net_neo:latest
+ sudo docker run -d -p 27017-27019:27017-27019 -p 6001:6001 --name test_net_neo test_net_neo:latest
 ```
+
+MainNet: 
+```bash
+ sudo docker run -d -p 27017-27019:27017-27019 -p 6002:6002 --name test_net_neo test_net_neo:latest
+```
+
 And then change last command is needed to start api and cli inside container
 
 ```bash
-sudo docker exec -it test_net_neo /bin/sh -c "cd neo-cli-nel/bin/Debug/netcoreapp2.1 && tmux new-session -d bash -c 'dotnet neo-cli.dll' && tmux new-session -d bash -c 'python3 api_deb.py'"
+sudo docker exec -it test_net_neo /bin/sh -c "dotnet build && cp protocol.json neo-cli-nel/bin/Debug/netcoreapp2.1 && cp config.json neo-cli-nel/bin/Debug/netcoreapp2.1 && cp -r NEL_Plugins neo-cli-nel/bin/Debug/netcoreapp2.1 && cd neo-cli-nel/bin/Debug/netcoreapp2.1 && tmux new-session -d bash -c 'dotnet neo-cli.dll' "
+```
+
+```bash
+sudo docker exec -it test_net_neo /bin/sh -c "tmux new-session -d bash -c 'python3 rot.py'"
 ```
 Do the same to folder that remains.
 
