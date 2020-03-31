@@ -22,17 +22,20 @@ cd TestNet/ or cd MainNet/
 ```bash
 sudo docker build -t test_net_neo .
 ```
-- Next start container, port 5000:5000 should be different for different container ( it need for differentiating endpoint in frontend )
+- Next start container, port 600*:600* should be different for different container ( it need for differentiating endpoint in frontend )
 TestNet: 
 ```bash
- sudo docker run -d -p 27017-27019:27017-27019 -p 6001:6001 --name test_net_neo test_net_neo:latest
+ sudo docker run -d -p 27017:27017 -p 6001:6001 --name test_net_neo test_net_neo:latest
 ```
 
 MainNet: 
 ```bash
- sudo docker run -d -p 27017-27019:27017-27019 -p 6002:6002 --name test_net_neo test_net_neo:latest
+ sudo docker run -d -p 27018:27017 -p 6002:6002 --name test_net_neo test_net_neo:latest
 ```
-
+PrivateNet: 
+```bash
+ sudo docker run -d -p 27019:27017 -p 6003:6003 --name test_net_neo test_net_neo:latest
+```
 And then change last command is needed to start api and cli inside container
 
 ```bash
@@ -69,9 +72,7 @@ nano config.json
 
 - **Pay attention** to ports on which you published o3 private net, for me it is 30333:30333, so will be changing following field to 30333, 30334, 30331 respectivly
 
-
-![Image ](https://git.blaize.tech/atticlab/neo-online-ide-react/raw/branch/feature/debug/debug/img/1.png)
-
+<img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/c9ltPAx.png">
 
 
 And protocol config 
@@ -84,7 +85,7 @@ nano protocol.json
 - Field of seeds where seed10.ngd.network is IP where container is published. For me it is localhost, so my seed is 127.0.0.1:30333
 
 
-![Image ](https://git.blaize.tech/atticlab/neo-online-ide-react/raw/branch/feature/debug/debug/img/3.png)
+<img alt="NeoIDE" title="NeoIDE" src="https://i.imgur.com/9Dea7mQ.png">
 
 
-- And after changin config, finnaly, reproduce first steps to publish container.
+- And after changin config, reproduce first steps to publish container.

@@ -1,0 +1,17 @@
+﻿{
+  "PluginConfiguration": {
+    "Conn": "mongodb://localhost:27017",
+    "DataBase": "DataBase",
+    "Coll_Operation": "Coll_Operation",
+    "Coll_Operation_Nep5": "Coll_Operation_Nep5",
+    "Coll_DumpInfo": "dimpInfo",
+    "Coll_Block": "Coll_Block",
+    "Coll_Application": "Coll_Application",
+    "Coll_SystemCounter": "Coll_SystemCounter",
+    "Coll_Nep5State": "Coll_Nep5State",
+    "MongoDbIndexs": [
+   
+    
+    ]
+  }
+}
