@@ -1,4 +1,4 @@
-{ 
+{
     "browser": {
         "newFileDefaultName": "untitled.py",
         "defaultOpenFolders": {
@@ -35,6 +35,11 @@
     "languages": [
         "en",
         "uk"
-    ]
+    ],
+    "debug": {
+        "MainNet": "http://127.0.0.1:6001/",
+        "TestNet": "http://127.0.0.1:6002/",
+        "PrivateNet": "http://127.0.0.1:6003/"
+    }
 }
 

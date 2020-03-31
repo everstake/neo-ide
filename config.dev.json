@@ -42,8 +42,8 @@
             "uk"
     ],
     "debug": {
-        "MainNet": "http://0.0.0.0:6000/",
-        "TestNet": "http://0.0.0.0:6001/",
-        "PrivateNet": "http://0.0.0.0:6002/"
+        "MainNet": "http://127.0.0.1:6001/",
+        "TestNet": "http://127.0.0.1:6002/",
+        "PrivateNet": "http://127.0.0.1:6003/"
     }
 }

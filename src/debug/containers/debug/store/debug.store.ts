@@ -28,18 +28,18 @@ class DebugStore implements IDebugStore {
     public simVM: ThinNeo.Debug.SimVM;
     @action public initTxList = async () => {
 
-        // var txID = store.getState().files.filter(f => f.file).filter(f => f.deployed).map(f=>f.tx_id);
+        var txID = store.getState().files.filter(f => f.file).filter(f => f.deployed).map(f=>f.tx_id);
 
         var d = [];
-        // console.log(txID.forEach(el => d.push({txid:el, time: "1"})))
-
-        const f = "1a328cdd53c7f1710b4006304e8c75236a9b18523f037cdf069a96f0d7f01379";
-        const s = "1";
-        d.push({txid:f, time: "1"}));
+        console.log(txID.forEach(el => d.push({txid:el, time: "1"})))
+        //
+        // const f = "1a328cdd53c7f1710b4006304e8c75236a9b18523f037cdf069a96f0d7f01379";
+        // const s = "1";
+        // d.push({txid:f, time: "1"}));
         // if (common.address && codeStore.deploy) {
             try {
                 // const result = await getTxidByAddressAndContract(common.address, codeStore.codeid, 1, 20);
-                this.txlist = [{txid: f , time:s}];
+                this.txlist = d;
             } catch (error) {
                 this.txlist = [];
             }
