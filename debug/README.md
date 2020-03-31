@@ -59,10 +59,7 @@ Do the same to folder that remains.
 - [O3 private network](https://neodapidocs.o3.network/#setting-up-a-private-net)
 
 After setting up private network, reproduce following steps:
-- Copy one of the folders ( it doesn't matter which)
-```bash
-cp -R TestNet PrivateNet
-```
+
 - Next will be chanching config, you can use any text editor (in example nano)
 
 ```bash
