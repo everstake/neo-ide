@@ -41,7 +41,7 @@ First you need to install O3 wallet, it provides dAPI for developers who want to
 ### [Usage of NEO IDE](USAGE.md)
 
 # Usage of debugger
-### [Usage of NEO IDE](debug/USAGE.md)
+### [Usage of debugger](debug/USAGE.md)
 
 # Local Installation
 
