@@ -12,8 +12,8 @@
 
 - [Introduction](#Introduction)
 - [Requirements](#Requirements)
-- [Usage of IDE](#Usage of ide)
-- [Usage of debugger](#Usage of debugger)
+- [Usage of IDE](#Usage-of-ide)
+- [Usage of debugger](#Usage-of-debugger)
 - [Local Installation](#local-installation)
 - [How to Contribute](#how-to-contribute)
 - [License](#license)
@@ -37,10 +37,10 @@ Create contracts for the Neo platform without setting up the environment and dow
 
 First you need to install O3 wallet, it provides dAPI for developers who want to interact easily with NEO blockchain. You can download O3 wallet from [this page](https://o3.network/).
 
-# Usage of ide
+# Usage-of-ide
 ### [Usage of NEO IDE](USAGE.md)
 
-# Usage of debugger
+# Usage-of-debugger
 ### [Usage of debugger](debug/USAGE.md)
 
 # Local Installation
