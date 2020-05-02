@@ -49,10 +49,10 @@ module.exports = {
                   name: 'static/media/[name].[hash:8].[ext]',
                 },
               },
-            {test: /\.(ts|tsx)$/,
+            {test: /\.ts|\.tsx$/,
             include: "/",
             use: [ {
-              loader: require.resolve( 'ts-loader' ),
+              loader: 'ts-loader',
               options: {
                 // disable type checker - we will use it in fork plugin
                 transpileOnly: true,
