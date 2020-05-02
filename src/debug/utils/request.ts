@@ -14,6 +14,7 @@ interface IOpts {
 
 // const network: string = process.env.REACT_APP_SERVER_ENV === 'DEV' ? 'testnet' : 'mainnet';
 const network = 'testnet'
+const baseUrl: string = "https://apidebug.nel.group/api/" + network;
 
 
 const makeRpcPostBody = (method: string, params: any): {} => {
@@ -33,8 +34,8 @@ const defaultConfig = {
   }
 }
 export default function request(opts: IOpts): Promise<any> {
-  let url;
-
+  let url = baseUrl;
+  
   if(store.getState().neo.network === "MainNet"){
     url = Config.debug.MainNet
   }
@@ -45,7 +46,7 @@ export default function request(opts: IOpts): Promise<any> {
     url = Config.debug.PrivateNet
   }
 
-
+  
   const params = makeRpcPostBody(opts.method, opts.params);
   const args = {
     url,
@@ -71,9 +72,7 @@ export default function request(opts: IOpts): Promise<any> {
           resolve(data.data.result);
           return;
         }
-        console.log(data)
         else if (data.data.error["code"] === -1) {
-          console.log(data)
           reject(data.data.error);
         }
         reject(data.data.error);
