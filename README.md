@@ -44,7 +44,33 @@ First you need to install O3 wallet, it provides dAPI for developers who want to
 ### [Usage of debugger](debug/USAGE.md)
 
 # Local Installation
+- For different OS steps for building compiler and debugger are same.
+#[MacOS]
+**Prerequisite**
+(All comands can be run with terminal)
+- [Docker](https://docs.docker.com/docker-for-mac/)
+- Choose macOS installer [Node.js](https://nodejs.org/en/download/)
 
+1. Download [Neo IDE](https://github.com/everstake/neo-ide/releases) from Releases tab
+2. Install dependencies with `npm`:
+    + `$ cd neo-ide`
+    + `$ npm install`
+3. Run React application:
+   + `$ npm run start`
+   
+#[Windows]
+**Prerequisite**
+(All comands can be run with cmd or powershell)
+- [Docker](https://docs.docker.com/docker-for-windows/)
+- Choose windows installer [Node.js](https://nodejs.org/en/download/)
+
+1. Download [Neo IDE](https://github.com/everstake/neo-ide/releases) from Releases tab
+2. Install dependencies with `npm`:
+    + `$ cd neo-ide`
+    + `$ npm install`
+3. Run React application:
+   + `$ npm run start`
+#[Linux]
 **Prerequisite**
 
 - [Docker](https://www.docker.com/get-started)
