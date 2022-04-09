@@ -48,7 +48,7 @@
     "mobx": "^5.1.1",
     "mobx-react": "^5.2.8",
     "mobx-react-router": "^4.0.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "monaco-editor": "^0.17.1",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "neo-dapi": "^2.0.4",
